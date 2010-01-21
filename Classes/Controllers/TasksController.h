@@ -8,10 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TasksController : UITableViewController 
+@interface TasksController : UITableViewController <UIAlertViewDelegate>
 {
 @private
     UINavigationController *_navigationController;
+    NSMutableArray *_tasksOverdue;
+    NSMutableArray *_tasksDueASAP;
+    NSMutableArray *_tasksDueToday;
+    NSMutableArray *_tasksDueTomorrow;
+    NSMutableArray *_tasksDueThisWeek;
+    NSMutableArray *_tasksDueNextWeek;
+    NSMutableArray *_tasksDueLater;
+    
+    NSMutableArray *_sections;
+    
+    NSIndexPath *_indexPathToDelete;
 }
 
 @property (nonatomic, readonly) UINavigationController *navigationController;

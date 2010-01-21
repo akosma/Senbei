@@ -35,6 +35,9 @@
 		3A29C3FE1107A34E00D887F1 /* TasksController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C3FD1107A34E00D887F1 /* TasksController.m */; };
 		3A29C4531107A8A300D887F1 /* Opportunity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C4521107A8A300D887F1 /* Opportunity.m */; };
 		3A29C4E91107B3BF00D887F1 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C4E81107B3BF00D887F1 /* Contact.m */; };
+		3A2B965E11088AC1000373A5 /* Campaign.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2B965D11088AC1000373A5 /* Campaign.m */; };
+		3A2B966211088C26000373A5 /* Lead.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2B966111088C26000373A5 /* Lead.m */; };
+		3A2B966711088C3D000373A5 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2B966611088C3D000373A5 /* Task.m */; };
 		3A6D8CD611064A4B0089F21D /* SaccharinAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8CD311064A4B0089F21D /* SaccharinAppDelegate.m */; };
 		3A6D8CDF11064AAC0089F21D /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D8CDE11064AAC0089F21D /* Entitlements.plist */; };
 		3A6D8D0611064C8F0089F21D /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8CF011064C8F0089F21D /* ASIAuthenticationDialog.m */; };
@@ -133,6 +136,12 @@
 		3A29C4521107A8A300D887F1 /* Opportunity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Opportunity.m; sourceTree = "<group>"; };
 		3A29C4E71107B3BF00D887F1 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
 		3A29C4E81107B3BF00D887F1 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		3A2B965C11088AC1000373A5 /* Campaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Campaign.h; sourceTree = "<group>"; };
+		3A2B965D11088AC1000373A5 /* Campaign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Campaign.m; sourceTree = "<group>"; };
+		3A2B966011088C26000373A5 /* Lead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lead.h; sourceTree = "<group>"; };
+		3A2B966111088C26000373A5 /* Lead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lead.m; sourceTree = "<group>"; };
+		3A2B966511088C3D000373A5 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
+		3A2B966611088C3D000373A5 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
 		3A6D8CD211064A4B0089F21D /* SaccharinAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaccharinAppDelegate.h; sourceTree = "<group>"; };
 		3A6D8CD311064A4B0089F21D /* SaccharinAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaccharinAppDelegate.m; sourceTree = "<group>"; };
 		3A6D8CDB11064A900089F21D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainWindow.xib; sourceTree = "<group>"; };
@@ -297,6 +306,12 @@
 				3A708B421108427500CB2D83 /* Comment.m */,
 				3AB72318110868BB001F861D /* User.h */,
 				3AB72319110868BB001F861D /* User.m */,
+				3A2B965C11088AC1000373A5 /* Campaign.h */,
+				3A2B965D11088AC1000373A5 /* Campaign.m */,
+				3A2B966011088C26000373A5 /* Lead.h */,
+				3A2B966111088C26000373A5 /* Lead.m */,
+				3A2B966511088C3D000373A5 /* Task.h */,
+				3A2B966611088C3D000373A5 /* Task.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -727,6 +742,9 @@
 				3A708B431108427500CB2D83 /* Comment.m in Sources */,
 				3AB721FB11085642001F861D /* AKOEditorrific.m in Sources */,
 				3AB7231A110868BB001F861D /* User.m in Sources */,
+				3A2B965E11088AC1000373A5 /* Campaign.m in Sources */,
+				3A2B966211088C26000373A5 /* Lead.m in Sources */,
+				3A2B966711088C3D000373A5 /* Task.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

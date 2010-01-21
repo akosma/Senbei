@@ -10,6 +10,7 @@
 
 #define FatFreeCRMProxyDidFailWithErrorNotification @"FatFreeCRMProxyDidFailWithErrorNotification"
 #define FatFreeCRMProxyDidRetrieveTasksNotification @"FatFreeCRMProxyDidRetrieveTasksNotification"
+#define FatFreeCRMProxyDidMarkTaskAsDoneNotification @"FatFreeCRMProxyDidMarkTaskAsDoneNotification"
 #define FatFreeCRMProxyDidRetrieveAccountsNotification @"FatFreeCRMProxyDidRetrieveAccountsNotification"
 #define FatFreeCRMProxyDidRetrieveOpportunitiesNotification @"FatFreeCRMProxyDidRetrieveOpportunitiesNotification"
 #define FatFreeCRMProxyDidRetrieveContactsNotification @"FatFreeCRMProxyDidRetrieveContactsNotification"
@@ -22,6 +23,7 @@
 
 @class ASINetworkQueue;
 @class BaseEntity;
+@class Task;
 
 @interface FatFreeCRMProxy : NSObject
 {
@@ -37,6 +39,7 @@
 - (void)searchList:(Class)klass query:(NSString *)search;
 - (void)loadCommentsForEntity:(BaseEntity *)entity;
 - (void)sendComment:(NSString *)comment forEntity:(BaseEntity *)entity;
+- (void)markTaskAsDone:(Task *)task;
 - (void)loadTasks;
 - (void)cancelConnections;
 

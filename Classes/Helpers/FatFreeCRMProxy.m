@@ -19,6 +19,7 @@
 #import "Contact.h"
 #import "Comment.h"
 #import "User.h"
+#import "Task.h"
 
 @interface FatFreeCRMProxy ()
 
@@ -30,7 +31,9 @@
 - (void)processGetContactsRequest:(ASIHTTPRequest *)request;
 - (void)processGetCommentsRequest:(ASIHTTPRequest *)request;
 - (void)processLoginRequest:(ASIHTTPRequest *)request;
+- (void)processGetTasksRequest:(ASIHTTPRequest *)request;
 - (NSString *)applicationDocumentsDirectory;
+- (NSArray *)deserializeXML:(NSString *)xmlString forXPath:(NSString *)xpath andClass:(Class)klass;
 
 @end
 
@@ -145,6 +148,29 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 
 - (void)loadTasks
 {
+    NSString *path = @"tasks";
+    NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", serverURL, path];
+    NSURL *url = [NSURL URLWithString:urlString];
+    [self sendGETRequestToURL:url path:path];
+}
+
+- (void)markTaskAsDone:(Task *)task
+{
+    NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
+    NSString *urlString = [NSString stringWithFormat:@"%@/tasks/%d/complete", serverURL, task.objectId];
+    NSURL *url = [NSURL URLWithString:urlString];
+
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    [request setRequestMethod:@"PUT"];
+    request.username = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_USERNAME];;
+    request.password = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_PASSWORD];;
+    request.shouldRedirect = NO;
+    request.defaultResponseEncoding = NSUTF8StringEncoding;
+    request.timeOutSeconds = REQUEST_TIMEOUT;
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"task_done", SELECTED_API_PATH, nil];
+    request.userInfo = userInfo;
+    [_networkQueue addOperation:request];    
 }
 
 - (void)cancelConnections
@@ -191,6 +217,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
         {
             [self processLoginRequest:request];
         }
+        else if ([selectedAPIPath isEqualToString:@"tasks"])
+        {
+            [self processGetTasksRequest:request];
+        }
+        else if ([selectedAPIPath isEqualToString:@"task_done"])
+        {
+            [_notificationCenter postNotificationName:FatFreeCRMProxyDidMarkTaskAsDoneNotification
+                                               object:self];
+        }
     }
     else 
     {
@@ -228,24 +263,30 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 #pragma mark -
 #pragma mark Request processing methods
 
-- (void)processGetAccountsRequest:(ASIHTTPRequest *)request
+- (NSArray *)deserializeXML:(NSString *)xmlString forXPath:(NSString *)xpath andClass:(Class)klass
 {
-    NSString *response = [request responseString];
-    CXMLDocument *xml = [[CXMLDocument alloc] initWithXMLString:response 
+    CXMLDocument *xml = [[CXMLDocument alloc] initWithXMLString:xmlString 
                                                         options:0 
                                                           error:nil];
-    NSArray *xmlAccounts = [xml nodesForXPath:@"//account" error:nil];
-    NSMutableArray *accounts = [[NSMutableArray alloc] initWithCapacity:[xmlAccounts count]];
-    for (CXMLElement *element in xmlAccounts) 
+    NSArray *xmlNodes = [xml nodesForXPath:xpath error:nil];
+    NSMutableArray *objects = [NSMutableArray arrayWithCapacity:[xmlNodes count]];
+    for (CXMLElement *element in xmlNodes) 
     {
-        Account *item = [[Account alloc] initWithCXMLElement:element];
-        [accounts addObject:item];
+        id item = [[klass alloc] initWithCXMLElement:element];
+        [objects addObject:item];
         [item release];
     }
     [xml release];
+    return objects;
+}
 
+- (void)processGetAccountsRequest:(ASIHTTPRequest *)request
+{
+    NSString *response = [request responseString];
+    NSArray *accounts = [self deserializeXML:response 
+                                    forXPath:@"//account" 
+                                    andClass:NSClassFromString(@"Account")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:accounts, @"data", nil];
-    [accounts release];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveAccountsNotification
                                                           object:self 
                                                         userInfo:dict];
@@ -255,21 +296,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 - (void)processGetOpportunitiesRequest:(ASIHTTPRequest *)request
 {
     NSString *response = [request responseString];
-    CXMLDocument *xml = [[CXMLDocument alloc] initWithXMLString:response 
-                                                        options:0 
-                                                          error:nil];
-    NSArray *xmlOpportunities = [xml nodesForXPath:@"//opportunity" error:nil];
-    NSMutableArray *opportunities = [[NSMutableArray alloc] initWithCapacity:[xmlOpportunities count]];
-    for (CXMLElement *element in xmlOpportunities) 
-    {
-        Opportunity *item = [[Opportunity alloc] initWithCXMLElement:element];
-        [opportunities addObject:item];
-        [item release];
-    }
-    [xml release];
-    
+    NSArray *opportunities = [self deserializeXML:response 
+                                         forXPath:@"//opportunity" 
+                                         andClass:NSClassFromString(@"Opportunity")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:opportunities, @"data", nil];
-    [opportunities release];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveOpportunitiesNotification
                                                           object:self 
                                                         userInfo:dict];
@@ -279,21 +309,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 - (void)processGetContactsRequest:(ASIHTTPRequest *)request
 {
     NSString *response = [request responseString];
-    CXMLDocument *xml = [[CXMLDocument alloc] initWithXMLString:response 
-                                                        options:0 
-                                                          error:nil];
-    NSArray *xmlContacts = [xml nodesForXPath:@"//contact" error:nil];
-    NSMutableArray *contacts = [[NSMutableArray alloc] initWithCapacity:[xmlContacts count]];
-    for (CXMLElement *element in xmlContacts) 
-    {
-        Contact *item = [[Contact alloc] initWithCXMLElement:element];
-        [contacts addObject:item];
-        [item release];
-    }
-    [xml release];
-    
+    NSArray *contacts = [self deserializeXML:response 
+                                    forXPath:@"//contact" 
+                                    andClass:NSClassFromString(@"Contact")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:contacts, @"data", nil];
-    [contacts release];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveContactsNotification
                                                           object:self 
                                                         userInfo:dict];
@@ -303,24 +322,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 - (void)processGetCommentsRequest:(ASIHTTPRequest *)request
 {
     NSString *response = [request responseString];
-    CXMLDocument *xml = [[CXMLDocument alloc] initWithXMLString:response 
-                                                        options:0 
-                                                          error:nil];
-    NSArray *xmlComments = [xml nodesForXPath:@"/comments/comment" error:nil];
-    NSMutableArray *comments = [[NSMutableArray alloc] initWithCapacity:[xmlComments count]];
-    for (CXMLElement *element in xmlComments) 
-    {
-        Comment *item = [[Comment alloc] initWithCXMLElement:element];
-        [comments addObject:item];
-        [item release];
-    }
-    [xml release];
+    NSArray *comments = [self deserializeXML:response 
+                                    forXPath:@"/comments/comment" 
+                                    andClass:NSClassFromString(@"Comment")];
 
     NSDictionary *userInfo = request.userInfo;
     BaseEntity *entity = [userInfo objectForKey:SELECTED_API_ENTITY];
 
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:comments, @"data", entity, @"entity", nil];
-    [comments release];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveCommentsNotification
                                                           object:self 
                                                         userInfo:dict];
@@ -330,17 +339,52 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 - (void)processLoginRequest:(ASIHTTPRequest *)request
 {
     NSString *response = [request responseString];
-    CXMLDocument *xml = [[CXMLDocument alloc] initWithXMLString:response 
-                                                        options:0 
-                                                          error:nil];
-    NSArray *xmlComments = [xml nodesForXPath:@"/user" error:nil];
-    CXMLElement *element = [xmlComments objectAtIndex:0];
-    User *user = [[Comment alloc] initWithCXMLElement:element];
-    [xml release];
-    
+    NSArray *users = [self deserializeXML:response 
+                                 forXPath:@"/user" 
+                                 andClass:NSClassFromString(@"User")];
+
+    User *user = [users objectAtIndex:0];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:user, @"user", nil];
-    [user release];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidLoginNotification
+                                                          object:self 
+                                                        userInfo:dict];
+    [_notificationCenter postNotification:notif];    
+}
+
+- (void)processGetTasksRequest:(ASIHTTPRequest *)request
+{
+    NSString *response = [request responseString];
+    NSArray *tasksOverdue = [self deserializeXML:response 
+                                        forXPath:@"/hash/overdue/overdue" 
+                                        andClass:NSClassFromString(@"Task")];
+    NSArray *tasksDueASAP = [self deserializeXML:response 
+                                        forXPath:@"/hash/due-asap/due-asap" 
+                                        andClass:NSClassFromString(@"Task")];
+    NSArray *tasksDueToday = [self deserializeXML:response 
+                                         forXPath:@"/hash/due-today/due-today" 
+                                         andClass:NSClassFromString(@"Task")];
+    NSArray *tasksDueTomorrow = [self deserializeXML:response 
+                                            forXPath:@"/hash/due-tomorrow/due-tomorrow" 
+                                            andClass:NSClassFromString(@"Task")];
+    NSArray *tasksDueThisWeek = [self deserializeXML:response 
+                                            forXPath:@"/hash/due-this-week/due-this-week" 
+                                            andClass:NSClassFromString(@"Task")];
+    NSArray *tasksDueNextWeek = [self deserializeXML:response 
+                                            forXPath:@"/hash/due-next-week/due-next-week" 
+                                            andClass:NSClassFromString(@"Task")];
+    NSArray *tasksDueLater = [self deserializeXML:response 
+                                         forXPath:@"/hash/due-later/due-later" 
+                                         andClass:NSClassFromString(@"Task")];
+
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:tasksOverdue, @"tasksOverdue",
+                          tasksDueASAP, @"tasksDueASAP", 
+                          tasksDueToday, @"tasksDueToday",
+                          tasksDueTomorrow, @"tasksDueTomorrow",
+                          tasksDueThisWeek, @"tasksDueThisWeek",
+                          tasksDueNextWeek, @"tasksDueNextWeek",
+                          tasksDueLater, @"tasksDueLater",
+                          nil];
+    NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveTasksNotification
                                                           object:self 
                                                         userInfo:dict];
     [_notificationCenter postNotification:notif];    

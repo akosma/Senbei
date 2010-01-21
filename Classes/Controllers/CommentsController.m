@@ -174,6 +174,7 @@
                                        reuseIdentifier:CellIdentifier] autorelease];
         cell.textLabel.font = [UIFont systemFontOfSize:17.0];
         cell.textLabel.numberOfLines = 0;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
 
     Comment *comment = [_comments objectAtIndex:indexPath.row];
