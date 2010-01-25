@@ -52,14 +52,33 @@
                                                  name:FatFreeCRMProxyDidLoginNotification
                                                object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(didFailWithError:) 
+                                                 name:FatFreeCRMProxyDidFailWithErrorNotification 
+                                               object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+    
     [[FatFreeCRMProxy sharedFatFreeCRMProxy] login];
 
-    [_window addSubview:_tabBarController.view];
     [_window makeKeyAndVisible];
 }
 
 #pragma mark -
 #pragma mark NSNotification handler methods
+
+- (void)didFailWithError:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+    NSError *error = [userInfo objectForKey:FatFreeCRMProxyErrorKey];
+    NSString *msg = [error localizedDescription];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil 
+                                                    message:msg 
+                                                   delegate:nil 
+                                          cancelButtonTitle:@"OK" 
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+}
 
 - (void)didLogin:(NSNotification *)notification
 {
@@ -194,7 +213,9 @@
             _tabBarController.selectedViewController = _tabBarController.moreNavigationController;
         default:
             break;
-    }    
+    }
+
+    [_window addSubview:_tabBarController.view];
 }
 
 #pragma mark -
