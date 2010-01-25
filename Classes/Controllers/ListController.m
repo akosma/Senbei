@@ -66,7 +66,6 @@
     [super viewWillAppear:animated];
     if (_firstLoad)
     {
-        _firstLoad = NO;
         [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadList:_listedClass page:_pageCounter];
     }
 }
@@ -92,6 +91,15 @@
     {
         [_data addObjectsFromArray:newData];
         [self.tableView reloadData];
+    }
+    
+    if (_firstLoad)
+    {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.tableView scrollToRowAtIndexPath:indexPath 
+                              atScrollPosition:UITableViewScrollPositionTop 
+                                      animated:YES];
+        _firstLoad = NO;
     }
 }
 
