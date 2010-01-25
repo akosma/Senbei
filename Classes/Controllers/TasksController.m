@@ -114,6 +114,13 @@
     return [[_sections objectAtIndex:section] count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Task *task = [[_sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    return [task.name sizeWithFont:[UIFont boldSystemFontOfSize:14.0] 
+                       constrainedToSize:CGSizeMake(180.0, 4000.0)].height + 20.0;
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSMutableArray *array = [_sections objectAtIndex:section];
@@ -139,8 +146,9 @@
                                        reuseIdentifier:CellIdentifier] autorelease];
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.detailTextLabel.numberOfLines = 0;
     }
-
+    
     Task *task = [[_sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     cell.textLabel.text = task.category;
     cell.detailTextLabel.text = task.name;
