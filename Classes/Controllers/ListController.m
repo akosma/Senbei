@@ -79,7 +79,7 @@
 #pragma mark -
 #pragma mark NSNotification methods
 
-- (void)didReceiveAccounts:(NSNotification *)notification
+- (void)didReceiveData:(NSNotification *)notification
 {
     NSArray *newData = [[notification userInfo] objectForKey:@"data"];
     _moreToLoad = [newData count] > 0;

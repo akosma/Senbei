@@ -20,6 +20,7 @@
 #import "Comment.h"
 #import "User.h"
 #import "Task.h"
+#import "Campaign.h"
 
 @interface FatFreeCRMProxy ()
 
@@ -28,6 +29,7 @@
 - (void)notifyError:(NSError *)error;
 - (void)processGetAccountsRequest:(ASIHTTPRequest *)request;
 - (void)processGetOpportunitiesRequest:(ASIHTTPRequest *)request;
+- (void)processGetCampaignsRequest:(ASIHTTPRequest *)request;
 - (void)processGetContactsRequest:(ASIHTTPRequest *)request;
 - (void)processGetCommentsRequest:(ASIHTTPRequest *)request;
 - (void)processLoginRequest:(ASIHTTPRequest *)request;
@@ -199,6 +201,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
         {
             [self processGetContactsRequest:request];
         }
+        else if ([selectedAPIPath isEqualToString:[Campaign serverPath]])
+        {
+            [self processGetCampaignsRequest:request];
+        }
         else if ([selectedAPIPath isEqualToString:@"comments"])
         {
             [self processGetCommentsRequest:request];
@@ -288,6 +294,19 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
                                     andClass:NSClassFromString(@"Account")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:accounts, @"data", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveAccountsNotification
+                                                          object:self 
+                                                        userInfo:dict];
+    [_notificationCenter postNotification:notif];
+}
+
+- (void)processGetCampaignsRequest:(ASIHTTPRequest *)request
+{
+    NSString *response = [request responseString];
+    NSArray *campaigns = [self deserializeXML:response 
+                                    forXPath:@"//campaign" 
+                                    andClass:NSClassFromString(@"Campaign")];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:campaigns, @"data", nil];
+    NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveCampaignsNotification
                                                           object:self 
                                                         userInfo:dict];
     [_notificationCenter postNotification:notif];
