@@ -15,6 +15,17 @@
 @class CommentsController;
 @class User;
 
+typedef enum {
+    SaccharinViewControllerAccounts = 0,
+    SaccharinViewControllerContacts = 1,
+    SaccharinViewControllerOpportunities = 2,
+    SaccharinViewControllerTasks = 3,
+    SaccharinViewControllerLeads = 4,
+    SaccharinViewControllerCampaigns = 5,
+    SaccharinViewControllerSettings = 6,
+    SaccharinViewControllerMore = 7
+} SaccharinViewController;
+
 @interface SaccharinAppDelegate : NSObject <UIApplicationDelegate,
                                             UITabBarControllerDelegate,
                                             ListControllerDelegate> 
