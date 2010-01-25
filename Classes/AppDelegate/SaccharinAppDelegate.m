@@ -17,6 +17,7 @@
 #import "Contact.h"
 #import "User.h"
 #import "Campaign.h"
+#import "Lead.h"
 
 #define TAB_ORDER_PREFERENCE @"TAB_ORDER_PREFERENCE"
 #define CURRENT_TAB_PREFERENCE @"CURRENT_TAB_PREFERENCE"
@@ -69,31 +70,37 @@
                                                  name:FatFreeCRMProxyDidRetrieveAccountsNotification
                                                object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
     _accountsController.listedClass = [Account class];
-    _accountsController.tabBarItem.image = [UIImage imageNamed:@"accounts.png"];
     
     [[NSNotificationCenter defaultCenter] addObserver:_opportunitiesController 
                                              selector:@selector(didReceiveData:) 
                                                  name:FatFreeCRMProxyDidRetrieveOpportunitiesNotification
                                                object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
     _opportunitiesController.listedClass = [Opportunity class];
-    _opportunitiesController.tabBarItem.image = [UIImage imageNamed:@"opportunities.png"];
     
     [[NSNotificationCenter defaultCenter] addObserver:_contactsController 
                                              selector:@selector(didReceiveData:) 
                                                  name:FatFreeCRMProxyDidRetrieveContactsNotification
                                                object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
     _contactsController.listedClass = [Contact class];
-    _contactsController.tabBarItem.image = [UIImage imageNamed:@"contacts.png"];
 
-    _leadsController.tabBarItem.image = [UIImage imageNamed:@"leads.png"];
-    _tasksController.tabBarItem.image = [UIImage imageNamed:@"tasks.png"];
-    
     [[NSNotificationCenter defaultCenter] addObserver:_campaignsController
                                              selector:@selector(didReceiveData:)
                                                  name:FatFreeCRMProxyDidRetrieveCampaignsNotification
                                                object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
     _campaignsController.listedClass = [Campaign class];
+
+    [[NSNotificationCenter defaultCenter] addObserver:_leadsController
+                                             selector:@selector(didReceiveData:)
+                                                 name:FatFreeCRMProxyDidRetrieveLeadsNotification
+                                               object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+    _leadsController.listedClass = [Lead class];
+    
+    _leadsController.tabBarItem.image = [UIImage imageNamed:@"leads.png"];
+    _contactsController.tabBarItem.image = [UIImage imageNamed:@"contacts.png"];
     _campaignsController.tabBarItem.image = [UIImage imageNamed:@"campaigns.png"];
+    _tasksController.tabBarItem.image = [UIImage imageNamed:@"tasks.png"];
+    _accountsController.tabBarItem.image = [UIImage imageNamed:@"accounts.png"];
+    _opportunitiesController.tabBarItem.image = [UIImage imageNamed:@"opportunities.png"];
     
     // Restore the order of the tab bars following the preferences of the user
     NSArray *order = [[NSUserDefaults standardUserDefaults] objectForKey:TAB_ORDER_PREFERENCE];

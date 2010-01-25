@@ -7,11 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BaseEntity.h"
+#import "Contact.h"
 
-@interface Lead : BaseEntity 
+@interface Lead : Contact 
 {
 @private
+    NSString *_status;
+    NSString *_referredBy;
 }
+
+@property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSString *referredBy;
+
++ (NSString *)serverPath;
+- (id)initWithCXMLElement:(CXMLElement *)element;
 
 @end

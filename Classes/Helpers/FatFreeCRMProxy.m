@@ -21,6 +21,7 @@
 #import "User.h"
 #import "Task.h"
 #import "Campaign.h"
+#import "Lead.h"
 
 @interface FatFreeCRMProxy ()
 
@@ -30,6 +31,7 @@
 - (void)processGetAccountsRequest:(ASIHTTPRequest *)request;
 - (void)processGetOpportunitiesRequest:(ASIHTTPRequest *)request;
 - (void)processGetCampaignsRequest:(ASIHTTPRequest *)request;
+- (void)processGetLeadsRequest:(ASIHTTPRequest *)request;
 - (void)processGetContactsRequest:(ASIHTTPRequest *)request;
 - (void)processGetCommentsRequest:(ASIHTTPRequest *)request;
 - (void)processLoginRequest:(ASIHTTPRequest *)request;
@@ -205,6 +207,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
         {
             [self processGetCampaignsRequest:request];
         }
+        else if ([selectedAPIPath isEqualToString:[Lead serverPath]])
+        {
+            [self processGetLeadsRequest:request];
+        }
         else if ([selectedAPIPath isEqualToString:@"comments"])
         {
             [self processGetCommentsRequest:request];
@@ -303,10 +309,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 {
     NSString *response = [request responseString];
     NSArray *campaigns = [self deserializeXML:response 
-                                    forXPath:@"//campaign" 
-                                    andClass:NSClassFromString(@"Campaign")];
+                                     forXPath:@"//campaign" 
+                                     andClass:NSClassFromString(@"Campaign")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:campaigns, @"data", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveCampaignsNotification
+                                                          object:self 
+                                                        userInfo:dict];
+    [_notificationCenter postNotification:notif];
+}
+
+- (void)processGetLeadsRequest:(ASIHTTPRequest *)request
+{
+    NSString *response = [request responseString];
+    NSArray *leads = [self deserializeXML:response 
+                                 forXPath:@"//lead" 
+                                 andClass:NSClassFromString(@"Lead")];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:leads, @"data", nil];
+    NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveLeadsNotification
                                                           object:self 
                                                         userInfo:dict];
     [_notificationCenter postNotification:notif];
