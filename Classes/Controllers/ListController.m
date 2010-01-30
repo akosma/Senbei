@@ -96,11 +96,19 @@
     if (_firstLoad)
     {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        [self.tableView scrollToRowAtIndexPath:indexPath 
-                              atScrollPosition:UITableViewScrollPositionTop 
-                                      animated:YES];
         _firstLoad = NO;
+        [self performSelector:@selector(scroll:) 
+                   withObject:[indexPath retain]
+                   afterDelay:0.5];
     }
+}
+
+- (void)scroll:(NSIndexPath *)indexPath
+{
+    [self.tableView scrollToRowAtIndexPath:indexPath 
+                          atScrollPosition:UITableViewScrollPositionTop 
+                                  animated:YES];
+    [indexPath release];
 }
 
 #pragma mark -
