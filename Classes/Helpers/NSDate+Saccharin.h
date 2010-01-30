@@ -11,5 +11,7 @@
 @interface NSDate (Saccharin)
 
 - (NSString *)stringFormattedWithCurrentLocale;
+- (NSString *)stringWithDateFormattedWithCurrentLocale;
+- (NSString *)stringForNewTaskCreation;
 
 @end

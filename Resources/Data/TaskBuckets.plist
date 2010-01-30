@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>text</key>
+		<string>As Soon As Possible</string>
+		<key>key</key>
+		<string>due_asap</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>Today</string>
+		<key>key</key>
+		<string>due_today</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>Tomorrow</string>
+		<key>key</key>
+		<string>due_tomorrow</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>This Week</string>
+		<key>key</key>
+		<string>due_this_week</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>Next Week</string>
+		<key>key</key>
+		<string>due_next_week</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>Sometime Later</string>
+		<key>key</key>
+		<string>due_later</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>On Specific Date...</string>
+		<key>key</key>
+		<string>specific_time</string>
+	</dict>
+</array>
+</plist>

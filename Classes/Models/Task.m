@@ -12,6 +12,7 @@
 
 @synthesize dueDate = _dueDate;
 @synthesize category = _category;
+@synthesize bucket = _bucket;
 
 - (id)initWithCXMLElement:(CXMLElement *)element
 {
@@ -24,6 +25,10 @@
             if ([nodeName isEqualToString:@"category"])
             {
                 _category = [[obj stringValue] copy];
+            }
+            else if ([nodeName isEqualToString:@"bucket"])
+            {
+                _bucket = [[obj stringValue] copy];
             }
             else if ([nodeName isEqualToString:@"due-at"])
             {
@@ -42,6 +47,7 @@
 
 - (void)dealloc
 {
+    [_bucket release];
     [_dueDate release];
     [_category release];
     [super dealloc];

@@ -9,6 +9,7 @@
 #import "FatFreeCRMProxy.h"
 #import "SaccharinAppDelegate.h"
 #import "SynthesizeSingleton.h"
+#import "NSDate+Saccharin.h"
 #import "ASINetworkQueue.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
@@ -136,10 +137,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setRequestMethod:@"POST"];
-    [request setPostValue:NSStringFromClass([entity class]) forKey:@"comment[commentable_type]"];
-    [request setPostValue:[NSNumber numberWithInt:entity.objectId] forKey:@"comment[commentable_id]"];
-    [request setPostValue:currentUserID forKey:@"comment[user_id]"];
-    [request setPostValue:comment forKey:@"comment[comment]"];
+    [request setPostValue:NSStringFromClass([entity class])         forKey:@"comment[commentable_type]"];
+    [request setPostValue:[NSNumber numberWithInt:entity.objectId]  forKey:@"comment[commentable_id]"];
+    [request setPostValue:currentUserID                             forKey:@"comment[user_id]"];
+    [request setPostValue:comment                                   forKey:@"comment[comment]"];
     request.shouldRedirect = NO;
     request.defaultResponseEncoding = NSUTF8StringEncoding;
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"new_comment", SELECTED_API_PATH, 
@@ -167,12 +168,38 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request setRequestMethod:@"PUT"];
-    request.username = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_USERNAME];;
-    request.password = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_PASSWORD];;
+    request.username = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_USERNAME];
+    request.password = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_PASSWORD];
     request.shouldRedirect = NO;
     request.defaultResponseEncoding = NSUTF8StringEncoding;
     request.timeOutSeconds = REQUEST_TIMEOUT;
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"task_done", SELECTED_API_PATH, nil];
+    request.userInfo = userInfo;
+    [_networkQueue addOperation:request];    
+}
+
+- (void)createTask:(Task *)task
+{
+    NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
+    NSString *urlString = [NSString stringWithFormat:@"%@/tasks", serverURL, task.objectId];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSInteger idValue = [SaccharinAppDelegate sharedAppDelegate].currentUser.objectId;
+    NSNumber *currentUserID = [NSNumber numberWithInt:idValue];
+
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setRequestMethod:@"POST"];
+    request.username = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_USERNAME];
+    request.password = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_PASSWORD];
+    [request setPostValue:task.name                               forKey:@"task[name]"];
+    [request setPostValue:task.category                           forKey:@"task[category]"];
+    [request setPostValue:[task.dueDate stringForNewTaskCreation] forKey:@"task[calendar]"];
+    [request setPostValue:task.bucket                             forKey:@"task[bucket]"];
+    [request setPostValue:currentUserID                           forKey:@"task[user_id]"];
+    request.shouldRedirect = NO;
+    request.defaultResponseEncoding = NSUTF8StringEncoding;
+    request.timeOutSeconds = REQUEST_TIMEOUT;
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"task_new", SELECTED_API_PATH, nil];
     request.userInfo = userInfo;
     [_networkQueue addOperation:request];    
 }
@@ -236,6 +263,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
         else if ([selectedAPIPath isEqualToString:@"task_done"])
         {
             [_notificationCenter postNotificationName:FatFreeCRMProxyDidMarkTaskAsDoneNotification
+                                               object:self];
+        }
+        else if ([selectedAPIPath isEqualToString:@"task_new"])
+        {
+            [_notificationCenter postNotificationName:FatFreeCRMProxyDidCreateTaskNotification
                                                object:self];
         }
     }

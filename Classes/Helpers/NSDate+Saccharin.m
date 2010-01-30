@@ -19,7 +19,28 @@
     NSString *result = [formatter stringFromDate:self];
     [formatter release];
     
-    return result;    
+    return result;
+}
+
+- (NSString *)stringWithDateFormattedWithCurrentLocale
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[NSLocale currentLocale]];
+    [formatter setDateStyle:NSDateFormatterLongStyle];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    NSString *result = [formatter stringFromDate:self];
+    [formatter release];
+    
+    return result;
+}
+
+- (NSString *)stringForNewTaskCreation
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
+    NSString *result = [formatter stringFromDate:self];
+    [formatter release];
+    return result;
 }
 
 @end

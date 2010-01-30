@@ -11,6 +11,9 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		3A0B525B11146D87005A26FD /* NewTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B525A11146D87005A26FD /* NewTaskController.m */; };
+		3A0B52FD11147B99005A26FD /* TaskCategories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B52FC11147B99005A26FD /* TaskCategories.plist */; };
+		3A0B531E11147EEC005A26FD /* TaskBuckets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B531D11147EEC005A26FD /* TaskBuckets.plist */; };
 		3A29C08A11075E2B00D887F1 /* CommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08911075E2B00D887F1 /* CommentsController.m */; };
 		3A29C08E11075E6100D887F1 /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08D11075E6100D887F1 /* Account.m */; };
 		3A29C0931107600500D887F1 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C0921107600500D887F1 /* BaseEntity.m */; };
@@ -93,6 +96,10 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Saccharin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Saccharin_Prefix.pch; sourceTree = "<group>"; };
+		3A0B525911146D87005A26FD /* NewTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTaskController.h; sourceTree = "<group>"; };
+		3A0B525A11146D87005A26FD /* NewTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTaskController.m; sourceTree = "<group>"; };
+		3A0B52FC11147B99005A26FD /* TaskCategories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TaskCategories.plist; sourceTree = "<group>"; };
+		3A0B531D11147EEC005A26FD /* TaskBuckets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TaskBuckets.plist; sourceTree = "<group>"; };
 		3A29C08811075E2B00D887F1 /* CommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsController.h; sourceTree = "<group>"; };
 		3A29C08911075E2B00D887F1 /* CommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsController.m; sourceTree = "<group>"; };
 		3A29C08C11075E6100D887F1 /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
@@ -291,6 +298,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3A0B52FB11147B88005A26FD /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3A0B531D11147EEC005A26FD /* TaskBuckets.plist */,
+				3A0B52FC11147B99005A26FD /* TaskCategories.plist */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		3A29C08B11075E5400D887F1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,6 +424,8 @@
 				3A29C35C110794BA00D887F1 /* ListControllerDelegate.h */,
 				3A29C3FC1107A34E00D887F1 /* TasksController.h */,
 				3A29C3FD1107A34E00D887F1 /* TasksController.m */,
+				3A0B525911146D87005A26FD /* NewTaskController.h */,
+				3A0B525A11146D87005A26FD /* NewTaskController.m */,
 				3A29C08811075E2B00D887F1 /* CommentsController.h */,
 				3A29C08911075E2B00D887F1 /* CommentsController.m */,
 				3A29C3361107922300D887F1 /* SettingsController.h */,
@@ -447,6 +465,7 @@
 			children = (
 				8D1107310486CEB800E47090 /* Saccharin-Info.plist */,
 				3A6D8CDE11064AAC0089F21D /* Entitlements.plist */,
+				3A0B52FB11147B88005A26FD /* Data */,
 				3A6D8CD911064A900089F21D /* Images */,
 				3A6D8D4511064ED70089F21D /* Strings */,
 				3A6D8CDA11064A900089F21D /* NIBs */,
@@ -685,6 +704,8 @@
 				3AB723D911087A80001F861D /* opportunities.png in Resources */,
 				3AB723DA11087A80001F861D /* settings.png in Resources */,
 				3AB723DB11087A80001F861D /* tasks.png in Resources */,
+				3A0B52FD11147B99005A26FD /* TaskCategories.plist in Resources */,
+				3A0B531E11147EEC005A26FD /* TaskBuckets.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,6 +766,7 @@
 				3A2B965E11088AC1000373A5 /* Campaign.m in Sources */,
 				3A2B966211088C26000373A5 /* Lead.m in Sources */,
 				3A2B966711088C3D000373A5 /* Task.m in Sources */,
+				3A0B525B11146D87005A26FD /* NewTaskController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

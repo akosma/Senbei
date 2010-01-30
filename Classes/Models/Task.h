@@ -14,10 +14,12 @@
 @private
     NSDate *_dueDate;
     NSString *_category;
+    NSString *_bucket;
 }
 
 @property (nonatomic, retain) NSDate *dueDate;
 @property (nonatomic, copy) NSString *category;
+@property (nonatomic, copy) NSString *bucket;
 
 - (id)initWithCXMLElement:(CXMLElement *)element;
 

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class NewTaskController;
+
 @interface TasksController : UITableViewController <UIAlertViewDelegate>
 {
 @private
@@ -23,6 +25,8 @@
     NSMutableArray *_sections;
     
     NSIndexPath *_indexPathToDelete;
+    
+    NewTaskController *_newTaskController;
 }
 
 @property (nonatomic, readonly) UINavigationController *navigationController;

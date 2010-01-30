@@ -8,6 +8,7 @@
 
 #import "TasksController.h"
 #import "FatFreeCRMProxy.h"
+#import "NewTaskController.h"
 #import "Task.h"
 
 @implementation TasksController
@@ -16,6 +17,7 @@
 
 - (void)dealloc 
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_tasksOverdue release];
     [_tasksDueASAP release];
     [_tasksDueToday release];
@@ -25,6 +27,7 @@
     [_tasksDueLater release];
     [_sections release];
     [_navigationController release];
+    [_newTaskController release];
     [super dealloc];
 }
 
@@ -33,6 +36,12 @@
     [super viewDidLoad];
     _navigationController = [[UINavigationController alloc] initWithRootViewController:self];
     self.title = @"Tasks";
+    
+    UIBarButtonItem *addTaskItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                 target:self
+                                                                                 action:@selector(addNewTask:)];
+    self.navigationItem.rightBarButtonItem = addTaskItem;
+    [addTaskItem release];
 
     _tasksOverdue = [[NSMutableArray alloc] initWithCapacity:10];
     _tasksDueASAP = [[NSMutableArray alloc] initWithCapacity:10];
@@ -50,15 +59,34 @@
                                                object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didMarkTaskAsDone:) 
+                                             selector:@selector(reloadTasks:) 
                                                  name:FatFreeCRMProxyDidMarkTaskAsDoneNotification 
                                                object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadTasks:) 
+                                                 name:FatFreeCRMProxyDidCreateTaskNotification
+                                               object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+    
     [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadTasks];
 }
 
 - (void)didReceiveMemoryWarning 
 {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark -
+#pragma mark Button handlers
+
+- (void)addNewTask:(id)sender
+{
+    if (_newTaskController == nil)
+    {
+        _newTaskController = [[NewTaskController alloc] init];
+    }
+    [self.navigationController presentModalViewController:_newTaskController.navigationController
+                                                 animated:YES];
 }
 
 #pragma mark -
@@ -96,7 +124,7 @@
     [self.tableView reloadData];
 }
 
-- (void)didMarkTaskAsDone:(NSNotification *)notification
+- (void)reloadTasks:(NSNotification *)notification
 {
     [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadTasks];
 }
@@ -118,7 +146,7 @@
 {
     Task *task = [[_sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     return [task.name sizeWithFont:[UIFont boldSystemFontOfSize:14.0] 
-                       constrainedToSize:CGSizeMake(180.0, 4000.0)].height + 20.0;
+                       constrainedToSize:CGSizeMake(170.0, 4000.0)].height + 20.0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section

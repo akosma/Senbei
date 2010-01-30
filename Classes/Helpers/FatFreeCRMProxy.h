@@ -8,18 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-#define FatFreeCRMProxyDidFailWithErrorNotification @"FatFreeCRMProxyDidFailWithErrorNotification"
-#define FatFreeCRMProxyDidRetrieveTasksNotification @"FatFreeCRMProxyDidRetrieveTasksNotification"
-#define FatFreeCRMProxyDidMarkTaskAsDoneNotification @"FatFreeCRMProxyDidMarkTaskAsDoneNotification"
-#define FatFreeCRMProxyDidRetrieveAccountsNotification @"FatFreeCRMProxyDidRetrieveAccountsNotification"
+#define FatFreeCRMProxyDidFailWithErrorNotification         @"FatFreeCRMProxyDidFailWithErrorNotification"
+#define FatFreeCRMProxyDidRetrieveTasksNotification         @"FatFreeCRMProxyDidRetrieveTasksNotification"
+#define FatFreeCRMProxyDidMarkTaskAsDoneNotification        @"FatFreeCRMProxyDidMarkTaskAsDoneNotification"
+#define FatFreeCRMProxyDidCreateTaskNotification            @"FatFreeCRMProxyDidCreateTaskNotification"
+#define FatFreeCRMProxyDidRetrieveAccountsNotification      @"FatFreeCRMProxyDidRetrieveAccountsNotification"
 #define FatFreeCRMProxyDidRetrieveOpportunitiesNotification @"FatFreeCRMProxyDidRetrieveOpportunitiesNotification"
-#define FatFreeCRMProxyDidRetrieveCampaignsNotification @"FatFreeCRMProxyDidRetrieveCampaignsNotification"
-#define FatFreeCRMProxyDidRetrieveLeadsNotification @"FatFreeCRMProxyDidRetrieveLeadsNotification"
-#define FatFreeCRMProxyDidRetrieveContactsNotification @"FatFreeCRMProxyDidRetrieveContactsNotification"
-#define FatFreeCRMProxyDidRetrieveCommentsNotification @"FatFreeCRMProxyDidRetrieveCommentsNotification"
-#define FatFreeCRMProxyDidPostCommentNotification @"FatFreeCRMProxyDidPostCommentNotification"
-#define FatFreeCRMProxyDidLoginNotification @"FatFreeCRMProxyDidLoginNotification"
-#define FatFreeCRMProxyDidFailLoginNotification @"FatFreeCRMProxyDidFailLoginNotification"
+#define FatFreeCRMProxyDidRetrieveCampaignsNotification     @"FatFreeCRMProxyDidRetrieveCampaignsNotification"
+#define FatFreeCRMProxyDidRetrieveLeadsNotification         @"FatFreeCRMProxyDidRetrieveLeadsNotification"
+#define FatFreeCRMProxyDidRetrieveContactsNotification      @"FatFreeCRMProxyDidRetrieveContactsNotification"
+#define FatFreeCRMProxyDidRetrieveCommentsNotification      @"FatFreeCRMProxyDidRetrieveCommentsNotification"
+#define FatFreeCRMProxyDidPostCommentNotification           @"FatFreeCRMProxyDidPostCommentNotification"
+#define FatFreeCRMProxyDidLoginNotification                 @"FatFreeCRMProxyDidLoginNotification"
+#define FatFreeCRMProxyDidFailLoginNotification             @"FatFreeCRMProxyDidFailLoginNotification"
 
 #define FatFreeCRMProxyErrorKey @"FatFreeCRMProxyErrorKey"
 
@@ -42,6 +43,7 @@
 - (void)loadCommentsForEntity:(BaseEntity *)entity;
 - (void)sendComment:(NSString *)comment forEntity:(BaseEntity *)entity;
 - (void)markTaskAsDone:(Task *)task;
+- (void)createTask:(Task *)task;
 - (void)loadTasks;
 - (void)cancelConnections;
 
