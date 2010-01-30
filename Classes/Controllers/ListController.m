@@ -202,10 +202,10 @@
 - (void)filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope
 {
 	[_searchData removeAllObjects];
+    [self.tableView reloadData];
 	
     if (searchText != nil && [searchText length] > 0)
     {
-        [[FatFreeCRMProxy sharedFatFreeCRMProxy] cancelConnections];
         [[FatFreeCRMProxy sharedFatFreeCRMProxy] searchList:_listedClass query:searchText];
     }
 }
