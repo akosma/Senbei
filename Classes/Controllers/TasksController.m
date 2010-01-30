@@ -28,6 +28,7 @@
     [_sections release];
     [_navigationController release];
     [_newTaskController release];
+    [_categories release];
     [super dealloc];
 }
 
@@ -67,6 +68,16 @@
                                              selector:@selector(reloadTasks:) 
                                                  name:FatFreeCRMProxyDidCreateTaskNotification
                                                object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"TaskCategories" ofType:@"plist"];
+    NSArray *categoriesArray = [[NSArray alloc] initWithContentsOfFile:path];
+    _categories = [[NSMutableDictionary alloc] initWithCapacity:[categoriesArray count]];
+    for (NSDictionary *dict in categoriesArray)
+    {
+        [_categories setObject:[dict objectForKey:@"text"] 
+                        forKey:[dict objectForKey:@"key"]];
+    }
+    [categoriesArray release];
     
     [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadTasks];
 }
@@ -178,7 +189,7 @@
     }
     
     Task *task = [[_sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    cell.textLabel.text = task.category;
+    cell.textLabel.text = [_categories objectForKey:task.category];
     cell.detailTextLabel.text = task.name;
     return cell;
 }

@@ -23,6 +23,7 @@
     NSMutableArray *_tasksDueLater;
     
     NSMutableArray *_sections;
+    NSMutableDictionary *_categories;
     
     NSIndexPath *_indexPathToDelete;
     
