@@ -21,6 +21,13 @@
     if (self = [super initWithCoder:coder]) 
     {
         _navigationController = [[UINavigationController alloc] initWithRootViewController:self];
+
+        UIBarButtonItem *reloadItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                                                                    target:self
+                                                                                    action:@selector(refresh)];
+        self.navigationItem.rightBarButtonItem = reloadItem;
+        [reloadItem release];
+        
         
         _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
         _searchBar.placeholder = @"Search";
@@ -51,6 +58,14 @@
 }
 
 #pragma mark -
+#pragma mark Public methods
+
+- (void)refresh
+{
+    [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadList:_listedClass page:_pageCounter];
+}
+
+#pragma mark -
 #pragma mark UIViewController methods
 
 - (void)viewDidLoad 
@@ -66,7 +81,7 @@
     [super viewWillAppear:animated];
     if (_firstLoad)
     {
-        [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadList:_listedClass page:_pageCounter];
+        [self refresh];
     }
 }
 
@@ -120,7 +135,7 @@
         scrollView.contentOffset.y + 372.0 >= scrollView.contentSize.height)
     {
         ++_pageCounter;
-        [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadList:_listedClass page:_pageCounter];
+        [self refresh];
     }
 }
 
@@ -202,7 +217,7 @@
 - (void)filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope
 {
 	[_searchData removeAllObjects];
-    [self.tableView reloadData];
+    [self.searchDisplayController.searchResultsTableView reloadData];
 	
     if (searchText != nil && [searchText length] > 0)
     {
