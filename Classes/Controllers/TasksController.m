@@ -15,6 +15,9 @@
 
 @synthesize navigationController = _navigationController;
 
+#pragma mark -
+#pragma mark Dealloc
+
 - (void)dealloc 
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -32,11 +35,29 @@
     [super dealloc];
 }
 
+#pragma mark -
+#pragma mark Public methods
+
+- (void)refresh
+{
+    [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadTasks];
+}
+
+#pragma mark -
+#pragma mark UIViewController methods
+
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
+    _firstLoad = YES;
     _navigationController = [[UINavigationController alloc] initWithRootViewController:self];
     self.title = @"Tasks";
+    
+    UIBarButtonItem *reloadItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                                                                target:self
+                                                                                action:@selector(refresh)];
+    self.navigationItem.leftBarButtonItem = reloadItem;
+    [reloadItem release];
     
     UIBarButtonItem *addTaskItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                  target:self
@@ -78,8 +99,15 @@
                         forKey:[dict objectForKey:@"key"]];
     }
     [categoriesArray release];
-    
-    [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadTasks];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    if (_firstLoad)
+    {
+        _firstLoad = NO;
+        [self refresh];
+    }
 }
 
 - (void)didReceiveMemoryWarning 
@@ -137,7 +165,7 @@
 
 - (void)reloadTasks:(NSNotification *)notification
 {
-    [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadTasks];
+    [self refresh];
 }
 
 #pragma mark -

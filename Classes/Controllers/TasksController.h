@@ -28,8 +28,12 @@
     NSIndexPath *_indexPathToDelete;
     
     NewTaskController *_newTaskController;
+    
+    BOOL _firstLoad;
 }
 
 @property (nonatomic, readonly) UINavigationController *navigationController;
+
+- (void)refresh;
 
 @end

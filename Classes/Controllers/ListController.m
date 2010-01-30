@@ -25,7 +25,7 @@
         UIBarButtonItem *reloadItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
                                                                                     target:self
                                                                                     action:@selector(refresh)];
-        self.navigationItem.rightBarButtonItem = reloadItem;
+        self.navigationItem.leftBarButtonItem = reloadItem;
         [reloadItem release];
         
         
