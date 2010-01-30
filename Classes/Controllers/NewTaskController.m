@@ -124,6 +124,7 @@
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
+    self.tableView.scrollEnabled = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated 
@@ -163,7 +164,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) 
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                        reuseIdentifier:CellIdentifier] autorelease];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -330,6 +331,9 @@
                       forControlEvents:UIControlEventValueChanged];
                 [self.navigationController.view addSubview:_datePicker];
             }
+            [_selectedDate release];
+            _selectedDate = [[_datePicker date] retain];
+            _bucketField.text = [_selectedDate stringWithDateFormattedWithCurrentLocale];
             [self.navigationController.view bringSubviewToFront:_datePicker];
         }
     }
