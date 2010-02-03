@@ -308,16 +308,32 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
 
 - (void)listController:(ListController *)controller didSelectEntity:(BaseEntity *)entity
 {
-    if (_commentsController == nil)
+    if (controller == _contactsController)
     {
-        _commentsController = [[CommentsController alloc] init];
+    
     }
-    _commentsController.entity = entity;
-    [controller.navigationController pushViewController:_commentsController animated:YES];
+    else
+    {
+        if (_commentsController == nil)
+        {
+            _commentsController = [[CommentsController alloc] init];
+        }
+        _commentsController.entity = entity;
+        [controller.navigationController pushViewController:_commentsController animated:YES];
+    }
 }
 
 - (void)listController:(ListController *)controller didTapAccessoryForEntity:(BaseEntity *)entity
 {
+    if (controller == _contactsController)
+    {
+        if (_commentsController == nil)
+        {
+            _commentsController = [[CommentsController alloc] init];
+        }
+        _commentsController.entity = entity;
+        [controller.navigationController pushViewController:_commentsController animated:YES];
+    }
 }
 
 @end
