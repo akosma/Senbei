@@ -185,7 +185,37 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
 
 - (NSString *)description
 {
-    return _phone;
+    NSMutableString *result = [[NSMutableString alloc] init];
+    if ([_title length] > 0)
+    {
+        [result appendString:_title];
+    }
+    if ([_department length] > 0)
+    {
+        if ([result length] > 0)
+        {
+            [result appendString:@" - "];
+        }
+        [result appendString:_department];
+    }
+    if ([_phone length] > 0)
+    {
+        if ([result length] > 0)
+        {
+            [result appendString:@" - "];
+        }
+        [result appendString:_phone];
+    }
+    if ([_email length] > 0)
+    {
+        if ([result length] > 0)
+        {
+            [result appendString:@" - "];
+        }
+        [result appendString:_email];
+    }
+    
+    return [result autorelease];
 }
 
 - (NSString *)name

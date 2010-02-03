@@ -6,9 +6,9 @@
 //  Copyright 2010 akosma software. All rights reserved.
 //
 
-#import "Account.h"
+#import "CompanyAccount.h"
 
-@implementation Account
+@implementation CompanyAccount
 
 @synthesize billingAddress = _billingAddress;
 @synthesize fax = _fax;

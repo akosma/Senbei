@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BaseEntity.h"
 
-@interface Account : BaseEntity 
+@interface CompanyAccount : BaseEntity 
 {
 @private
     NSString *_billingAddress;

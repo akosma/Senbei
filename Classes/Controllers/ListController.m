@@ -8,7 +8,7 @@
 
 #import "ListController.h"
 #import "FatFreeCRMProxy.h"
-#import "Account.h"
+#import "CompanyAccount.h"
 #import "NSDate+Saccharin.h"
 
 @implementation ListController

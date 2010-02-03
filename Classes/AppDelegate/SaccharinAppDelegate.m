@@ -12,15 +12,24 @@
 #import "CommentsController.h"
 #import "TasksController.h"
 #import "FatFreeCRMProxy.h"
-#import "Account.h"
+#import "CompanyAccount.h"
 #import "Opportunity.h"
 #import "Contact.h"
 #import "User.h"
 #import "Campaign.h"
 #import "Lead.h"
+#import "WebBrowserController.h"
 
 #define TAB_ORDER_PREFERENCE @"TAB_ORDER_PREFERENCE"
 #define CURRENT_TAB_PREFERENCE @"CURRENT_TAB_PREFERENCE"
+
+NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID property, ABMultiValueIdentifier identifierForValue)
+{
+    ABMultiValueRef items = ABRecordCopyValue(person, property);
+    NSString *value = (NSString *)ABMultiValueCopyValueAtIndex(items, identifierForValue);
+    CFRelease(items);
+    return [value autorelease];
+}
 
 @implementation SaccharinAppDelegate
 
@@ -88,7 +97,7 @@
                                              selector:@selector(didReceiveData:) 
                                                  name:FatFreeCRMProxyDidRetrieveAccountsNotification
                                                object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
-    _accountsController.listedClass = [Account class];
+    _accountsController.listedClass = [CompanyAccount class];
     
     [[NSNotificationCenter defaultCenter] addObserver:_opportunitiesController 
                                              selector:@selector(didReceiveData:) 
@@ -343,12 +352,53 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
     }
 }
 
+#pragma mark -
+#pragma mark ABPersonViewControllerDelegate methods
+
 -        (BOOL)personViewController:(ABPersonViewController *)personViewController 
 shouldPerformDefaultActionForPerson:(ABRecordRef)person 
                            property:(ABPropertyID)property 
                          identifier:(ABMultiValueIdentifier)identifierForValue
 {
+    if (property == kABPersonEmailProperty)
+    {
+        NSString* email = getValueForPropertyFromPerson(person, property, identifierForValue);
+        MFMailComposeViewController *composer = [[MFMailComposeViewController alloc] init];
+        composer.mailComposeDelegate = self;
+        [composer setToRecipients:[NSArray arrayWithObject:email]];
+
+        [composer setMessageBody:@"<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>Sent from Saccharin</p>" 
+                          isHTML:YES];                    
+        
+        [personViewController presentModalViewController:composer animated:YES];
+        [composer release];
+        return NO;
+    }
+    else if (property == kABPersonURLProperty)
+    {
+        NSString* urlString = getValueForPropertyFromPerson(person, property, identifierForValue);
+        NSURL *url = [[NSURL alloc] initWithString:urlString];
+        WebBrowserController *webController = [[WebBrowserController alloc] init];
+        webController.url = url;
+        webController.title = urlString;
+        webController.hidesBottomBarWhenPushed = YES;
+        [personViewController.navigationController pushViewController:webController animated:YES];
+        [webController release];
+        [url release];
+        return NO;
+    }
+
     return YES;
+}
+
+#pragma mark -
+#pragma mark MFMailComposeViewControllerDelegate methods
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller 
+          didFinishWithResult:(MFMailComposeResult)result 
+                        error:(NSError*)err
+{
+    [controller dismissModalViewControllerAnimated:YES];
 }
 
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import <AddressBook/AddressBook.h>
+#import <MessageUI/MFMailComposeViewController.h>
 #import "ListControllerDelegate.h"
 
 @class SettingsController;
@@ -31,7 +32,8 @@ typedef enum {
 @interface SaccharinAppDelegate : NSObject <UIApplicationDelegate,
                                             UITabBarControllerDelegate,
                                             ListControllerDelegate,
-                                            ABPersonViewControllerDelegate> 
+                                            ABPersonViewControllerDelegate,
+                                            MFMailComposeViewControllerDelegate> 
 {
 @private
     IBOutlet UIWindow *_window;

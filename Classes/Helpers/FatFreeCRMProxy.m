@@ -15,7 +15,7 @@
 #import "ASIFormDataRequest.h"
 #import "Definitions.h"
 #import "TouchXML.h"
-#import "Account.h"
+#import "CompanyAccount.h"
 #import "Opportunity.h"
 #import "Contact.h"
 #import "Comment.h"
@@ -218,7 +218,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSString *selectedAPIPath = [userInfo objectForKey:SELECTED_API_PATH];
     if ([self requestOK:request])
     {
-        if ([selectedAPIPath isEqualToString:[Account serverPath]])
+        if ([selectedAPIPath isEqualToString:[CompanyAccount serverPath]])
         {
             [self processGetAccountsRequest:request];
         }
