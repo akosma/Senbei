@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AddressBook/AddressBook.h>
 #import "BaseEntity.h"
 
 @interface Contact : BaseEntity 
@@ -48,8 +49,11 @@
 @property (nonatomic, copy) NSString *twitter;
 @property (nonatomic, retain) NSDate *birthDate;
 @property (nonatomic) BOOL doNotCall;
+@property (nonatomic, readonly) ABRecordRef person;
 
 + (NSString *)serverPath;
++ (NSArray *)displayedProperties;
+
 - (id)initWithCXMLElement:(CXMLElement *)element;
 
 @end

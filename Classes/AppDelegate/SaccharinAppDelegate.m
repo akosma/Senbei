@@ -310,7 +310,14 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
 {
     if (controller == _contactsController)
     {
-    
+        ABPersonViewController *personController = [[ABPersonViewController alloc] init];
+        Contact *contact = (Contact *)entity;
+        ABRecordRef person = contact.person;
+        personController.displayedPerson = person;
+        personController.displayedProperties = [Contact displayedProperties];
+        personController.personViewDelegate = self;
+        [controller.navigationController pushViewController:personController animated:YES];
+        [personController release];
     }
     else
     {
@@ -334,6 +341,14 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
         _commentsController.entity = entity;
         [controller.navigationController pushViewController:_commentsController animated:YES];
     }
+}
+
+-        (BOOL)personViewController:(ABPersonViewController *)personViewController 
+shouldPerformDefaultActionForPerson:(ABRecordRef)person 
+                           property:(ABPropertyID)property 
+                         identifier:(ABMultiValueIdentifier)identifierForValue
+{
+    return YES;
 }
 
 @end

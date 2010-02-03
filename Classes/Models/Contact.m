@@ -7,6 +7,19 @@
 //
 
 #import "Contact.h"
+#import "NSDate+Saccharin.h"
+
+void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringRef label, NSString *value)
+{
+    if (value != nil && ![value isEqualToString:@""])
+    {
+        ABMutableMultiValueRef items = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+        CFIndex index = ABMultiValueGetCount(items);
+        ABMultiValueInsertValueAndLabelAtIndex(items, (CFStringRef)value, label, index, nil);
+        ABRecordSetValue(person, property, items, nil);
+        CFRelease(items);
+    }
+}
 
 @implementation Contact
 
@@ -28,10 +41,36 @@
 @synthesize birthDate = _birthDate;
 @synthesize doNotCall = _doNotCall;
 
+@dynamic person;
+
+#pragma mark -
+#pragma mark Static methods
+
 + (NSString *)serverPath
 {
     return @"contacts";
 }
+
++ (NSArray *)displayedProperties
+{
+    static NSArray *properties;
+    if (properties == nil)
+    {
+        properties = [[NSArray alloc] initWithObjects:[NSNumber numberWithInt:kABPersonFirstNameProperty],
+                      [NSNumber numberWithInt:kABPersonLastNameProperty], 
+                      [NSNumber numberWithInt:kABPersonJobTitleProperty],
+                      [NSNumber numberWithInt:kABPersonDepartmentProperty],
+                      [NSNumber numberWithInt:kABPersonBirthdayProperty],
+                      [NSNumber numberWithInt:kABPersonPhoneProperty],
+                      [NSNumber numberWithInt:kABPersonURLProperty],
+                      [NSNumber numberWithInt:kABPersonEmailProperty],
+                      nil];
+    }
+    return properties;
+}
+
+#pragma mark -
+#pragma mark Init and dealloc
 
 - (id)initWithCXMLElement:(CXMLElement *)element
 {
@@ -141,6 +180,9 @@
     [super dealloc];
 }
 
+#pragma mark -
+#pragma mark Overridden methods
+
 - (NSString *)description
 {
     return _phone;
@@ -149,6 +191,29 @@
 - (NSString *)name
 {
     return [NSString stringWithFormat:@"%@ %@", _firstName, _lastName];
+}
+
+#pragma mark -
+#pragma mark Public methods
+
+- (ABRecordRef)person
+{
+    ABRecordRef person = ABPersonCreate();
+    ABRecordSetValue(person, kABPersonFirstNameProperty, _firstName, nil);
+    ABRecordSetValue(person, kABPersonLastNameProperty, _lastName, nil);
+    ABRecordSetValue(person, kABPersonJobTitleProperty, _title, nil);
+    ABRecordSetValue(person, kABPersonDepartmentProperty, _department, nil);
+    
+    ABRecordSetValue(person, kABPersonBirthdayProperty, [_birthDate stringWithDateFormattedWithCurrentLocale], nil);
+    
+    setPersonPropertyValue(person, kABPersonPhoneProperty, kABPersonPhoneMobileLabel, _mobile);
+    setPersonPropertyValue(person, kABPersonPhoneProperty, kABPersonPhoneMainLabel, _phone);
+    setPersonPropertyValue(person, kABPersonPhoneProperty, kABPersonPhoneWorkFAXLabel, _fax);
+    setPersonPropertyValue(person, kABPersonURLProperty, kABPersonHomePageLabel, _blog);
+    setPersonPropertyValue(person, kABPersonEmailProperty, kABWorkLabel, _email);
+    setPersonPropertyValue(person, kABPersonEmailProperty, kABHomeLabel, _altEmail);
+
+    return person;
 }
 
 @end

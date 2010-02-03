@@ -74,6 +74,8 @@
 		3A6D8DD011065C410089F21D /* CTidy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8DC411065C410089F21D /* CTidy.m */; };
 		3A6D8DD411065C640089F21D /* libxml2.2.7.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6D8DD311065C640089F21D /* libxml2.2.7.3.dylib */; };
 		3A708B431108427500CB2D83 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A708B421108427500CB2D83 /* Comment.m */; };
+		3A8C38811119D8E1006669BE /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8C38801119D8E1006669BE /* AddressBook.framework */; };
+		3A8C38831119D8E1006669BE /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8C38821119D8E1006669BE /* AddressBookUI.framework */; };
 		3AB721FB11085642001F861D /* AKOEditorrific.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB721F911085642001F861D /* AKOEditorrific.m */; };
 		3AB7220111085699001F861D /* ako-editorrific-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB7220011085699001F861D /* ako-editorrific-bar.png */; };
 		3AB7231A110868BB001F861D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB72319110868BB001F861D /* User.m */; };
@@ -214,6 +216,8 @@
 		3A6D8DD311065C640089F21D /* libxml2.2.7.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.7.3.dylib; path = usr/lib/libxml2.2.7.3.dylib; sourceTree = SDKROOT; };
 		3A708B411108427500CB2D83 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		3A708B421108427500CB2D83 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		3A8C38801119D8E1006669BE /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		3A8C38821119D8E1006669BE /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		3AB721F811085642001F861D /* AKOEditorrific.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKOEditorrific.h; sourceTree = "<group>"; };
 		3AB721F911085642001F861D /* AKOEditorrific.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKOEditorrific.m; sourceTree = "<group>"; };
 		3AB721FA11085642001F861D /* AKOEditorrificDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKOEditorrificDelegate.h; sourceTree = "<group>"; };
@@ -245,6 +249,8 @@
 				3A6D8D2411064D060089F21D /* SystemConfiguration.framework in Frameworks */,
 				3A6D8D2611064D060089F21D /* libz.1.2.3.dylib in Frameworks */,
 				3A6D8DD411065C640089F21D /* libxml2.2.7.3.dylib in Frameworks */,
+				3A8C38811119D8E1006669BE /* AddressBook.framework in Frameworks */,
+				3A8C38831119D8E1006669BE /* AddressBookUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +293,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A8C38801119D8E1006669BE /* AddressBook.framework */,
+				3A8C38821119D8E1006669BE /* AddressBookUI.framework */,
 				3A6D8DD311065C640089F21D /* libxml2.2.7.3.dylib */,
 				3A6D8D2111064D060089F21D /* CFNetwork.framework */,
 				3A6D8D2311064D060089F21D /* SystemConfiguration.framework */,

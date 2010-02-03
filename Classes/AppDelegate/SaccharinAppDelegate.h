@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AddressBookUI/AddressBookUI.h>
+#import <AddressBook/AddressBook.h>
 #import "ListControllerDelegate.h"
 
 @class SettingsController;
@@ -28,7 +30,8 @@ typedef enum {
 
 @interface SaccharinAppDelegate : NSObject <UIApplicationDelegate,
                                             UITabBarControllerDelegate,
-                                            ListControllerDelegate> 
+                                            ListControllerDelegate,
+                                            ABPersonViewControllerDelegate> 
 {
 @private
     IBOutlet UIWindow *_window;
