@@ -32,7 +32,7 @@
                                                      name:FatFreeCRMProxyDidPostCommentNotification 
                                                    object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
         
-        UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+        UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
                                                                                 target:self 
                                                                                 action:@selector(addComment:)];
         self.navigationItem.rightBarButtonItem = button;
