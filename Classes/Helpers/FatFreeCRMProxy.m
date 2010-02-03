@@ -329,7 +329,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSString *response = [request responseString];
     NSArray *accounts = [self deserializeXML:response 
                                     forXPath:@"//account" 
-                                    andClass:NSClassFromString(@"Account")];
+                                    andClass:NSClassFromString(@"CompanyAccount")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:accounts, @"data", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveAccountsNotification
                                                           object:self 
