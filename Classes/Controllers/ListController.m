@@ -15,12 +15,14 @@
 
 @synthesize listedClass = _listedClass;
 @synthesize delegate = _delegate;
+@synthesize accessoryType = _accessoryType;
 
 - (id)initWithCoder:(NSCoder *)coder
 {
     if (self = [super initWithCoder:coder]) 
     {
         _navigationController = [[UINavigationController alloc] initWithRootViewController:self];
+        _accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
         UIBarButtonItem *reloadItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
                                                                                     target:self
@@ -176,7 +178,7 @@
     if (indexPath.row < [array count])
     {
         BaseEntity *item = [array objectAtIndex:indexPath.row];
-        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+        cell.accessoryType = _accessoryType;
         cell.textLabel.text = item.name;
         cell.textLabel.textColor = [UIColor blackColor];
         cell.detailTextLabel.text = [item description];

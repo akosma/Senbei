@@ -22,10 +22,12 @@
     BOOL _moreToLoad;
     BOOL _firstLoad;
     Class _listedClass;
+    UITableViewCellAccessoryType _accessoryType;
     
     IBOutlet id<ListControllerDelegate> _delegate;
 }
 
+@property (nonatomic) UITableViewCellAccessoryType accessoryType;
 @property (nonatomic) Class listedClass;
 @property (nonatomic, assign) id<ListControllerDelegate> delegate;
 
