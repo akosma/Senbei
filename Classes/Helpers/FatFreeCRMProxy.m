@@ -273,7 +273,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     }
     else 
     {
-        // Create an error object and notify
+        NSString *text = [NSString stringWithFormat:@"The communication with the server failed with error %d", request.responseStatusCode];
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:text, NSLocalizedDescriptionKey, nil];
+        NSError *error = [NSError errorWithDomain:@"Server"
+                                             code:request.responseStatusCode
+                                         userInfo:userInfo];
+        [self notifyError:error];
     }
 }
 
