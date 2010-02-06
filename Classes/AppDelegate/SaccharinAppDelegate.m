@@ -428,7 +428,7 @@ shouldPerformDefaultActionForPerson:(ABRecordRef)person
         webController.url = url;
         webController.title = urlString;
         webController.hidesBottomBarWhenPushed = YES;
-        [personViewController.navigationController pushViewController:webController animated:YES];
+        [personViewController presentModalViewController:webController animated:YES];
         [webController release];
         [url release];
         return NO;

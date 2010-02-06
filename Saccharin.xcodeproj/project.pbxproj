@@ -511,8 +511,8 @@
 		3A6D8CDA11064A900089F21D /* NIBs */ = {
 			isa = PBXGroup;
 			children = (
-				3A6C627C1119EA29000DD23B /* WebBrowserController.xib */,
 				3A6D8D4311064E880089F21D /* MainWindow.xib */,
+				3A6C627C1119EA29000DD23B /* WebBrowserController.xib */,
 			);
 			path = NIBs;
 			sourceTree = "<group>";
