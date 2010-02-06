@@ -28,7 +28,7 @@
 static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
 static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
-static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 216;
+static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 166;
 static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 static NSString *kIASKCredits = @"Powered by InAppSettingsKit"; // Leave this as-is!!!
@@ -489,7 +489,6 @@ static NSString *kIASKCredits = @"Powered by InAppSettingsKit"; // Leave this as
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    [textField setTextAlignment:UITextAlignmentRight];
     return YES;
 }
 
@@ -510,7 +509,7 @@ static NSString *kIASKCredits = @"Powered by InAppSettingsKit"; // Leave this as
     [UIView setAnimationBeginsFromCurrentState:YES];
     [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
     
-    [self.view setFrame:viewFrame];
+    [_tableView setFrame:viewFrame];
 	[_tableView scrollToRowAtIndexPath:textFieldIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 	
     [UIView commitAnimations];
@@ -523,12 +522,11 @@ static NSString *kIASKCredits = @"Powered by InAppSettingsKit"; // Leave this as
     [UIView setAnimationBeginsFromCurrentState:YES];
     [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
     
-    [self.view setFrame:viewFrameBeforeAnimation];
+    [_tableView setFrame:viewFrameBeforeAnimation];
     [UIView commitAnimations];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField setTextAlignment:UITextAlignmentLeft];
     [textField resignFirstResponder];
 	return YES;
 }
