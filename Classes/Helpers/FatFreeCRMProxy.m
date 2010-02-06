@@ -24,6 +24,13 @@
 #import "Campaign.h"
 #import "Lead.h"
 
+#define PROFILE_REQUEST @"profile"
+#define COMMENTS_REQUEST @"comments"
+#define TASKS_REQUEST @"tasks"
+#define NEW_TASK_REQUEST @"task_new"
+#define TASK_DONE_REQUEST @"task_done"
+#define NEW_COMMENT_REQUEST @"new_comment"
+
 @interface FatFreeCRMProxy ()
 
 - (void)sendGETRequestToURL:(NSURL *)url path:(NSString *)path;
@@ -79,7 +86,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 
 - (void)login
 {
-    NSString *path = @"profile";
+    NSString *path = PROFILE_REQUEST;
     NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
     NSString *urlString = [NSString stringWithFormat:@"%@/%@", serverURL, path];
     NSURL *url = [NSURL URLWithString:urlString];
@@ -118,7 +125,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     request.shouldRedirect = NO;
     request.defaultResponseEncoding = NSUTF8StringEncoding;
     request.timeOutSeconds = REQUEST_TIMEOUT;
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"comments", SELECTED_API_PATH, 
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:COMMENTS_REQUEST, SELECTED_API_PATH, 
                               entity, SELECTED_API_ENTITY, 
                               nil];
     request.userInfo = userInfo;
@@ -144,7 +151,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     [request setPostValue:comment                                   forKey:@"comment[comment]"];
     request.shouldRedirect = NO;
     request.defaultResponseEncoding = NSUTF8StringEncoding;
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"new_comment", SELECTED_API_PATH, 
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:NEW_COMMENT_REQUEST, SELECTED_API_PATH, 
                               entity, SELECTED_API_ENTITY, 
                               nil];
     request.userInfo = userInfo;
@@ -154,7 +161,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 
 - (void)loadTasks
 {
-    NSString *path = @"tasks";
+    NSString *path = TASKS_REQUEST;
     NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
     NSString *urlString = [NSString stringWithFormat:@"%@/%@", serverURL, path];
     NSURL *url = [NSURL URLWithString:urlString];
@@ -174,7 +181,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     request.shouldRedirect = NO;
     request.defaultResponseEncoding = NSUTF8StringEncoding;
     request.timeOutSeconds = REQUEST_TIMEOUT;
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"task_done", SELECTED_API_PATH, nil];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:TASK_DONE_REQUEST, SELECTED_API_PATH, nil];
     request.userInfo = userInfo;
     [_networkQueue addOperation:request];    
 }
@@ -200,7 +207,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     request.shouldRedirect = NO;
     request.defaultResponseEncoding = NSUTF8StringEncoding;
     request.timeOutSeconds = REQUEST_TIMEOUT;
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"task_new", SELECTED_API_PATH, nil];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:NEW_TASK_REQUEST, SELECTED_API_PATH, nil];
     request.userInfo = userInfo;
     [_networkQueue addOperation:request];    
 }
@@ -239,11 +246,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
         {
             [self processGetLeadsRequest:request];
         }
-        else if ([selectedAPIPath isEqualToString:@"comments"])
+        else if ([selectedAPIPath isEqualToString:COMMENTS_REQUEST])
         {
             [self processGetCommentsRequest:request];
         }
-        else if ([selectedAPIPath isEqualToString:@"new_comment"])
+        else if ([selectedAPIPath isEqualToString:NEW_COMMENT_REQUEST])
         {
             NSDictionary *userInfo = request.userInfo;
             BaseEntity *entity = [userInfo objectForKey:SELECTED_API_ENTITY];
@@ -253,20 +260,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
                                                                 userInfo:dict];
             [_notificationCenter postNotification:notif];    
         }
-        else if ([selectedAPIPath isEqualToString:@"profile"])
+        else if ([selectedAPIPath isEqualToString:PROFILE_REQUEST])
         {
             [self processLoginRequest:request];
         }
-        else if ([selectedAPIPath isEqualToString:@"tasks"])
+        else if ([selectedAPIPath isEqualToString:TASKS_REQUEST])
         {
             [self processGetTasksRequest:request];
         }
-        else if ([selectedAPIPath isEqualToString:@"task_done"])
+        else if ([selectedAPIPath isEqualToString:TASK_DONE_REQUEST])
         {
             [_notificationCenter postNotificationName:FatFreeCRMProxyDidMarkTaskAsDoneNotification
                                                object:self];
         }
-        else if ([selectedAPIPath isEqualToString:@"task_new"])
+        else if ([selectedAPIPath isEqualToString:NEW_TASK_REQUEST])
         {
             [_notificationCenter postNotificationName:FatFreeCRMProxyDidCreateTaskNotification
                                                object:self];
