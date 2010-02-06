@@ -53,9 +53,11 @@
         
         NSString *path = [[NSBundle mainBundle] pathForResource:@"TaskCategories" ofType:@"plist"];
         _categories = [[NSArray alloc] initWithContentsOfFile:path];
+        _selectedCategory = [[[_categories objectAtIndex:0] objectForKey:@"key"] copy];
         
         path = [[NSBundle mainBundle] pathForResource:@"TaskBuckets" ofType:@"plist"];
         _buckets = [[NSArray alloc] initWithContentsOfFile:path];
+        _selectedBucket = [[[_buckets objectAtIndex:0] objectForKey:@"key"] copy];
     }
     return self;
 }
@@ -312,11 +314,13 @@
 {
     if (pickerView == _categoryPicker)
     {
+        [_selectedCategory release];
         _selectedCategory = [[[_categories objectAtIndex:row] objectForKey:@"key"] copy];
         _categoryField.text = [[_categories objectAtIndex:row] objectForKey:@"text"];
     }
     else if (pickerView == _bucketPicker)
     {
+        [_selectedBucket release];
         _selectedBucket = [[[_buckets objectAtIndex:row] objectForKey:@"key"] copy];
         _bucketField.text = [[_buckets objectAtIndex:row] objectForKey:@"text"];
         
