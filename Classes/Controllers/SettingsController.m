@@ -33,13 +33,16 @@
         {
             [defaults setObject:@"http://demo.fatfreecrm.com" forKey:PREFERENCES_SERVER_URL];
         }
-        if ([defaults stringForKey:PREFERENCES_USERNAME] == nil)
+        if ([defaults stringForKey:PREFERENCES_USERNAME] == nil || [defaults stringForKey:PREFERENCES_PASSWORD] == nil)
         {
-            [defaults setObject:@"aaron" forKey:PREFERENCES_USERNAME];
-        }
-        if ([defaults stringForKey:PREFERENCES_PASSWORD] == nil)
-        {
-            [defaults setObject:@"aaron" forKey:PREFERENCES_PASSWORD];
+            // Use a random username from those used in the Fat Free CRM wiki
+            // http://wiki.github.com/michaeldv/fat_free_crm/loading-demo-data
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"DemoLogins" ofType:@"plist"];
+            NSArray *usernames = [NSArray arrayWithContentsOfFile:path];
+            NSInteger index = floor(arc4random() % [usernames count]);
+            NSString *username = [usernames objectAtIndex:index];
+            [defaults setObject:username forKey:PREFERENCES_USERNAME];
+            [defaults setObject:username forKey:PREFERENCES_PASSWORD];
         }
         [defaults synchronize];
     }

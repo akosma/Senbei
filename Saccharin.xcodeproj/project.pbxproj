@@ -14,6 +14,7 @@
 		3A0B525B11146D87005A26FD /* NewTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B525A11146D87005A26FD /* NewTaskController.m */; };
 		3A0B52FD11147B99005A26FD /* TaskCategories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B52FC11147B99005A26FD /* TaskCategories.plist */; };
 		3A0B531E11147EEC005A26FD /* TaskBuckets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B531D11147EEC005A26FD /* TaskBuckets.plist */; };
+		3A1104A3111DEF4500729EB6 /* DemoLogins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A1104A2111DEF4500729EB6 /* DemoLogins.plist */; };
 		3A29C08A11075E2B00D887F1 /* CommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08911075E2B00D887F1 /* CommentsController.m */; };
 		3A29C08E11075E6100D887F1 /* CompanyAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08D11075E6100D887F1 /* CompanyAccount.m */; };
 		3A29C0931107600500D887F1 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C0921107600500D887F1 /* BaseEntity.m */; };
@@ -105,6 +106,7 @@
 		3A0B525A11146D87005A26FD /* NewTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTaskController.m; sourceTree = "<group>"; };
 		3A0B52FC11147B99005A26FD /* TaskCategories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TaskCategories.plist; sourceTree = "<group>"; };
 		3A0B531D11147EEC005A26FD /* TaskBuckets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TaskBuckets.plist; sourceTree = "<group>"; };
+		3A1104A2111DEF4500729EB6 /* DemoLogins.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DemoLogins.plist; sourceTree = "<group>"; };
 		3A29C08811075E2B00D887F1 /* CommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsController.h; sourceTree = "<group>"; };
 		3A29C08911075E2B00D887F1 /* CommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsController.m; sourceTree = "<group>"; };
 		3A29C08C11075E6100D887F1 /* CompanyAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyAccount.h; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 			children = (
 				3A0B531D11147EEC005A26FD /* TaskBuckets.plist */,
 				3A0B52FC11147B99005A26FD /* TaskCategories.plist */,
+				3A1104A2111DEF4500729EB6 /* DemoLogins.plist */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -727,6 +730,7 @@
 				3A0B52FD11147B99005A26FD /* TaskCategories.plist in Resources */,
 				3A0B531E11147EEC005A26FD /* TaskBuckets.plist in Resources */,
 				3A6C627E1119EA29000DD23B /* WebBrowserController.xib in Resources */,
+				3A1104A3111DEF4500729EB6 /* DemoLogins.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -831,6 +835,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Saccharin_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "Saccharin-Info.plist";
 				PRODUCT_NAME = Saccharin;
@@ -844,6 +849,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Saccharin_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "Saccharin-Info.plist";
 				PRODUCT_NAME = Saccharin;
@@ -872,6 +878,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Saccharin_Prefix.pch;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "Saccharin-Info.plist";
 				PRODUCT_NAME = Saccharin;
