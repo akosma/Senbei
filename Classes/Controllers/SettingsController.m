@@ -31,7 +31,7 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         if ([defaults stringForKey:PREFERENCES_SERVER_URL] == nil)
         {
-            [defaults setObject:@"http://localhost:3000" forKey:PREFERENCES_SERVER_URL];
+            [defaults setObject:@"http://demo.fatfreecrm.com" forKey:PREFERENCES_SERVER_URL];
         }
         if ([defaults stringForKey:PREFERENCES_USERNAME] == nil)
         {
