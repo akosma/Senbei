@@ -28,6 +28,7 @@
 
 - (void)sendGETRequestToURL:(NSURL *)url path:(NSString *)path;
 - (BOOL)requestOK:(ASIHTTPRequest *)request;
+- (NSError *)createErrorWithMessage:(NSString *)string code:(NSInteger)code;
 - (void)notifyError:(NSError *)error;
 - (void)processGetAccountsRequest:(ASIHTTPRequest *)request;
 - (void)processGetOpportunitiesRequest:(ASIHTTPRequest *)request;
@@ -271,15 +272,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
                                                object:self];
         }
     }
-    else 
-    {
-        NSString *text = [NSString stringWithFormat:@"The communication with the server failed with error %d", request.responseStatusCode];
-        NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:text, NSLocalizedDescriptionKey, nil];
-        NSError *error = [NSError errorWithDomain:@"Server"
-                                             code:request.responseStatusCode
-                                         userInfo:userInfo];
-        [self notifyError:error];
-    }
 }
 
 - (void)requestWentWrong:(ASIHTTPRequest *)request
@@ -297,7 +289,47 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 
 - (BOOL)requestOK:(ASIHTTPRequest *)request
 {
-    return (request.responseStatusCode == 200) || (request.responseStatusCode == 201);
+    NSInteger statusCode = request.responseStatusCode;
+    BOOL ok = (statusCode == 200) || (statusCode == 201);
+
+    if (!ok)
+    {
+        NSString *text = @"";
+        switch (statusCode) 
+        {
+            case 500:
+                text = @"The server experienced an error (500)";
+                break;
+                
+            case 401:
+            case 302:
+                // In the case of FFCRM, bad login API requests receive a 302,
+                // with a redirection body taking to the login form
+                text = @"The login credentials have been rejected by the server (401)";
+                break;
+                
+            case 404:
+                text = @"The specified path cannot be found (404)";
+                break;
+                
+            default:
+                text = [NSString stringWithFormat:@"The communication with the server failed with error %d", statusCode];
+                break;
+        }
+        NSError *error = [self createErrorWithMessage:text code:statusCode];
+        [self notifyError:error];
+    }
+    
+    return ok;
+}
+
+- (NSError *)createErrorWithMessage:(NSString *)text code:(NSInteger)code
+{
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:text, NSLocalizedDescriptionKey, nil];
+    NSError *error = [NSError errorWithDomain:@"Server"
+                                         code:code
+                                     userInfo:userInfo];
+    return error;
 }
 
 - (void)notifyError:(NSError *)error
