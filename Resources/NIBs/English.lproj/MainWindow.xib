@@ -13,7 +13,6 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="2"/>
-			<integer value="11"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -59,7 +58,7 @@
 					<object class="IBUILabel" id="250609245">
 						<reference key="NSNextResponder" ref="380026005"/>
 						<int key="NSvFlags">1316</int>
-						<string key="NSFrame">{{136, 366}, {75, 21}}</string>
+						<string key="NSFrame">{{20, 394}, {280, 21}}</string>
 						<reference key="NSSuperview" ref="380026005"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -72,16 +71,16 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
 					</object>
 					<object class="IBUIActivityIndicatorView" id="308444092">
 						<reference key="NSNextResponder" ref="380026005"/>
 						<int key="NSvFlags">1316</int>
-						<string key="NSFrame">{{108, 367}, {20, 20}}</string>
+						<string key="NSFrame">{{150, 366}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="380026005"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<bool key="IBUIHidesWhenStopped">NO</bool>
 						<bool key="IBUIAnimating">YES</bool>
 						<int key="IBUIStyle">2</int>
 					</object>
@@ -462,6 +461,22 @@
 					</object>
 					<int key="connectionID">68</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">_spinningWheel</string>
+						<reference key="source" ref="664661524"/>
+						<reference key="destination" ref="308444092"/>
+					</object>
+					<int key="connectionID">69</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">_statusLabel</string>
+						<reference key="source" ref="664661524"/>
+						<reference key="destination" ref="250609245"/>
+					</object>
+					<int key="connectionID">70</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -678,7 +693,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 						</object>
 					</object>
-					<string>{{438, 320}, {320, 480}}</string>
+					<string>{{580, 510}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>ListController</string>
 					<string>{{0, 654}, {320, 480}}</string>
@@ -730,7 +745,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">68</int>
+			<int key="maxID">70</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -793,6 +808,8 @@
 							<string>_leadsController</string>
 							<string>_opportunitiesController</string>
 							<string>_settingsController</string>
+							<string>_spinningWheel</string>
+							<string>_statusLabel</string>
 							<string>_tabBarController</string>
 							<string>_tasksController</string>
 							<string>_window</string>
@@ -805,6 +822,8 @@
 							<string>ListController</string>
 							<string>ListController</string>
 							<string>SettingsController</string>
+							<string>UIActivityIndicatorView</string>
+							<string>UILabel</string>
 							<string>UITabBarController</string>
 							<string>TasksController</string>
 							<string>UIWindow</string>

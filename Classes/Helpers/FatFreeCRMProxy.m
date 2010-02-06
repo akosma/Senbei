@@ -297,33 +297,55 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 - (BOOL)requestOK:(ASIHTTPRequest *)request
 {
     NSInteger statusCode = request.responseStatusCode;
-    BOOL ok = (statusCode == 200) || (statusCode == 201);
+    BOOL ok = NO;
+    NSString *text = @"";
+    NSError *error = nil;
 
-    if (!ok)
+    switch (statusCode) 
     {
-        NSString *text = @"";
-        switch (statusCode) 
+        case 200:
+        case 201:
         {
-            case 500:
-                text = @"The server experienced an error (500)";
-                break;
-                
-            case 401:
-            case 302:
-                // In the case of FFCRM, bad login API requests receive a 302,
-                // with a redirection body taking to the login form
-                text = @"The login credentials have been rejected by the server (401)";
-                break;
-                
-            case 404:
-                text = @"The specified path cannot be found (404)";
-                break;
-                
-            default:
-                text = [NSString stringWithFormat:@"The communication with the server failed with error %d", statusCode];
-                break;
+            ok = YES;
+            break;
         }
-        NSError *error = [self createErrorWithMessage:text code:statusCode];
+            
+        case 302:
+        case 401:
+        {
+            // In the case of FFCRM, bad login API requests receive a 302,
+            // with a redirection body taking to the login form
+            NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidFailLoginNotification 
+                                                                  object:self 
+                                                                userInfo:nil];
+            [_notificationCenter postNotification:notif];            
+            break;
+        }
+
+        case 404:
+        {
+            text = @"The specified path cannot be found (404)";
+            error = [self createErrorWithMessage:text code:statusCode];
+            break;
+        }
+            
+        case 500:
+        {
+            text = @"The server experienced an error (500)";
+            error = [self createErrorWithMessage:text code:statusCode];
+            break;
+        }
+            
+        default:
+        {
+            text = [NSString stringWithFormat:@"The communication with the server failed with error %d", statusCode];
+            error = [self createErrorWithMessage:text code:statusCode];
+            break;
+        }
+    }
+    
+    if (error != nil)
+    {
         [self notifyError:error];
     }
     

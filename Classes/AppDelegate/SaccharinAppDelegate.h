@@ -45,6 +45,8 @@ typedef enum {
     IBOutlet ListController *_campaignsController;
     IBOutlet SettingsController *_settingsController;
     IBOutlet TasksController *_tasksController;
+    IBOutlet UIActivityIndicatorView *_spinningWheel;
+    IBOutlet UILabel *_statusLabel;
 
     CommentsController *_commentsController;
     User *_currentUser;

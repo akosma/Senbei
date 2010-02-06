@@ -19,6 +19,7 @@
 #import "Campaign.h"
 #import "Lead.h"
 #import "WebBrowserController.h"
+#import "Definitions.h"
 
 #define TAB_ORDER_PREFERENCE @"TAB_ORDER_PREFERENCE"
 #define CURRENT_TAB_PREFERENCE @"CURRENT_TAB_PREFERENCE"
@@ -65,8 +66,35 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
                                              selector:@selector(didFailWithError:) 
                                                  name:FatFreeCRMProxyDidFailWithErrorNotification 
                                                object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self 
+                                             selector:@selector(didFailLogin:) 
+                                                 name:FatFreeCRMProxyDidFailLoginNotification 
+                                               object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
     
     [[FatFreeCRMProxy sharedFatFreeCRMProxy] login];
+    
+    // Set some defaults for the first run of the application
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults stringForKey:PREFERENCES_SERVER_URL] == nil)
+    {
+        [defaults setObject:@"http://demo.fatfreecrm.com" forKey:PREFERENCES_SERVER_URL];
+    }
+    if ([defaults stringForKey:PREFERENCES_USERNAME] == nil || [defaults stringForKey:PREFERENCES_PASSWORD] == nil)
+    {
+        // Use a random username from those used in the Fat Free CRM wiki
+        // http://wiki.github.com/michaeldv/fat_free_crm/loading-demo-data
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"DemoLogins" ofType:@"plist"];
+        NSArray *usernames = [NSArray arrayWithContentsOfFile:path];
+        NSInteger index = floor(arc4random() % [usernames count]);
+        NSString *username = [usernames objectAtIndex:index];
+        [defaults setObject:username forKey:PREFERENCES_USERNAME];
+        [defaults setObject:username forKey:PREFERENCES_PASSWORD];
+    }
+    [defaults synchronize];
+    
+    NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_USERNAME];
+    _statusLabel.text = [NSString stringWithFormat:@"Logging in as %@...", username];
 
     [_window makeKeyAndVisible];
 }
@@ -74,12 +102,29 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 #pragma mark -
 #pragma mark NSNotification handler methods
 
+- (void)didFailLogin:(NSNotification *)notification
+{
+    [_spinningWheel stopAnimating];
+    _statusLabel.text = @"Failed login";
+
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil 
+                                                    message:@"The server rejected your credentials"
+                                                   delegate:nil 
+                                          cancelButtonTitle:@"OK" 
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+}
+
 - (void)didFailWithError:(NSNotification *)notification
 {
     NSDictionary *userInfo = [notification userInfo];
     NSError *error = [userInfo objectForKey:FatFreeCRMProxyErrorKey];
     NSString *msg = [error localizedDescription];
-    
+
+    [_spinningWheel stopAnimating];
+    _statusLabel.text = [NSString stringWithFormat:@"Error! (code %d)", [error code]];
+
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil 
                                                     message:msg 
                                                    delegate:nil 
@@ -92,6 +137,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 - (void)didLogin:(NSNotification *)notification
 {
     _currentUser = [[[notification userInfo] objectForKey:@"user"] retain];
+    _statusLabel.text = @"Loading controllers...";
 
     [[NSNotificationCenter defaultCenter] addObserver:_accountsController 
                                              selector:@selector(didReceiveData:) 
