@@ -702,7 +702,7 @@
 					<string>ListController</string>
 					<string>{{0, 654}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>SaccharinAppDelegate</string>
+					<string>SenbeiAppDelegate</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>ListController</string>
@@ -796,7 +796,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">SaccharinAppDelegate</string>
+					<string key="className">SenbeiAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -831,11 +831,11 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/AppDelegate/SaccharinAppDelegate.h</string>
+						<string key="minorKey">Classes/AppDelegate/SenbeiAppDelegate.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">SaccharinAppDelegate</string>
+					<string key="className">SenbeiAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
@@ -1123,7 +1123,7 @@
 			<integer value="3100" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../../../Saccharin.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../../../Senbei.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<string key="IBCocoaTouchPluginVersion">3.1</string>
 	</data>
