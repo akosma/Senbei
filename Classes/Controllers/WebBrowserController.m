@@ -1,6 +1,6 @@
 //
 //  WebBrowserController.m
-//  Saccharin
+//  Senbei
 //
 //  Created by Adrian on 2/3/10.
 //  Copyright 2010 akosma software. All rights reserved.

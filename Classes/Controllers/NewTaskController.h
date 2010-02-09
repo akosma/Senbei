@@ -1,6 +1,6 @@
 //
 //  NewTaskController.h
-//  Saccharin
+//  Senbei
 //
 //  Created by Adrian on 1/30/10.
 //  Copyright 2010 akosma software. All rights reserved.

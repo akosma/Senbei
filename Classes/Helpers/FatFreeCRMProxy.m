@@ -1,15 +1,15 @@
 //
 //  FatFreeCRMProxy.m
-//  Saccharin
+//  Senbei
 //
 //  Created by Adrian on 1/19/10.
 //  Copyright 2010 akosma software. All rights reserved.
 //
 
 #import "FatFreeCRMProxy.h"
-#import "SaccharinAppDelegate.h"
+#import "SenbeiAppDelegate.h"
 #import "SynthesizeSingleton.h"
-#import "NSDate+Saccharin.h"
+#import "NSDate+Senbei.h"
 #import "ASINetworkQueue.h"
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
@@ -140,7 +140,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments", serverURL, path, entity.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
     
-    NSInteger idValue = [SaccharinAppDelegate sharedAppDelegate].currentUser.objectId;
+    NSInteger idValue = [SenbeiAppDelegate sharedAppDelegate].currentUser.objectId;
     NSNumber *currentUserID = [NSNumber numberWithInt:idValue];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -192,7 +192,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSString *urlString = [NSString stringWithFormat:@"%@/tasks", serverURL, task.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
     
-    NSInteger idValue = [SaccharinAppDelegate sharedAppDelegate].currentUser.objectId;
+    NSInteger idValue = [SenbeiAppDelegate sharedAppDelegate].currentUser.objectId;
     NSNumber *currentUserID = [NSNumber numberWithInt:idValue];
 
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];

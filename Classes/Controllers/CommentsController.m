@@ -1,6 +1,6 @@
 //
 //  CommentsController.m
-//  Saccharin
+//  Senbei
 //
 //  Created by Adrian on 1/20/10.
 //  Copyright 2010 akosma software. All rights reserved.
@@ -9,7 +9,7 @@
 #import "CommentsController.h"
 #import "FatFreeCRMProxy.h"
 #import "Comment.h"
-#import "NSDate+Saccharin.h"
+#import "NSDate+Senbei.h"
 #import "AKOEditorrific.h"
 
 @implementation CommentsController

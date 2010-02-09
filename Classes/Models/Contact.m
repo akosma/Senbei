@@ -1,13 +1,13 @@
 //
 //  Contact.m
-//  Saccharin
+//  Senbei
 //
 //  Created by Adrian on 1/20/10.
 //  Copyright 2010 akosma software. All rights reserved.
 //
 
 #import "Contact.h"
-#import "NSDate+Saccharin.h"
+#import "NSDate+Senbei.h"
 
 void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringRef label, NSString *value)
 {

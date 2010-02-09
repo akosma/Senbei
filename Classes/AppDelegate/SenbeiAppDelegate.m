@@ -1,12 +1,12 @@
 //
-//  SaccharinAppDelegate.m
-//  Saccharin
+//  SenbeiAppDelegate.m
+//  Senbei
 //
 //  Created by Adrian on 1/19/10.
 //  Copyright akosma software 2010. All rights reserved.
 //
 
-#import "SaccharinAppDelegate.h"
+#import "SenbeiAppDelegate.h"
 #import "ListController.h"
 #import "SettingsController.h"
 #import "CommentsController.h"
@@ -32,7 +32,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     return [value autorelease];
 }
 
-@implementation SaccharinAppDelegate
+@implementation SenbeiAppDelegate
 
 @synthesize currentUser = _currentUser;
 
@@ -47,9 +47,9 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 #pragma mark -
 #pragma mark Static methods
 
-+ (SaccharinAppDelegate *)sharedAppDelegate
++ (SenbeiAppDelegate *)sharedAppDelegate
 {
-    return (SaccharinAppDelegate *)[UIApplication sharedApplication].delegate;
+    return (SenbeiAppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
 #pragma mark -
@@ -197,31 +197,31 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
         {
             switch ([number intValue]) 
             {
-                case SaccharinViewControllerAccounts:
+                case SenbeiViewControllerAccounts:
                     [controllers addObject:_accountsController.navigationController];
                     break;
 
-                case SaccharinViewControllerCampaigns:
+                case SenbeiViewControllerCampaigns:
                     [controllers addObject:_campaignsController.navigationController];
                     break;
 
-                case SaccharinViewControllerContacts:
+                case SenbeiViewControllerContacts:
                     [controllers addObject:_contactsController.navigationController];
                     break;
 
-                case SaccharinViewControllerLeads:
+                case SenbeiViewControllerLeads:
                     [controllers addObject:_leadsController.navigationController];
                     break;
 
-                case SaccharinViewControllerOpportunities:
+                case SenbeiViewControllerOpportunities:
                     [controllers addObject:_opportunitiesController.navigationController];
                     break;
 
-                case SaccharinViewControllerSettings:
+                case SenbeiViewControllerSettings:
                     [controllers addObject:_settingsController.navigationController];
                     break;
 
-                case SaccharinViewControllerTasks:
+                case SenbeiViewControllerTasks:
                     [controllers addObject:_tasksController.navigationController];
                     break;
                 default:
@@ -234,38 +234,38 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     [controllers release];
     
     // Jump to the last selected view controller in the tab bar
-    SaccharinViewController controllerNumber = [[NSUserDefaults standardUserDefaults] integerForKey:CURRENT_TAB_PREFERENCE];
+    SenbeiViewController controllerNumber = [[NSUserDefaults standardUserDefaults] integerForKey:CURRENT_TAB_PREFERENCE];
     switch (controllerNumber) 
     {
-        case SaccharinViewControllerAccounts:
+        case SenbeiViewControllerAccounts:
             _tabBarController.selectedViewController = _accountsController.navigationController;
             break;
             
-        case SaccharinViewControllerCampaigns:
+        case SenbeiViewControllerCampaigns:
             _tabBarController.selectedViewController = _campaignsController.navigationController;
             break;
             
-        case SaccharinViewControllerContacts:
+        case SenbeiViewControllerContacts:
             _tabBarController.selectedViewController = _contactsController.navigationController;
             break;
             
-        case SaccharinViewControllerLeads:
+        case SenbeiViewControllerLeads:
             _tabBarController.selectedViewController = _leadsController.navigationController;
             break;
             
-        case SaccharinViewControllerOpportunities:
+        case SenbeiViewControllerOpportunities:
             _tabBarController.selectedViewController = _opportunitiesController.navigationController;
             break;
             
-        case SaccharinViewControllerSettings:
+        case SenbeiViewControllerSettings:
             _tabBarController.selectedViewController = _settingsController.navigationController;
             break;
             
-        case SaccharinViewControllerTasks:
+        case SenbeiViewControllerTasks:
             _tabBarController.selectedViewController = _tasksController.navigationController;
             break;
             
-        case SaccharinViewControllerMore:
+        case SenbeiViewControllerMore:
             _tabBarController.selectedViewController = _tabBarController.moreNavigationController;
         default:
             break;
@@ -283,35 +283,35 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (viewController == _accountsController.navigationController)
     {
-        [defaults setInteger:SaccharinViewControllerAccounts forKey:CURRENT_TAB_PREFERENCE];
+        [defaults setInteger:SenbeiViewControllerAccounts forKey:CURRENT_TAB_PREFERENCE];
     }
     else if (viewController == _contactsController.navigationController)
     {
-        [defaults setInteger:SaccharinViewControllerContacts forKey:CURRENT_TAB_PREFERENCE];
+        [defaults setInteger:SenbeiViewControllerContacts forKey:CURRENT_TAB_PREFERENCE];
     }
     else if (viewController == _opportunitiesController.navigationController)
     {
-        [defaults setInteger:SaccharinViewControllerOpportunities forKey:CURRENT_TAB_PREFERENCE];
+        [defaults setInteger:SenbeiViewControllerOpportunities forKey:CURRENT_TAB_PREFERENCE];
     }
     else if (viewController == _tasksController.navigationController)
     {
-        [defaults setInteger:SaccharinViewControllerTasks forKey:CURRENT_TAB_PREFERENCE];
+        [defaults setInteger:SenbeiViewControllerTasks forKey:CURRENT_TAB_PREFERENCE];
     }
     else if (viewController == _leadsController.navigationController)
     {
-        [defaults setInteger:SaccharinViewControllerLeads forKey:CURRENT_TAB_PREFERENCE];
+        [defaults setInteger:SenbeiViewControllerLeads forKey:CURRENT_TAB_PREFERENCE];
     }
     else if (viewController == _campaignsController.navigationController)
     {
-        [defaults setInteger:SaccharinViewControllerCampaigns forKey:CURRENT_TAB_PREFERENCE];
+        [defaults setInteger:SenbeiViewControllerCampaigns forKey:CURRENT_TAB_PREFERENCE];
     }
     else if (viewController == _settingsController.navigationController)
     {
-        [defaults setInteger:SaccharinViewControllerSettings forKey:CURRENT_TAB_PREFERENCE];
+        [defaults setInteger:SenbeiViewControllerSettings forKey:CURRENT_TAB_PREFERENCE];
     }
     else if (viewController == _tabBarController.moreNavigationController)
     {
-        [defaults setInteger:SaccharinViewControllerMore forKey:CURRENT_TAB_PREFERENCE];
+        [defaults setInteger:SenbeiViewControllerMore forKey:CURRENT_TAB_PREFERENCE];
     }
 }
 
@@ -326,31 +326,31 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
         {
             if (controller == _accountsController.navigationController)
             {
-                [order addObject:[NSNumber numberWithInt:SaccharinViewControllerAccounts]];
+                [order addObject:[NSNumber numberWithInt:SenbeiViewControllerAccounts]];
             }
             else if (controller == _contactsController.navigationController)
             {
-                [order addObject:[NSNumber numberWithInt:SaccharinViewControllerContacts]];
+                [order addObject:[NSNumber numberWithInt:SenbeiViewControllerContacts]];
             }
             else if (controller == _opportunitiesController.navigationController)
             {
-                [order addObject:[NSNumber numberWithInt:SaccharinViewControllerOpportunities]];
+                [order addObject:[NSNumber numberWithInt:SenbeiViewControllerOpportunities]];
             }
             else if (controller == _tasksController.navigationController)
             {
-                [order addObject:[NSNumber numberWithInt:SaccharinViewControllerTasks]];
+                [order addObject:[NSNumber numberWithInt:SenbeiViewControllerTasks]];
             }
             else if (controller == _leadsController.navigationController)
             {
-                [order addObject:[NSNumber numberWithInt:SaccharinViewControllerLeads]];
+                [order addObject:[NSNumber numberWithInt:SenbeiViewControllerLeads]];
             }
             else if (controller == _campaignsController.navigationController)
             {
-                [order addObject:[NSNumber numberWithInt:SaccharinViewControllerCampaigns]];
+                [order addObject:[NSNumber numberWithInt:SenbeiViewControllerCampaigns]];
             }
             else if (controller == _settingsController.navigationController)
             {
-                [order addObject:[NSNumber numberWithInt:SaccharinViewControllerSettings]];
+                [order addObject:[NSNumber numberWithInt:SenbeiViewControllerSettings]];
             }
         }
         [[NSUserDefaults standardUserDefaults] setObject:order forKey:TAB_ORDER_PREFERENCE];
@@ -413,7 +413,7 @@ shouldPerformDefaultActionForPerson:(ABRecordRef)person
         composer.mailComposeDelegate = self;
         [composer setToRecipients:[NSArray arrayWithObject:email]];
 
-        [composer setMessageBody:@"<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>Sent from Saccharin</p>" 
+        [composer setMessageBody:@"<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>Sent from Senbei</p>" 
                           isHTML:YES];                    
         
         [personViewController presentModalViewController:composer animated:YES];

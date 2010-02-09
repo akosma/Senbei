@@ -1,6 +1,6 @@
 //
-//  SaccharinAppDelegate.h
-//  Saccharin
+//  SenbeiAppDelegate.h
+//  Senbei
 //
 //  Created by Adrian on 1/19/10.
 //  Copyright akosma software 2010. All rights reserved.
@@ -19,17 +19,17 @@
 @class User;
 
 typedef enum {
-    SaccharinViewControllerAccounts = 0,
-    SaccharinViewControllerContacts = 1,
-    SaccharinViewControllerOpportunities = 2,
-    SaccharinViewControllerTasks = 3,
-    SaccharinViewControllerLeads = 4,
-    SaccharinViewControllerCampaigns = 5,
-    SaccharinViewControllerSettings = 6,
-    SaccharinViewControllerMore = 7
-} SaccharinViewController;
+    SenbeiViewControllerAccounts = 0,
+    SenbeiViewControllerContacts = 1,
+    SenbeiViewControllerOpportunities = 2,
+    SenbeiViewControllerTasks = 3,
+    SenbeiViewControllerLeads = 4,
+    SenbeiViewControllerCampaigns = 5,
+    SenbeiViewControllerSettings = 6,
+    SenbeiViewControllerMore = 7
+} SenbeiViewController;
 
-@interface SaccharinAppDelegate : NSObject <UIApplicationDelegate,
+@interface SenbeiAppDelegate : NSObject <UIApplicationDelegate,
                                             UITabBarControllerDelegate,
                                             ListControllerDelegate,
                                             ABPersonViewControllerDelegate,
@@ -54,7 +54,7 @@ typedef enum {
 
 @property (nonatomic, readonly) User *currentUser;
 
-+ (SaccharinAppDelegate *)sharedAppDelegate;
++ (SenbeiAppDelegate *)sharedAppDelegate;
 
 @end
 

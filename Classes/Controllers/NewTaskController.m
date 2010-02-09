@@ -1,6 +1,6 @@
 //
 //  NewTaskController.m
-//  Saccharin
+//  Senbei
 //
 //  Created by Adrian on 1/30/10.
 //  Copyright 2010 akosma software. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "NewTaskController.h"
 #import "FatFreeCRMProxy.h"
-#import "NSDate+Saccharin.h"
+#import "NSDate+Senbei.h"
 #import "Task.h"
 
 @implementation NewTaskController

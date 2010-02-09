@@ -1,6 +1,6 @@
 //
 //  main.m
-//  Saccharin
+//  Senbei
 //
 //  Created by Adrian on 1/19/10.
 //  Copyright akosma software 2010. All rights reserved.

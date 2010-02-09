@@ -1,6 +1,6 @@
 //
 //  Definitions.h
-//  Saccharin
+//  Senbei
 //
 //  Created by Adrian on 1/19/10.
 //  Copyright 2010 akosma software. All rights reserved.

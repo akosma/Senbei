@@ -1,6 +1,6 @@
 //
 //  AccountsController.m
-//  Saccharin
+//  Senbei
 //
 //  Created by Adrian on 1/19/10.
 //  Copyright 2010 akosma software. All rights reserved.
@@ -9,7 +9,7 @@
 #import "ListController.h"
 #import "FatFreeCRMProxy.h"
 #import "CompanyAccount.h"
-#import "NSDate+Saccharin.h"
+#import "NSDate+Senbei.h"
 
 @implementation ListController
 
