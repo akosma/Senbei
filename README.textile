@@ -39,6 +39,15 @@ h3. Later
 * Create cross-relations (jump from one account to its opportunities, and so on);
 * Other things I can't remember right now :)
 
+h2. Credits
+
+* Fat Free CRM by "Michael Dvorkin":mailto:mike@fatfreecrm.com
+* Application name idea by "Zerofee":http://zerofee.org/.
+* Tab bar icons used with permission from 
+** eddit, Inc., 
+** Joseph Wain / glyphish.com
+** www.pixelpressicons.com
+
 h2. License
 
 This code is released under a liberal BSD license. See the LICENSE file for details.
