@@ -15,6 +15,7 @@
 		3A0B52FD11147B99005A26FD /* TaskCategories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B52FC11147B99005A26FD /* TaskCategories.plist */; };
 		3A0B531E11147EEC005A26FD /* TaskBuckets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B531D11147EEC005A26FD /* TaskBuckets.plist */; };
 		3A1104A3111DEF4500729EB6 /* DemoLogins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A1104A2111DEF4500729EB6 /* DemoLogins.plist */; };
+		3A1F518F1122029C0081580E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F518D1122029C0081580E /* Localizable.strings */; };
 		3A29C08A11075E2B00D887F1 /* CommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08911075E2B00D887F1 /* CommentsController.m */; };
 		3A29C08E11075E6100D887F1 /* CompanyAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08D11075E6100D887F1 /* CompanyAccount.m */; };
 		3A29C0931107600500D887F1 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C0921107600500D887F1 /* BaseEntity.m */; };
@@ -62,7 +63,6 @@
 		3A6D8D2611064D060089F21D /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6D8D2511064D060089F21D /* libz.1.2.3.dylib */; };
 		3A6D8D3A11064DF20089F21D /* ListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8D3911064DF20089F21D /* ListController.m */; };
 		3A6D8D4411064E880089F21D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D8D4311064E880089F21D /* MainWindow.xib */; };
-		3A6D8D4911064F010089F21D /* Application.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D8D4811064F010089F21D /* Application.strings */; };
 		3A6D8D61110654DB0089F21D /* FatFreeCRMProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8D60110654DB0089F21D /* FatFreeCRMProxy.m */; };
 		3A6D8DC611065C410089F21D /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8DAF11065C410089F21D /* CXMLDocument_CreationExtensions.m */; };
 		3A6D8DC711065C410089F21D /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8DB111065C410089F21D /* CXMLNode_CreationExtensions.m */; };
@@ -105,6 +105,7 @@
 		3A0B52FC11147B99005A26FD /* TaskCategories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TaskCategories.plist; sourceTree = "<group>"; };
 		3A0B531D11147EEC005A26FD /* TaskBuckets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TaskBuckets.plist; sourceTree = "<group>"; };
 		3A1104A2111DEF4500729EB6 /* DemoLogins.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DemoLogins.plist; sourceTree = "<group>"; };
+		3A1F518E1122029C0081580E /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A29C08811075E2B00D887F1 /* CommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsController.h; sourceTree = "<group>"; };
 		3A29C08911075E2B00D887F1 /* CommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsController.m; sourceTree = "<group>"; };
 		3A29C08C11075E6100D887F1 /* CompanyAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyAccount.h; sourceTree = "<group>"; };
@@ -192,7 +193,6 @@
 		3A6D8D2511064D060089F21D /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		3A6D8D3811064DF20089F21D /* ListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListController.h; sourceTree = "<group>"; };
 		3A6D8D3911064DF20089F21D /* ListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListController.m; sourceTree = "<group>"; };
-		3A6D8D4611064EF80089F21D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Application.strings; sourceTree = "<group>"; };
 		3A6D8D5F110654DB0089F21D /* FatFreeCRMProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FatFreeCRMProxy.h; sourceTree = "<group>"; };
 		3A6D8D60110654DB0089F21D /* FatFreeCRMProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FatFreeCRMProxy.m; sourceTree = "<group>"; };
 		3A6D8D691106573B0089F21D /* Definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
@@ -576,7 +576,7 @@
 		3A6D8D4511064ED70089F21D /* Strings */ = {
 			isa = PBXGroup;
 			children = (
-				3A6D8D4811064F010089F21D /* Application.strings */,
+				3A1F518D1122029C0081580E /* Localizable.strings */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -706,7 +706,6 @@
 			files = (
 				3A6D8D4411064E880089F21D /* MainWindow.xib in Resources */,
 				3A6D8CDF11064AAC0089F21D /* Entitlements.plist in Resources */,
-				3A6D8D4911064F010089F21D /* Application.strings in Resources */,
 				3A29C2BB11078D9500D887F1 /* Settings.bundle in Resources */,
 				3A29C3151107902700D887F1 /* IASKAppSettingsView.xib in Resources */,
 				3A29C3161107902700D887F1 /* IASKPSSliderSpecifierViewCell.xib in Resources */,
@@ -727,6 +726,7 @@
 				3A0B531E11147EEC005A26FD /* TaskBuckets.plist in Resources */,
 				3A6C627E1119EA29000DD23B /* WebBrowserController.xib in Resources */,
 				3A1104A3111DEF4500729EB6 /* DemoLogins.plist in Resources */,
+				3A1F518F1122029C0081580E /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -795,6 +795,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		3A1F518D1122029C0081580E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A1F518E1122029C0081580E /* English */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		3A6C627C1119EA29000DD23B /* WebBrowserController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -809,14 +817,6 @@
 				3A6D8CDB11064A900089F21D /* English */,
 			);
 			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		3A6D8D4811064F010089F21D /* Application.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A6D8D4611064EF80089F21D /* English */,
-			);
-			name = Application.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
