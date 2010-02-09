@@ -72,8 +72,6 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
                                                  name:FatFreeCRMProxyDidFailLoginNotification 
                                                object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
     
-    [[FatFreeCRMProxy sharedFatFreeCRMProxy] login];
-    
     // Set some defaults for the first run of the application
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults stringForKey:PREFERENCES_SERVER_URL] == nil)
@@ -95,6 +93,8 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     
     NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_USERNAME];
     _statusLabel.text = [NSString stringWithFormat:@"Logging in as %@...", username];
+
+    [[FatFreeCRMProxy sharedFatFreeCRMProxy] login];
 
     [_window makeKeyAndVisible];
 }
