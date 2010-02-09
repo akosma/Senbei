@@ -92,7 +92,8 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     [defaults synchronize];
     
     NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_USERNAME];
-    _statusLabel.text = [NSString stringWithFormat:@"Logging in as %@...", username];
+    NSString *logging = NSLocalizedString(@"LOGGING_IN", @"Text shown while the user logs in");
+    _statusLabel.text = [NSString stringWithFormat:logging, username];
 
     [[FatFreeCRMProxy sharedFatFreeCRMProxy] login];
 
@@ -107,8 +108,9 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     [_spinningWheel stopAnimating];
     _statusLabel.text = @"Failed login";
 
+    NSString *message = NSLocalizedString(@"CREDENTIALS_REJECTED", @"Message shown when the login credentials are rejected");
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil 
-                                                    message:@"The server rejected your credentials"
+                                                    message:message
                                                    delegate:nil 
                                           cancelButtonTitle:@"OK" 
                                           otherButtonTitles:nil];
@@ -123,12 +125,14 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     NSString *msg = [error localizedDescription];
 
     [_spinningWheel stopAnimating];
-    _statusLabel.text = [NSString stringWithFormat:@"Error! (code %d)", [error code]];
+    NSString *errorMessage = NSLocalizedString(@"ERROR_MESSAGE", @"Message shown when any error occurs");
+    NSString *ok = NSLocalizedString(@"OK", @"The 'OK' word");
+    _statusLabel.text = [NSString stringWithFormat:errorMessage, [error code]];
 
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil 
                                                     message:msg 
                                                    delegate:nil 
-                                          cancelButtonTitle:@"OK" 
+                                          cancelButtonTitle:ok 
                                           otherButtonTitles:nil];
     [alert show];
     [alert release];
@@ -137,7 +141,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 - (void)didLogin:(NSNotification *)notification
 {
     _currentUser = [[[notification userInfo] objectForKey:@"user"] retain];
-    _statusLabel.text = @"Loading controllers...";
+    _statusLabel.text = NSLocalizedString(@"LOADING_CONTROLLERS", @"Message shown when the controllers are loading");
 
     [[NSNotificationCenter defaultCenter] addObserver:_accountsController 
                                              selector:@selector(didReceiveData:) 
@@ -413,7 +417,8 @@ shouldPerformDefaultActionForPerson:(ABRecordRef)person
         composer.mailComposeDelegate = self;
         [composer setToRecipients:[NSArray arrayWithObject:email]];
 
-        [composer setMessageBody:@"<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>Sent from Senbei</p>" 
+        NSString *body = NSLocalizedString(@"EMAIL_BODY", @"Body of the e-mail sent from the contacts view");
+        [composer setMessageBody:body
                           isHTML:YES];                    
         
         [personViewController presentModalViewController:composer animated:YES];

@@ -32,7 +32,8 @@
         
         
         _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
-        _searchBar.placeholder = @"Search";
+        NSString *search = NSLocalizedString(@"SEARCH", @"Word used in the 'Search' controller");
+        _searchBar.placeholder = search;
         _searchController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar 
                                                               contentsController:self];
         _searchController.delegate = self;
@@ -186,7 +187,8 @@
     else
     {
         cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.textLabel.text = @"Loading...";
+        NSString *loading = NSLocalizedString(@"LOADING", @"Text shown in cells when more content is loading");
+        cell.textLabel.text = loading;
         cell.textLabel.textColor = [UIColor grayColor];
         cell.detailTextLabel.text = @"";
     }

@@ -23,6 +23,13 @@
 #define FatFreeCRMProxyDidFailLoginNotification             @"FatFreeCRMProxyDidFailLoginNotification"
 
 #define FatFreeCRMProxyErrorKey @"FatFreeCRMProxyErrorKey"
+#define TASKS_OVERDUE_KEY       @"tasksOverdue"
+#define TASKS_DUE_ASAP_KEY      @"tasksDueASAP"
+#define TASKS_DUE_TODAY_KEY     @"tasksDueToday"
+#define TASKS_DUE_TOMORROW_KEY  @"tasksDueTomorrow"
+#define TASKS_DUE_THIS_WEEK_KEY @"tasksDueThisWeek"
+#define TASKS_DUE_NEXT_WEEK_KEY @"tasksDueNextWeek"
+#define TASKS_DUE_LATER_KEY     @"tasksDueLater"
 
 @class ASINetworkQueue;
 @class BaseEntity;

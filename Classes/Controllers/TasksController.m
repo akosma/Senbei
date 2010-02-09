@@ -51,7 +51,7 @@
     [super viewDidLoad];
     _firstLoad = YES;
     _navigationController = [[UINavigationController alloc] initWithRootViewController:self];
-    self.title = @"Tasks";
+    self.title = NSLocalizedString(@"TASKS_CONTROLLER_TITLE", @"Title of the Tasks controller");
     
     UIBarButtonItem *reloadItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
                                                                                 target:self
@@ -144,13 +144,13 @@
     [_tasksDueLater removeAllObjects];
     
     NSDictionary *userInfo = [notification userInfo];
-    [_tasksOverdue addObjectsFromArray:[userInfo objectForKey:@"tasksOverdue"]];
-    [_tasksDueASAP addObjectsFromArray:[userInfo objectForKey:@"tasksDueASAP"]];
-    [_tasksDueToday addObjectsFromArray:[userInfo objectForKey:@"tasksDueToday"]];
-    [_tasksDueTomorrow addObjectsFromArray:[userInfo objectForKey:@"tasksDueTomorrow"]];
-    [_tasksDueThisWeek addObjectsFromArray:[userInfo objectForKey:@"tasksDueThisWeek"]];
-    [_tasksDueNextWeek addObjectsFromArray:[userInfo objectForKey:@"tasksDueNextWeek"]];
-    [_tasksDueLater addObjectsFromArray:[userInfo objectForKey:@"tasksDueLater"]];
+    [_tasksOverdue addObjectsFromArray:[userInfo objectForKey:TASKS_OVERDUE_KEY]];
+    [_tasksDueASAP addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_ASAP_KEY]];
+    [_tasksDueToday addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_TODAY_KEY]];
+    [_tasksDueTomorrow addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_TOMORROW_KEY]];
+    [_tasksDueThisWeek addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_THIS_WEEK_KEY]];
+    [_tasksDueNextWeek addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_NEXT_WEEK_KEY]];
+    [_tasksDueLater addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_LATER_KEY]];
     
     if ([_tasksOverdue count] > 0) [_sections addObject:_tasksOverdue];
     if ([_tasksDueASAP count] > 0) [_sections addObject:_tasksDueASAP];
@@ -192,13 +192,20 @@
 {
     NSMutableArray *array = [_sections objectAtIndex:section];
     NSString *text = nil;
-    if (array == _tasksOverdue) text = @"Overdue";
-    if (array == _tasksDueASAP) text = @"Due as soon as possible";
-    if (array == _tasksDueToday) text = @"Due today";
-    if (array == _tasksDueTomorrow) text = @"Due tomorrow";
-    if (array == _tasksDueThisWeek) text = @"Due this week";
-    if (array == _tasksDueNextWeek) text = @"Due next week";
-    if (array == _tasksDueLater) text = @"Due later";
+    NSString *tasksOverdueTitle = NSLocalizedString(@"TASKS_OVERDUE_TITLE", @"Title of the overdue tasks section");
+    NSString *tasksDueASAPTitle = NSLocalizedString(@"TASKS_DUE_ASAP_TITLE", @"Title of the due asap tasks section");
+    NSString *tasksDueTodayTitle = NSLocalizedString(@"TASKS_DUE_TODAY_TITLE", @"Title of the due today tasks section");
+    NSString *tasksDueTomorrowTitle = NSLocalizedString(@"TASKS_DUE_TOMORROW_TITLE", @"Title of the due tomorrow tasks section");
+    NSString *tasksDueThisWeekTitle = NSLocalizedString(@"TASKS_DUE_THIS_WEEK_TITLE", @"Title of the due this week tasks section");
+    NSString *tasksDueNextWeekTitle = NSLocalizedString(@"TASKS_DUE_NEXT_WEEK_TITLE", @"Title of the due next week tasks section");
+    NSString *tasksDueLaterTitle = NSLocalizedString(@"TASKS_DUE_LATER_TITLE", @"Title of the due later tasks section");
+    if (array == _tasksOverdue) text = tasksOverdueTitle;
+    if (array == _tasksDueASAP) text = tasksDueASAPTitle;
+    if (array == _tasksDueToday) text = tasksDueTodayTitle;
+    if (array == _tasksDueTomorrow) text = tasksDueTomorrowTitle;
+    if (array == _tasksDueThisWeek) text = tasksDueThisWeekTitle;
+    if (array == _tasksDueNextWeek) text = tasksDueNextWeekTitle;
+    if (array == _tasksDueLater) text = tasksDueLaterTitle;
     return text;    
 }
 
@@ -229,11 +236,14 @@
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
     _indexPathToDelete = [indexPath retain];
+    NSString *message = NSLocalizedString(@"MARK_TASKS_DONE", @"Confirmation text shown before setting a task as done");
+    NSString *ok = NSLocalizedString(@"OK", @"The 'OK' word");
+    NSString *cancel = NSLocalizedString(@"CANCEL", @"The 'Cancel' word");
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil 
-                                                    message:@"Do you want to mark this task as done?" 
+                                                    message:message
                                                    delegate:self
-                                          cancelButtonTitle:@"Cancel" 
-                                          otherButtonTitles:@"OK", nil];
+                                          cancelButtonTitle:cancel
+                                          otherButtonTitles:ok, nil];
     [alert show];
     [alert release];
 }

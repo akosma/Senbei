@@ -512,13 +512,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
                                          forXPath:@"/hash/due-later/due-later" 
                                          andClass:NSClassFromString(@"Task")];
 
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:tasksOverdue, @"tasksOverdue",
-                          tasksDueASAP, @"tasksDueASAP", 
-                          tasksDueToday, @"tasksDueToday",
-                          tasksDueTomorrow, @"tasksDueTomorrow",
-                          tasksDueThisWeek, @"tasksDueThisWeek",
-                          tasksDueNextWeek, @"tasksDueNextWeek",
-                          tasksDueLater, @"tasksDueLater",
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:tasksOverdue, TASKS_OVERDUE_KEY,
+                          tasksDueASAP, TASKS_DUE_ASAP_KEY, 
+                          tasksDueToday, TASKS_DUE_TODAY_KEY,
+                          tasksDueTomorrow, TASKS_DUE_TOMORROW_KEY,
+                          tasksDueThisWeek, TASKS_DUE_THIS_WEEK_KEY,
+                          tasksDueNextWeek, TASKS_DUE_NEXT_WEEK_KEY,
+                          tasksDueLater, TASKS_DUE_LATER_KEY,
                           nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveTasksNotification
                                                           object:self 
