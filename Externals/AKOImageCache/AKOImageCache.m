@@ -34,6 +34,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AKOImageCache)
         _keyArray = [[NSMutableArray alloc] initWithCapacity:MEMORY_CACHE_SIZE];
         _memoryCache = [[NSMutableDictionary alloc] initWithCapacity:MEMORY_CACHE_SIZE];
         _fileManager = [NSFileManager defaultManager];
+
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        _cacheDirectoryName = [[documentsDirectory stringByAppendingPathComponent:CACHE_FOLDER_NAME] retain];
         
         BOOL isDirectory = NO;
         BOOL folderExists = [_fileManager fileExistsAtPath:_cacheDirectoryName isDirectory:&isDirectory] && isDirectory;
@@ -41,13 +45,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AKOImageCache)
         if (!folderExists)
         {
             NSError *error = nil;
-            [_fileManager createDirectoryAtPath:_cacheDirectoryName withIntermediateDirectories:YES attributes:nil error:&error];
+            [_fileManager createDirectoryAtPath:_cacheDirectoryName 
+                    withIntermediateDirectories:YES 
+                                     attributes:nil 
+                                          error:&error];
             [error release];
         }
-
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        _cacheDirectoryName = [[documentsDirectory stringByAppendingPathComponent:CACHE_FOLDER_NAME] retain];
     }
     return self;
 }
