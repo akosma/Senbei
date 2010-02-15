@@ -125,7 +125,7 @@
 {
     UIFont *font = [UIFont fontWithName:@"Helvetica" size:17.0];
     struct CGSize size = [_editorTextView.text sizeWithFont:font
-                          constrainedToSize:CGSizeMake(220.0, 4000) 
+                          constrainedToSize:CGSizeMake(280.0, 4000) 
                           lineBreakMode:UILineBreakModeWordWrap];
     CGFloat height = (size.height == 0.0) ? 21.0 : size.height;
     
