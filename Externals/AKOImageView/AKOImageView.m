@@ -6,6 +6,7 @@
 //  Copyright 2009 akosma software. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "AKOImageView.h"
 #import "ASIHTTPRequest.h"
 #import "AKOImageCache.h"
@@ -26,6 +27,9 @@
         _spinningWheel.center = self.center;
         _spinningWheel.hidesWhenStopped = YES;
         [self addSubview:_spinningWheel];
+        
+        self.layer.masksToBounds = YES;
+        self.layer.cornerRadius = 5.0f;
     }
     return self;
 }
@@ -43,26 +47,32 @@
 
 - (void)loadImageFromURL:(NSURL *)url
 {
-    [_url release];
-    _url = [url retain];
-    
-    AKOImageCache *cache = [AKOImageCache sharedAKOImageCache];
-    
-    if (self.image == nil)
+    if (url != _url)
     {
-        NSString *cacheKey = [_url cacheKey];
-        if ([cache hasImageWithKey:cacheKey])
+        [_url release];
+        _url = [url retain];
+        
+        self.image = nil;
+        [_spinningWheel startAnimating];
+        if (_url != nil)
         {
-            UIImage *cachedImage = [cache imageForKey:cacheKey];
-            self.image = cachedImage;
-            [_spinningWheel stopAnimating];
-        }
-        else 
-        {
-            [_spinningWheel startAnimating];
-            ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:_url];
-            [request setDelegate:self];
-            [request startAsynchronous];
+            AKOImageCache *cache = [AKOImageCache sharedAKOImageCache];
+            
+            NSString *cacheKey = [_url cacheKey];
+            if ([cache hasImageWithKey:cacheKey])
+            {
+                UIImage *cachedImage = [cache imageForKey:cacheKey];
+                self.image = cachedImage;
+                [_spinningWheel stopAnimating];
+            }
+            else 
+            {
+                _request.delegate = nil;
+                _request = [ASIHTTPRequest requestWithURL:_url];
+                _request.delegate = self;
+                _request.shouldRedirect = YES;
+                [_request startAsynchronous];
+            }
         }
     }
 }
@@ -72,6 +82,7 @@
 
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
+    _request = nil;
     [_spinningWheel stopAnimating];
     NSData *data = [request responseData];
     UIImage *remoteImage = [[UIImage alloc] initWithData:data];
@@ -88,6 +99,7 @@
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
+    _request = nil;
     [_spinningWheel stopAnimating];
     NSInteger status = [request responseStatusCode];
     if (status == 404)

@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "AKOImageViewDelegate.h"
 
+@class ASIHTTPRequest;
+
 @interface AKOImageView : UIImageView 
 {
 @private
     NSURL *_url;
     UIActivityIndicatorView *_spinningWheel;
+    ASIHTTPRequest *_request;
     IBOutlet id<AKOImageViewDelegate> _delegate;
 }
 

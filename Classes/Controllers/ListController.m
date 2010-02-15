@@ -10,6 +10,8 @@
 #import "FatFreeCRMProxy.h"
 #import "CompanyAccount.h"
 #import "NSDate+Senbei.h"
+#import "ListTableViewCell.h"
+#import "AKOImageView.h"
 
 @implementation ListController
 
@@ -165,13 +167,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *cellIdentifier = @"ListControllerCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ListTableViewCell *cell = (ListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) 
     {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle 
-                                       reuseIdentifier:CellIdentifier] autorelease];
+        cell = [ListTableViewCell cellWithReuseIdentifier:cellIdentifier];
     }
 
     NSArray *array = (self.searchDisplayController.active) ? _searchData : _data;
@@ -183,6 +184,10 @@
         cell.textLabel.text = item.name;
         cell.textLabel.textColor = [UIColor blackColor];
         cell.detailTextLabel.text = [item description];
+
+        NSURL *photoURL = [item photoURL];
+        cell.photoView.hidden = (photoURL == nil);
+        [cell.photoView loadImageFromURL:photoURL];
     }
     else
     {
@@ -191,6 +196,8 @@
         cell.textLabel.text = loading;
         cell.textLabel.textColor = [UIColor grayColor];
         cell.detailTextLabel.text = @"";
+
+        cell.photoView.hidden = YES;
     }
     return cell;
 }

@@ -92,6 +92,8 @@
 		3AB723D911087A80001F861D /* opportunities.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723D211087A80001F861D /* opportunities.png */; };
 		3AB723DA11087A80001F861D /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723D311087A80001F861D /* settings.png */; };
 		3AB723DB11087A80001F861D /* tasks.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723D411087A80001F861D /* tasks.png */; };
+		3AE1CC3A112941C500F50018 /* ListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1CC39112941C500F50018 /* ListTableViewCell.m */; };
+		3AE1CCF011294F5500F50018 /* NSString+Senbei.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1CCEF11294F5500F50018 /* NSString+Senbei.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -242,6 +244,10 @@
 		3AB723D211087A80001F861D /* opportunities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opportunities.png; sourceTree = "<group>"; };
 		3AB723D311087A80001F861D /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		3AB723D411087A80001F861D /* tasks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tasks.png; sourceTree = "<group>"; };
+		3AE1CC38112941C500F50018 /* ListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewCell.h; sourceTree = "<group>"; };
+		3AE1CC39112941C500F50018 /* ListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewCell.m; sourceTree = "<group>"; };
+		3AE1CCEE11294F5500F50018 /* NSString+Senbei.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Senbei.h"; sourceTree = "<group>"; };
+		3AE1CCEF11294F5500F50018 /* NSString+Senbei.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Senbei.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -419,6 +425,7 @@
 			children = (
 				3A6D8CD111064A4B0089F21D /* AppDelegate */,
 				3A6D8CD411064A4B0089F21D /* Controllers */,
+				3AE1CC371129419E00F50018 /* Views */,
 				3A29C08B11075E5400D887F1 /* Models */,
 				3A6D8CD511064A4B0089F21D /* Helpers */,
 			);
@@ -457,10 +464,12 @@
 		3A6D8CD511064A4B0089F21D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				3A3E6A291121C6F700F3D322 /* NSDate+Senbei.h */,
-				3A3E6A2A1121C6F700F3D322 /* NSDate+Senbei.m */,
 				3A6D8D5F110654DB0089F21D /* FatFreeCRMProxy.h */,
 				3A6D8D60110654DB0089F21D /* FatFreeCRMProxy.m */,
+				3A3E6A291121C6F700F3D322 /* NSDate+Senbei.h */,
+				3A3E6A2A1121C6F700F3D322 /* NSDate+Senbei.m */,
+				3AE1CCEE11294F5500F50018 /* NSString+Senbei.h */,
+				3AE1CCEF11294F5500F50018 /* NSString+Senbei.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -659,6 +668,15 @@
 			path = Icons;
 			sourceTree = "<group>";
 		};
+		3AE1CC371129419E00F50018 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3AE1CC38112941C500F50018 /* ListTableViewCell.h */,
+				3AE1CC39112941C500F50018 /* ListTableViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -789,6 +807,8 @@
 				3A6C627A1119EA07000DD23B /* WebBrowserController.m in Sources */,
 				3A3E6A2B1121C6F700F3D322 /* NSDate+Senbei.m in Sources */,
 				3A3E6A2E1121C73300F3D322 /* SenbeiAppDelegate.m in Sources */,
+				3AE1CC3A112941C500F50018 /* ListTableViewCell.m in Sources */,
+				3AE1CCF011294F5500F50018 /* NSString+Senbei.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

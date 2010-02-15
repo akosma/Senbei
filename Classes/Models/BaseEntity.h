@@ -22,6 +22,7 @@
 @property (nonatomic, retain) NSDate *createdAt;
 @property (nonatomic, retain) NSDate *updatedAt;
 @property (nonatomic, copy) NSString *name;
+@property (nonatomic, readonly) NSURL *photoURL;
 
 - (id)initWithCXMLElement:(CXMLElement *)element;
 

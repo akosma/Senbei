@@ -8,6 +8,9 @@
 
 #import "Contact.h"
 #import "NSDate+Senbei.h"
+#import "NSString+Senbei.h"
+#import "NSURL+AKOCacheKey.h"
+#import "Definitions.h"
 
 void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringRef label, NSString *value)
 {
@@ -224,7 +227,7 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
 }
 
 #pragma mark -
-#pragma mark Public methods
+#pragma mark Dynamic properties
 
 - (ABRecordRef)person
 {
@@ -244,6 +247,28 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
     setPersonPropertyValue(person, kABPersonEmailProperty, kABHomeLabel, _altEmail);
 
     return person;
+}
+
+- (NSURL *)photoURL
+{
+    NSURL *url = nil;
+    NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
+    NSString *defaultImage = [NSString stringWithFormat:@"%@/images/avatar.jpg", serverURL];
+    NSURL *defaultImageURL = [NSURL URLWithString:defaultImage];
+    
+    if (_email == nil)
+    {
+        url = defaultImageURL;
+    }
+    else
+    {
+        NSString *emailHash = [_email md5];
+        NSString *base = @"http://www.gravatar.com/avatar";
+        defaultImage = [defaultImageURL cacheKey];
+        NSString *stringURL = [NSString stringWithFormat:@"%@/%@.png?d=%@&s=50", base, emailHash, defaultImage];
+        url = [NSURL URLWithString:stringURL];
+    }
+    return url;
 }
 
 @end

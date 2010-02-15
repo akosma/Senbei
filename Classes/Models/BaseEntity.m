@@ -15,6 +15,11 @@
 @synthesize createdAt = _createdAt;
 @synthesize updatedAt = _updatedAt;
 
+@dynamic photoURL;
+
+#pragma mark -
+#pragma mark Init and dealloc
+
 - (id)initWithCXMLElement:(CXMLElement *)element
 {
     if (self = [super init])
@@ -53,6 +58,14 @@
     [_updatedAt release];
     [_name release];
     [super dealloc];
+}
+
+#pragma mark -
+#pragma mark Overridable properties
+
+- (NSURL *)photoURL
+{
+    return nil;
 }
 
 @end

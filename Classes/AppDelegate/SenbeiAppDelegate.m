@@ -20,6 +20,7 @@
 #import "Lead.h"
 #import "WebBrowserController.h"
 #import "Definitions.h"
+#import "AKOImageCache.h"
 
 #define TAB_ORDER_PREFERENCE @"TAB_ORDER_PREFERENCE"
 #define CURRENT_TAB_PREFERENCE @"CURRENT_TAB_PREFERENCE"
@@ -57,6 +58,10 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {
+#if TARGET_IPHONE_SIMULATOR
+    [[AKOImageCache sharedAKOImageCache] removeAllImages];
+#endif
+    
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(didLogin:) 
                                                  name:FatFreeCRMProxyDidLoginNotification

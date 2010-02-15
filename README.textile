@@ -22,6 +22,7 @@ h2. Functionality
 * View contacts as "address book" entries, with integrated e-mail and web browsing;
 * Configurable to use any FFCRM instance (URL, username, password, done). Off the box it uses the http://demo.fatfreecrm.com/ site as a default entry, with a random entry ("aaron", "ben", "elizabeth") as username and password;
 * Lists are sorted and displayed in the same order as the underlying FFCRM instance.
+* Displays Gravatars for accounts with e-mails.
 
 h2. Planned features
 
@@ -29,8 +30,7 @@ h3. Soon
 
 * Create contacts from the local address book;
 * View accounts, opportunities, leads and campaigns details in a separate screen;
-* View assigned and completed tasks;
-* Load Gravatars for accounts.
+* View assigned and completed tasks.
 
 h3. Later
 
