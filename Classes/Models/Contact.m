@@ -11,6 +11,7 @@
 #import "NSString+Senbei.h"
 #import "NSURL+AKOCacheKey.h"
 #import "Definitions.h"
+#import "AKOImageCache.h"
 
 void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringRef label, NSString *value)
 {
@@ -246,6 +247,16 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
     setPersonPropertyValue(person, kABPersonEmailProperty, kABWorkLabel, _email);
     setPersonPropertyValue(person, kABPersonEmailProperty, kABHomeLabel, _altEmail);
 
+    NSString *key = [self.photoURL cacheKey];
+    UIImage *image = [[AKOImageCache sharedAKOImageCache] imageForKey:key];
+    if (image != nil)
+    {
+        NSData *data = UIImagePNGRepresentation(image);
+        CFDataRef cfdata = (CFDataRef)data;
+        CFErrorRef error;
+        ABPersonSetImageData(person, cfdata, &error);
+    }
+    
     return person;
 }
 

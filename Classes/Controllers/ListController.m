@@ -185,7 +185,7 @@
         cell.textLabel.textColor = [UIColor blackColor];
         cell.detailTextLabel.text = [item description];
 
-        NSURL *photoURL = [item photoURL];
+        NSURL *photoURL = item.photoURL;
         cell.photoView.hidden = (photoURL == nil);
         [cell.photoView loadImageFromURL:photoURL];
     }
