@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define MEMORY_CACHE_SIZE 20
+#define MEMORY_CACHE_SIZE 50
 #define CACHE_FOLDER_NAME @"AKOImageCacheFolder"
 
 // 10 days in seconds
@@ -20,6 +20,7 @@
     NSMutableArray *_keyArray;
     NSMutableDictionary *_memoryCache;
     NSFileManager *_fileManager;
+    NSString *_cacheDirectoryName;
 }
 
 + (AKOImageCache *)sharedAKOImageCache;

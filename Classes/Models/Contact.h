@@ -30,6 +30,8 @@
     NSString *_twitter;
     NSDate *_birthDate;
     BOOL _doNotCall;
+    
+    NSURL *_photoURL;
 }
 
 @property (nonatomic, copy) NSString *address;

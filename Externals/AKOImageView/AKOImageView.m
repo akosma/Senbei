@@ -6,7 +6,6 @@
 //  Copyright 2009 akosma software. All rights reserved.
 //
 
-#import <QuartzCore/QuartzCore.h>
 #import "AKOImageView.h"
 #import "ASIHTTPRequest.h"
 #import "AKOImageCache.h"
@@ -15,6 +14,7 @@
 @implementation AKOImageView
 
 @synthesize delegate = _delegate;
+@dynamic url;
 
 #pragma mark -
 #pragma mark Dealloc
@@ -27,9 +27,6 @@
         _spinningWheel.center = self.center;
         _spinningWheel.hidesWhenStopped = YES;
         [self addSubview:_spinningWheel];
-        
-        self.layer.masksToBounds = YES;
-        self.layer.cornerRadius = 5.0f;
     }
     return self;
 }
@@ -45,15 +42,18 @@
 #pragma mark -  
 #pragma mark Public methods
 
-- (void)loadImageFromURL:(NSURL *)url
+- (NSURL *)url
+{
+    return _url;
+}
+
+- (void)setUrl:(NSURL *)url
 {
     if (url != _url)
     {
         [_url release];
         _url = [url retain];
         
-        self.image = nil;
-        [_spinningWheel startAnimating];
         if (_url != nil)
         {
             AKOImageCache *cache = [AKOImageCache sharedAKOImageCache];
@@ -67,6 +67,8 @@
             }
             else 
             {
+                self.image = nil;
+                [_spinningWheel startAnimating];
                 _request.delegate = nil;
                 _request = [ASIHTTPRequest requestWithURL:_url];
                 _request.delegate = self;

@@ -187,7 +187,7 @@
 
         NSURL *photoURL = item.photoURL;
         cell.photoView.hidden = (photoURL == nil);
-        [cell.photoView loadImageFromURL:photoURL];
+        cell.photoView.url = photoURL;
     }
     else
     {

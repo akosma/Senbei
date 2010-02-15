@@ -12,7 +12,6 @@
 @interface AKOImageCache ()
 
 - (void)addImageToMemoryCache:(UIImage *)image withKey:(NSString *)key;
-- (NSString *)getCacheDirectoryName;
 - (NSString *)getFileNameForKey:(NSString *)key;
 
 @end
@@ -36,22 +35,26 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AKOImageCache)
         _memoryCache = [[NSMutableDictionary alloc] initWithCapacity:MEMORY_CACHE_SIZE];
         _fileManager = [NSFileManager defaultManager];
         
-        NSString *cacheDirectoryName = [self getCacheDirectoryName];
         BOOL isDirectory = NO;
-        BOOL folderExists = [_fileManager fileExistsAtPath:cacheDirectoryName isDirectory:&isDirectory] && isDirectory;
+        BOOL folderExists = [_fileManager fileExistsAtPath:_cacheDirectoryName isDirectory:&isDirectory] && isDirectory;
 
         if (!folderExists)
         {
             NSError *error = nil;
-            [_fileManager createDirectoryAtPath:cacheDirectoryName withIntermediateDirectories:YES attributes:nil error:&error];
+            [_fileManager createDirectoryAtPath:_cacheDirectoryName withIntermediateDirectories:YES attributes:nil error:&error];
             [error release];
         }
+
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        _cacheDirectoryName = [[documentsDirectory stringByAppendingPathComponent:CACHE_FOLDER_NAME] retain];
     }
     return self;
 }
 
 - (void)dealloc
 {
+    [_cacheDirectoryName release];
     [_keyArray release];
     [_memoryCache release];
     [super dealloc];
@@ -115,11 +118,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AKOImageCache)
 {
     [_memoryCache removeAllObjects];
     
-    NSString *cacheDirectoryName = [self getCacheDirectoryName];
-    NSArray *items = [_fileManager directoryContentsAtPath:cacheDirectoryName];
+    NSArray *items = [_fileManager directoryContentsAtPath:_cacheDirectoryName];
     for (NSString *item in items)
     {
-        NSString *path = [cacheDirectoryName stringByAppendingPathComponent:item];
+        NSString *path = [_cacheDirectoryName stringByAppendingPathComponent:item];
         NSError *error = nil;
         [_fileManager removeItemAtPath:path error:&error];
         [error release];
@@ -133,11 +135,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AKOImageCache)
 
 - (void)removeOldImages
 {
-    NSString *cacheDirectoryName = [self getCacheDirectoryName];
-    NSArray *items = [_fileManager directoryContentsAtPath:cacheDirectoryName];
+    NSArray *items = [_fileManager directoryContentsAtPath:_cacheDirectoryName];
     for (NSString *item in items)
     {
-        NSString *path = [cacheDirectoryName stringByAppendingPathComponent:item];
+        NSString *path = [_cacheDirectoryName stringByAppendingPathComponent:item];
         NSDictionary *attributes = [_fileManager attributesOfItemAtPath:path error:nil];
         NSDate *creationDate = [attributes valueForKey:NSFileCreationDate];
         if (abs([creationDate timeIntervalSinceNow]) > IMAGE_FILE_LIFETIME)
@@ -166,8 +167,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AKOImageCache)
 
 - (NSUInteger)countImagesInDisk
 {
-    NSString *cacheDirectoryName = [self getCacheDirectoryName];
-    NSArray *items = [_fileManager directoryContentsAtPath:cacheDirectoryName];
+    NSArray *items = [_fileManager directoryContentsAtPath:_cacheDirectoryName];
     return [items count];
 }
 
@@ -196,18 +196,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AKOImageCache)
     }    
 }
 
-- (NSString *)getCacheDirectoryName
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *cacheDirectoryName = [documentsDirectory stringByAppendingPathComponent:CACHE_FOLDER_NAME];
-    return cacheDirectoryName;
-}
-
 - (NSString *)getFileNameForKey:(NSString *)key
 {
-    NSString *cacheDirectoryName = [self getCacheDirectoryName];
-    NSString *fileName = [cacheDirectoryName stringByAppendingPathComponent:key];
+    NSString *fileName = [_cacheDirectoryName stringByAppendingPathComponent:key];
     return fileName;
 }
 

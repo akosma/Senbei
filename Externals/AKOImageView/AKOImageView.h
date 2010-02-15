@@ -21,7 +21,6 @@
 }
 
 @property (nonatomic, assign) id<AKOImageViewDelegate> delegate;
-
-- (void)loadImageFromURL:(NSURL *)url;
-                                               
+@property (nonatomic, retain) NSURL *url;
+                                              
 @end

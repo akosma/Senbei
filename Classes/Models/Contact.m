@@ -80,6 +80,7 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
 {
     if (self = [super initWithCXMLElement:element])
     {
+        _photoURL = nil;
         for(int counter = 0; counter < [element childCount]; ++counter) 
         {
             id obj = [element childAtIndex:counter];
@@ -159,12 +160,26 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
                 _twitter = [[obj stringValue] copy];
             }
         }
+        
+        NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
+        NSString *defaultImage = [NSString stringWithFormat:@"%@/images/avatar.jpg", serverURL];
+        _photoURL = [[NSURL alloc] initWithString:defaultImage];
+        
+        if (_email != nil)
+        {
+            NSString *emailHash = [_email md5];
+            NSString *base = @"http://www.gravatar.com/avatar";
+            defaultImage = [_photoURL cacheKey];
+            NSString *stringURL = [NSString stringWithFormat:@"%@/%@.png?d=%@&s=50", base, emailHash, defaultImage];
+            _photoURL = [[NSURL alloc] initWithString:stringURL];
+        }        
     }
     return self;
 }
 
 - (void)dealloc
 {
+    [_photoURL release];
     [_address release];
     [_altEmail release];
     [_blog release];
@@ -262,24 +277,7 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
 
 - (NSURL *)photoURL
 {
-    NSURL *url = nil;
-    NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
-    NSString *defaultImage = [NSString stringWithFormat:@"%@/images/avatar.jpg", serverURL];
-    NSURL *defaultImageURL = [NSURL URLWithString:defaultImage];
-    
-    if (_email == nil)
-    {
-        url = defaultImageURL;
-    }
-    else
-    {
-        NSString *emailHash = [_email md5];
-        NSString *base = @"http://www.gravatar.com/avatar";
-        defaultImage = [defaultImageURL cacheKey];
-        NSString *stringURL = [NSString stringWithFormat:@"%@/%@.png?d=%@&s=50", base, emailHash, defaultImage];
-        url = [NSURL URLWithString:stringURL];
-    }
-    return url;
+    return _photoURL;
 }
 
 @end
