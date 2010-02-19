@@ -32,3 +32,8 @@ TASKS_DUE_TOMORROW_TITLE = "Due tomorrow"; /* Title of the due tomorrow tasks se
 TASKS_DUE_THIS_WEEK_TITLE = "Due this week"; /* Title of the due this week tasks section */
 TASKS_DUE_NEXT_WEEK_TITLE = "Due next week"; /* Title of the due next week tasks section */
 TASKS_DUE_LATER_TITLE = "Due later"; /* Title of the due later tasks section */
+
+/* NewTaskController */
+NEW_TASK_TITLE = "New Task"; /* Title of the new task screen */
+NEW_TASK_SPECIFY_NAME = "Please specify the name of the task"; /* Text shown when trying to create a task without name */
+

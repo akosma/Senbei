@@ -23,7 +23,8 @@
     if (self = [super initWithStyle:UITableViewStyleGrouped]) 
     {
         _navigationController = [[UINavigationController alloc] initWithRootViewController:self];
-        self.title = @"New Task";
+        NSString *controllerTitle = NSLocalizedString(@"NEW_TASK_TITLE", @"Title of the new task screen");
+        self.title = controllerTitle;
 
         UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                      target:self
@@ -97,10 +98,12 @@
     }
     else
     {
+        NSString *message = NSLocalizedString(@"NEW_TASK_SPECIFY_NAME", @"Text shown when trying to create a task without name");
+        NSString *ok = NSLocalizedString(@"OK", @"The 'OK' word");
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:@"Please specify the name of the task" 
+                                                        message:message
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK" 
+                                              cancelButtonTitle:ok
                                               otherButtonTitles:nil];
         [alert show];
         [alert release];
