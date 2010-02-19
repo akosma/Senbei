@@ -11,7 +11,7 @@ OK = "OK"; /* The 'OK' word */
 CANCEL = "Cancel"; /* The 'Cancel' word */
 
 /* SenbeiAppDelegate */
-LOGGING_IN = "Logging in as %@..."; /* Text shown while the user logs in */
+LOGGING_IN = "Logging in as %@\nat %@..."; /* Text shown while the user logs in */
 CREDENTIALS_REJECTED = "The server rejected your credentials"; /* Message shown when the login credentials are rejected */
 ERROR_MESSAGE = "Error! (code %d)"; /* Message shown when any error occurs */
 LOADING_CONTROLLERS = "Loading controllers..."; /* Message shown when the controllers are loading */

@@ -98,7 +98,8 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     [defaults synchronize];
     
     NSString *server = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
-    NSString *host = [server stringByReplacingOccurrencesOfString:@"http://" withString:@""];
+    NSURL *url = [NSURL URLWithString:server];
+    NSString *host = [url host];
     Reachability *reachability = [Reachability reachabilityWithHostName:host];
     NetworkStatus status = [reachability currentReachabilityStatus];
     
@@ -120,7 +121,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     {
         NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_USERNAME];
         NSString *logging = NSLocalizedString(@"LOGGING_IN", @"Text shown while the user logs in");
-        _statusLabel.text = [NSString stringWithFormat:logging, username];
+        _statusLabel.text = [NSString stringWithFormat:logging, username, host];
         
         [[FatFreeCRMProxy sharedFatFreeCRMProxy] login];
     }
