@@ -42,7 +42,7 @@ h3. Later
 h2. Credits
 
 * Fat Free CRM by "Michael Dvorkin":mailto:mike@fatfreecrm.com
-* Application name idea by "Zerofee":http://zerofee.org/.
+* Application name and icon by "Zerofee":http://zerofee.org/.
 * Tab bar icons used with permission from 
 ** eddit, Inc., 
 ** Joseph Wain / glyphish.com
