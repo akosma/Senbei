@@ -24,7 +24,8 @@
         self.showDoneButton = NO;
         self.showCreditsFooter = NO;
         _navigationController = [[UINavigationController alloc] initWithRootViewController:self];
-        self.title = @"Settings";
+        NSString *settings = NSLocalizedString(@"SETTINGS_TITLE", @"Title of the settings controller");
+        self.title = settings;
         self.tabBarItem.image = [UIImage imageNamed:@"settings.png"];
     }
     return self;
