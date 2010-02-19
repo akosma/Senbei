@@ -21,6 +21,7 @@
 #import "WebBrowserController.h"
 #import "Definitions.h"
 #import "AKOImageCache.h"
+#import "Reachability.h"
 
 #define TAB_ORDER_PREFERENCE @"TAB_ORDER_PREFERENCE"
 #define CURRENT_TAB_PREFERENCE @"CURRENT_TAB_PREFERENCE"
@@ -61,7 +62,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 #if TARGET_IPHONE_SIMULATOR
     [[AKOImageCache sharedAKOImageCache] removeAllImages];
 #endif
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(didLogin:) 
                                                  name:FatFreeCRMProxyDidLoginNotification
@@ -96,11 +97,33 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     }
     [defaults synchronize];
     
-    NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_USERNAME];
-    NSString *logging = NSLocalizedString(@"LOGGING_IN", @"Text shown while the user logs in");
-    _statusLabel.text = [NSString stringWithFormat:logging, username];
-
-    [[FatFreeCRMProxy sharedFatFreeCRMProxy] login];
+    NSString *server = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
+    NSString *host = [server stringByReplacingOccurrencesOfString:@"http://" withString:@""];
+    Reachability *reachability = [Reachability reachabilityWithHostName:host];
+    NetworkStatus status = [reachability currentReachabilityStatus];
+    
+    if (status == NotReachable)
+    {
+        NSString *message = NSLocalizedString(@"NETWORK_REQUIRED", @"Message shown when the device does not have a network connection");
+        NSString *ok = NSLocalizedString(@"OK", @"The 'OK' word");
+        [_spinningWheel stopAnimating];
+        _statusLabel.text = message;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil 
+                                                        message:message
+                                                       delegate:nil 
+                                              cancelButtonTitle:ok
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+    else 
+    {
+        NSString *username = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_USERNAME];
+        NSString *logging = NSLocalizedString(@"LOGGING_IN", @"Text shown while the user logs in");
+        _statusLabel.text = [NSString stringWithFormat:logging, username];
+        
+        [[FatFreeCRMProxy sharedFatFreeCRMProxy] login];
+    }
 
     [_window makeKeyAndVisible];
 }
@@ -114,10 +137,11 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     _statusLabel.text = @"Failed login";
 
     NSString *message = NSLocalizedString(@"CREDENTIALS_REJECTED", @"Message shown when the login credentials are rejected");
+    NSString *ok = NSLocalizedString(@"OK", @"The 'OK' word");
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil 
                                                     message:message
                                                    delegate:nil 
-                                          cancelButtonTitle:@"OK" 
+                                          cancelButtonTitle:ok
                                           otherButtonTitles:nil];
     [alert show];
     [alert release];

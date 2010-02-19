@@ -16,6 +16,7 @@ CREDENTIALS_REJECTED = "The server rejected your credentials"; /* Message shown 
 ERROR_MESSAGE = "Error! (code %d)"; /* Message shown when any error occurs */
 LOADING_CONTROLLERS = "Loading controllers..."; /* Message shown when the controllers are loading */
 EMAIL_BODY = "<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>Sent from Senbei</p>"; /* Body of the e-mail sent from the contacts view */
+NETWORK_REQUIRED = "Senbei requires a network connection"; /* Message shown when the device does not have a network connection */
 
 /* ListController */
 SEARCH = "Search"; /* Word used in the 'Search' controller */
