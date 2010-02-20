@@ -18,13 +18,13 @@
 @class CommentsController;
 
 typedef enum {
-    SenbeiViewControllerAccounts = 0,
-    SenbeiViewControllerContacts = 1,
-    SenbeiViewControllerOpportunities = 2,
-    SenbeiViewControllerTasks = 3,
-    SenbeiViewControllerLeads = 4,
-    SenbeiViewControllerCampaigns = 5,
-    SenbeiViewControllerSettings = 6,
+    SenbeiViewControllerTasks = 0,
+    SenbeiViewControllerAccounts = 1,
+    SenbeiViewControllerContacts = 2,
+    SenbeiViewControllerSettings = 3,
+    SenbeiViewControllerOpportunities = 4,
+    SenbeiViewControllerLeads = 5,
+    SenbeiViewControllerCampaigns = 6,
     SenbeiViewControllerMore = 7
 } SenbeiViewController;
 

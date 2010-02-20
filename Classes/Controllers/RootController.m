@@ -89,13 +89,13 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     if (order == nil)
     {
         // Probably first run, or never reordered controllers
+        [controllers addObject:_tasksController.navigationController];
         [controllers addObject:_accountsController.navigationController];
         [controllers addObject:_contactsController.navigationController];
+        [controllers addObject:_settingsController.navigationController];
         [controllers addObject:_opportunitiesController.navigationController];
-        [controllers addObject:_tasksController.navigationController];
         [controllers addObject:_leadsController.navigationController];
         [controllers addObject:_campaignsController.navigationController];
-        [controllers addObject:_settingsController.navigationController];
     }
     else 
     {
@@ -130,6 +130,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
                 case SenbeiViewControllerTasks:
                     [controllers addObject:_tasksController.navigationController];
                     break;
+
                 default:
                     break;
             }
