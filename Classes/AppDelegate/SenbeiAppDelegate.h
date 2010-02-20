@@ -18,6 +18,7 @@
     IBOutlet RootController *_tabBarController;
     IBOutlet UIActivityIndicatorView *_spinningWheel;
     IBOutlet UILabel *_statusLabel;
+    IBOutlet UIView *_applicationCredits;
     User *_currentUser;
 }
 

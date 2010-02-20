@@ -103,7 +103,12 @@
         [[FatFreeCRMProxy sharedFatFreeCRMProxy] login];
     }
 
+    _applicationCredits.alpha = 0.0;
     [_window makeKeyAndVisible];
+    
+    [UIView beginAnimations:nil context:NULL];
+    _applicationCredits.alpha = 1.0;
+    [UIView commitAnimations];
 }
 
 #pragma mark -
@@ -150,7 +155,12 @@
     _currentUser = [[[notification userInfo] objectForKey:@"user"] retain];
     _statusLabel.text = NSLocalizedString(@"LOADING_CONTROLLERS", @"Message shown when the controllers are loading");
 
+    _tabBarController.view.alpha = 0.0;
     [_window addSubview:_tabBarController.view];
+    
+    [UIView beginAnimations:nil context:NULL];
+    _tabBarController.view.alpha = 1.0;
+    [UIView commitAnimations];
 }
 
 @end
