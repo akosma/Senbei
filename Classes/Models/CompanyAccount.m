@@ -101,4 +101,12 @@
     return _website;
 }
 
+#pragma mark -
+#pragma mark Overridable properties
+
+- (NSString *)commentableTypeName
+{
+    return @"Account";
+}
+
 @end

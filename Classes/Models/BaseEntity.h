@@ -49,6 +49,7 @@
 @property (nonatomic, retain) NSDate *updatedAt;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, readonly) NSURL *photoURL;
+@property (nonatomic, readonly) NSString *commentableTypeName;
 
 - (id)initWithCXMLElement:(CXMLElement *)element;
 

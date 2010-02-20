@@ -42,6 +42,7 @@
 @synthesize updatedAt = _updatedAt;
 
 @dynamic photoURL;
+@dynamic commentableTypeName;
 
 #pragma mark -
 #pragma mark Init and dealloc
@@ -92,6 +93,11 @@
 - (NSURL *)photoURL
 {
     return nil;
+}
+
+- (NSString *)commentableTypeName
+{
+    return NSStringFromClass([self class]);
 }
 
 @end
