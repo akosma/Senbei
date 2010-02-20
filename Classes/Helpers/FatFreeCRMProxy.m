@@ -71,7 +71,6 @@
 - (void)processGetCommentsRequest:(ASIHTTPRequest *)request;
 - (void)processLoginRequest:(ASIHTTPRequest *)request;
 - (void)processGetTasksRequest:(ASIHTTPRequest *)request;
-- (NSString *)applicationDocumentsDirectory;
 - (NSArray *)deserializeXML:(NSString *)xmlString forXPath:(NSString *)xpath andClass:(Class)klass;
 
 @end
@@ -80,6 +79,10 @@
 @implementation FatFreeCRMProxy
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
+
+@synthesize server = _server;
+@synthesize username = _username;
+@synthesize password = _password;
 
 #pragma mark -
 #pragma mark Init and dealloc
@@ -103,6 +106,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 
 - (void)dealloc
 {
+    [_server release];
+    [_username release];
+    [_password release];
     [_networkQueue release];
     [super dealloc];
 }
@@ -113,8 +119,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 - (void)login
 {
     NSString *path = PROFILE_REQUEST;
-    NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@", serverURL, path];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", _server, path];
     NSURL *url = [NSURL URLWithString:urlString];
     [self sendGETRequestToURL:url path:path];
 }
@@ -122,8 +127,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 - (void)loadList:(Class)klass page:(NSInteger)page
 {
     NSString *path = [klass serverPath];
-    NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@?page=%d", serverURL, path, page];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@?page=%d", _server, path, page];
     NSURL *url = [NSURL URLWithString:urlString];
     [self sendGETRequestToURL:url path:path];
 }
@@ -131,8 +135,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 - (void)searchList:(Class)klass query:(NSString *)query
 {
     NSString *path = [klass serverPath];
-    NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@?page=1&query=%@", serverURL, path, query];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@?page=1&query=%@", _server, path, query];
     NSURL *url = [NSURL URLWithString:urlString];
     [self sendGETRequestToURL:url path:path];
 }
@@ -141,13 +144,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 {
     Class klass = [entity class];
     NSString *path = [klass serverPath];
-    NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments.xml", serverURL, path, entity.objectId];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments.xml", _server, path, entity.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
     
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    request.username = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_USERNAME];;
-    request.password = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_PASSWORD];;
+    request.username = _username;
+    request.password = _password;
     request.shouldRedirect = NO;
     request.defaultResponseEncoding = NSUTF8StringEncoding;
     request.timeOutSeconds = REQUEST_TIMEOUT;
@@ -162,8 +164,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 {
     Class klass = [entity class];
     NSString *path = [klass serverPath];
-    NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments", serverURL, path, entity.objectId];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments", _server, path, entity.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSInteger idValue = [SenbeiAppDelegate sharedAppDelegate].currentUser.objectId;
@@ -188,22 +189,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 - (void)loadTasks
 {
     NSString *path = TASKS_REQUEST;
-    NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@", serverURL, path];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", _server, path];
     NSURL *url = [NSURL URLWithString:urlString];
     [self sendGETRequestToURL:url path:path];
 }
 
 - (void)markTaskAsDone:(Task *)task
 {
-    NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
-    NSString *urlString = [NSString stringWithFormat:@"%@/tasks/%d/complete", serverURL, task.objectId];
+    NSString *urlString = [NSString stringWithFormat:@"%@/tasks/%d/complete", _server, task.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
 
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
     [request setRequestMethod:@"PUT"];
-    request.username = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_USERNAME];
-    request.password = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_PASSWORD];
+    request.username = _username;
+    request.password = _password;
     request.shouldRedirect = NO;
     request.defaultResponseEncoding = NSUTF8StringEncoding;
     request.timeOutSeconds = REQUEST_TIMEOUT;
@@ -214,8 +213,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 
 - (void)createTask:(Task *)task
 {
-    NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
-    NSString *urlString = [NSString stringWithFormat:@"%@/tasks", serverURL, task.objectId];
+    NSString *urlString = [NSString stringWithFormat:@"%@/tasks", _server, task.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSInteger idValue = [SenbeiAppDelegate sharedAppDelegate].currentUser.objectId;
@@ -223,8 +221,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setRequestMethod:@"POST"];
-    request.username = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_USERNAME];
-    request.password = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_PASSWORD];
+    request.username = _username;
+    request.password = _password;
     [request setPostValue:task.name                               forKey:@"task[name]"];
     [request setPostValue:task.category                           forKey:@"task[category]"];
     [request setPostValue:[task.dueDate stringForNewTaskCreation] forKey:@"task[calendar]"];
@@ -558,8 +556,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 - (void)sendGETRequestToURL:(NSURL *)url path:(NSString *)path
 {
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    request.username = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_USERNAME];
-    request.password = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_PASSWORD];
+    request.username = _username;
+    request.password = _password;
     [request addRequestHeader:@"Accept" value:@"text/xml"];
     request.shouldRedirect = NO;
     request.defaultResponseEncoding = NSUTF8StringEncoding;
@@ -567,11 +565,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:path, SELECTED_API_PATH, nil];
     request.userInfo = userInfo;
     [_networkQueue addOperation:request];    
-}
-
-- (NSString *)applicationDocumentsDirectory
-{
-	return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
 
 @end

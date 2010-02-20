@@ -123,9 +123,14 @@
     else 
     {
         NSString *username = [defaults stringForKey:PREFERENCES_USERNAME];
+        NSString *password = [defaults stringForKey:PREFERENCES_PASSWORD];
+        NSString *server = [defaults stringForKey:PREFERENCES_SERVER_URL];
         NSString *logging = NSLocalizedString(@"LOGGING_IN", @"Text shown while the user logs in");
         _statusLabel.text = [NSString stringWithFormat:logging, username, host];
         
+        [FatFreeCRMProxy sharedFatFreeCRMProxy].username = username;
+        [FatFreeCRMProxy sharedFatFreeCRMProxy].password = password;
+        [FatFreeCRMProxy sharedFatFreeCRMProxy].server = server;
         [[FatFreeCRMProxy sharedFatFreeCRMProxy] login];
     }
 

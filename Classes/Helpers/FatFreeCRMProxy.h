@@ -66,7 +66,14 @@
 @private
     ASINetworkQueue *_networkQueue;
     NSNotificationCenter *_notificationCenter;
+    NSString *_server;
+    NSString *_username;
+    NSString *_password;
 }
+
+@property (nonatomic, copy) NSString *server;
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *password;
 
 + (FatFreeCRMProxy *)sharedFatFreeCRMProxy;
 
