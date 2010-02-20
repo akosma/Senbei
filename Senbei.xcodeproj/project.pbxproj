@@ -79,6 +79,7 @@
 		3A708B431108427500CB2D83 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A708B421108427500CB2D83 /* Comment.m */; };
 		3A8C38811119D8E1006669BE /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8C38801119D8E1006669BE /* AddressBook.framework */; };
 		3A8C38831119D8E1006669BE /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8C38821119D8E1006669BE /* AddressBookUI.framework */; };
+		3A92BDDC112FDB6F001B43FE /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A92BDDB112FDB6F001B43FE /* RootController.m */; };
 		3A9565BF1119E439003BF4D6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9565BE1119E439003BF4D6 /* MessageUI.framework */; };
 		3AB721FB11085642001F861D /* AKOEditorrific.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB721F911085642001F861D /* AKOEditorrific.m */; };
 		3AB7220111085699001F861D /* ako-editorrific-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB7220011085699001F861D /* ako-editorrific-bar.png */; };
@@ -228,6 +229,8 @@
 		3A82A8821121C694009FF035 /* Senbei_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Senbei_Prefix.pch; sourceTree = "<group>"; };
 		3A8C38801119D8E1006669BE /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		3A8C38821119D8E1006669BE /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		3A92BDDA112FDB6F001B43FE /* RootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootController.h; sourceTree = "<group>"; };
+		3A92BDDB112FDB6F001B43FE /* RootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootController.m; sourceTree = "<group>"; };
 		3A9565BE1119E439003BF4D6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		3AB721F811085642001F861D /* AKOEditorrific.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKOEditorrific.h; sourceTree = "<group>"; };
 		3AB721F911085642001F861D /* AKOEditorrific.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKOEditorrific.m; sourceTree = "<group>"; };
@@ -444,6 +447,8 @@
 		3A6D8CD411064A4B0089F21D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3A92BDDA112FDB6F001B43FE /* RootController.h */,
+				3A92BDDB112FDB6F001B43FE /* RootController.m */,
 				3A6D8D3811064DF20089F21D /* ListController.h */,
 				3A6D8D3911064DF20089F21D /* ListController.m */,
 				3A29C35C110794BA00D887F1 /* ListControllerDelegate.h */,
@@ -809,6 +814,7 @@
 				3A3E6A2E1121C73300F3D322 /* SenbeiAppDelegate.m in Sources */,
 				3AE1CC3A112941C500F50018 /* ListTableViewCell.m in Sources */,
 				3AE1CCF011294F5500F50018 /* NSString+Senbei.m in Sources */,
+				3A92BDDC112FDB6F001B43FE /* RootController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

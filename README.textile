@@ -8,7 +8,7 @@ h2. CRM?
 
 h2. Senbei?
 
-Because "Senbei":http://en.wikipedia.org/wiki/Senbei is lightweight, tasty and, most importantly, fat-free :) The name was suggested by the design and branding geniuses of "Zerofee":http://zerofee.org/.
+Because "Senbei":http://en.wikipedia.org/wiki/Senbei is lightweight, tasty and, most importantly, fat-free :) The name and icon were both suggested by the design and branding geniuses of "Zerofee":http://zerofee.org/.
 
 h2. Functionality
 
