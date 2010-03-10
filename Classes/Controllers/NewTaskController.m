@@ -52,11 +52,10 @@
         NSString *controllerTitle = NSLocalizedString(@"NEW_TASK_TITLE", @"Title of the new task screen");
         self.title = controllerTitle;
 
-        UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+        _doneButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                      target:self
                                                                                      action:@selector(done:)];
-        self.navigationItem.rightBarButtonItem = doneItem;
-        [doneItem release];
+        self.navigationItem.rightBarButtonItem = _doneButtonItem;
 
         UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                      target:self
@@ -93,6 +92,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_navigationController release];
+    [_doneButtonItem release];
     [_nameField release];
     [_bucketField release];
     [_categoryField release];
@@ -114,6 +114,7 @@
 {
     if ([_nameField.text length] > 0)
     {
+        _doneButtonItem.enabled = NO;
         Task *task = [[Task alloc] init];
         task.name = _nameField.text;
         task.category = _selectedCategory;
@@ -139,6 +140,7 @@
 
 - (void)close:(id)sender
 {
+    _doneButtonItem.enabled = NO;
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -162,6 +164,7 @@
 {
     [super viewWillAppear:animated];
     _nameField.text = @"";
+    _doneButtonItem.enabled = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated

@@ -43,6 +43,7 @@
     UITextField *_nameField;
     UITextField *_bucketField;
     UITextField *_categoryField;
+    UIBarButtonItem *_doneButtonItem;
     
     NSString *_selectedBucket;
     UIPickerView *_bucketPicker;
