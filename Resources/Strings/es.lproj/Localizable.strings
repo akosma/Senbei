@@ -1,0 +1,41 @@
+/* 
+   Application.strings
+   Senbei
+
+   Created by Adrian on 1/19/10.
+   Copyright 2010 akosma software. All rights reserved.
+ */
+
+/* Generic */
+OK = "OK"; /* The 'OK' word */
+CANCEL = "Anular"; /* The 'Cancel' word */
+
+/* SenbeiAppDelegate */
+LOGGING_IN = "Conectándose como %@\nen %@..."; /* Text shown while the user logs in */
+CREDENTIALS_REJECTED = "El servidor rechazó sus credenciales"; /* Message shown when the login credentials are rejected */
+ERROR_MESSAGE = "Error! (código %d)"; /* Message shown when any error occurs */
+LOADING_CONTROLLERS = "Cargando controladores..."; /* Message shown when the controllers are loading */
+EMAIL_BODY = "<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>Enviado desde Senbei</p>"; /* Body of the e-mail sent from the contacts view */
+NETWORK_REQUIRED = "Senbei necesita una conexión internet"; /* Message shown when the device does not have a network connection */
+
+/* ListController */
+SEARCH = "Buscar"; /* Word used in the 'Search' controller */
+LOADING = "Cargando..."; /* Text shown in cells when more content is loading */
+
+/* TasksController */
+TASKS_CONTROLLER_TITLE = "Tareas"; /* Title of the Tasks controller */
+MARK_TASKS_DONE = "Quiere marcar esta tarea como cumplida?"; /* Confirmation text shown before setting a task as done */
+TASKS_OVERDUE_TITLE = "Atrasadas"; /* Title of the overdue task section */
+TASKS_DUE_ASAP_TITLE = "Cuanto antes"; /* Title of the due asap tasks section */
+TASKS_DUE_TODAY_TITLE = "Para hoy"; /* Title of the due today tasks section */
+TASKS_DUE_TOMORROW_TITLE = "Para mañana"; /* Title of the due tomorrow tasks section */
+TASKS_DUE_THIS_WEEK_TITLE = "Para esta semana"; /* Title of the due this week tasks section */
+TASKS_DUE_NEXT_WEEK_TITLE = "Para la próxima semana"; /* Title of the due next week tasks section */
+TASKS_DUE_LATER_TITLE = "Para más tarde"; /* Title of the due later tasks section */
+
+/* NewTaskController */
+NEW_TASK_TITLE = "Nueva tarea"; /* Title of the new task screen */
+NEW_TASK_SPECIFY_NAME = "Por favor ingrese el nombre de la tarea"; /* Text shown when trying to create a task without name */
+
+/* SettingsController */
+SETTINGS_TITLE = "Ajustes"; /* Title of the settings controller */

@@ -66,6 +66,16 @@
 #pragma mark -
 #pragma mark UIViewController methods
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // In the superclass, this method sets the title to a "Settings" key.
+    // Here, we override that behaviour.
+    NSString *settings = NSLocalizedString(@"SETTINGS_TITLE", @"Title of the settings controller");
+    self.title = settings;
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];

@@ -12,8 +12,6 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		3A0B525B11146D87005A26FD /* NewTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B525A11146D87005A26FD /* NewTaskController.m */; };
-		3A0B52FD11147B99005A26FD /* TaskCategories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B52FC11147B99005A26FD /* TaskCategories.plist */; };
-		3A0B531E11147EEC005A26FD /* TaskBuckets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A0B531D11147EEC005A26FD /* TaskBuckets.plist */; };
 		3A1104A3111DEF4500729EB6 /* DemoLogins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A1104A2111DEF4500729EB6 /* DemoLogins.plist */; };
 		3A1F518F1122029C0081580E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F518D1122029C0081580E /* Localizable.strings */; };
 		3A29C08A11075E2B00D887F1 /* CommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08911075E2B00D887F1 /* CommentsController.m */; };
@@ -44,6 +42,8 @@
 		3A2B966711088C3D000373A5 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2B966611088C3D000373A5 /* Task.m */; };
 		3A3E6A2B1121C6F700F3D322 /* NSDate+Senbei.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E6A2A1121C6F700F3D322 /* NSDate+Senbei.m */; };
 		3A3E6A2E1121C73300F3D322 /* SenbeiAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E6A2D1121C73300F3D322 /* SenbeiAppDelegate.m */; };
+		3A564E851147E1FE009A7435 /* TaskBuckets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A564E841147E1FE009A7435 /* TaskBuckets.plist */; };
+		3A564E871147E208009A7435 /* TaskCategories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A564E861147E208009A7435 /* TaskCategories.plist */; };
 		3A6C627A1119EA07000DD23B /* WebBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6C62781119EA07000DD23B /* WebBrowserController.m */; };
 		3A6C627E1119EA29000DD23B /* WebBrowserController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6C627C1119EA29000DD23B /* WebBrowserController.xib */; };
 		3A6D8CDF11064AAC0089F21D /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D8CDE11064AAC0089F21D /* Entitlements.plist */; };
@@ -105,8 +105,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A0B525911146D87005A26FD /* NewTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTaskController.h; sourceTree = "<group>"; };
 		3A0B525A11146D87005A26FD /* NewTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTaskController.m; sourceTree = "<group>"; };
-		3A0B52FC11147B99005A26FD /* TaskCategories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TaskCategories.plist; sourceTree = "<group>"; };
-		3A0B531D11147EEC005A26FD /* TaskBuckets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TaskBuckets.plist; sourceTree = "<group>"; };
+		3A0B52FC11147B99005A26FD /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/TaskCategories.plist; sourceTree = "<group>"; };
+		3A0B531D11147EEC005A26FD /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/TaskBuckets.plist; sourceTree = "<group>"; };
 		3A1104A2111DEF4500729EB6 /* DemoLogins.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DemoLogins.plist; sourceTree = "<group>"; };
 		3A1F518E1122029C0081580E /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A29C08811075E2B00D887F1 /* CommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsController.h; sourceTree = "<group>"; };
@@ -160,6 +160,10 @@
 		3A3E6A2A1121C6F700F3D322 /* NSDate+Senbei.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Senbei.m"; sourceTree = "<group>"; };
 		3A3E6A2C1121C73300F3D322 /* SenbeiAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SenbeiAppDelegate.h; sourceTree = "<group>"; };
 		3A3E6A2D1121C73300F3D322 /* SenbeiAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SenbeiAppDelegate.m; sourceTree = "<group>"; };
+		3A564E541147DDAA009A7435 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3A564E551147DDAC009A7435 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3A564E561147DDB4009A7435 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3A564E661147DFB4009A7435 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		3A6C62771119EA07000DD23B /* WebBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebBrowserController.h; sourceTree = "<group>"; };
 		3A6C62781119EA07000DD23B /* WebBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebBrowserController.m; sourceTree = "<group>"; };
 		3A6C627D1119EA29000DD23B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WebBrowserController.xib; sourceTree = "<group>"; };
@@ -327,8 +331,8 @@
 		3A0B52FB11147B88005A26FD /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				3A0B531D11147EEC005A26FD /* TaskBuckets.plist */,
-				3A0B52FC11147B99005A26FD /* TaskCategories.plist */,
+				3A564E841147E1FE009A7435 /* TaskBuckets.plist */,
+				3A564E861147E208009A7435 /* TaskCategories.plist */,
 				3A1104A2111DEF4500729EB6 /* DemoLogins.plist */,
 			);
 			path = Data;
@@ -713,6 +717,15 @@
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Senbei" */;
 			compatibilityVersion = "Xcode 3.1";
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				es,
+				fr,
+				it,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -745,8 +758,8 @@
 				3AB723D911087A80001F861D /* opportunities.png in Resources */,
 				3AB723DA11087A80001F861D /* settings.png in Resources */,
 				3AB723DB11087A80001F861D /* tasks.png in Resources */,
-				3A0B52FD11147B99005A26FD /* TaskCategories.plist in Resources */,
-				3A0B531E11147EEC005A26FD /* TaskBuckets.plist in Resources */,
+				3A564E871147E208009A7435 /* TaskCategories.plist in Resources */,
+				3A564E851147E1FE009A7435 /* TaskBuckets.plist in Resources */,
 				3A6C627E1119EA29000DD23B /* WebBrowserController.xib in Resources */,
 				3A1104A3111DEF4500729EB6 /* DemoLogins.plist in Resources */,
 				3A1F518F1122029C0081580E /* Localizable.strings in Resources */,
@@ -825,8 +838,27 @@
 			isa = PBXVariantGroup;
 			children = (
 				3A1F518E1122029C0081580E /* English */,
+				3A564E541147DDAA009A7435 /* es */,
+				3A564E551147DDAC009A7435 /* fr */,
+				3A564E561147DDB4009A7435 /* it */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		3A564E841147E1FE009A7435 /* TaskBuckets.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A0B531D11147EEC005A26FD /* English */,
+			);
+			name = TaskBuckets.plist;
+			sourceTree = "<group>";
+		};
+		3A564E861147E208009A7435 /* TaskCategories.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A0B52FC11147B99005A26FD /* English */,
+			);
+			name = TaskCategories.plist;
 			sourceTree = "<group>";
 		};
 		3A6C627C1119EA29000DD23B /* WebBrowserController.xib */ = {
@@ -841,6 +873,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3A6D8CDB11064A900089F21D /* English */,
+				3A564E661147DFB4009A7435 /* es */,
 			);
 			name = MainWindow.xib;
 			sourceTree = "<group>";
