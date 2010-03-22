@@ -71,8 +71,6 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
 @synthesize birthDate = _birthDate;
 @synthesize doNotCall = _doNotCall;
 
-@dynamic person;
-
 #pragma mark -
 #pragma mark Static methods
 
@@ -128,7 +126,7 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
         
         NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
         NSString *defaultImage = [NSString stringWithFormat:@"%@/images/avatar.jpg", serverURL];
-        self.photoURL = [[NSURL alloc] initWithString:defaultImage];
+        self.photoURL = [[[NSURL alloc] initWithString:defaultImage] autorelease];
         
         if (self.email != nil)
         {
@@ -136,7 +134,7 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
             NSString *base = @"http://www.gravatar.com/avatar";
             defaultImage = [self.photoURL cacheKey];
             NSString *stringURL = [NSString stringWithFormat:@"%@/%@.png?d=%@&s=50", base, emailHash, defaultImage];
-            self.photoURL = [[NSURL alloc] initWithString:stringURL];
+            self.photoURL = [[[NSURL alloc] initWithString:stringURL] autorelease];
         }        
     }
     return self;
@@ -161,6 +159,7 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
     self.title = nil;
     self.twitter = nil;
     self.birthDate = nil;
+    CFRelease(_person);
     [super dealloc];
 }
 
@@ -210,42 +209,45 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
 #pragma mark -
 #pragma mark Dynamic properties
 
-- (ABRecordRef)person
+- (ABRecordRef)getPerson
 {
-    ABRecordRef person = ABPersonCreate();
-    ABRecordSetValue(person, kABPersonFirstNameProperty, self.firstName, nil);
-    ABRecordSetValue(person, kABPersonLastNameProperty, self.lastName, nil);
-    
-    if ([self.title length] > 0)
+    if (_person == NULL)
     {
-        ABRecordSetValue(person, kABPersonJobTitleProperty, self.title, nil);
-    }
-    
-    if ([self.department length] > 0)
-    {
-        ABRecordSetValue(person, kABPersonDepartmentProperty, self.department, nil);
-    }
-    
-    ABRecordSetValue(person, kABPersonBirthdayProperty, [self.birthDate stringWithDateFormattedWithCurrentLocale], nil);
-    
-    setPersonPropertyValue(person, kABPersonPhoneProperty, kABPersonPhoneMobileLabel, self.mobile);
-    setPersonPropertyValue(person, kABPersonPhoneProperty, kABPersonPhoneMainLabel, self.phone);
-    setPersonPropertyValue(person, kABPersonPhoneProperty, kABPersonPhoneWorkFAXLabel, self.fax);
-    setPersonPropertyValue(person, kABPersonURLProperty, kABPersonHomePageLabel, self.blog);
-    setPersonPropertyValue(person, kABPersonEmailProperty, kABWorkLabel, self.email);
-    setPersonPropertyValue(person, kABPersonEmailProperty, kABHomeLabel, self.altEmail);
+        _person = ABPersonCreate();
+        ABRecordSetValue(_person, kABPersonFirstNameProperty, self.firstName, nil);
+        ABRecordSetValue(_person, kABPersonLastNameProperty, self.lastName, nil);
+        
+        if ([self.title length] > 0)
+        {
+            ABRecordSetValue(_person, kABPersonJobTitleProperty, self.title, nil);
+        }
+        
+        if ([self.department length] > 0)
+        {
+            ABRecordSetValue(_person, kABPersonDepartmentProperty, self.department, nil);
+        }
+        
+        ABRecordSetValue(_person, kABPersonBirthdayProperty, [self.birthDate stringWithDateFormattedWithCurrentLocale], nil);
+        
+        setPersonPropertyValue(_person, kABPersonPhoneProperty, kABPersonPhoneMobileLabel, self.mobile);
+        setPersonPropertyValue(_person, kABPersonPhoneProperty, kABPersonPhoneMainLabel, self.phone);
+        setPersonPropertyValue(_person, kABPersonPhoneProperty, kABPersonPhoneWorkFAXLabel, self.fax);
+        setPersonPropertyValue(_person, kABPersonURLProperty, kABPersonHomePageLabel, self.blog);
+        setPersonPropertyValue(_person, kABPersonEmailProperty, kABWorkLabel, self.email);
+        setPersonPropertyValue(_person, kABPersonEmailProperty, kABHomeLabel, self.altEmail);
 
-    NSString *key = [self.photoURL cacheKey];
-    UIImage *image = [[AKOImageCache sharedAKOImageCache] imageForKey:key];
-    if (image != nil)
-    {
-        NSData *data = UIImagePNGRepresentation(image);
-        CFDataRef cfdata = (CFDataRef)data;
-        CFErrorRef error;
-        ABPersonSetImageData(person, cfdata, &error);
+        NSString *key = [self.photoURL cacheKey];
+        UIImage *image = [[AKOImageCache sharedAKOImageCache] imageForKey:key];
+        if (image != nil)
+        {
+            NSData *data = UIImagePNGRepresentation(image);
+            CFDataRef cfdata = (CFDataRef)data;
+            CFErrorRef error;
+            ABPersonSetImageData(_person, cfdata, &error);
+        }
     }
-    
-    return person;
+
+    return _person;
 }
 
 @end

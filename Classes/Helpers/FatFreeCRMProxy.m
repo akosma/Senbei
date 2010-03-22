@@ -59,6 +59,9 @@
 
 @interface FatFreeCRMProxy ()
 
+@property (nonatomic, retain) ASINetworkQueue *networkQueue;
+@property (nonatomic, assign) NSNotificationCenter *notificationCenter;
+
 - (void)sendGETRequestToURL:(NSURL *)url path:(NSString *)path;
 - (BOOL)requestOK:(ASIHTTPRequest *)request;
 - (NSError *)createErrorWithMessage:(NSString *)string code:(NSInteger)code;
@@ -84,6 +87,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 @synthesize server = _server;
 @synthesize username = _username;
 @synthesize password = _password;
+@synthesize networkQueue = _networkQueue;
+@synthesize notificationCenter = _notificationCenter;
 
 #pragma mark -
 #pragma mark Init and dealloc
@@ -92,25 +97,26 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 {
     if (self = [super init])
     {
-        _notificationCenter = [NSNotificationCenter defaultCenter];
+        self.notificationCenter = [NSNotificationCenter defaultCenter];
 
-        _networkQueue = [[ASINetworkQueue alloc] init];
-        _networkQueue.shouldCancelAllRequestsOnFailure = NO;
-        _networkQueue.delegate = self;
-        _networkQueue.requestDidFinishSelector = @selector(requestDone:);
-        _networkQueue.requestDidFailSelector = @selector(requestWentWrong:);
-        _networkQueue.queueDidFinishSelector = @selector(queueFinished:);
-        [_networkQueue go];
+        self.networkQueue = [[ASINetworkQueue alloc] init];
+        self.networkQueue.shouldCancelAllRequestsOnFailure = NO;
+        self.networkQueue.delegate = self;
+        self.networkQueue.requestDidFinishSelector = @selector(requestDone:);
+        self.networkQueue.requestDidFailSelector = @selector(requestWentWrong:);
+        self.networkQueue.queueDidFinishSelector = @selector(queueFinished:);
+        [self.networkQueue go];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [_server release];
-    [_username release];
-    [_password release];
-    [_networkQueue release];
+    self.server = nil;
+    self.username = nil;
+    self.password = nil;
+    self.notificationCenter = nil;
+    self.networkQueue = nil;
     [super dealloc];
 }
 
@@ -120,7 +126,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 - (void)login
 {
     NSString *path = PROFILE_REQUEST;
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@", _server, path];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", self.server, path];
     NSURL *url = [NSURL URLWithString:urlString];
     [self sendGETRequestToURL:url path:path];
 }
@@ -128,7 +134,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 - (void)loadList:(Class)klass page:(NSInteger)page
 {
     NSString *path = [klass serverPath];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@?page=%d", _server, path, page];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@?page=%d", self.server, path, page];
     NSURL *url = [NSURL URLWithString:urlString];
     [self sendGETRequestToURL:url path:path];
 }
@@ -136,7 +142,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 - (void)searchList:(Class)klass query:(NSString *)query
 {
     NSString *path = [klass serverPath];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@?page=1&query=%@", _server, path, query];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@?page=1&query=%@", self.server, path, query];
     NSURL *url = [NSURL URLWithString:urlString];
     [self sendGETRequestToURL:url path:path];
 }
@@ -145,101 +151,99 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 {
     Class klass = [entity class];
     NSString *path = [klass serverPath];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments.xml", _server, path, entity.objectId];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments.xml", self.server, path, entity.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
     
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    request.username = _username;
-    request.password = _password;
+    request.username = self.username;
+    request.password = self.password;
     request.shouldRedirect = NO;
     request.defaultResponseEncoding = NSUTF8StringEncoding;
     request.timeOutSeconds = REQUEST_TIMEOUT;
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:COMMENTS_REQUEST, SELECTED_API_PATH, 
-                              entity, SELECTED_API_ENTITY, 
-                              nil];
+                              entity, SELECTED_API_ENTITY, nil];
     request.userInfo = userInfo;
-    [_networkQueue addOperation:request];    
+    [self.networkQueue addOperation:request];    
 }
 
 - (void)sendComment:(NSString *)comment forEntity:(BaseEntity *)entity
 {
     Class klass = [entity class];
     NSString *path = [klass serverPath];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments", _server, path, entity.objectId];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments", self.server, path, entity.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSInteger idValue = [SenbeiAppDelegate sharedAppDelegate].currentUser.objectId;
     NSNumber *currentUserID = [NSNumber numberWithInt:idValue];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setRequestMethod:@"POST"];
+    request.username = self.username;
+    request.password = self.password;
+    request.requestMethod = @"POST";
+    request.shouldRedirect = NO;
+    request.defaultResponseEncoding = NSUTF8StringEncoding;
+    request.timeOutSeconds = REQUEST_TIMEOUT;
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:NEW_COMMENT_REQUEST, SELECTED_API_PATH, 
+                              entity, SELECTED_API_ENTITY, nil];
+    request.userInfo = userInfo;
     [request setPostValue:entity.commentableTypeName                forKey:@"comment[commentable_type]"];
     [request setPostValue:[NSNumber numberWithInt:entity.objectId]  forKey:@"comment[commentable_id]"];
     [request setPostValue:currentUserID                             forKey:@"comment[user_id]"];
     [request setPostValue:comment                                   forKey:@"comment[comment]"];
-    request.shouldRedirect = NO;
-    request.defaultResponseEncoding = NSUTF8StringEncoding;
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:NEW_COMMENT_REQUEST, SELECTED_API_PATH, 
-                              entity, SELECTED_API_ENTITY, 
-                              nil];
-    request.userInfo = userInfo;
-    request.timeOutSeconds = REQUEST_TIMEOUT;
-    [_networkQueue addOperation:request];
+    [self.networkQueue addOperation:request];
 }
 
 - (void)loadTasks
 {
     NSString *path = TASKS_REQUEST;
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@", _server, path];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", self.server, path];
     NSURL *url = [NSURL URLWithString:urlString];
     [self sendGETRequestToURL:url path:path];
 }
 
 - (void)markTaskAsDone:(Task *)task
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/tasks/%d/complete", _server, task.objectId];
+    NSString *urlString = [NSString stringWithFormat:@"%@/tasks/%d/complete", self.server, task.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
 
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    [request setRequestMethod:@"PUT"];
-    request.username = _username;
-    request.password = _password;
+    request.requestMethod = @"PUT";
+    request.username = self.username;
+    request.password = self.password;
     request.shouldRedirect = NO;
     request.defaultResponseEncoding = NSUTF8StringEncoding;
     request.timeOutSeconds = REQUEST_TIMEOUT;
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:TASK_DONE_REQUEST, SELECTED_API_PATH, nil];
-    request.userInfo = userInfo;
-    [_networkQueue addOperation:request];    
+    request.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:TASK_DONE_REQUEST, SELECTED_API_PATH, nil];
+    [self.networkQueue addOperation:request];    
 }
 
 - (void)createTask:(Task *)task
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/tasks", _server, task.objectId];
+    NSString *urlString = [NSString stringWithFormat:@"%@/tasks", self.server, task.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSInteger idValue = [SenbeiAppDelegate sharedAppDelegate].currentUser.objectId;
     NSNumber *currentUserID = [NSNumber numberWithInt:idValue];
 
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    [request setRequestMethod:@"POST"];
-    request.username = _username;
-    request.password = _password;
+    request.requestMethod = @"POST";
+    request.username = self.username;
+    request.password = self.password;
+    request.shouldRedirect = NO;
+    request.defaultResponseEncoding = NSUTF8StringEncoding;
+    request.timeOutSeconds = REQUEST_TIMEOUT;
+    request.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:NEW_TASK_REQUEST, SELECTED_API_PATH, nil];
     [request setPostValue:task.name                               forKey:@"task[name]"];
     [request setPostValue:task.category                           forKey:@"task[category]"];
     [request setPostValue:[task.dueDate stringForNewTaskCreation] forKey:@"task[calendar]"];
     [request setPostValue:task.bucket                             forKey:@"task[bucket]"];
     [request setPostValue:currentUserID                           forKey:@"task[user_id]"];
-    request.shouldRedirect = NO;
-    request.defaultResponseEncoding = NSUTF8StringEncoding;
-    request.timeOutSeconds = REQUEST_TIMEOUT;
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:NEW_TASK_REQUEST, SELECTED_API_PATH, nil];
-    request.userInfo = userInfo;
-    [_networkQueue addOperation:request];    
+    [self.networkQueue addOperation:request];    
 }
 
 - (void)cancelConnections
 {
-    [_networkQueue cancelAllOperations];
+    [self.networkQueue cancelAllOperations];
 }
 
 #pragma mark -
@@ -283,7 +287,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
             NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidPostCommentNotification
                                                                   object:self 
                                                                 userInfo:dict];
-            [_notificationCenter postNotification:notif];    
+            [self.notificationCenter postNotification:notif];    
         }
         else if ([selectedAPIPath isEqualToString:PROFILE_REQUEST])
         {
@@ -295,12 +299,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
         }
         else if ([selectedAPIPath isEqualToString:TASK_DONE_REQUEST])
         {
-            [_notificationCenter postNotificationName:FatFreeCRMProxyDidMarkTaskAsDoneNotification
+            [self.notificationCenter postNotificationName:FatFreeCRMProxyDidMarkTaskAsDoneNotification
                                                object:self];
         }
         else if ([selectedAPIPath isEqualToString:NEW_TASK_REQUEST])
         {
-            [_notificationCenter postNotificationName:FatFreeCRMProxyDidCreateTaskNotification
+            [self.notificationCenter postNotificationName:FatFreeCRMProxyDidCreateTaskNotification
                                                object:self];
         }
     }
@@ -343,7 +347,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
             NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidFailLoginNotification 
                                                                   object:self 
                                                                 userInfo:nil];
-            [_notificationCenter postNotification:notif];            
+            [self.notificationCenter postNotification:notif];            
             break;
         }
 
@@ -353,14 +357,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
             error = [self createErrorWithMessage:text code:statusCode];
             break;
         }
-            
+
         case 500:
         {
             text = @"The server experienced an error (500)";
             error = [self createErrorWithMessage:text code:statusCode];
             break;
         }
-            
+
         default:
         {
             text = [NSString stringWithFormat:@"The communication with the server failed with error %d", statusCode];
@@ -392,7 +396,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidFailWithErrorNotification 
                                                           object:self 
                                                         userInfo:userInfo];
-    [_notificationCenter postNotification:notif];    
+    [self.notificationCenter postNotification:notif];    
 }
 
 #pragma mark -
@@ -434,7 +438,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveAccountsNotification
                                                           object:self 
                                                         userInfo:dict];
-    [_notificationCenter postNotification:notif];
+    [self.notificationCenter postNotification:notif];
 }
 
 - (void)processGetCampaignsRequest:(ASIHTTPRequest *)request
@@ -447,7 +451,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveCampaignsNotification
                                                           object:self 
                                                         userInfo:dict];
-    [_notificationCenter postNotification:notif];
+    [self.notificationCenter postNotification:notif];
 }
 
 - (void)processGetLeadsRequest:(ASIHTTPRequest *)request
@@ -460,7 +464,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveLeadsNotification
                                                           object:self 
                                                         userInfo:dict];
-    [_notificationCenter postNotification:notif];
+    [self.notificationCenter postNotification:notif];
 }
 
 - (void)processGetOpportunitiesRequest:(ASIHTTPRequest *)request
@@ -473,7 +477,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveOpportunitiesNotification
                                                           object:self 
                                                         userInfo:dict];
-    [_notificationCenter postNotification:notif];
+    [self.notificationCenter postNotification:notif];
 }
 
 - (void)processGetContactsRequest:(ASIHTTPRequest *)request
@@ -486,7 +490,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveContactsNotification
                                                           object:self 
                                                         userInfo:dict];
-    [_notificationCenter postNotification:notif];    
+    [self.notificationCenter postNotification:notif];    
 }
 
 - (void)processGetCommentsRequest:(ASIHTTPRequest *)request
@@ -496,14 +500,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
                                     forXPath:@"comment" 
                                     andClass:NSClassFromString(@"Comment")];
 
-    NSDictionary *userInfo = request.userInfo;
-    BaseEntity *entity = [userInfo objectForKey:SELECTED_API_ENTITY];
+    BaseEntity *entity = [request.userInfo objectForKey:SELECTED_API_ENTITY];
 
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:comments, @"data", entity, @"entity", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveCommentsNotification
                                                           object:self 
                                                         userInfo:dict];
-    [_notificationCenter postNotification:notif];    
+    [self.notificationCenter postNotification:notif];    
 }
 
 - (void)processLoginRequest:(ASIHTTPRequest *)request
@@ -511,13 +514,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSData *response = [request responseData];
     TBXML *tbxml = [TBXML tbxmlWithXMLData:response];
     TBXMLElement *root = tbxml.rootXMLElement;
-    User *user = [[User alloc] initWithTBXMLElement:root];
+    User *user = [[[User alloc] initWithTBXMLElement:root] autorelease];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:user, @"user", nil];
-    [user release];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidLoginNotification
                                                           object:self 
                                                         userInfo:dict];
-    [_notificationCenter postNotification:notif];    
+    [self.notificationCenter postNotification:notif];    
 }
 
 - (void)processGetTasksRequest:(ASIHTTPRequest *)request
@@ -560,7 +562,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveTasksNotification
                                                           object:self 
                                                         userInfo:dict];
-    [_notificationCenter postNotification:notif];    
+    [self.notificationCenter postNotification:notif];    
 }
 
 #pragma mark -
@@ -569,15 +571,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 - (void)sendGETRequestToURL:(NSURL *)url path:(NSString *)path
 {
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    request.username = _username;
-    request.password = _password;
-    [request addRequestHeader:@"Accept" value:@"text/xml"];
+    request.username = self.username;
+    request.password = self.password;
     request.shouldRedirect = NO;
     request.defaultResponseEncoding = NSUTF8StringEncoding;
     request.timeOutSeconds = REQUEST_TIMEOUT;
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:path, SELECTED_API_PATH, nil];
-    request.userInfo = userInfo;
-    [_networkQueue addOperation:request];    
+    request.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:path, SELECTED_API_PATH, nil];
+    [request addRequestHeader:@"Accept" value:@"text/xml"];
+    [self.networkQueue addOperation:request];    
 }
 
 @end

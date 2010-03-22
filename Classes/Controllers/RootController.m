@@ -331,7 +331,7 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
     {
         ABPersonViewController *personController = [[ABPersonViewController alloc] init];
         Contact *contact = (Contact *)entity;
-        ABRecordRef person = contact.person;
+        ABRecordRef person = [contact getPerson];
         personController.displayedPerson = person;
         personController.displayedProperties = [Contact displayedProperties];
         personController.personViewDelegate = self;

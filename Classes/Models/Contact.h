@@ -56,6 +56,7 @@
     NSString *_twitter;
     NSDate *_birthDate;
     BOOL _doNotCall;
+    ABRecordRef _person;
 }
 
 @property (nonatomic, copy) NSString *address;
@@ -75,11 +76,11 @@
 @property (nonatomic, copy) NSString *twitter;
 @property (nonatomic, retain) NSDate *birthDate;
 @property (nonatomic) BOOL doNotCall;
-@property (nonatomic, readonly) ABRecordRef person;
 
 + (NSString *)serverPath;
 + (NSArray *)displayedProperties;
 
 - (id)initWithTBXMLElement:(TBXMLElement *)element;
+- (ABRecordRef)getPerson;
 
 @end
