@@ -58,11 +58,32 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     return [value autorelease];
 }
 
+@interface RootController ()
+@property (nonatomic, readonly) ListController *accountsController;
+@property (nonatomic, readonly) ListController *contactsController;
+@property (nonatomic, readonly) ListController *opportunitiesController;
+@property (nonatomic, readonly) ListController *leadsController;
+@property (nonatomic, readonly) ListController *campaignsController;
+@property (nonatomic, readonly) SettingsController *settingsController;
+@property (nonatomic, readonly) TasksController *tasksController;
+@property (nonatomic, retain) CommentsController *commentsController;
+@end
+
+
 @implementation RootController
+
+@synthesize accountsController = _accountsController;
+@synthesize contactsController = _contactsController;
+@synthesize opportunitiesController = _opportunitiesController;
+@synthesize leadsController = _leadsController;
+@synthesize campaignsController = _campaignsController;
+@synthesize settingsController = _settingsController;
+@synthesize tasksController = _tasksController;
+@synthesize commentsController = _commentsController;
 
 - (void)dealloc 
 {
-    [_commentsController release];
+    self.commentsController = nil;
     [super dealloc];
 }
 
@@ -71,43 +92,44 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     [super viewDidLoad];
     self.delegate = self;
 
-    [[NSNotificationCenter defaultCenter] addObserver:_accountsController 
-                                             selector:@selector(didReceiveData:) 
-                                                 name:FatFreeCRMProxyDidRetrieveAccountsNotification
-                                               object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
-    _accountsController.listedClass = [CompanyAccount class];
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self.accountsController 
+               selector:@selector(didReceiveData:) 
+                   name:FatFreeCRMProxyDidRetrieveAccountsNotification
+                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+    self.accountsController.listedClass = [CompanyAccount class];
     
-    [[NSNotificationCenter defaultCenter] addObserver:_opportunitiesController 
-                                             selector:@selector(didReceiveData:) 
-                                                 name:FatFreeCRMProxyDidRetrieveOpportunitiesNotification
-                                               object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
-    _opportunitiesController.listedClass = [Opportunity class];
+    [center addObserver:self.opportunitiesController 
+               selector:@selector(didReceiveData:) 
+                   name:FatFreeCRMProxyDidRetrieveOpportunitiesNotification
+                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+    self.opportunitiesController.listedClass = [Opportunity class];
     
-    [[NSNotificationCenter defaultCenter] addObserver:_contactsController 
-                                             selector:@selector(didReceiveData:) 
-                                                 name:FatFreeCRMProxyDidRetrieveContactsNotification
-                                               object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
-    _contactsController.listedClass = [Contact class];
-    _contactsController.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    [center addObserver:self.contactsController 
+               selector:@selector(didReceiveData:) 
+                   name:FatFreeCRMProxyDidRetrieveContactsNotification
+                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+    self.contactsController.listedClass = [Contact class];
+    self.contactsController.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
-    [[NSNotificationCenter defaultCenter] addObserver:_campaignsController
-                                             selector:@selector(didReceiveData:)
-                                                 name:FatFreeCRMProxyDidRetrieveCampaignsNotification
-                                               object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
-    _campaignsController.listedClass = [Campaign class];
+    [center addObserver:self.campaignsController
+               selector:@selector(didReceiveData:)
+                   name:FatFreeCRMProxyDidRetrieveCampaignsNotification
+                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+    self.campaignsController.listedClass = [Campaign class];
     
-    [[NSNotificationCenter defaultCenter] addObserver:_leadsController
-                                             selector:@selector(didReceiveData:)
-                                                 name:FatFreeCRMProxyDidRetrieveLeadsNotification
-                                               object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
-    _leadsController.listedClass = [Lead class];
+    [center addObserver:self.leadsController
+               selector:@selector(didReceiveData:)
+                   name:FatFreeCRMProxyDidRetrieveLeadsNotification
+                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+    self.leadsController.listedClass = [Lead class];
     
-    _leadsController.tabBarItem.image = [UIImage imageNamed:@"leads.png"];
-    _contactsController.tabBarItem.image = [UIImage imageNamed:@"contacts.png"];
-    _campaignsController.tabBarItem.image = [UIImage imageNamed:@"campaigns.png"];
-    _tasksController.tabBarItem.image = [UIImage imageNamed:@"tasks.png"];
-    _accountsController.tabBarItem.image = [UIImage imageNamed:@"accounts.png"];
-    _opportunitiesController.tabBarItem.image = [UIImage imageNamed:@"opportunities.png"];
+    self.leadsController.tabBarItem.image = [UIImage imageNamed:@"leads.png"];
+    self.contactsController.tabBarItem.image = [UIImage imageNamed:@"contacts.png"];
+    self.campaignsController.tabBarItem.image = [UIImage imageNamed:@"campaigns.png"];
+    self.tasksController.tabBarItem.image = [UIImage imageNamed:@"tasks.png"];
+    self.accountsController.tabBarItem.image = [UIImage imageNamed:@"accounts.png"];
+    self.opportunitiesController.tabBarItem.image = [UIImage imageNamed:@"opportunities.png"];
 
     // Restore the order of the tab bars following the preferences of the user
     NSArray *order = [[NSUserDefaults standardUserDefaults] objectForKey:TAB_ORDER_PREFERENCE];
@@ -115,13 +137,13 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     if (order == nil)
     {
         // Probably first run, or never reordered controllers
-        [controllers addObject:_tasksController.navigationController];
-        [controllers addObject:_accountsController.navigationController];
-        [controllers addObject:_contactsController.navigationController];
-        [controllers addObject:_settingsController.navigationController];
-        [controllers addObject:_opportunitiesController.navigationController];
-        [controllers addObject:_leadsController.navigationController];
-        [controllers addObject:_campaignsController.navigationController];
+        [controllers addObject:self.tasksController.navigationController];
+        [controllers addObject:self.accountsController.navigationController];
+        [controllers addObject:self.contactsController.navigationController];
+        [controllers addObject:self.settingsController.navigationController];
+        [controllers addObject:self.opportunitiesController.navigationController];
+        [controllers addObject:self.leadsController.navigationController];
+        [controllers addObject:self.campaignsController.navigationController];
     }
     else 
     {
@@ -130,31 +152,31 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
             switch ([number intValue]) 
             {
                 case SenbeiViewControllerAccounts:
-                    [controllers addObject:_accountsController.navigationController];
+                    [controllers addObject:self.accountsController.navigationController];
                     break;
                     
                 case SenbeiViewControllerCampaigns:
-                    [controllers addObject:_campaignsController.navigationController];
+                    [controllers addObject:self.campaignsController.navigationController];
                     break;
                     
                 case SenbeiViewControllerContacts:
-                    [controllers addObject:_contactsController.navigationController];
+                    [controllers addObject:self.contactsController.navigationController];
                     break;
                     
                 case SenbeiViewControllerLeads:
-                    [controllers addObject:_leadsController.navigationController];
+                    [controllers addObject:self.leadsController.navigationController];
                     break;
                     
                 case SenbeiViewControllerOpportunities:
-                    [controllers addObject:_opportunitiesController.navigationController];
+                    [controllers addObject:self.opportunitiesController.navigationController];
                     break;
                     
                 case SenbeiViewControllerSettings:
-                    [controllers addObject:_settingsController.navigationController];
+                    [controllers addObject:self.settingsController.navigationController];
                     break;
                     
                 case SenbeiViewControllerTasks:
-                    [controllers addObject:_tasksController.navigationController];
+                    [controllers addObject:self.tasksController.navigationController];
                     break;
 
                 default:
@@ -171,31 +193,31 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     switch (controllerNumber) 
     {
         case SenbeiViewControllerAccounts:
-            self.selectedViewController = _accountsController.navigationController;
+            self.selectedViewController = self.accountsController.navigationController;
             break;
             
         case SenbeiViewControllerCampaigns:
-            self.selectedViewController = _campaignsController.navigationController;
+            self.selectedViewController = self.campaignsController.navigationController;
             break;
             
         case SenbeiViewControllerContacts:
-            self.selectedViewController = _contactsController.navigationController;
+            self.selectedViewController = self.contactsController.navigationController;
             break;
             
         case SenbeiViewControllerLeads:
-            self.selectedViewController = _leadsController.navigationController;
+            self.selectedViewController = self.leadsController.navigationController;
             break;
             
         case SenbeiViewControllerOpportunities:
-            self.selectedViewController = _opportunitiesController.navigationController;
+            self.selectedViewController = self.opportunitiesController.navigationController;
             break;
             
         case SenbeiViewControllerSettings:
-            self.selectedViewController = _settingsController.navigationController;
+            self.selectedViewController = self.settingsController.navigationController;
             break;
             
         case SenbeiViewControllerTasks:
-            self.selectedViewController = _tasksController.navigationController;
+            self.selectedViewController = self.tasksController.navigationController;
             break;
             
         case SenbeiViewControllerMore:
@@ -223,31 +245,31 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
  didSelectViewController:(UIViewController *)viewController
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if (viewController == _accountsController.navigationController)
+    if (viewController == self.accountsController.navigationController)
     {
         [defaults setInteger:SenbeiViewControllerAccounts forKey:CURRENT_TAB_PREFERENCE];
     }
-    else if (viewController == _contactsController.navigationController)
+    else if (viewController == self.contactsController.navigationController)
     {
         [defaults setInteger:SenbeiViewControllerContacts forKey:CURRENT_TAB_PREFERENCE];
     }
-    else if (viewController == _opportunitiesController.navigationController)
+    else if (viewController == self.opportunitiesController.navigationController)
     {
         [defaults setInteger:SenbeiViewControllerOpportunities forKey:CURRENT_TAB_PREFERENCE];
     }
-    else if (viewController == _tasksController.navigationController)
+    else if (viewController == self.tasksController.navigationController)
     {
         [defaults setInteger:SenbeiViewControllerTasks forKey:CURRENT_TAB_PREFERENCE];
     }
-    else if (viewController == _leadsController.navigationController)
+    else if (viewController == self.leadsController.navigationController)
     {
         [defaults setInteger:SenbeiViewControllerLeads forKey:CURRENT_TAB_PREFERENCE];
     }
-    else if (viewController == _campaignsController.navigationController)
+    else if (viewController == self.campaignsController.navigationController)
     {
         [defaults setInteger:SenbeiViewControllerCampaigns forKey:CURRENT_TAB_PREFERENCE];
     }
-    else if (viewController == _settingsController.navigationController)
+    else if (viewController == self.settingsController.navigationController)
     {
         [defaults setInteger:SenbeiViewControllerSettings forKey:CURRENT_TAB_PREFERENCE];
     }
@@ -266,31 +288,31 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
         NSMutableArray *order = [[NSMutableArray alloc] initWithCapacity:7];
         for (id controller in viewControllers)
         {
-            if (controller == _accountsController.navigationController)
+            if (controller == self.accountsController.navigationController)
             {
                 [order addObject:[NSNumber numberWithInt:SenbeiViewControllerAccounts]];
             }
-            else if (controller == _contactsController.navigationController)
+            else if (controller == self.contactsController.navigationController)
             {
                 [order addObject:[NSNumber numberWithInt:SenbeiViewControllerContacts]];
             }
-            else if (controller == _opportunitiesController.navigationController)
+            else if (controller == self.opportunitiesController.navigationController)
             {
                 [order addObject:[NSNumber numberWithInt:SenbeiViewControllerOpportunities]];
             }
-            else if (controller == _tasksController.navigationController)
+            else if (controller == self.tasksController.navigationController)
             {
                 [order addObject:[NSNumber numberWithInt:SenbeiViewControllerTasks]];
             }
-            else if (controller == _leadsController.navigationController)
+            else if (controller == self.leadsController.navigationController)
             {
                 [order addObject:[NSNumber numberWithInt:SenbeiViewControllerLeads]];
             }
-            else if (controller == _campaignsController.navigationController)
+            else if (controller == self.campaignsController.navigationController)
             {
                 [order addObject:[NSNumber numberWithInt:SenbeiViewControllerCampaigns]];
             }
-            else if (controller == _settingsController.navigationController)
+            else if (controller == self.settingsController.navigationController)
             {
                 [order addObject:[NSNumber numberWithInt:SenbeiViewControllerSettings]];
             }
@@ -305,7 +327,7 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
 
 - (void)listController:(ListController *)controller didSelectEntity:(BaseEntity *)entity
 {
-    if (controller == _contactsController)
+    if (controller == self.contactsController)
     {
         ABPersonViewController *personController = [[ABPersonViewController alloc] init];
         Contact *contact = (Contact *)entity;
@@ -318,25 +340,26 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
     }
     else
     {
-        if (_commentsController == nil)
+        if (self.commentsController == nil)
         {
-            _commentsController = [[CommentsController alloc] init];
+            self.commentsController = [[[CommentsController alloc] init] autorelease];
         }
-        _commentsController.entity = entity;
-        [controller.navigationController pushViewController:_commentsController animated:YES];
+        self.commentsController.entity = entity;
+        [controller.navigationController pushViewController:self.commentsController
+                                                   animated:YES];
     }
 }
 
 - (void)listController:(ListController *)controller didTapAccessoryForEntity:(BaseEntity *)entity
 {
-    if (controller == _contactsController)
+    if (controller == self.contactsController)
     {
-        if (_commentsController == nil)
+        if (self.commentsController == nil)
         {
-            _commentsController = [[CommentsController alloc] init];
+            self.commentsController = [[[CommentsController alloc] init] autorelease];
         }
-        _commentsController.entity = entity;
-        [controller.navigationController pushViewController:_commentsController animated:YES];
+        self.commentsController.entity = entity;
+        [controller.navigationController pushViewController:self.commentsController animated:YES];
     }
 }
 
