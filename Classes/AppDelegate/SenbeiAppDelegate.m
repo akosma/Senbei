@@ -39,13 +39,27 @@
 #import "Reachability.h"
 #import "RootController.h"
 
+@interface SenbeiAppDelegate ()
+@property (nonatomic, readonly) UILabel *statusLabel;
+@property (nonatomic, readonly) UIActivityIndicatorView *spinningWheel;
+@property (nonatomic, readonly) UIView *applicationCredits;
+@property (nonatomic, readonly) RootController *tabBarController;
+@property (nonatomic, readonly) UIWindow *window;
+@end
+
+
 @implementation SenbeiAppDelegate
 
 @synthesize currentUser = _currentUser;
+@synthesize statusLabel = _statusLabel;
+@synthesize spinningWheel = _spinningWheel;
+@synthesize applicationCredits = _applicationCredits;
+@synthesize tabBarController = _tabBarController;
+@synthesize window = _window;
 
 - (void)dealloc 
 {
-    [_currentUser release];
+    self.currentUser = nil;
     [super dealloc];
 }
 
@@ -66,28 +80,31 @@
     [[AKOImageCache sharedAKOImageCache] removeAllImages];
 #endif
 
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(didLogin:) 
-                                                 name:FatFreeCRMProxyDidLoginNotification
-                                               object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self 
+               selector:@selector(didLogin:) 
+                   name:FatFreeCRMProxyDidLoginNotification
+                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(didFailWithError:) 
-                                                 name:FatFreeCRMProxyDidFailWithErrorNotification 
-                                               object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+    [center addObserver:self 
+               selector:@selector(didFailWithError:) 
+                   name:FatFreeCRMProxyDidFailWithErrorNotification 
+                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self 
-                                             selector:@selector(didFailLogin:) 
-                                                 name:FatFreeCRMProxyDidFailLoginNotification 
-                                               object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+    [center addObserver:self 
+               selector:@selector(didFailLogin:) 
+                   name:FatFreeCRMProxyDidFailLoginNotification 
+                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
     
     // Set some defaults for the first run of the application
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults stringForKey:PREFERENCES_SERVER_URL] == nil)
     {
-        [defaults setObject:@"http://demo.fatfreecrm.com" forKey:PREFERENCES_SERVER_URL];
+        [defaults setObject:@"http://demo.fatfreecrm.com" 
+                     forKey:PREFERENCES_SERVER_URL];
     }
-    if ([defaults stringForKey:PREFERENCES_USERNAME] == nil || [defaults stringForKey:PREFERENCES_PASSWORD] == nil)
+    if ([defaults stringForKey:PREFERENCES_USERNAME] == nil || 
+        [defaults stringForKey:PREFERENCES_PASSWORD] == nil)
     {
         // Use a random username from those used in the Fat Free CRM wiki
         // http://wiki.github.com/michaeldv/fat_free_crm/loading-demo-data
@@ -110,8 +127,8 @@
     {
         NSString *message = NSLocalizedString(@"NETWORK_REQUIRED", @"Message shown when the device does not have a network connection");
         NSString *ok = NSLocalizedString(@"OK", @"The 'OK' word");
-        [_spinningWheel stopAnimating];
-        _statusLabel.text = message;
+        [self.spinningWheel stopAnimating];
+        self.statusLabel.text = message;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil 
                                                         message:message
                                                        delegate:nil 
@@ -126,19 +143,20 @@
         NSString *password = [defaults stringForKey:PREFERENCES_PASSWORD];
         NSString *server = [defaults stringForKey:PREFERENCES_SERVER_URL];
         NSString *logging = NSLocalizedString(@"LOGGING_IN", @"Text shown while the user logs in");
-        _statusLabel.text = [NSString stringWithFormat:logging, username, host];
+        self.statusLabel.text = [NSString stringWithFormat:logging, username, host];
         
-        [FatFreeCRMProxy sharedFatFreeCRMProxy].username = username;
-        [FatFreeCRMProxy sharedFatFreeCRMProxy].password = password;
-        [FatFreeCRMProxy sharedFatFreeCRMProxy].server = server;
-        [[FatFreeCRMProxy sharedFatFreeCRMProxy] login];
+        FatFreeCRMProxy *proxy = [FatFreeCRMProxy sharedFatFreeCRMProxy];
+        proxy.username = username;
+        proxy.password = password;
+        proxy.server = server;
+        [proxy login];
     }
 
-    _applicationCredits.alpha = 0.0;
-    [_window makeKeyAndVisible];
+    self.applicationCredits.alpha = 0.0;
+    [self.window makeKeyAndVisible];
     
     [UIView beginAnimations:nil context:NULL];
-    _applicationCredits.alpha = 1.0;
+    self.applicationCredits.alpha = 1.0;
     [UIView commitAnimations];
 }
 
@@ -147,8 +165,8 @@
 
 - (void)didFailLogin:(NSNotification *)notification
 {
-    [_spinningWheel stopAnimating];
-    _statusLabel.text = @"Failed login";
+    [self.spinningWheel stopAnimating];
+    self.statusLabel.text = @"Failed login";
 
     NSString *message = NSLocalizedString(@"CREDENTIALS_REJECTED", @"Message shown when the login credentials are rejected");
     NSString *ok = NSLocalizedString(@"OK", @"The 'OK' word");
@@ -167,10 +185,10 @@
     NSError *error = [userInfo objectForKey:FatFreeCRMProxyErrorKey];
     NSString *msg = [error localizedDescription];
 
-    [_spinningWheel stopAnimating];
+    [self.spinningWheel stopAnimating];
     NSString *errorMessage = NSLocalizedString(@"ERROR_MESSAGE", @"Message shown when any error occurs");
     NSString *ok = NSLocalizedString(@"OK", @"The 'OK' word");
-    _statusLabel.text = [NSString stringWithFormat:errorMessage, [error code]];
+    self.statusLabel.text = [NSString stringWithFormat:errorMessage, [error code]];
 
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil 
                                                     message:msg 
@@ -183,14 +201,14 @@
 
 - (void)didLogin:(NSNotification *)notification
 {
-    _currentUser = [[[notification userInfo] objectForKey:@"user"] retain];
-    _statusLabel.text = NSLocalizedString(@"LOADING_CONTROLLERS", @"Message shown when the controllers are loading");
+    self.currentUser = [[notification userInfo] objectForKey:@"user"];
+    self.statusLabel.text = NSLocalizedString(@"LOADING_CONTROLLERS", @"Message shown when the controllers are loading");
 
-    _tabBarController.view.alpha = 0.0;
-    [_window addSubview:_tabBarController.view];
+    self.tabBarController.view.alpha = 0.0;
+    [self.window addSubview:self.tabBarController.view];
     
     [UIView beginAnimations:nil context:NULL];
-    _tabBarController.view.alpha = 1.0;
+    self.tabBarController.view.alpha = 1.0;
     [UIView commitAnimations];
 }
 

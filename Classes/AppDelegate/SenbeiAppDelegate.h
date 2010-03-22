@@ -48,9 +48,8 @@
     User *_currentUser;
 }
 
-@property (nonatomic, readonly) User *currentUser;
+@property (nonatomic, retain) User *currentUser;
 
 + (SenbeiAppDelegate *)sharedAppDelegate;
 
 @end
-
