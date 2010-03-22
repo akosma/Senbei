@@ -56,8 +56,6 @@
     NSString *_twitter;
     NSDate *_birthDate;
     BOOL _doNotCall;
-    
-    NSURL *_photoURL;
 }
 
 @property (nonatomic, copy) NSString *address;
@@ -82,6 +80,6 @@
 + (NSString *)serverPath;
 + (NSArray *)displayedProperties;
 
-- (id)initWithCXMLElement:(CXMLElement *)element;
+- (id)initWithTBXMLElement:(TBXMLElement *)element;
 
 @end

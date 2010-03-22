@@ -47,6 +47,6 @@
 @property (nonatomic, copy) NSString *category;
 @property (nonatomic, copy) NSString *bucket;
 
-- (id)initWithCXMLElement:(CXMLElement *)element;
+- (id)initWithTBXMLElement:(TBXMLElement *)element;
 
 @end

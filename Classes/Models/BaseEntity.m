@@ -33,6 +33,7 @@
 //
 
 #import "BaseEntity.h"
+#import "GTMNSString+HTML.h"
 
 @implementation BaseEntity
 
@@ -40,60 +41,62 @@
 @synthesize objectId = _objectId;
 @synthesize createdAt = _createdAt;
 @synthesize updatedAt = _updatedAt;
+@synthesize formatter = _formatter;
+@synthesize photoURL = _photoURL;
 
-@dynamic photoURL;
 @dynamic commentableTypeName;
+
+#pragma mark -
+#pragma mark Class methods
+
++ (NSString *)stringValueForElement:(NSString *)elementName 
+                      parentElement:(TBXMLElement *)element
+{
+    TBXMLElement *attribute = [TBXML childElementNamed:elementName parentElement:element];
+    NSString *value = @"";
+    if (attribute != nil)
+    {
+        value = [[TBXML textForElement:attribute] gtm_stringByUnescapingFromHTML];
+    }
+    return value;
+}
 
 #pragma mark -
 #pragma mark Init and dealloc
 
-- (id)initWithCXMLElement:(CXMLElement *)element
+- (id)initWithTBXMLElement:(TBXMLElement *)element
 {
     if (self = [super init])
     {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
-        for(int counter = 0; counter < [element childCount]; ++counter) 
-        {
-            id obj = [element childAtIndex:counter];
-            NSString *nodeName = [obj name];
-            if ([nodeName isEqualToString:@"id"])
-            {
-                _objectId = [[obj stringValue] intValue];
-            }
-            else if ([nodeName isEqualToString:@"created-at"])
-            {
-                _createdAt = [[formatter dateFromString:[obj stringValue]] retain];
-            }
-            else if ([nodeName isEqualToString:@"updated-at"])
-            {
-                _updatedAt = [[formatter dateFromString:[obj stringValue]] retain];
-            }
-            else if ([nodeName isEqualToString:@"name"])
-            {
-                _name = [[obj stringValue] copy];
-            }
-        }
-        [formatter release];
+        self.formatter = [[[NSDateFormatter alloc] init] autorelease];
+        [self.formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+
+        NSString *value = [BaseEntity stringValueForElement:@"id" parentElement:element];
+        self.objectId = [value intValue];
+
+        value = [BaseEntity stringValueForElement:@"created-at" parentElement:element];
+        self.createdAt = [self.formatter dateFromString:value];
+
+        value = [BaseEntity stringValueForElement:@"updated-at" parentElement:element];
+        self.updatedAt = [self.formatter dateFromString:value];
+
+        self.name = [BaseEntity stringValueForElement:@"name" parentElement:element];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [_createdAt release];
-    [_updatedAt release];
-    [_name release];
+    self.formatter = nil;
+    self.createdAt = nil;
+    self.updatedAt = nil;
+    self.name = nil;
+    self.photoURL = nil;
     [super dealloc];
 }
 
 #pragma mark -
 #pragma mark Overridable properties
-
-- (NSURL *)photoURL
-{
-    return nil;
-}
 
 - (NSString *)commentableTypeName
 {

@@ -33,7 +33,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TouchXML.h"
+#import "TBXML.h"
 
 @interface BaseEntity : NSObject 
 {
@@ -42,15 +42,20 @@
     NSDate *_createdAt;
     NSDate *_updatedAt;
     NSString *_name;
+    NSURL *_photoURL;
+    NSDateFormatter *_formatter;
 }
 
 @property (nonatomic) NSInteger objectId;
 @property (nonatomic, retain) NSDate *createdAt;
 @property (nonatomic, retain) NSDate *updatedAt;
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic, readonly) NSURL *photoURL;
+@property (nonatomic, retain) NSURL *photoURL;
 @property (nonatomic, readonly) NSString *commentableTypeName;
+@property (nonatomic, retain) NSDateFormatter *formatter;
 
-- (id)initWithCXMLElement:(CXMLElement *)element;
++ (NSString *)stringValueForElement:(NSString *)elementName 
+                      parentElement:(TBXMLElement *)element;
+- (id)initWithTBXMLElement:(TBXMLElement *)element;
 
 @end

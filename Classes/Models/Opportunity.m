@@ -48,60 +48,32 @@
     return @"opportunities";
 }
 
-- (id)initWithCXMLElement:(CXMLElement *)element
+- (id)initWithTBXMLElement:(TBXMLElement *)element
 {
-    if (self = [super initWithCXMLElement:element])
+    if (self = [super initWithTBXMLElement:element])
     {
-        for(int counter = 0; counter < [element childCount]; ++counter) 
-        {
-            id obj = [element childAtIndex:counter];
-            NSString *nodeName = [obj name];
-            if ([nodeName isEqualToString:@"amount"])
-            {
-                _amount = [[obj stringValue] doubleValue];
-            }
-            else if ([nodeName isEqualToString:@"discount"])
-            {
-                _discount = [[obj stringValue] doubleValue];
-            }
-            else if ([nodeName isEqualToString:@"probability"])
-            {
-                _probability = [[obj stringValue] intValue];
-            }
-            else if ([nodeName isEqualToString:@"closes-on"])
-            {
-                if ([obj stringValue] != nil)
-                {
-                    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
-                    _closingDate = [[formatter dateFromString:[obj stringValue]] retain];
-                    [formatter release];
-                }
-            }
-            else if ([nodeName isEqualToString:@"source"])
-            {
-                _source = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"stage"])
-            {
-                _stage = [[obj stringValue] copy];
-            }
-        }
+        self.amount = [[BaseEntity stringValueForElement:@"amount" parentElement:element] doubleValue];
+        self.discount = [[BaseEntity stringValueForElement:@"discount" parentElement:element] doubleValue];
+        self.probability = [[BaseEntity stringValueForElement:@"probability" parentElement:element] intValue];
+        self.source = [BaseEntity stringValueForElement:@"source" parentElement:element];
+        self.stage = [BaseEntity stringValueForElement:@"stage" parentElement:element];
+        self.closingDate = [self.formatter dateFromString:[BaseEntity stringValueForElement:@"closes-on" 
+                                                                              parentElement:element]];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [_closingDate release];
-    [_source release];
-    [_stage release];
+    self.closingDate = nil;
+    self.source = nil;
+    self.stage = nil;
     [super dealloc];
 }
 
 - (NSString *)description
 {
-    return _stage;
+    return self.stage;
 }
 
 @end

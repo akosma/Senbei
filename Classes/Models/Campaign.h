@@ -64,6 +64,6 @@
 @property (nonatomic) double revenueTarget;
 
 + (NSString *)serverPath;
-- (id)initWithCXMLElement:(CXMLElement *)element;
+- (id)initWithTBXMLElement:(TBXMLElement *)element;
 
 @end

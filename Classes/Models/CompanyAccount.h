@@ -54,6 +54,6 @@
 @property (nonatomic, copy) NSString *website;
 
 + (NSString *)serverPath;
-- (id)initWithCXMLElement:(CXMLElement *)element;
+- (id)initWithTBXMLElement:(TBXMLElement *)element;
 
 @end

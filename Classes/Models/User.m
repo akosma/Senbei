@@ -51,92 +51,48 @@
 @synthesize username = _username;
 @synthesize yahoo = _yahoo;
 
-- (id)initWithCXMLElement:(CXMLElement *)element
+- (id)initWithTBXMLElement:(TBXMLElement *)element
 {
-    if (self = [super initWithCXMLElement:element])
+    if (self = [super initWithTBXMLElement:element])
     {
-        for(int counter = 0; counter < [element childCount]; ++counter) 
-        {
-            id obj = [element childAtIndex:counter];
-            NSString *nodeName = [obj name];
-            if ([nodeName isEqualToString:@"admin"])
-            {
-                _admin = [[obj stringValue] isEqualToString:@"true"];
-            }
-            else if ([nodeName isEqualToString:@"alt-email"])
-            {
-                _altEmail = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"company"])
-            {
-                _company = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"email"])
-            {
-                _email = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"first-name"])
-            {
-                _firstName = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"google"])
-            {
-                _google = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"last-name"])
-            {
-                _lastName = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"mobile"])
-            {
-                _mobile = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"phone"])
-            {
-                _phone = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"skype"])
-            {
-                _skype = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"title"])
-            {
-                _title = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"username"])
-            {
-                _username = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"yahoo"])
-            {
-                _yahoo = [[obj stringValue] copy];
-            }
-        }
+        self.admin = [[BaseEntity stringValueForElement:@"admin" parentElement:element] isEqualToString:@"true"];
+        self.altEmail = [BaseEntity stringValueForElement:@"alt-email" parentElement:element];
+        self.company = [BaseEntity stringValueForElement:@"company" parentElement:element];
+        self.email = [BaseEntity stringValueForElement:@"email" parentElement:element];
+        self.firstName = [BaseEntity stringValueForElement:@"first-name" parentElement:element];
+        self.google = [BaseEntity stringValueForElement:@"google" parentElement:element];
+        self.lastName = [BaseEntity stringValueForElement:@"last-name" parentElement:element];
+        self.mobile = [BaseEntity stringValueForElement:@"mobile" parentElement:element];
+        self.phone = [BaseEntity stringValueForElement:@"phone" parentElement:element];
+        self.skype = [BaseEntity stringValueForElement:@"skype" parentElement:element];
+        self.title = [BaseEntity stringValueForElement:@"title" parentElement:element];
+        self.username = [BaseEntity stringValueForElement:@"username" parentElement:element];
+        self.yahoo = [BaseEntity stringValueForElement:@"yahoo" parentElement:element];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [_aim release];
-    [_altEmail release];
-    [_company release];
-    [_email release];
-    [_firstName release];
-    [_google release];
-    [_lastName release];
-    [_mobile release];
-    [_phone release];
-    [_skype release];
-    [_title release];
-    [_username release];
-    [_yahoo release];
+    self.aim = nil;
+    self.altEmail = nil;
+    self.company = nil;
+    self.email = nil;
+    self.firstName = nil;
+    self.google = nil;
+    self.lastName = nil;
+    self.mobile = nil;
+    self.phone = nil;
+    self.skype = nil;
+    self.title = nil;
+    self.username = nil;
+    self.yahoo = nil;
     [super dealloc];
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@ %@", _firstName, _lastName];
+    return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
 }
 
 @end

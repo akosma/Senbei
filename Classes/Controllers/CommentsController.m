@@ -180,8 +180,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Comment *comment = [_comments objectAtIndex:indexPath.row];
-    return [comment.comment sizeWithFont:[UIFont systemFontOfSize:17.0] 
-                       constrainedToSize:CGSizeMake(300.0, 4000.0)].height + 30.0;
+    CGFloat height = [comment.comment sizeWithFont:[UIFont systemFontOfSize:17.0] 
+                                 constrainedToSize:CGSizeMake(300.0, 4000.0)].height + 30.0;
+    if (height < 44.0)
+    {
+        height = 44.0;
+    }
+    return height;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 

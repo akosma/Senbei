@@ -43,6 +43,6 @@
 
 @property (nonatomic, copy) NSString *comment;
 
-- (id)initWithCXMLElement:(CXMLElement *)element;
+- (id)initWithTBXMLElement:(TBXMLElement *)element;
 
 @end

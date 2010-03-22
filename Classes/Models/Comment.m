@@ -38,26 +38,18 @@
 
 @synthesize comment = _comment;
 
-- (id)initWithCXMLElement:(CXMLElement *)element
+- (id)initWithTBXMLElement:(TBXMLElement *)element
 {
-    if (self = [super initWithCXMLElement:element])
+    if (self = [super initWithTBXMLElement:element])
     {
-        for(int counter = 0; counter < [element childCount]; ++counter) 
-        {
-            id obj = [element childAtIndex:counter];
-            NSString *nodeName = [obj name];
-            if ([nodeName isEqualToString:@"comment"])
-            {
-                _comment = [[obj stringValue] copy];
-            }
-        }
+        self.comment = [BaseEntity stringValueForElement:@"comment" parentElement:element];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [_comment release];
+    self.comment = nil;
     [super dealloc];
 }
 

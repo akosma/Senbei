@@ -102,102 +102,41 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
 #pragma mark -
 #pragma mark Init and dealloc
 
-- (id)initWithCXMLElement:(CXMLElement *)element
+- (id)initWithTBXMLElement:(TBXMLElement *)element
 {
-    if (self = [super initWithCXMLElement:element])
+    if (self = [super initWithTBXMLElement:element])
     {
-        _photoURL = nil;
-        for(int counter = 0; counter < [element childCount]; ++counter) 
-        {
-            id obj = [element childAtIndex:counter];
-            NSString *nodeName = [obj name];
-            if ([nodeName isEqualToString:@"address"])
-            {
-                _address = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"alt-email"])
-            {
-                _altEmail = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"blog"])
-            {
-                _blog = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"born-on"])
-            {
-                if ([obj stringValue] != nil)
-                {
-                    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                    [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
-                    _birthDate = [[formatter dateFromString:[obj stringValue]] retain];
-                    [formatter release];
-                }
-            }
-            else if ([nodeName isEqualToString:@"department"])
-            {
-                _department = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"do-not-call"])
-            {
-                _doNotCall = [[obj stringValue] isEqualToString:@"true"];
-            }
-            else if ([nodeName isEqualToString:@"email"])
-            {
-                _email = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"facebook"])
-            {
-                _facebook = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"fax"])
-            {
-                _fax = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"first-name"])
-            {
-                _firstName = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"last-name"])
-            {
-                _lastName = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"linkedin"])
-            {
-                _linkedIn = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"mobile"])
-            {
-                _mobile = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"phone"])
-            {
-                _phone = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"source"])
-            {
-                _source = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"title"])
-            {
-                _title = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"twitter"])
-            {
-                _twitter = [[obj stringValue] copy];
-            }
-        }
+        self.photoURL = nil;
+        self.address = [BaseEntity stringValueForElement:@"address" parentElement:element];
+        self.altEmail = [BaseEntity stringValueForElement:@"alt-email" parentElement:element];
+        self.blog = [BaseEntity stringValueForElement:@"blog" parentElement:element];
+        self.birthDate = [self.formatter dateFromString:[BaseEntity stringValueForElement:@"born-on" 
+                                                                            parentElement:element]];
+        self.department = [BaseEntity stringValueForElement:@"department" parentElement:element];
+        self.doNotCall = [[BaseEntity stringValueForElement:@"do-not-call" parentElement:element] isEqualToString:@"true"];
+        self.email = [BaseEntity stringValueForElement:@"email" parentElement:element];
+        self.facebook = [BaseEntity stringValueForElement:@"facebook" parentElement:element];
+        self.fax = [BaseEntity stringValueForElement:@"fax" parentElement:element];
+        self.firstName = [BaseEntity stringValueForElement:@"first-name" parentElement:element];
+        self.lastName = [BaseEntity stringValueForElement:@"last-name" parentElement:element];
+        self.linkedIn = [BaseEntity stringValueForElement:@"linkedin" parentElement:element];
+        self.mobile = [BaseEntity stringValueForElement:@"mobile" parentElement:element];
+        self.phone = [BaseEntity stringValueForElement:@"phone" parentElement:element];
+        self.source = [BaseEntity stringValueForElement:@"source" parentElement:element];
+        self.title = [BaseEntity stringValueForElement:@"title" parentElement:element];
+        self.twitter = [BaseEntity stringValueForElement:@"twitter" parentElement:element];
         
         NSString *serverURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCES_SERVER_URL];
         NSString *defaultImage = [NSString stringWithFormat:@"%@/images/avatar.jpg", serverURL];
-        _photoURL = [[NSURL alloc] initWithString:defaultImage];
+        self.photoURL = [[NSURL alloc] initWithString:defaultImage];
         
-        if (_email != nil)
+        if (self.email != nil)
         {
-            NSString *emailHash = [_email md5];
+            NSString *emailHash = [self.email md5];
             NSString *base = @"http://www.gravatar.com/avatar";
-            defaultImage = [_photoURL cacheKey];
+            defaultImage = [self.photoURL cacheKey];
             NSString *stringURL = [NSString stringWithFormat:@"%@/%@.png?d=%@&s=50", base, emailHash, defaultImage];
-            _photoURL = [[NSURL alloc] initWithString:stringURL];
+            self.photoURL = [[NSURL alloc] initWithString:stringURL];
         }        
     }
     return self;
@@ -205,23 +144,23 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
 
 - (void)dealloc
 {
-    [_photoURL release];
-    [_address release];
-    [_altEmail release];
-    [_blog release];
-    [_department release];
-    [_email release];
-    [_facebook release];
-    [_fax release];
-    [_firstName release];
-    [_lastName release];
-    [_linkedIn release];
-    [_mobile release];
-    [_phone release];
-    [_source release];
-    [_title release];
-    [_twitter release];
-    [_birthDate release];
+    self.photoURL = nil;
+    self.address = nil;
+    self.altEmail = nil;
+    self.blog = nil;
+    self.department = nil;
+    self.email = nil;
+    self.facebook = nil;
+    self.fax = nil;
+    self.firstName = nil;
+    self.lastName = nil;
+    self.linkedIn = nil;
+    self.mobile = nil;
+    self.phone = nil;
+    self.source = nil;
+    self.title = nil;
+    self.twitter = nil;
+    self.birthDate = nil;
     [super dealloc];
 }
 
@@ -231,33 +170,33 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
 - (NSString *)description
 {
     NSMutableString *result = [[NSMutableString alloc] init];
-    if ([_title length] > 0)
+    if ([self.title length] > 0)
     {
-        [result appendString:_title];
+        [result appendString:self.title];
     }
-    if ([_department length] > 0)
+    if ([self.department length] > 0)
     {
         if ([result length] > 0)
         {
             [result appendString:@" - "];
         }
-        [result appendString:_department];
+        [result appendString:self.department];
     }
-    if ([_phone length] > 0)
+    if ([self.phone length] > 0)
     {
         if ([result length] > 0)
         {
             [result appendString:@" - "];
         }
-        [result appendString:_phone];
+        [result appendString:self.phone];
     }
-    if ([_email length] > 0)
+    if ([self.email length] > 0)
     {
         if ([result length] > 0)
         {
             [result appendString:@" - "];
         }
-        [result appendString:_email];
+        [result appendString:self.email];
     }
     
     return [result autorelease];
@@ -265,7 +204,7 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
 
 - (NSString *)name
 {
-    return [NSString stringWithFormat:@"%@ %@", _firstName, _lastName];
+    return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
 }
 
 #pragma mark -
@@ -274,19 +213,27 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
 - (ABRecordRef)person
 {
     ABRecordRef person = ABPersonCreate();
-    ABRecordSetValue(person, kABPersonFirstNameProperty, _firstName, nil);
-    ABRecordSetValue(person, kABPersonLastNameProperty, _lastName, nil);
-    ABRecordSetValue(person, kABPersonJobTitleProperty, _title, nil);
-    ABRecordSetValue(person, kABPersonDepartmentProperty, _department, nil);
+    ABRecordSetValue(person, kABPersonFirstNameProperty, self.firstName, nil);
+    ABRecordSetValue(person, kABPersonLastNameProperty, self.lastName, nil);
     
-    ABRecordSetValue(person, kABPersonBirthdayProperty, [_birthDate stringWithDateFormattedWithCurrentLocale], nil);
+    if ([self.title length] > 0)
+    {
+        ABRecordSetValue(person, kABPersonJobTitleProperty, self.title, nil);
+    }
     
-    setPersonPropertyValue(person, kABPersonPhoneProperty, kABPersonPhoneMobileLabel, _mobile);
-    setPersonPropertyValue(person, kABPersonPhoneProperty, kABPersonPhoneMainLabel, _phone);
-    setPersonPropertyValue(person, kABPersonPhoneProperty, kABPersonPhoneWorkFAXLabel, _fax);
-    setPersonPropertyValue(person, kABPersonURLProperty, kABPersonHomePageLabel, _blog);
-    setPersonPropertyValue(person, kABPersonEmailProperty, kABWorkLabel, _email);
-    setPersonPropertyValue(person, kABPersonEmailProperty, kABHomeLabel, _altEmail);
+    if ([self.department length] > 0)
+    {
+        ABRecordSetValue(person, kABPersonDepartmentProperty, self.department, nil);
+    }
+    
+    ABRecordSetValue(person, kABPersonBirthdayProperty, [self.birthDate stringWithDateFormattedWithCurrentLocale], nil);
+    
+    setPersonPropertyValue(person, kABPersonPhoneProperty, kABPersonPhoneMobileLabel, self.mobile);
+    setPersonPropertyValue(person, kABPersonPhoneProperty, kABPersonPhoneMainLabel, self.phone);
+    setPersonPropertyValue(person, kABPersonPhoneProperty, kABPersonPhoneWorkFAXLabel, self.fax);
+    setPersonPropertyValue(person, kABPersonURLProperty, kABPersonHomePageLabel, self.blog);
+    setPersonPropertyValue(person, kABPersonEmailProperty, kABWorkLabel, self.email);
+    setPersonPropertyValue(person, kABPersonEmailProperty, kABHomeLabel, self.altEmail);
 
     NSString *key = [self.photoURL cacheKey];
     UIImage *image = [[AKOImageCache sharedAKOImageCache] imageForKey:key];
@@ -299,11 +246,6 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
     }
     
     return person;
-}
-
-- (NSURL *)photoURL
-{
-    return _photoURL;
 }
 
 @end

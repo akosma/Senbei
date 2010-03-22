@@ -54,6 +54,6 @@
 @property (nonatomic, copy) NSString *stage;
 
 + (NSString *)serverPath;
-- (id)initWithCXMLElement:(CXMLElement *)element;
+- (id)initWithTBXMLElement:(TBXMLElement *)element;
 
 @end

@@ -46,6 +46,6 @@
 @property (nonatomic, copy) NSString *referredBy;
 
 + (NSString *)serverPath;
-- (id)initWithCXMLElement:(CXMLElement *)element;
+- (id)initWithTBXMLElement:(TBXMLElement *)element;
 
 @end

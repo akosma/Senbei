@@ -48,57 +48,34 @@
     return @"accounts";
 }
 
-- (id)initWithCXMLElement:(CXMLElement *)element
+- (id)initWithTBXMLElement:(TBXMLElement *)element
 {
-    if (self = [super initWithCXMLElement:element])
+    if (self = [super initWithTBXMLElement:element])
     {
-        for(int counter = 0; counter < [element childCount]; ++counter) 
-        {
-            id obj = [element childAtIndex:counter];
-            NSString *nodeName = [obj name];
-            if ([nodeName isEqualToString:@"billing-address"])
-            {
-                _billingAddress = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"fax"])
-            {
-                _fax = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"phone"])
-            {
-                _phone = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"shipping-address"])
-            {
-                _shippingAddress = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"toll-free-phone"])
-            {
-                _tollFreePhone = [[obj stringValue] copy];
-            }
-            else if ([nodeName isEqualToString:@"website"])
-            {
-                _website = [[obj stringValue] copy];
-            }
-        }
+        self.billingAddress = [BaseEntity stringValueForElement:@"billing-address" parentElement:element];
+        self.fax = [BaseEntity stringValueForElement:@"fax" parentElement:element];
+        self.phone = [BaseEntity stringValueForElement:@"phone" parentElement:element];
+        self.shippingAddress = [BaseEntity stringValueForElement:@"shipping-address" parentElement:element];
+        self.tollFreePhone = [BaseEntity stringValueForElement:@"toll-free-phone" parentElement:element];
+        self.website = [BaseEntity stringValueForElement:@"website" parentElement:element];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [_billingAddress release];
-    [_fax release];
-    [_phone release];
-    [_shippingAddress release];
-    [_tollFreePhone release];
-    [_website release];
+    self.billingAddress = nil;
+    self.fax = nil;
+    self.phone = nil;
+    self.shippingAddress = nil;
+    self.tollFreePhone = nil;
+    self.website = nil;
     [super dealloc];
 }
 
 - (NSString *)description
 {
-    return _website;
+    return self.website;
 }
 
 #pragma mark -

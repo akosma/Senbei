@@ -40,7 +40,7 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "Definitions.h"
-#import "TouchXML.h"
+#import "TBXML.h"
 #import "CompanyAccount.h"
 #import "Opportunity.h"
 #import "Contact.h"
@@ -71,7 +71,8 @@
 - (void)processGetCommentsRequest:(ASIHTTPRequest *)request;
 - (void)processLoginRequest:(ASIHTTPRequest *)request;
 - (void)processGetTasksRequest:(ASIHTTPRequest *)request;
-- (NSArray *)deserializeXML:(NSString *)xmlString forXPath:(NSString *)xpath andClass:(Class)klass;
+- (NSArray *)deserializeXML:(NSData *)xmlData forXPath:(NSString *)xpath andClass:(Class)klass;
+- (NSArray *)deserializeXMLElement:(TBXMLElement *)element forXPath:(NSString *)xpath andClass:(Class)klass;
 
 @end
 
@@ -397,28 +398,37 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 #pragma mark -
 #pragma mark Request processing methods
 
-- (NSArray *)deserializeXML:(NSString *)xmlString forXPath:(NSString *)xpath andClass:(Class)klass
+- (NSArray *)deserializeXMLElement:(TBXMLElement *)element forXPath:(NSString *)xpath andClass:(Class)klass
 {
-    CXMLDocument *xml = [[CXMLDocument alloc] initWithXMLString:xmlString 
-                                                        options:0 
-                                                          error:nil];
-    NSArray *xmlNodes = [xml nodesForXPath:xpath error:nil];
-    NSMutableArray *objects = [NSMutableArray arrayWithCapacity:[xmlNodes count]];
-    for (CXMLElement *element in xmlNodes) 
+    NSMutableArray *objects = [NSMutableArray array];
+    if (element)
     {
-        id item = [[klass alloc] initWithCXMLElement:element];
-        [objects addObject:item];
-        [item release];
+        TBXMLElement *child = [TBXML childElementNamed:xpath parentElement:element];
+        
+        while (child != nil)
+        {
+            id item = [[klass alloc] initWithTBXMLElement:child];
+            [objects addObject:item];
+            [item release];
+            
+            child = [TBXML nextSiblingNamed:xpath searchFromElement:child];
+        }
     }
-    [xml release];
     return objects;
+}
+
+- (NSArray *)deserializeXML:(NSData *)xmlData forXPath:(NSString *)xpath andClass:(Class)klass
+{
+    TBXML *tbxml = [TBXML tbxmlWithXMLData:xmlData];
+    TBXMLElement *root = tbxml.rootXMLElement;
+    return [self deserializeXMLElement:root forXPath:xpath andClass:klass];
 }
 
 - (void)processGetAccountsRequest:(ASIHTTPRequest *)request
 {
-    NSString *response = [request responseString];
+    NSData *response = [request responseData];
     NSArray *accounts = [self deserializeXML:response 
-                                    forXPath:@"//account" 
+                                    forXPath:@"account" 
                                     andClass:NSClassFromString(@"CompanyAccount")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:accounts, @"data", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveAccountsNotification
@@ -429,9 +439,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 
 - (void)processGetCampaignsRequest:(ASIHTTPRequest *)request
 {
-    NSString *response = [request responseString];
+    NSData *response = [request responseData];
     NSArray *campaigns = [self deserializeXML:response 
-                                     forXPath:@"//campaign" 
+                                     forXPath:@"campaign" 
                                      andClass:NSClassFromString(@"Campaign")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:campaigns, @"data", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveCampaignsNotification
@@ -442,9 +452,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 
 - (void)processGetLeadsRequest:(ASIHTTPRequest *)request
 {
-    NSString *response = [request responseString];
+    NSData *response = [request responseData];
     NSArray *leads = [self deserializeXML:response 
-                                 forXPath:@"//lead" 
+                                 forXPath:@"lead" 
                                  andClass:NSClassFromString(@"Lead")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:leads, @"data", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveLeadsNotification
@@ -455,9 +465,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 
 - (void)processGetOpportunitiesRequest:(ASIHTTPRequest *)request
 {
-    NSString *response = [request responseString];
+    NSData *response = [request responseData];
     NSArray *opportunities = [self deserializeXML:response 
-                                         forXPath:@"//opportunity" 
+                                         forXPath:@"opportunity" 
                                          andClass:NSClassFromString(@"Opportunity")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:opportunities, @"data", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveOpportunitiesNotification
@@ -468,9 +478,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 
 - (void)processGetContactsRequest:(ASIHTTPRequest *)request
 {
-    NSString *response = [request responseString];
+    NSData *response = [request responseData];
     NSArray *contacts = [self deserializeXML:response 
-                                    forXPath:@"//contact" 
+                                    forXPath:@"contact" 
                                     andClass:NSClassFromString(@"Contact")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:contacts, @"data", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveContactsNotification
@@ -481,9 +491,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 
 - (void)processGetCommentsRequest:(ASIHTTPRequest *)request
 {
-    NSString *response = [request responseString];
+    NSData *response = [request responseData];
     NSArray *comments = [self deserializeXML:response 
-                                    forXPath:@"/comments/comment" 
+                                    forXPath:@"comment" 
                                     andClass:NSClassFromString(@"Comment")];
 
     NSDictionary *userInfo = request.userInfo;
@@ -498,13 +508,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 
 - (void)processLoginRequest:(ASIHTTPRequest *)request
 {
-    NSString *response = [request responseString];
-    NSArray *users = [self deserializeXML:response 
-                                 forXPath:@"/user" 
-                                 andClass:NSClassFromString(@"User")];
-
-    User *user = [users objectAtIndex:0];
+    NSData *response = [request responseData];
+    TBXML *tbxml = [TBXML tbxmlWithXMLData:response];
+    TBXMLElement *root = tbxml.rootXMLElement;
+    User *user = [[User alloc] initWithTBXMLElement:root];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:user, @"user", nil];
+    [user release];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidLoginNotification
                                                           object:self 
                                                         userInfo:dict];
@@ -513,28 +522,32 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 
 - (void)processGetTasksRequest:(ASIHTTPRequest *)request
 {
-    NSString *response = [request responseString];
-    NSArray *tasksOverdue = [self deserializeXML:response 
-                                        forXPath:@"/hash/overdue/overdue" 
-                                        andClass:NSClassFromString(@"Task")];
-    NSArray *tasksDueASAP = [self deserializeXML:response 
-                                        forXPath:@"/hash/due-asap/due-asap" 
-                                        andClass:NSClassFromString(@"Task")];
-    NSArray *tasksDueToday = [self deserializeXML:response 
-                                         forXPath:@"/hash/due-today/due-today" 
-                                         andClass:NSClassFromString(@"Task")];
-    NSArray *tasksDueTomorrow = [self deserializeXML:response 
-                                            forXPath:@"/hash/due-tomorrow/due-tomorrow" 
-                                            andClass:NSClassFromString(@"Task")];
-    NSArray *tasksDueThisWeek = [self deserializeXML:response 
-                                            forXPath:@"/hash/due-this-week/due-this-week" 
-                                            andClass:NSClassFromString(@"Task")];
-    NSArray *tasksDueNextWeek = [self deserializeXML:response 
-                                            forXPath:@"/hash/due-next-week/due-next-week" 
-                                            andClass:NSClassFromString(@"Task")];
-    NSArray *tasksDueLater = [self deserializeXML:response 
-                                         forXPath:@"/hash/due-later/due-later" 
-                                         andClass:NSClassFromString(@"Task")];
+    NSData *response = [request responseData];
+    TBXML *tbxml = [TBXML tbxmlWithXMLData:response];
+    TBXMLElement *hash = tbxml.rootXMLElement;
+    Class klass = NSClassFromString(@"Task");
+
+    NSArray *tasksOverdue = [self deserializeXMLElement:[TBXML childElementNamed:@"overdue" parentElement:hash] 
+                                               forXPath:@"overdue" 
+                                               andClass:klass];
+    NSArray *tasksDueASAP = [self deserializeXMLElement:[TBXML childElementNamed:@"due-asap" parentElement:hash] 
+                                               forXPath:@"due-asap" 
+                                               andClass:klass];
+    NSArray *tasksDueToday = [self deserializeXMLElement:[TBXML childElementNamed:@"due-today" parentElement:hash] 
+                                                forXPath:@"due-today" 
+                                                andClass:klass];
+    NSArray *tasksDueTomorrow = [self deserializeXMLElement:[TBXML childElementNamed:@"due-tomorrow" parentElement:hash] 
+                                                   forXPath:@"due-tomorrow" 
+                                                   andClass:klass];
+    NSArray *tasksDueThisWeek = [self deserializeXMLElement:[TBXML childElementNamed:@"due-this-week" parentElement:hash] 
+                                                   forXPath:@"due-this-week" 
+                                                   andClass:klass];
+    NSArray *tasksDueNextWeek = [self deserializeXMLElement:[TBXML childElementNamed:@"due-next-week" parentElement:hash] 
+                                                   forXPath:@"due-next-week" 
+                                                   andClass:klass];
+    NSArray *tasksDueLater = [self deserializeXMLElement:[TBXML childElementNamed:@"due-later" parentElement:hash] 
+                                                forXPath:@"due-later" 
+                                                andClass:klass];
 
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:tasksOverdue, TASKS_OVERDUE_KEY,
                           tasksDueASAP, TASKS_DUE_ASAP_KEY, 
