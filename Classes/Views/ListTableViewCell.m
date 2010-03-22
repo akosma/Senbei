@@ -62,7 +62,7 @@
 
 - (void)dealloc 
 {
-    [_photoView release];
+    self.photoView = nil;
     [super dealloc];
 }
 
@@ -74,7 +74,7 @@
     // This trick is borrowed from
     // http://stackoverflow.com/questions/1132029/labels-aligning-in-uitableviewcell
     [super layoutSubviews];
-    if (!_photoView.hidden)
+    if (!self.photoView.hidden)
     {
         CGRect rect = self.textLabel.frame;
         self.textLabel.frame = CGRectMake(rect.origin.x + 60.0, 

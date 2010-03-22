@@ -42,7 +42,7 @@
     AKOImageView *_photoView;
 }
 
-@property (nonatomic, readonly) AKOImageView *photoView;
+@property (nonatomic, retain) AKOImageView *photoView;
 
 + (ListTableViewCell *)cellWithReuseIdentifier:(NSString *)reuseIdentifier;
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
