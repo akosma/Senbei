@@ -235,18 +235,21 @@
 
 - (void)showSettingsPanel
 {
-    SettingsController *settings = [[SettingsController alloc] init];
-    self.settingsNavigation = [[[UINavigationController alloc] initWithRootViewController:settings] autorelease];
-    [settings release];
+    if (self.settingsNavigation == nil)
+    {
+        SettingsController *settings = [[SettingsController alloc] init];
+        self.settingsNavigation = [[[UINavigationController alloc] initWithRootViewController:settings] autorelease];
+        [settings release];
 
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                                                                target:self 
-                                                                                action:@selector(hideSettingsPanel:)];
-    settings.navigationItem.rightBarButtonItem = doneButton;
-    [doneButton release];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
+                                                                                    target:self 
+                                                                                    action:@selector(hideSettingsPanel:)];
+        settings.navigationItem.rightBarButtonItem = doneButton;
+        [doneButton release];
 
-    self.settingsNavigation.view.transform = CGAffineTransformMakeTranslation(0.0, 480.0);
-    [self.window addSubview:self.settingsNavigation.view];
+        self.settingsNavigation.view.transform = CGAffineTransformMakeTranslation(0.0, 480.0);
+        [self.window addSubview:self.settingsNavigation.view];
+    }
 
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.4];
