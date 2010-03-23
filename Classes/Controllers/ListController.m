@@ -41,6 +41,7 @@
 
 @interface ListController ()
 - (void)loadData;
+- (void)filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope;
 @end
 
 
@@ -258,20 +259,6 @@
 }
 
 #pragma mark -
-#pragma mark Content Filtering
-
-- (void)filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope
-{
-	[_searchData removeAllObjects];
-    [self.searchDisplayController.searchResultsTableView reloadData];
-	
-    if (searchText != nil && [searchText length] > 0)
-    {
-        [[FatFreeCRMProxy sharedFatFreeCRMProxy] searchList:_listedClass query:searchText];
-    }
-}
-
-#pragma mark -
 #pragma mark UISearchDisplayController Delegate Methods
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
@@ -295,6 +282,17 @@
 
 #pragma mark -
 #pragma mark Private methods
+
+- (void)filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope
+{
+	[_searchData removeAllObjects];
+    [self.searchDisplayController.searchResultsTableView reloadData];
+	
+    if (searchText != nil && [searchText length] > 0)
+    {
+        [[FatFreeCRMProxy sharedFatFreeCRMProxy] searchList:_listedClass query:searchText];
+    }
+}
 
 - (void)loadData
 {
