@@ -39,6 +39,11 @@
 #import "ListTableViewCell.h"
 #import "AKOImageView.h"
 
+@interface ListController ()
+- (void)loadData;
+@end
+
+
 @implementation ListController
 
 @synthesize listedClass = _listedClass;
@@ -54,7 +59,7 @@
 
         UIBarButtonItem *reloadItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
                                                                                     target:self
-                                                                                    action:@selector(refresh)];
+                                                                                    action:@selector(refresh:)];
         self.navigationItem.leftBarButtonItem = reloadItem;
         [reloadItem release];
         
@@ -91,7 +96,16 @@
 #pragma mark -
 #pragma mark Public methods
 
-- (void)refresh
+- (void)refresh:(id)sender
+{
+    _pageCounter = 1;
+    _moreToLoad = YES;
+    _firstLoad = YES;
+    [_data removeAllObjects];
+    [self loadData];
+}
+
+- (void)loadData
 {
     [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadList:_listedClass page:_pageCounter];
 }
@@ -112,7 +126,7 @@
     [super viewWillAppear:animated];
     if (_firstLoad)
     {
-        [self refresh];
+        [self loadData];
     }
 }
 
@@ -166,7 +180,7 @@
         scrollView.contentOffset.y + 372.0 >= scrollView.contentSize.height)
     {
         ++_pageCounter;
-        [self refresh];
+        [self loadData];
     }
 }
 

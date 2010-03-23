@@ -57,6 +57,4 @@
 @property (nonatomic) Class listedClass;
 @property (nonatomic, assign) id<ListControllerDelegate> delegate;
 
-- (void)refresh;
-
 @end
