@@ -94,7 +94,7 @@
 }
 
 #pragma mark -
-#pragma mark Public methods
+#pragma mark Button handler methods
 
 - (void)refresh:(id)sender
 {
@@ -103,11 +103,6 @@
     _firstLoad = YES;
     [_data removeAllObjects];
     [self loadData];
-}
-
-- (void)loadData
-{
-    [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadList:_listedClass page:_pageCounter];
 }
 
 #pragma mark -
@@ -296,6 +291,14 @@
     [self filterContentForSearchText:_searchController.searchBar.text scope:scope];
     
     return NO;
+}
+
+#pragma mark -
+#pragma mark Private methods
+
+- (void)loadData
+{
+    [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadList:_listedClass page:_pageCounter];
 }
 
 @end
