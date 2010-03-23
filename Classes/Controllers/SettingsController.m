@@ -43,7 +43,7 @@
 #pragma mark -
 #pragma mark Init and dealloc
 
-- (id)initWithCoder:(NSCoder *)coder
+- (id)init
 {
     if (self = [super initWithNibName:@"IASKAppSettingsView" bundle:nil]) 
     {
@@ -53,6 +53,14 @@
         NSString *settings = NSLocalizedString(@"SETTINGS_TITLE", @"Title of the settings controller");
         self.title = settings;
         self.tabBarItem.image = [UIImage imageNamed:@"settings.png"];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)coder
+{
+    if (self = [self init]) 
+    {
     }
     return self;
 }

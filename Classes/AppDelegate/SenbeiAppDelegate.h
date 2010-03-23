@@ -45,6 +45,7 @@
     IBOutlet UIActivityIndicatorView *_spinningWheel;
     IBOutlet UILabel *_statusLabel;
     IBOutlet UIView *_applicationCredits;
+    UINavigationController *_settingsNavigation;
     User *_currentUser;
 }
 
