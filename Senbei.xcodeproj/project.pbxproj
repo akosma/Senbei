@@ -203,6 +203,9 @@
 		3A6D8D691106573B0089F21D /* Definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
 		3A708B411108427500CB2D83 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
 		3A708B421108427500CB2D83 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		3A7700E1115960E000BCF25B /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		3A7700E4115961C800BCF25B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/TaskBuckets.plist; sourceTree = "<group>"; };
+		3A7700E51159620400BCF25B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/TaskCategories.plist; sourceTree = "<group>"; };
 		3A82A8801121C679009FF035 /* Senbei-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Senbei-Info.plist"; sourceTree = SOURCE_ROOT; };
 		3A82A8821121C694009FF035 /* Senbei_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Senbei_Prefix.pch; sourceTree = "<group>"; };
 		3A8C38801119D8E1006669BE /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -792,6 +795,7 @@
 			children = (
 				3A0B531D11147EEC005A26FD /* English */,
 				3AAA464E11592811002362C1 /* es */,
+				3A7700E4115961C800BCF25B /* fr */,
 			);
 			name = TaskBuckets.plist;
 			sourceTree = "<group>";
@@ -801,6 +805,7 @@
 			children = (
 				3A0B52FC11147B99005A26FD /* English */,
 				3AAA464F1159284B002362C1 /* es */,
+				3A7700E51159620400BCF25B /* fr */,
 			);
 			name = TaskCategories.plist;
 			sourceTree = "<group>";
@@ -818,6 +823,7 @@
 			children = (
 				3A6D8CDB11064A900089F21D /* English */,
 				3A564E661147DFB4009A7435 /* es */,
+				3A7700E1115960E000BCF25B /* fr */,
 			);
 			name = MainWindow.xib;
 			sourceTree = "<group>";

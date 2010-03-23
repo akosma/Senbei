@@ -8,35 +8,38 @@
 
 /* Generic */
 OK = "OK"; /* The 'OK' word */
-CANCEL = "Cancel"; /* The 'Cancel' word */
+CANCEL = "Annuler"; /* The 'Cancel' word */
 CLEAR = "Effacer"; /* The 'Clear' word */
 
 /* SenbeiAppDelegate */
-LOGGING_IN = "Logging in as %@\nat %@..."; /* Text shown while the user logs in */
-CREDENTIALS_REJECTED = "The server rejected your credentials"; /* Message shown when the login credentials are rejected */
-ERROR_MESSAGE = "Error! (code %d)"; /* Message shown when any error occurs */
-LOADING_CONTROLLERS = "Loading controllers..."; /* Message shown when the controllers are loading */
-EMAIL_BODY = "<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>Sent from Senbei</p>"; /* Body of the e-mail sent from the contacts view */
-NETWORK_REQUIRED = "Senbei requires a network connection"; /* Message shown when the device does not have a network connection */
+LOGGING_IN = "Connexion comme %@\ndans %@..."; /* Text shown while the user logs in */
+CREDENTIALS_REJECTED = "Le serveur a rejeté votre username ou password"; /* Message shown when the login credentials are rejected */
+ERROR_MESSAGE = "Erreur! (code %d)"; /* Message shown when any error occurs */
+LOADING_CONTROLLERS = "Chargement des controlleurs..."; /* Message shown when the controllers are loading */
+EMAIL_BODY = "<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>Envoyé depuis Senbei</p>"; /* Body of the e-mail sent from the contacts view */
+NETWORK_REQUIRED = "Senbei a besoin d'une connexion réseau"; /* Message shown when the device does not have a network connection */
 
 /* ListController */
-SEARCH = "Search"; /* Word used in the 'Search' controller */
-LOADING = "Loading..."; /* Text shown in cells when more content is loading */
+SEARCH = "Rechercher"; /* Word used in the 'Search' controller */
+LOADING = "Chargement..."; /* Text shown in cells when more content is loading */
 
 /* TasksController */
-TASKS_CONTROLLER_TITLE = "Tasks"; /* Title of the Tasks controller */
-MARK_TASKS_DONE = "Do you want to mark this task as done?"; /* Confirmation text shown before setting a task as done */
-TASKS_OVERDUE_TITLE = "Overdue"; /* Title of the overdue task section */
-TASKS_DUE_ASAP_TITLE = "Due as soon as possible"; /* Title of the due asap tasks section */
-TASKS_DUE_TODAY_TITLE = "Due today"; /* Title of the due today tasks section */
-TASKS_DUE_TOMORROW_TITLE = "Due tomorrow"; /* Title of the due tomorrow tasks section */
-TASKS_DUE_THIS_WEEK_TITLE = "Due this week"; /* Title of the due this week tasks section */
-TASKS_DUE_NEXT_WEEK_TITLE = "Due next week"; /* Title of the due next week tasks section */
-TASKS_DUE_LATER_TITLE = "Due later"; /* Title of the due later tasks section */
+TASKS_CONTROLLER_TITLE = "Tâches"; /* Title of the Tasks controller */
+MARK_TASKS_DONE = "Voulez-vous marquer cette tâche comme faite?"; /* Confirmation text shown before setting a task as done */
+TASKS_OVERDUE_TITLE = "Délai expiré"; /* Title of the overdue task section */
+TASKS_DUE_ASAP_TITLE = "Dès que possible"; /* Title of the due asap tasks section */
+TASKS_DUE_TODAY_TITLE = "Pour aujourd'hui"; /* Title of the due today tasks section */
+TASKS_DUE_TOMORROW_TITLE = "Pour demain"; /* Title of the due tomorrow tasks section */
+TASKS_DUE_THIS_WEEK_TITLE = "Pour cette semaine"; /* Title of the due this week tasks section */
+TASKS_DUE_NEXT_WEEK_TITLE = "Pour la semaine prochaine"; /* Title of the due next week tasks section */
+TASKS_DUE_LATER_TITLE = "Pour plus tard"; /* Title of the due later tasks section */
 
 /* NewTaskController */
-NEW_TASK_TITLE = "New Task"; /* Title of the new task screen */
-NEW_TASK_SPECIFY_NAME = "Please specify the name of the task"; /* Text shown when trying to create a task without name */
+NEW_TASK_TITLE = "Nouvelle tâche"; /* Title of the new task screen */
+NEW_TASK_SPECIFY_NAME = "S'il vous plaît, donnez un nom à cette tâche"; /* Text shown when trying to create a task without name */
+NEW_TASK_NAME_FIELD = "nom"; /* Title of the 'name' form field */
+NEW_TASK_DUE_FIELD = "pour"; /* Title of the 'due' form field */
+NEW_TASK_CATEGORY_FIELD = "catégorie"; /* Title of the 'category' form field */
 
 /* SettingsController */
-SETTINGS_TITLE = "Settings"; /* Title of the settings controller */
+SETTINGS_TITLE = "Paramètres"; /* Title of the settings controller */
