@@ -9,6 +9,7 @@
 /* Generic */
 OK = "OK"; /* The 'OK' word */
 CANCEL = "Cancel"; /* The 'Cancel' word */
+CLEAR = "Effacer"; /* The 'Clear' word */
 
 /* SenbeiAppDelegate */
 LOGGING_IN = "Logging in as %@\nat %@..."; /* Text shown while the user logs in */

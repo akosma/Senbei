@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>text</key>
+		<string>Otro</string>
+		<key>key</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>Llamada</string>
+		<key>key</key>
+		<string>call</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>Email</string>
+		<key>key</key>
+		<string>email</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>Seguimiento</string>
+		<key>key</key>
+		<string>follow_up</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>Almuerzo</string>
+		<key>key</key>
+		<string>lunch</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>Reunión</string>
+		<key>key</key>
+		<string>meeting</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>Dinero</string>
+		<key>key</key>
+		<string>money</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>Presentación</string>
+		<key>key</key>
+		<string>presentation</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>Viaje</string>
+		<key>key</key>
+		<string>trip</string>
+	</dict>
+</array>
+</plist>

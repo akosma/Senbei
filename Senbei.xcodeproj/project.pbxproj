@@ -212,6 +212,8 @@
 		3A92BDDA112FDB6F001B43FE /* RootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootController.h; sourceTree = "<group>"; };
 		3A92BDDB112FDB6F001B43FE /* RootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootController.m; sourceTree = "<group>"; };
 		3A9565BE1119E439003BF4D6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		3AAA464E11592811002362C1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/TaskBuckets.plist; sourceTree = "<group>"; };
+		3AAA464F1159284B002362C1 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/TaskCategories.plist; sourceTree = "<group>"; };
 		3AB721F811085642001F861D /* AKOEditorrific.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKOEditorrific.h; sourceTree = "<group>"; };
 		3AB721F911085642001F861D /* AKOEditorrific.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKOEditorrific.m; sourceTree = "<group>"; };
 		3AB721FA11085642001F861D /* AKOEditorrificDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKOEditorrificDelegate.h; sourceTree = "<group>"; };
@@ -793,6 +795,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3A0B531D11147EEC005A26FD /* English */,
+				3AAA464E11592811002362C1 /* es */,
 			);
 			name = TaskBuckets.plist;
 			sourceTree = "<group>";
@@ -801,6 +804,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3A0B52FC11147B99005A26FD /* English */,
+				3AAA464F1159284B002362C1 /* es */,
 			);
 			name = TaskCategories.plist;
 			sourceTree = "<group>";

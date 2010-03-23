@@ -28,8 +28,11 @@
         _hidingTransformation = CGAffineTransformMakeTranslation(0.0, 350.0);    
         self.transform = _hidingTransformation;
         _oldTextHeight = 0.0;        
-        
-        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" 
+
+        NSString *cancel = NSLocalizedString(@"CANCEL", @"The 'Cancel' word");
+        NSString *clear = NSLocalizedString(@"CLEAR", @"The 'Clear' word");
+
+        UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:cancel
                                                                    style:UIBarButtonItemStyleBordered 
                                                                   target:self 
                                                                   action:@selector(cancel:)];
@@ -38,7 +41,7 @@
                                                                                 target:nil 
                                                                                 action:nil];
         
-        UIBarButtonItem *clearButton = [[UIBarButtonItem alloc] initWithTitle:@"Clear" 
+        UIBarButtonItem *clearButton = [[UIBarButtonItem alloc] initWithTitle:clear
                                                                         style:UIBarButtonItemStyleBordered 
                                                                        target:self 
                                                                        action:@selector(clear:)];
