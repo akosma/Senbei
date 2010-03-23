@@ -37,6 +37,9 @@ TASKS_DUE_LATER_TITLE = "Due later"; /* Title of the due later tasks section */
 /* NewTaskController */
 NEW_TASK_TITLE = "New Task"; /* Title of the new task screen */
 NEW_TASK_SPECIFY_NAME = "Please specify the name of the task"; /* Text shown when trying to create a task without name */
+NEW_TASK_NAME_FIELD = "name"; /* Title of the 'name' form field */
+NEW_TASK_DUE_FIELD = "due"; /* Title of the 'due' form field */
+NEW_TASK_CATEGORY_FIELD = "category"; /* Title of the 'category' form field */
 
 /* SettingsController */
 SETTINGS_TITLE = "Settings"; /* Title of the settings controller */

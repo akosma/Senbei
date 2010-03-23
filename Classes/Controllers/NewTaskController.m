@@ -203,22 +203,26 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
+    NSString *name = NSLocalizedString(@"NEW_TASK_NAME_FIELD", @"Title of the 'name' form field");
+    NSString *due = NSLocalizedString(@"NEW_TASK_DUE_FIELD", @"Title of the 'due' form field");
+    NSString *category = NSLocalizedString(@"NEW_TASK_CATEGORY_FIELD", @"Title of the 'category' form field");
+    
     switch (indexPath.row) 
     {
         case 0:
-            cell.textLabel.text = @"name";
+            cell.textLabel.text = name;
             _nameField.text = @"";
             [cell.contentView addSubview:_nameField];
             break;
 
         case 1:
-            cell.textLabel.text = @"due";
+            cell.textLabel.text = due;
             _bucketField.text = [[_buckets objectAtIndex:0] objectForKey:@"text"];
             [cell.contentView addSubview:_bucketField];
             break;
             
         case 2:
-            cell.textLabel.text = @"category";
+            cell.textLabel.text = category;
             _categoryField.text = [[_categories objectAtIndex:0] objectForKey:@"text"];
             [cell.contentView addSubview:_categoryField];
 
