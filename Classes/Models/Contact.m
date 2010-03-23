@@ -159,7 +159,10 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
     self.title = nil;
     self.twitter = nil;
     self.birthDate = nil;
-    CFRelease(_person);
+    if (_person != NULL)
+    {
+        CFRelease(_person);
+    }
     [super dealloc];
 }
 
