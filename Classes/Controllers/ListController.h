@@ -43,7 +43,7 @@
     UISearchDisplayController *_searchController;
     UISearchBar *_searchBar;
     NSMutableArray *_data;
-	NSMutableArray	*_searchData;
+	NSMutableArray *_searchData;
     NSInteger _pageCounter;
     BOOL _moreToLoad;
     BOOL _firstLoad;

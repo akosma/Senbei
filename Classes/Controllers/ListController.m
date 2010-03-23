@@ -40,8 +40,19 @@
 #import "AKOImageView.h"
 
 @interface ListController ()
+
+@property (nonatomic, retain) UINavigationController *navigationController;
+@property (nonatomic, retain) UISearchDisplayController *searchController;
+@property (nonatomic, retain) UISearchBar *searchBar;
+@property (nonatomic, retain) NSMutableArray *data;
+@property (nonatomic, retain) NSMutableArray *searchData;
+@property (nonatomic) NSInteger pageCounter;
+@property (nonatomic) BOOL moreToLoad;
+@property (nonatomic) BOOL firstLoad;
+
 - (void)loadData;
 - (void)filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope;
+
 @end
 
 
@@ -51,46 +62,53 @@
 @synthesize delegate = _delegate;
 @synthesize accessoryType = _accessoryType;
 
+@synthesize navigationController = _navigationController;
+@synthesize searchController = _searchController;
+@synthesize searchBar = _searchBar;
+@synthesize data = _data;
+@synthesize searchData = _searchData;
+@synthesize pageCounter = _pageCounter;
+@synthesize moreToLoad = _moreToLoad;
+@synthesize firstLoad = _firstLoad;
+
 - (id)initWithCoder:(NSCoder *)coder
 {
     if (self = [super initWithCoder:coder]) 
     {
-        _navigationController = [[UINavigationController alloc] initWithRootViewController:self];
-        _accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        self.navigationController = [[[UINavigationController alloc] initWithRootViewController:self] autorelease];
+        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-        UIBarButtonItem *reloadItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
-                                                                                    target:self
-                                                                                    action:@selector(refresh:)];
+        UIBarButtonItem *reloadItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                                                                     target:self
+                                                                                     action:@selector(refresh:)] autorelease];
         self.navigationItem.leftBarButtonItem = reloadItem;
-        [reloadItem release];
         
-        
-        _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)];
+        self.searchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
         NSString *search = NSLocalizedString(@"SEARCH", @"Word used in the 'Search' controller");
-        _searchBar.placeholder = search;
-        _searchController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar 
-                                                              contentsController:self];
-        _searchController.delegate = self;
-        _searchController.searchResultsDataSource = self;
-        _searchController.searchResultsDelegate = self;
+        self.searchBar.placeholder = search;
+        self.searchController = [[[UISearchDisplayController alloc] initWithSearchBar:self.searchBar 
+                                                                   contentsController:self] autorelease];
+        self.searchController.delegate = self;
+        self.searchController.searchResultsDataSource = self;
+        self.searchController.searchResultsDelegate = self;
         
-        _data = [[NSMutableArray alloc] initWithCapacity:20];
-        _searchData = [[NSMutableArray alloc] initWithCapacity:20];
+        self.data = [NSMutableArray arrayWithCapacity:20];
+        self.searchData = [NSMutableArray arrayWithCapacity:20];
         
-        _pageCounter = 1;
-        _moreToLoad = YES;
-        _firstLoad = YES;
+        self.pageCounter = 1;
+        self.moreToLoad = YES;
+        self.firstLoad = YES;
     }
     return self;
 }
 
 - (void)dealloc 
 {
-    [_navigationController release];
-    [_searchBar release];
-    [_searchController release];
-    [_data release];
-    [_searchData release];
+    self.navigationController = nil;
+    self.searchBar = nil;
+    self.searchController = nil;
+    self.data = nil;
+    self.searchData = nil;
     [super dealloc];
 }
 
@@ -99,10 +117,10 @@
 
 - (void)refresh:(id)sender
 {
-    _pageCounter = 1;
-    _moreToLoad = YES;
-    _firstLoad = YES;
-    [_data removeAllObjects];
+    self.pageCounter = 1;
+    self.moreToLoad = YES;
+    self.firstLoad = YES;
+    [self.data removeAllObjects];
     [self loadData];
 }
 
@@ -112,7 +130,7 @@
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
-    self.tableView.tableHeaderView = _searchBar;
+    self.tableView.tableHeaderView = self.searchBar;
     self.tableView.rowHeight = 60.0;
     self.searchDisplayController.searchResultsTableView.rowHeight = 60.0;
 }
@@ -120,7 +138,7 @@
 - (void)viewWillAppear:(BOOL)animated 
 {
     [super viewWillAppear:animated];
-    if (_firstLoad)
+    if (self.firstLoad)
     {
         [self loadData];
     }
@@ -137,21 +155,21 @@
 - (void)didReceiveData:(NSNotification *)notification
 {
     NSArray *newData = [[notification userInfo] objectForKey:@"data"];
-    _moreToLoad = [newData count] > 0;
+    self.moreToLoad = [newData count] > 0;
     if (self.searchDisplayController.active)
     {
-        [_searchData addObjectsFromArray:newData];
+        [self.searchData addObjectsFromArray:newData];
         [self.searchDisplayController.searchResultsTableView reloadData];
     }
     else 
     {
-        [_data addObjectsFromArray:newData];
+        [self.data addObjectsFromArray:newData];
         [self.tableView reloadData];
     }
     
-    if (_firstLoad)
+    if (self.firstLoad)
     {
-        _firstLoad = NO;
+        self.firstLoad = NO;
         [self performSelector:@selector(scroll) 
                    withObject:nil
                    afterDelay:0.5];
@@ -172,10 +190,10 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     // When the user scrolls to the bottom, we load a new page of information automatically.
-    if (!self.searchDisplayController.active && _moreToLoad && 
+    if (!self.searchDisplayController.active && self.moreToLoad && 
         scrollView.contentOffset.y + 372.0 >= scrollView.contentSize.height)
     {
-        ++_pageCounter;
+        self.pageCounter += 1;
         [self loadData];
     }
 }
@@ -192,13 +210,13 @@
 {
 	if (self.searchDisplayController.active)
 	{
-        return [_searchData count];
+        return [self.searchData count];
     }
-    if (_moreToLoad)
+    if (self.moreToLoad)
     {
-        return [_data count] + 1;
+        return [self.data count] + 1;
     }
-    return [_data count];
+    return [self.data count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
@@ -211,12 +229,12 @@
         cell = [ListTableViewCell cellWithReuseIdentifier:cellIdentifier];
     }
 
-    NSArray *array = (self.searchDisplayController.active) ? _searchData : _data;
+    NSArray *array = (self.searchDisplayController.active) ? self.searchData : self.data;
     
     if (indexPath.row < [array count])
     {
         BaseEntity *item = [array objectAtIndex:indexPath.row];
-        cell.accessoryType = _accessoryType;
+        cell.accessoryType = self.accessoryType;
         cell.textLabel.text = item.name;
         cell.textLabel.textColor = [UIColor blackColor];
         cell.detailTextLabel.text = [item description];
@@ -240,21 +258,21 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    if ([_delegate respondsToSelector:@selector(listController:didTapAccessoryForEntity:)])
+    if ([self.delegate respondsToSelector:@selector(listController:didTapAccessoryForEntity:)])
     {
-        NSArray *array = (self.searchDisplayController.active) ? _searchData : _data;
+        NSArray *array = (self.searchDisplayController.active) ? self.searchData : self.data;
         BaseEntity *entity = [array objectAtIndex:indexPath.row];
-        [_delegate listController:self didTapAccessoryForEntity:entity];
+        [self.delegate listController:self didTapAccessoryForEntity:entity];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-    if ([_delegate respondsToSelector:@selector(listController:didSelectEntity:)])
+    if ([self.delegate respondsToSelector:@selector(listController:didSelectEntity:)])
     {
-        NSArray *array = (self.searchDisplayController.active) ? _searchData : _data;
+        NSArray *array = (self.searchDisplayController.active) ? self.searchData : self.data;
         BaseEntity *entity = [array objectAtIndex:indexPath.row];
-        [_delegate listController:self didSelectEntity:entity];
+        [self.delegate listController:self didSelectEntity:entity];
     }
 }
 
@@ -263,8 +281,8 @@
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
-    NSInteger index = [_searchController.searchBar selectedScopeButtonIndex];
-    NSArray *buttons = [_searchController.searchBar scopeButtonTitles];
+    NSInteger index = [self.searchController.searchBar selectedScopeButtonIndex];
+    NSArray *buttons = [self.searchController.searchBar scopeButtonTitles];
     NSString *scope = [buttons objectAtIndex:index];
     [self filterContentForSearchText:searchString scope:scope];
     
@@ -273,9 +291,9 @@
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
 {
-    NSArray *buttons = [_searchController.searchBar scopeButtonTitles];
+    NSArray *buttons = [self.searchController.searchBar scopeButtonTitles];
     NSString *scope = [buttons objectAtIndex:searchOption];
-    [self filterContentForSearchText:_searchController.searchBar.text scope:scope];
+    [self filterContentForSearchText:self.searchController.searchBar.text scope:scope];
     
     return NO;
 }
@@ -285,18 +303,18 @@
 
 - (void)filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope
 {
-	[_searchData removeAllObjects];
+	[self.searchData removeAllObjects];
     [self.searchDisplayController.searchResultsTableView reloadData];
 	
     if (searchText != nil && [searchText length] > 0)
     {
-        [[FatFreeCRMProxy sharedFatFreeCRMProxy] searchList:_listedClass query:searchText];
+        [[FatFreeCRMProxy sharedFatFreeCRMProxy] searchList:self.listedClass query:searchText];
     }
 }
 
 - (void)loadData
 {
-    [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadList:_listedClass page:_pageCounter];
+    [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadList:self.listedClass page:self.pageCounter];
 }
 
 @end
