@@ -43,6 +43,7 @@ h2. Credits
 
 * Fat Free CRM by "Michael Dvorkin":mailto:mike@fatfreecrm.com
 * Application name and icon by "Zerofee":http://zerofee.org/.
+* German translation by Martin Hering from "Vemedio":http://vemedio.com/.
 * Tab bar icons used with permission from 
 ** eddit, Inc., 
 ** Joseph Wain / glyphish.com

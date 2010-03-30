@@ -1,0 +1,45 @@
+/* 
+   Application.strings
+   Senbei
+
+   Created by Adrian on 1/19/10.
+   Copyright 2010 akosma software. All rights reserved.
+ */
+
+/* Generic */
+OK = "Ok"; /* The 'OK' word */
+CANCEL = "Abbrechen"; /* The 'Cancel' word */
+CLEAR = "Löschen"; /* The 'Clear' word */
+
+/* SenbeiAppDelegate */
+LOGGING_IN = "Anmelden als %@\nat %@..."; /* Text shown while the user logs in */
+CREDENTIALS_REJECTED = "Anmeldung fehlgeschlagen"; /* Message shown when the login credentials are rejected */
+ERROR_MESSAGE = "Fehler! (Code %d)"; /* Message shown when any error occurs */
+LOADING_CONTROLLERS = "Lade Oberfläche..."; /* Message shown when the controllers are loading */
+EMAIL_BODY = "<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>Gesendet von Senbei</p>"; /* Body of the e-mail sent from the contacts view */
+NETWORK_REQUIRED = "Senbei benötigt eine Netzwerkverbindung"; /* Message shown when the device does not have a network connection */
+
+/* ListController */
+SEARCH = "Suche"; /* Word used in the 'Search' controller */
+LOADING = "Lade..."; /* Text shown in cells when more content is loading */
+
+/* TasksController */
+TASKS_CONTROLLER_TITLE = "Aufgaben"; /* Title of the Tasks controller */
+MARK_TASKS_DONE = "Aufgabe als erledigt markieren?"; /* Confirmation text shown before setting a task as done */
+TASKS_OVERDUE_TITLE = "Überfällig"; /* Title of the overdue task section */
+TASKS_DUE_ASAP_TITLE = "Sofort fällig"; /* Title of the due asap tasks section */
+TASKS_DUE_TODAY_TITLE = "Heute fällig"; /* Title of the due today tasks section */
+TASKS_DUE_TOMORROW_TITLE = "Morgen fällig"; /* Title of the due tomorrow tasks section */
+TASKS_DUE_THIS_WEEK_TITLE = "Diese Woche fällig"; /* Title of the due this week tasks section */
+TASKS_DUE_NEXT_WEEK_TITLE = "Nächste Woche fällig"; /* Title of the due next week tasks section */
+TASKS_DUE_LATER_TITLE = "Später fällig"; /* Title of the due later tasks section */
+
+/* NewTaskController */
+NEW_TASK_TITLE = "Neue Aufgabe"; /* Title of the new task screen */
+NEW_TASK_SPECIFY_NAME = "Geben Sie einen Namen für die Aufgabe an"; /* Text shown when trying to create a task without name */
+NEW_TASK_NAME_FIELD = "Name"; /* Title of the 'name' form field */
+NEW_TASK_DUE_FIELD = "Fällig bis"; /* Title of the 'due' form field */
+NEW_TASK_CATEGORY_FIELD = "Kategorie"; /* Title of the 'category' form field */
+
+/* SettingsController */
+SETTINGS_TITLE = "Einstellungen"; /* Title of the settings controller */

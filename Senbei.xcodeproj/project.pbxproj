@@ -151,6 +151,10 @@
 		3A3E6A2A1121C6F700F3D322 /* NSDate+Senbei.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Senbei.m"; sourceTree = "<group>"; };
 		3A3E6A2C1121C73300F3D322 /* SenbeiAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SenbeiAppDelegate.h; sourceTree = "<group>"; };
 		3A3E6A2D1121C73300F3D322 /* SenbeiAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SenbeiAppDelegate.m; sourceTree = "<group>"; };
+		3A45743011625D3D00EFFEA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3A45743111625D8D00EFFEA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/TaskBuckets.plist; sourceTree = "<group>"; };
+		3A45743211625DA100EFFEA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/TaskCategories.plist; sourceTree = "<group>"; };
+		3A45743311625DF800EFFEA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		3A564E541147DDAA009A7435 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A564E551147DDAC009A7435 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A564E561147DDB4009A7435 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -678,6 +682,7 @@
 				es,
 				fr,
 				it,
+				de,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -786,6 +791,7 @@
 				3A564E541147DDAA009A7435 /* es */,
 				3A564E551147DDAC009A7435 /* fr */,
 				3A564E561147DDB4009A7435 /* it */,
+				3A45743011625D3D00EFFEA5 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -796,6 +802,7 @@
 				3A0B531D11147EEC005A26FD /* English */,
 				3AAA464E11592811002362C1 /* es */,
 				3A7700E4115961C800BCF25B /* fr */,
+				3A45743111625D8D00EFFEA5 /* de */,
 			);
 			name = TaskBuckets.plist;
 			sourceTree = "<group>";
@@ -806,6 +813,7 @@
 				3A0B52FC11147B99005A26FD /* English */,
 				3AAA464F1159284B002362C1 /* es */,
 				3A7700E51159620400BCF25B /* fr */,
+				3A45743211625DA100EFFEA5 /* de */,
 			);
 			name = TaskCategories.plist;
 			sourceTree = "<group>";
@@ -824,6 +832,7 @@
 				3A6D8CDB11064A900089F21D /* English */,
 				3A564E661147DFB4009A7435 /* es */,
 				3A7700E1115960E000BCF25B /* fr */,
+				3A45743311625DF800EFFEA5 /* de */,
 			);
 			name = MainWindow.xib;
 			sourceTree = "<group>";
