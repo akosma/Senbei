@@ -179,9 +179,12 @@
 - (void)scroll
 {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView scrollToRowAtIndexPath:indexPath 
-                          atScrollPosition:UITableViewScrollPositionTop 
-                                  animated:YES];
+    if ([self.data count] > 0)
+    {
+        [self.tableView scrollToRowAtIndexPath:indexPath 
+                              atScrollPosition:UITableViewScrollPositionTop 
+                                      animated:YES];
+    }
 }
 
 #pragma mark -
