@@ -241,6 +241,7 @@
         cell.textLabel.text = item.name;
         cell.textLabel.textColor = [UIColor blackColor];
         cell.detailTextLabel.text = [item description];
+        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
 
         NSURL *photoURL = item.photoURL;
         cell.photoView.hidden = (photoURL == nil);
@@ -251,6 +252,7 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
         NSString *loading = NSLocalizedString(@"LOADING", @"Text shown in cells when more content is loading");
         cell.textLabel.text = loading;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.textColor = [UIColor grayColor];
         cell.detailTextLabel.text = @"";
 
@@ -264,8 +266,11 @@
     if ([self.delegate respondsToSelector:@selector(listController:didTapAccessoryForEntity:)])
     {
         NSArray *array = (self.searchDisplayController.active) ? self.searchData : self.data;
-        BaseEntity *entity = [array objectAtIndex:indexPath.row];
-        [self.delegate listController:self didTapAccessoryForEntity:entity];
+        if (indexPath.row < [array count])
+        {
+            BaseEntity *entity = [array objectAtIndex:indexPath.row];
+            [self.delegate listController:self didTapAccessoryForEntity:entity];
+        }
     }
 }
 
@@ -274,8 +279,11 @@
     if ([self.delegate respondsToSelector:@selector(listController:didSelectEntity:)])
     {
         NSArray *array = (self.searchDisplayController.active) ? self.searchData : self.data;
-        BaseEntity *entity = [array objectAtIndex:indexPath.row];
-        [self.delegate listController:self didSelectEntity:entity];
+        if (indexPath.row < [array count])
+        {
+            BaseEntity *entity = [array objectAtIndex:indexPath.row];
+            [self.delegate listController:self didSelectEntity:entity];
+        }
     }
 }
 
