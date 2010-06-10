@@ -896,7 +896,7 @@
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "Senbei-Info.plist";
 				PRODUCT_NAME = Senbei;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "01DDA876-C541-41E3-8F3E-EB3E7913E151";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F0C5B9DC-5402-4075-B4B4-090CE017F3E0";
 			};
 			name = DistributionAppStore;
 		};
