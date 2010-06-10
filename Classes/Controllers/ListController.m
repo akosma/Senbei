@@ -47,6 +47,7 @@
 @property (nonatomic, retain) NSMutableArray *data;
 @property (nonatomic, retain) NSMutableArray *searchData;
 @property (nonatomic) NSInteger pageCounter;
+@property (nonatomic) NSInteger pageSize;
 @property (nonatomic) BOOL moreToLoad;
 @property (nonatomic) BOOL firstLoad;
 
@@ -68,6 +69,7 @@
 @synthesize data = _data;
 @synthesize searchData = _searchData;
 @synthesize pageCounter = _pageCounter;
+@synthesize pageSize = _pageSize;
 @synthesize moreToLoad = _moreToLoad;
 @synthesize firstLoad = _firstLoad;
 
@@ -95,6 +97,7 @@
         self.data = [NSMutableArray arrayWithCapacity:20];
         self.searchData = [NSMutableArray arrayWithCapacity:20];
         
+        self.pageSize = 0;
         self.pageCounter = 1;
         self.moreToLoad = YES;
         self.firstLoad = YES;
@@ -118,6 +121,7 @@
 - (void)refresh:(id)sender
 {
     self.pageCounter = 1;
+    self.pageSize = 0;
     self.moreToLoad = YES;
     self.firstLoad = YES;
     [self.data removeAllObjects];
@@ -155,7 +159,7 @@
 - (void)didReceiveData:(NSNotification *)notification
 {
     NSArray *newData = [[notification userInfo] objectForKey:@"data"];
-    self.moreToLoad = [newData count] > 0;
+    self.moreToLoad = [newData count] >= self.pageSize;
     if (self.searchDisplayController.active)
     {
         [self.searchData addObjectsFromArray:newData];
@@ -170,6 +174,7 @@
     if (self.firstLoad)
     {
         self.firstLoad = NO;
+        self.pageSize = [newData count];
         [self performSelector:@selector(scroll) 
                    withObject:nil
                    afterDelay:0.5];
@@ -184,7 +189,13 @@
         [self.tableView scrollToRowAtIndexPath:indexPath 
                               atScrollPosition:UITableViewScrollPositionTop 
                                       animated:YES];
+        self.moreToLoad = self.moreToLoad && ([self.data count] > [[self.tableView indexPathsForVisibleRows] count]);
     }
+    else
+    {
+        self.moreToLoad = NO;
+    }
+    [self.tableView reloadData];
 }
 
 #pragma mark -

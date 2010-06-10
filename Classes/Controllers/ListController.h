@@ -45,6 +45,7 @@
     NSMutableArray *_data;
 	NSMutableArray *_searchData;
     NSInteger _pageCounter;
+    NSInteger _pageSize;
     BOOL _moreToLoad;
     BOOL _firstLoad;
     Class _listedClass;
