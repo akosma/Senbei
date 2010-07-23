@@ -121,7 +121,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AKOImageCache)
 {
     [_memoryCache removeAllObjects];
     
-    NSArray *items = [_fileManager directoryContentsAtPath:_cacheDirectoryName];
+    NSArray *items = [_fileManager contentsOfDirectoryAtPath:_cacheDirectoryName error:nil];
     for (NSString *item in items)
     {
         NSString *path = [_cacheDirectoryName stringByAppendingPathComponent:item];
@@ -138,7 +138,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AKOImageCache)
 
 - (void)removeOldImages
 {
-    NSArray *items = [_fileManager directoryContentsAtPath:_cacheDirectoryName];
+    NSArray *items = [_fileManager contentsOfDirectoryAtPath:_cacheDirectoryName error:nil];
     for (NSString *item in items)
     {
         NSString *path = [_cacheDirectoryName stringByAppendingPathComponent:item];
@@ -170,7 +170,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(AKOImageCache)
 
 - (NSUInteger)countImagesInDisk
 {
-    NSArray *items = [_fileManager directoryContentsAtPath:_cacheDirectoryName];
+    NSArray *items = [_fileManager contentsOfDirectoryAtPath:_cacheDirectoryName error:nil];
     return [items count];
 }
 
