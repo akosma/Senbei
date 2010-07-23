@@ -49,6 +49,7 @@
 #import "Task.h"
 #import "Campaign.h"
 #import "Lead.h"
+#import "SettingsManager.h"
 
 #define PROFILE_REQUEST @"profile"
 #define COMMENTS_REQUEST @"comments"
@@ -61,6 +62,7 @@
 
 @property (nonatomic, retain) ASINetworkQueue *networkQueue;
 @property (nonatomic, assign) NSNotificationCenter *notificationCenter;
+@property (nonatomic, assign) SettingsManager *settingsManager;
 
 - (void)sendGETRequestToURL:(NSURL *)url path:(NSString *)path;
 - (BOOL)requestOK:(ASIHTTPRequest *)request;
@@ -89,6 +91,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 @synthesize password = _password;
 @synthesize networkQueue = _networkQueue;
 @synthesize notificationCenter = _notificationCenter;
+@synthesize settingsManager = _settingsManager;
 
 #pragma mark -
 #pragma mark Init and dealloc
@@ -98,6 +101,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     if (self = [super init])
     {
         self.notificationCenter = [NSNotificationCenter defaultCenter];
+        self.settingsManager = [SettingsManager sharedSettingsManager];
 
         self.networkQueue = [[ASINetworkQueue alloc] init];
         self.networkQueue.shouldCancelAllRequestsOnFailure = NO;
@@ -116,6 +120,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     self.username = nil;
     self.password = nil;
     self.notificationCenter = nil;
+    self.settingsManager = nil;
     self.networkQueue = nil;
     [super dealloc];
 }
@@ -155,6 +160,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSURL *url = [NSURL URLWithString:urlString];
     
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    request.validatesSecureCertificate = !self.settingsManager.useSelfSignedSSLCertificates;
     request.username = self.username;
     request.password = self.password;
     request.shouldRedirect = NO;
@@ -207,6 +213,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSURL *url = [NSURL URLWithString:urlString];
 
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    request.validatesSecureCertificate = !self.settingsManager.useSelfSignedSSLCertificates;
     request.requestMethod = @"PUT";
     request.username = self.username;
     request.password = self.password;
@@ -571,6 +578,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
 - (void)sendGETRequestToURL:(NSURL *)url path:(NSString *)path
 {
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    request.validatesSecureCertificate = !self.settingsManager.useSelfSignedSSLCertificates;
     request.username = self.username;
     request.password = self.password;
     request.shouldRedirect = NO;

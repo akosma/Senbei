@@ -18,7 +18,7 @@
 			<key>Title</key>
 			<string>Server URL</string>
 			<key>Key</key>
-			<string>server_url</string>
+			<string>SETTING_SERVER</string>
 			<key>DefaultValue</key>
 			<string>http://localhost:3000</string>
 			<key>IsSecure</key>
@@ -36,7 +36,7 @@
 			<key>Title</key>
 			<string>Username</string>
 			<key>Key</key>
-			<string>username</string>
+			<string>SETTING_USERNAME</string>
 			<key>DefaultValue</key>
 			<string>aaron</string>
 			<key>IsSecure</key>
@@ -58,9 +58,25 @@
 			<key>KeyboardType</key>
 			<string>EmailAddress</string>
 			<key>Key</key>
-			<string>password</string>
+			<string>SETTING_PASSWORD</string>
 			<key>DefaultValue</key>
 			<string>aaron</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>SSL Certificates</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Use Self-Signed</string>
+			<key>Key</key>
+			<string>SETTING_USE_SELF_SIGNED_CERTIFICATE</string>
+			<key>DefaultValue</key>
+			<false/>
 		</dict>
 		<dict>
 			<key>Title</key>
@@ -74,9 +90,9 @@
 			<key>Title</key>
 			<string>Version</string>
 			<key>Key</key>
-			<string>version</string>
+			<string>SETTING_VERSION_NUMBER</string>
 			<key>DefaultValue</key>
-			<string>1.1.1</string>
+			<string></string>
 		</dict>
 		<dict>
 			<key>Type</key>

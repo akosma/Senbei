@@ -1,8 +1,8 @@
 //
-//  Definitions.h
+//  SettingsManager.h
 //  Senbei
 //
-//  Created by Adrian on 1/19/10.
+//  Created by Adrian on 7/23/10.
 //  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,7 +32,22 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#define SELECTED_API_PATH @"SELECTED_API_PATH"
-#define SELECTED_API_ENTITY @"SELECTED_API_ENTITY"
-#define ACCOUNTS_API_PATH @"accounts"
-#define REQUEST_TIMEOUT 60
+#import <Foundation/Foundation.h>
+
+@interface SettingsManager : NSObject 
+{
+@private
+    NSUserDefaults *_userDefaults;
+}
+
+@property (nonatomic, copy) NSString *server;
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *password;
+@property (nonatomic) BOOL useSelfSignedSSLCertificates;
+@property (nonatomic, copy) NSString *versionNumber;
+@property (nonatomic, retain) NSArray *tabOrder;
+@property (nonatomic) NSInteger currentTab;
+
++ (SettingsManager *)sharedSettingsManager;
+
+@end

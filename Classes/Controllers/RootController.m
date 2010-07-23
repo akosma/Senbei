@@ -46,9 +46,7 @@
 #import "Definitions.h"
 #import "CommentsController.h"
 #import "WebBrowserController.h"
-
-#define TAB_ORDER_PREFERENCE @"TAB_ORDER_PREFERENCE"
-#define CURRENT_TAB_PREFERENCE @"CURRENT_TAB_PREFERENCE"
+#import "SettingsManager.h"
 
 NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID property, ABMultiValueIdentifier identifierForValue)
 {
@@ -132,7 +130,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     self.opportunitiesController.tabBarItem.image = [UIImage imageNamed:@"opportunities.png"];
 
     // Restore the order of the tab bars following the preferences of the user
-    NSArray *order = [[NSUserDefaults standardUserDefaults] objectForKey:TAB_ORDER_PREFERENCE];
+    NSArray *order = [SettingsManager sharedSettingsManager].tabOrder;
     NSMutableArray *controllers = [[NSMutableArray alloc] initWithCapacity:7];
     if (order == nil)
     {
@@ -189,7 +187,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     [controllers release];
     
     // Jump to the last selected view controller in the tab bar
-    SenbeiViewController controllerNumber = [[NSUserDefaults standardUserDefaults] integerForKey:CURRENT_TAB_PREFERENCE];
+    SenbeiViewController controllerNumber = [SettingsManager sharedSettingsManager].currentTab;
     switch (controllerNumber) 
     {
         case SenbeiViewControllerAccounts:
@@ -244,38 +242,38 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 - (void)tabBarController:(UITabBarController *)tabBarController 
  didSelectViewController:(UIViewController *)viewController
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    SettingsManager *settings = [SettingsManager sharedSettingsManager];
     if (viewController == self.accountsController.navigationController)
     {
-        [defaults setInteger:SenbeiViewControllerAccounts forKey:CURRENT_TAB_PREFERENCE];
+        settings.currentTab = SenbeiViewControllerAccounts;
     }
     else if (viewController == self.contactsController.navigationController)
     {
-        [defaults setInteger:SenbeiViewControllerContacts forKey:CURRENT_TAB_PREFERENCE];
+        settings.currentTab = SenbeiViewControllerContacts;
     }
     else if (viewController == self.opportunitiesController.navigationController)
     {
-        [defaults setInteger:SenbeiViewControllerOpportunities forKey:CURRENT_TAB_PREFERENCE];
+        settings.currentTab = SenbeiViewControllerOpportunities;
     }
     else if (viewController == self.tasksController.navigationController)
     {
-        [defaults setInteger:SenbeiViewControllerTasks forKey:CURRENT_TAB_PREFERENCE];
+        settings.currentTab = SenbeiViewControllerTasks;
     }
     else if (viewController == self.leadsController.navigationController)
     {
-        [defaults setInteger:SenbeiViewControllerLeads forKey:CURRENT_TAB_PREFERENCE];
+        settings.currentTab = SenbeiViewControllerLeads;
     }
     else if (viewController == self.campaignsController.navigationController)
     {
-        [defaults setInteger:SenbeiViewControllerCampaigns forKey:CURRENT_TAB_PREFERENCE];
+        settings.currentTab = SenbeiViewControllerCampaigns;
     }
     else if (viewController == self.settingsController.navigationController)
     {
-        [defaults setInteger:SenbeiViewControllerSettings forKey:CURRENT_TAB_PREFERENCE];
+        settings.currentTab = SenbeiViewControllerSettings;
     }
     else if (viewController == self.moreNavigationController)
     {
-        [defaults setInteger:SenbeiViewControllerMore forKey:CURRENT_TAB_PREFERENCE];
+        settings.currentTab = SenbeiViewControllerMore;
     }
 }
 
@@ -285,7 +283,7 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
 {
     if (changed)
     {
-        NSMutableArray *order = [[NSMutableArray alloc] initWithCapacity:7];
+        NSMutableArray *order = [NSMutableArray arrayWithCapacity:7];
         for (id controller in viewControllers)
         {
             if (controller == self.accountsController.navigationController)
@@ -317,8 +315,7 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
                 [order addObject:[NSNumber numberWithInt:SenbeiViewControllerSettings]];
             }
         }
-        [[NSUserDefaults standardUserDefaults] setObject:order forKey:TAB_ORDER_PREFERENCE];
-        [order release];
+        [SettingsManager sharedSettingsManager].tabOrder = order;
     }
 }
 

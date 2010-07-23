@@ -39,6 +39,7 @@
 #import "Reachability.h"
 #import "RootController.h"
 #import "SettingsController.h"
+#import "SettingsManager.h"
 
 @interface SenbeiAppDelegate ()
 @property (nonatomic, readonly) UILabel *statusLabel;
@@ -103,28 +104,8 @@
                    name:FatFreeCRMProxyDidFailLoginNotification 
                  object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
     
-    // Set some defaults for the first run of the application
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([defaults stringForKey:PREFERENCES_SERVER_URL] == nil)
-    {
-        [defaults setObject:@"http://demo.fatfreecrm.com" 
-                     forKey:PREFERENCES_SERVER_URL];
-    }
-    if ([defaults stringForKey:PREFERENCES_USERNAME] == nil || 
-        [defaults stringForKey:PREFERENCES_PASSWORD] == nil)
-    {
-        // Use a random username from those used in the Fat Free CRM wiki
-        // http://wiki.github.com/michaeldv/fat_free_crm/loading-demo-data
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"DemoLogins" ofType:@"plist"];
-        NSArray *usernames = [NSArray arrayWithContentsOfFile:path];
-        NSInteger index = floor(arc4random() % [usernames count]);
-        NSString *username = [usernames objectAtIndex:index];
-        [defaults setObject:username forKey:PREFERENCES_USERNAME];
-        [defaults setObject:username forKey:PREFERENCES_PASSWORD];
-    }
-    [defaults synchronize];
-    
-    NSString *server = [defaults stringForKey:PREFERENCES_SERVER_URL];
+    SettingsManager *settings = [SettingsManager sharedSettingsManager];
+    NSString *server = settings.server;
     NSURL *url = [NSURL URLWithString:server];
     NSString *host = [url host];
     Reachability *reachability = [Reachability reachabilityWithHostName:host];
@@ -217,12 +198,11 @@
 
 - (void)login
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *server = [defaults stringForKey:PREFERENCES_SERVER_URL];
+    NSString *server = [SettingsManager sharedSettingsManager].server;
     NSURL *url = [NSURL URLWithString:server];
     NSString *host = [url host];
-    NSString *username = [defaults stringForKey:PREFERENCES_USERNAME];
-    NSString *password = [defaults stringForKey:PREFERENCES_PASSWORD];
+    NSString *username = [SettingsManager sharedSettingsManager].username;
+    NSString *password = [SettingsManager sharedSettingsManager].password;
     NSString *logging = NSLocalizedString(@"LOGGING_IN", @"Text shown while the user logs in");
     self.statusLabel.text = [NSString stringWithFormat:logging, username, host];
     

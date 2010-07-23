@@ -60,6 +60,7 @@
 @class ASINetworkQueue;
 @class BaseEntity;
 @class Task;
+@class SettingsManager;
 
 @interface FatFreeCRMProxy : NSObject
 {
@@ -69,6 +70,7 @@
     NSString *_server;
     NSString *_username;
     NSString *_password;
+    SettingsManager *_settings;
 }
 
 @property (nonatomic, copy) NSString *server;
