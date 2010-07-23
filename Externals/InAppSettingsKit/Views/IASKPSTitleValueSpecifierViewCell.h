@@ -1,8 +1,8 @@
 //
-//  IASKTextField.m
+//  IASKPSTitleValueSpecifierViewCell.h
 //  http://www.inappsettingskit.com
 //
-//  Copyright (c) 2009:
+//  Copyright (c) 2010:
 //  Luc Vandal, Edovia Inc., http://www.edovia.com
 //  Ortwin Gentz, FutureTap GmbH, http://www.futuretap.com
 //  All rights reserved.
@@ -14,16 +14,9 @@
 //  This code is licensed under the BSD license that is available at: http://www.opensource.org/licenses/bsd-license.php
 //
 
-#import "IASKTextField.h"
+#import <UIKit/UIKit.h>
 
 
-@implementation IASKTextField
-
-@synthesize key=_key;
-
-- (void)dealloc {
-    [_key release];
-    [super dealloc];
-}
+@interface IASKPSTitleValueSpecifierViewCell : UITableViewCell
 
 @end

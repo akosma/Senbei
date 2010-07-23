@@ -29,7 +29,7 @@
 #define kIASKIsSecure                         @"IsSecure"
 #define KIASKKeyboardType                     @"KeyboardType"
 #define kIASKAutocapitalizationType           @"AutocapitalizationType"
-#define kIASKAutoCorrectionType               @"AutoCorrectionType"
+#define kIASKAutoCorrectionType               @"AutocorrectionType"
 #define kIASKValues                           @"Values"
 #define kIASKTitles                           @"Titles"
 #define kIASKKeyboardAlphabet                 @"Alphabet"
@@ -53,26 +53,37 @@
 #define kIASKPSSliderSpecifier                @"PSSliderSpecifier"
 #define kIASKPSTitleValueSpecifier            @"PSTitleValueSpecifier"
 #define kIASKPSTextFieldSpecifier             @"PSTextFieldSpecifier"
-
 #define kIASKPSChildPaneSpecifier             @"PSChildPaneSpecifier"
+#define kIASKOpenURLSpecifier                 @"IASKOpenURLSpecifier"
 
 #define kIASKBundleFolder                     @"Settings.bundle"
+#define kIASKBundleFolderAlt                  @"InAppSettings.bundle"
 #define kIASKBundleFilename                   @"Root.plist"
 
 #define kIASKAppSettingChanged                @"kAppSettingChanged"
 
 #define kIASKSectionHeaderIndex               0
 
-#define kIASKSliderNoImagesX                  11
+#define kIASKSliderNoImagesX                  21
 #define kIASKSliderNoImagesWidth              278
-#define kIASKSliderBothImagesX                45
-#define kIASKSliderBothImagesWidth            210
-#define kIASKSliderOneImageWidth              244
+#define kIASKSliderBothImagesX                53
+#define kIASKSliderBothImagesWidth            214
+#define kIASKSliderOneImageWidth              246
+
+#define kIASKTableWidth                       320
+#define kIASKSpacing                          5
+#define kIASKMinLabelWidth                    97
+#define kIASKMinValueWidth                    35
+#define kIASKPaddingLeft                      9
+#define kIASKPaddingRight                     10
+
+#define kIASKLabelFontSize                    17
 
 @class IASKSpecifier;
 
 @interface IASKSettingsReader : NSObject {
     NSString        *_path;
+    NSString        *_bundleFolder;
     NSDictionary    *_settingsBundle;
     NSArray         *_dataSource;
     NSBundle        *_bundle;
@@ -89,6 +100,7 @@
 - (NSString*)pathForImageNamed:(NSString*)image;
 
 @property (nonatomic, retain) NSString      *path;
+@property (nonatomic, retain) NSString      *bundleFolder;
 @property (nonatomic, retain) NSDictionary  *settingsBundle;
 @property (nonatomic, retain) NSArray       *dataSource;
 
