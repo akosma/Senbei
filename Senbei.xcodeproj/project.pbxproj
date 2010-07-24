@@ -52,7 +52,6 @@
 		3A5C54B51157A61500620375 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C54B41157A61500620375 /* GTMNSString+HTML.m */; };
 		3A6C627A1119EA07000DD23B /* WebBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6C62781119EA07000DD23B /* WebBrowserController.m */; };
 		3A6C627E1119EA29000DD23B /* WebBrowserController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6C627C1119EA29000DD23B /* WebBrowserController.xib */; };
-		3A6D8CDF11064AAC0089F21D /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D8CDE11064AAC0089F21D /* Entitlements.plist */; };
 		3A6D8D0611064C8F0089F21D /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8CF011064C8F0089F21D /* ASIAuthenticationDialog.m */; };
 		3A6D8D0711064C8F0089F21D /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8CF211064C8F0089F21D /* ASIFormDataRequest.m */; };
 		3A6D8D0811064C8F0089F21D /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8CF411064C8F0089F21D /* ASIHTTPRequest.m */; };
@@ -136,6 +135,7 @@
 		3A0B52FC11147B99005A26FD /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/TaskCategories.plist; sourceTree = "<group>"; };
 		3A0B531D11147EEC005A26FD /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/TaskBuckets.plist; sourceTree = "<group>"; };
 		3A1104A2111DEF4500729EB6 /* DemoLogins.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DemoLogins.plist; sourceTree = "<group>"; };
+		3A1AC61D11FAFDD600C9B2E3 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		3A1F518E1122029C0081580E /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A29C08811075E2B00D887F1 /* CommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsController.h; sourceTree = "<group>"; };
 		3A29C08911075E2B00D887F1 /* CommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsController.m; sourceTree = "<group>"; };
@@ -182,7 +182,6 @@
 		3A6C62781119EA07000DD23B /* WebBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebBrowserController.m; sourceTree = "<group>"; };
 		3A6C627D1119EA29000DD23B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WebBrowserController.xib; sourceTree = "<group>"; };
 		3A6D8CDB11064A900089F21D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		3A6D8CDE11064AAC0089F21D /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		3A6D8CE211064B420089F21D /* README.textile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.textile; sourceTree = "<group>"; };
 		3A6D8CE311064B4B0089F21D /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		3A6D8CEF11064C8E0089F21D /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
@@ -523,7 +522,7 @@
 			isa = PBXGroup;
 			children = (
 				3A82A8801121C679009FF035 /* Senbei-Info.plist */,
-				3A6D8CDE11064AAC0089F21D /* Entitlements.plist */,
+				3A1AC61D11FAFDD600C9B2E3 /* Entitlements.plist */,
 				3A0B52FB11147B88005A26FD /* Data */,
 				3A6D8CD911064A900089F21D /* Images */,
 				3A6D8D4511064ED70089F21D /* Strings */,
@@ -721,7 +720,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A6D8D4411064E880089F21D /* MainWindow.xib in Resources */,
-				3A6D8CDF11064AAC0089F21D /* Entitlements.plist in Resources */,
 				3A29C2BB11078D9500D887F1 /* Settings.bundle in Resources */,
 				3AB7220111085699001F861D /* ako-editorrific-bar.png in Resources */,
 				3AB7231F1108695A001F861D /* Icon.png in Resources */,
@@ -868,6 +866,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/Desktop/akosma/_products/Senbei/Resources/Entitlements.plist";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -885,6 +884,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/Desktop/akosma/_products/Senbei/Resources/Entitlements.plist";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Senbei_Prefix.pch;
@@ -913,7 +913,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Resources/Entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = "~/Desktop/akosma/_products/Senbei/Resources/Entitlements.plist";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Adrian Kosmaczewski";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -944,7 +944,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Resources/Entitlements.plist;
+				CODE_SIGN_ENTITLEMENTS = "~/Desktop/akosma/_products/Senbei/Resources/Entitlements.plist";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
