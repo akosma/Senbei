@@ -86,6 +86,7 @@
 		3AB723D911087A80001F861D /* opportunities.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723D211087A80001F861D /* opportunities.png */; };
 		3AB723DA11087A80001F861D /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723D311087A80001F861D /* settings.png */; };
 		3AB723DB11087A80001F861D /* tasks.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723D411087A80001F861D /* tasks.png */; };
+		3ACED3FD1428700C003C65B1 /* Entitlements.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 3ACED3FC1428700C003C65B1 /* Entitlements.entitlements */; };
 		3AE1CC3A112941C500F50018 /* ListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1CC39112941C500F50018 /* ListTableViewCell.m */; };
 		3AE1CCF011294F5500F50018 /* NSString+Senbei.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1CCEF11294F5500F50018 /* NSString+Senbei.m */; };
 /* End PBXBuildFile section */
@@ -135,7 +136,6 @@
 		3A0B52FC11147B99005A26FD /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/TaskCategories.plist; sourceTree = "<group>"; };
 		3A0B531D11147EEC005A26FD /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/TaskBuckets.plist; sourceTree = "<group>"; };
 		3A1104A2111DEF4500729EB6 /* DemoLogins.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DemoLogins.plist; sourceTree = "<group>"; };
-		3A1AC61D11FAFDD600C9B2E3 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		3A1F518E1122029C0081580E /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A29C08811075E2B00D887F1 /* CommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsController.h; sourceTree = "<group>"; };
 		3A29C08911075E2B00D887F1 /* CommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsController.m; sourceTree = "<group>"; };
@@ -245,6 +245,7 @@
 		3AB723D211087A80001F861D /* opportunities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opportunities.png; sourceTree = "<group>"; };
 		3AB723D311087A80001F861D /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		3AB723D411087A80001F861D /* tasks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tasks.png; sourceTree = "<group>"; };
+		3ACED3FC1428700C003C65B1 /* Entitlements.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Entitlements.entitlements; sourceTree = "<group>"; };
 		3AE1CC38112941C500F50018 /* ListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewCell.h; sourceTree = "<group>"; };
 		3AE1CC39112941C500F50018 /* ListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewCell.m; sourceTree = "<group>"; };
 		3AE1CCEE11294F5500F50018 /* NSString+Senbei.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Senbei.h"; sourceTree = "<group>"; };
@@ -522,12 +523,12 @@
 			isa = PBXGroup;
 			children = (
 				3A82A8801121C679009FF035 /* Senbei-Info.plist */,
-				3A1AC61D11FAFDD600C9B2E3 /* Entitlements.plist */,
 				3A0B52FB11147B88005A26FD /* Data */,
 				3A6D8CD911064A900089F21D /* Images */,
 				3A6D8D4511064ED70089F21D /* Strings */,
 				3A6D8CDA11064A900089F21D /* NIBs */,
 				3A29C2BA11078D9500D887F1 /* Settings.bundle */,
+				3ACED3FC1428700C003C65B1 /* Entitlements.entitlements */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -743,6 +744,7 @@
 				3A006DC611F99A1000534055 /* IASKPSTextFieldSpecifierViewCell.xib in Resources */,
 				3A006DC711F99A1000534055 /* IASKPSToggleSwitchSpecifierViewCell.xib in Resources */,
 				3A006DC811F99A1000534055 /* IASKSpecifierValuesView.xib in Resources */,
+				3ACED3FD1428700C003C65B1 /* Entitlements.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
