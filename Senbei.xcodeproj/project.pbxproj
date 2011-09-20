@@ -52,6 +52,21 @@
 		3A23F58B1428C71B00894EA2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F5841428C71B00894EA2 /* Icon.png */; };
 		3A23F58C1428C71B00894EA2 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F5851428C71B00894EA2 /* Icon-Small-50.png */; };
 		3A23F58D1428C71B00894EA2 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F5861428C71B00894EA2 /* Icon-Small.png */; };
+		3A23F5A21428C9F800894EA2 /* ako-editorrific-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F5921428C9F800894EA2 /* ako-editorrific-bar.png */; };
+		3A23F5A31428C9F800894EA2 /* accounts.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F5941428C9F800894EA2 /* accounts.png */; };
+		3A23F5A41428C9F800894EA2 /* accounts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F5951428C9F800894EA2 /* accounts@2x.png */; };
+		3A23F5A51428C9F800894EA2 /* campaigns.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F5961428C9F800894EA2 /* campaigns.png */; };
+		3A23F5A61428C9F800894EA2 /* campaigns@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F5971428C9F800894EA2 /* campaigns@2x.png */; };
+		3A23F5A71428C9F800894EA2 /* contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F5981428C9F800894EA2 /* contacts.png */; };
+		3A23F5A81428C9F800894EA2 /* contacts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F5991428C9F800894EA2 /* contacts@2x.png */; };
+		3A23F5A91428C9F800894EA2 /* leads.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F59A1428C9F800894EA2 /* leads.png */; };
+		3A23F5AA1428C9F800894EA2 /* leads@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F59B1428C9F800894EA2 /* leads@2x.png */; };
+		3A23F5AB1428C9F800894EA2 /* opportunities.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F59C1428C9F800894EA2 /* opportunities.png */; };
+		3A23F5AC1428C9F800894EA2 /* opportunities@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F59D1428C9F800894EA2 /* opportunities@2x.png */; };
+		3A23F5AD1428C9F800894EA2 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F59E1428C9F800894EA2 /* settings.png */; };
+		3A23F5AE1428C9F800894EA2 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F59F1428C9F800894EA2 /* settings@2x.png */; };
+		3A23F5AF1428C9F800894EA2 /* tasks.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F5A01428C9F800894EA2 /* tasks.png */; };
+		3A23F5B01428C9F800894EA2 /* tasks@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F5A11428C9F800894EA2 /* tasks@2x.png */; };
 		3A29C08A11075E2B00D887F1 /* SBCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08911075E2B00D887F1 /* SBCommentsController.m */; };
 		3A29C08E11075E6100D887F1 /* SBCompanyAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08D11075E6100D887F1 /* SBCompanyAccount.m */; };
 		3A29C0931107600500D887F1 /* SBBaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C0921107600500D887F1 /* SBBaseEntity.m */; };
@@ -94,16 +109,8 @@
 		3A92BDDC112FDB6F001B43FE /* SBRootController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A92BDDB112FDB6F001B43FE /* SBRootController.m */; };
 		3A9565BF1119E439003BF4D6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9565BE1119E439003BF4D6 /* MessageUI.framework */; };
 		3AB721FB11085642001F861D /* AKOEditorrific.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB721F911085642001F861D /* AKOEditorrific.m */; };
-		3AB7220111085699001F861D /* ako-editorrific-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB7220011085699001F861D /* ako-editorrific-bar.png */; };
 		3AB7231A110868BB001F861D /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB72319110868BB001F861D /* SBUser.m */; };
 		3AB723A511087569001F861D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723A411087569001F861D /* Default.png */; };
-		3AB723D511087A80001F861D /* accounts.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723CE11087A80001F861D /* accounts.png */; };
-		3AB723D611087A80001F861D /* campaigns.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723CF11087A80001F861D /* campaigns.png */; };
-		3AB723D711087A80001F861D /* contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723D011087A80001F861D /* contacts.png */; };
-		3AB723D811087A80001F861D /* leads.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723D111087A80001F861D /* leads.png */; };
-		3AB723D911087A80001F861D /* opportunities.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723D211087A80001F861D /* opportunities.png */; };
-		3AB723DA11087A80001F861D /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723D311087A80001F861D /* settings.png */; };
-		3AB723DB11087A80001F861D /* tasks.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723D411087A80001F861D /* tasks.png */; };
 		3ACED3FD1428700C003C65B1 /* Entitlements.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 3ACED3FC1428700C003C65B1 /* Entitlements.entitlements */; };
 		3AE1CC3A112941C500F50018 /* SBListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1CC39112941C500F50018 /* SBListTableViewCell.m */; };
 		3AE1CCF011294F5500F50018 /* NSString+Senbei.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1CCEF11294F5500F50018 /* NSString+Senbei.m */; };
@@ -192,6 +199,21 @@
 		3A23F5841428C71B00894EA2 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		3A23F5851428C71B00894EA2 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		3A23F5861428C71B00894EA2 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		3A23F5921428C9F800894EA2 /* ako-editorrific-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ako-editorrific-bar.png"; sourceTree = "<group>"; };
+		3A23F5941428C9F800894EA2 /* accounts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = accounts.png; sourceTree = "<group>"; };
+		3A23F5951428C9F800894EA2 /* accounts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accounts@2x.png"; sourceTree = "<group>"; };
+		3A23F5961428C9F800894EA2 /* campaigns.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = campaigns.png; sourceTree = "<group>"; };
+		3A23F5971428C9F800894EA2 /* campaigns@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "campaigns@2x.png"; sourceTree = "<group>"; };
+		3A23F5981428C9F800894EA2 /* contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contacts.png; sourceTree = "<group>"; };
+		3A23F5991428C9F800894EA2 /* contacts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "contacts@2x.png"; sourceTree = "<group>"; };
+		3A23F59A1428C9F800894EA2 /* leads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leads.png; sourceTree = "<group>"; };
+		3A23F59B1428C9F800894EA2 /* leads@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leads@2x.png"; sourceTree = "<group>"; };
+		3A23F59C1428C9F800894EA2 /* opportunities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opportunities.png; sourceTree = "<group>"; };
+		3A23F59D1428C9F800894EA2 /* opportunities@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "opportunities@2x.png"; sourceTree = "<group>"; };
+		3A23F59E1428C9F800894EA2 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		3A23F59F1428C9F800894EA2 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
+		3A23F5A01428C9F800894EA2 /* tasks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tasks.png; sourceTree = "<group>"; };
+		3A23F5A11428C9F800894EA2 /* tasks@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tasks@2x.png"; sourceTree = "<group>"; };
 		3A29C08811075E2B00D887F1 /* SBCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCommentsController.h; sourceTree = "<group>"; };
 		3A29C08911075E2B00D887F1 /* SBCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCommentsController.m; sourceTree = "<group>"; };
 		3A29C08C11075E6100D887F1 /* SBCompanyAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCompanyAccount.h; sourceTree = "<group>"; };
@@ -284,17 +306,9 @@
 		3AB721F811085642001F861D /* AKOEditorrific.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKOEditorrific.h; sourceTree = "<group>"; };
 		3AB721F911085642001F861D /* AKOEditorrific.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKOEditorrific.m; sourceTree = "<group>"; };
 		3AB721FA11085642001F861D /* AKOEditorrificDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKOEditorrificDelegate.h; sourceTree = "<group>"; };
-		3AB7220011085699001F861D /* ako-editorrific-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ako-editorrific-bar.png"; sourceTree = "<group>"; };
 		3AB72318110868BB001F861D /* SBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUser.h; sourceTree = "<group>"; };
 		3AB72319110868BB001F861D /* SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUser.m; sourceTree = "<group>"; };
 		3AB723A411087569001F861D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		3AB723CE11087A80001F861D /* accounts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = accounts.png; sourceTree = "<group>"; };
-		3AB723CF11087A80001F861D /* campaigns.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = campaigns.png; sourceTree = "<group>"; };
-		3AB723D011087A80001F861D /* contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contacts.png; sourceTree = "<group>"; };
-		3AB723D111087A80001F861D /* leads.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leads.png; sourceTree = "<group>"; };
-		3AB723D211087A80001F861D /* opportunities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = opportunities.png; sourceTree = "<group>"; };
-		3AB723D311087A80001F861D /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
-		3AB723D411087A80001F861D /* tasks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tasks.png; sourceTree = "<group>"; };
 		3ACED3FC1428700C003C65B1 /* Entitlements.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Entitlements.entitlements; sourceTree = "<group>"; };
 		3ACED40B142871FE003C65B1 /* SBHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBHelpers.h; sourceTree = "<group>"; };
 		3AE1CC38112941C500F50018 /* SBListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBListTableViewCell.h; sourceTree = "<group>"; };
@@ -487,6 +501,35 @@
 			path = Requests;
 			sourceTree = "<group>";
 		};
+		3A23F5911428C9F800894EA2 /* AKOEditorrific */ = {
+			isa = PBXGroup;
+			children = (
+				3A23F5921428C9F800894EA2 /* ako-editorrific-bar.png */,
+			);
+			path = AKOEditorrific;
+			sourceTree = "<group>";
+		};
+		3A23F5931428C9F800894EA2 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				3A23F5941428C9F800894EA2 /* accounts.png */,
+				3A23F5951428C9F800894EA2 /* accounts@2x.png */,
+				3A23F5961428C9F800894EA2 /* campaigns.png */,
+				3A23F5971428C9F800894EA2 /* campaigns@2x.png */,
+				3A23F5981428C9F800894EA2 /* contacts.png */,
+				3A23F5991428C9F800894EA2 /* contacts@2x.png */,
+				3A23F59A1428C9F800894EA2 /* leads.png */,
+				3A23F59B1428C9F800894EA2 /* leads@2x.png */,
+				3A23F59C1428C9F800894EA2 /* opportunities.png */,
+				3A23F59D1428C9F800894EA2 /* opportunities@2x.png */,
+				3A23F59E1428C9F800894EA2 /* settings.png */,
+				3A23F59F1428C9F800894EA2 /* settings@2x.png */,
+				3A23F5A01428C9F800894EA2 /* tasks.png */,
+				3A23F5A11428C9F800894EA2 /* tasks@2x.png */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
 		3A29C08B11075E5400D887F1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -638,8 +681,8 @@
 				3A23F5851428C71B00894EA2 /* Icon-Small-50.png */,
 				3A23F5861428C71B00894EA2 /* Icon-Small.png */,
 				3AB723A411087569001F861D /* Default.png */,
-				3AB723CD11087A80001F861D /* Icons */,
-				3AB721FF11085699001F861D /* AKOEditorrific */,
+				3A23F5911428C9F800894EA2 /* AKOEditorrific */,
+				3A23F5931428C9F800894EA2 /* Icons */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -734,28 +777,6 @@
 			path = AKOEditorrific;
 			sourceTree = "<group>";
 		};
-		3AB721FF11085699001F861D /* AKOEditorrific */ = {
-			isa = PBXGroup;
-			children = (
-				3AB7220011085699001F861D /* ako-editorrific-bar.png */,
-			);
-			path = AKOEditorrific;
-			sourceTree = "<group>";
-		};
-		3AB723CD11087A80001F861D /* Icons */ = {
-			isa = PBXGroup;
-			children = (
-				3AB723CE11087A80001F861D /* accounts.png */,
-				3AB723CF11087A80001F861D /* campaigns.png */,
-				3AB723D011087A80001F861D /* contacts.png */,
-				3AB723D111087A80001F861D /* leads.png */,
-				3AB723D211087A80001F861D /* opportunities.png */,
-				3AB723D311087A80001F861D /* settings.png */,
-				3AB723D411087A80001F861D /* tasks.png */,
-			);
-			path = Icons;
-			sourceTree = "<group>";
-		};
 		3AE1CC371129419E00F50018 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -824,15 +845,7 @@
 			files = (
 				3A6D8D4411064E880089F21D /* MainWindow.xib in Resources */,
 				3A29C2BB11078D9500D887F1 /* Settings.bundle in Resources */,
-				3AB7220111085699001F861D /* ako-editorrific-bar.png in Resources */,
 				3AB723A511087569001F861D /* Default.png in Resources */,
-				3AB723D511087A80001F861D /* accounts.png in Resources */,
-				3AB723D611087A80001F861D /* campaigns.png in Resources */,
-				3AB723D711087A80001F861D /* contacts.png in Resources */,
-				3AB723D811087A80001F861D /* leads.png in Resources */,
-				3AB723D911087A80001F861D /* opportunities.png in Resources */,
-				3AB723DA11087A80001F861D /* settings.png in Resources */,
-				3AB723DB11087A80001F861D /* tasks.png in Resources */,
 				3A564E871147E208009A7435 /* TaskCategories.plist in Resources */,
 				3A564E851147E1FE009A7435 /* TaskBuckets.plist in Resources */,
 				3A6C627E1119EA29000DD23B /* SBWebBrowserController.xib in Resources */,
@@ -851,6 +864,21 @@
 				3A23F58B1428C71B00894EA2 /* Icon.png in Resources */,
 				3A23F58C1428C71B00894EA2 /* Icon-Small-50.png in Resources */,
 				3A23F58D1428C71B00894EA2 /* Icon-Small.png in Resources */,
+				3A23F5A21428C9F800894EA2 /* ako-editorrific-bar.png in Resources */,
+				3A23F5A31428C9F800894EA2 /* accounts.png in Resources */,
+				3A23F5A41428C9F800894EA2 /* accounts@2x.png in Resources */,
+				3A23F5A51428C9F800894EA2 /* campaigns.png in Resources */,
+				3A23F5A61428C9F800894EA2 /* campaigns@2x.png in Resources */,
+				3A23F5A71428C9F800894EA2 /* contacts.png in Resources */,
+				3A23F5A81428C9F800894EA2 /* contacts@2x.png in Resources */,
+				3A23F5A91428C9F800894EA2 /* leads.png in Resources */,
+				3A23F5AA1428C9F800894EA2 /* leads@2x.png in Resources */,
+				3A23F5AB1428C9F800894EA2 /* opportunities.png in Resources */,
+				3A23F5AC1428C9F800894EA2 /* opportunities@2x.png in Resources */,
+				3A23F5AD1428C9F800894EA2 /* settings.png in Resources */,
+				3A23F5AE1428C9F800894EA2 /* settings@2x.png in Resources */,
+				3A23F5AF1428C9F800894EA2 /* tasks.png in Resources */,
+				3A23F5B01428C9F800894EA2 /* tasks@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
