@@ -178,6 +178,7 @@
 		3A23F57A1428AEE700894EA2 /* SBBaseFormDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBBaseFormDataRequest.m; sourceTree = "<group>"; };
 		3A23F57C1428AF9400894EA2 /* ASIHTTPRequest+Senbei.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ASIHTTPRequest+Senbei.h"; sourceTree = "<group>"; };
 		3A23F57D1428AF9500894EA2 /* ASIHTTPRequest+Senbei.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ASIHTTPRequest+Senbei.m"; sourceTree = "<group>"; };
+		3A23F57F1428C07D00894EA2 /* README.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
 		3A29C08811075E2B00D887F1 /* SBCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCommentsController.h; sourceTree = "<group>"; };
 		3A29C08911075E2B00D887F1 /* SBCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCommentsController.m; sourceTree = "<group>"; };
 		3A29C08C11075E6100D887F1 /* SBCompanyAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCompanyAccount.h; sourceTree = "<group>"; };
@@ -223,7 +224,6 @@
 		3A6C62781119EA07000DD23B /* SBWebBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBWebBrowserController.m; sourceTree = "<group>"; };
 		3A6C627D1119EA29000DD23B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SBWebBrowserController.xib; sourceTree = "<group>"; };
 		3A6D8CDB11064A900089F21D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		3A6D8CE211064B420089F21D /* README.textile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.textile; sourceTree = "<group>"; };
 		3A6D8CE311064B4B0089F21D /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		3A6D8CEF11064C8E0089F21D /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		3A6D8CF011064C8F0089F21D /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
@@ -323,7 +323,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				3A6D8CE211064B420089F21D /* README.textile */,
+				3A23F57F1428C07D00894EA2 /* README.markdown */,
 				3A6D8CE311064B4B0089F21D /* LICENSE */,
 				3A6D8CD011064A4B0089F21D /* Classes */,
 				3A6D8CD711064A820089F21D /* Externals */,
