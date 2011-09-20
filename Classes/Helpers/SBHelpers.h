@@ -32,7 +32,7 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "FatFreeCRMProxy.h"
+#import "SBNetworkManager.h"
 #import "NSDate+Senbei.h"
 #import "NSString+Senbei.h"
 #import "SBSettingsManager.h"

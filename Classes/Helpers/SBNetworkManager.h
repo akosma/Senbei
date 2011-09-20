@@ -1,5 +1,5 @@
 //
-//  FatFreeCRMProxy.h
+//  SBNetworkManager.h
 //  Senbei
 //
 //  Created by Adrian on 1/19/10.
@@ -62,7 +62,7 @@
 @class SBTask;
 @class SBSettingsManager;
 
-@interface FatFreeCRMProxy : NSObject
+@interface SBNetworkManager : NSObject
 {
 @private
     ASINetworkQueue *_networkQueue;
@@ -76,7 +76,7 @@
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
 
-+ (FatFreeCRMProxy *)sharedFatFreeCRMProxy;
++ (SBNetworkManager *)sharedSBNetworkManager;
 
 - (void)login;
 - (void)loadList:(Class)klass page:(NSInteger)page;

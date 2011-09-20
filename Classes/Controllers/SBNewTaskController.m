@@ -92,7 +92,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(close:) 
                                                      name:FatFreeCRMProxyDidCreateTaskNotification
-                                                   object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+                                                   object:[SBNetworkManager sharedSBNetworkManager]];
         
         self.nameField = [[[UITextField alloc] initWithFrame:CGRectMake(90.0, 12.0, 200.0, 20.0)] autorelease];
         self.nameField.delegate = self;
@@ -145,7 +145,7 @@
         task.category = self.selectedCategory;
         task.bucket = self.selectedBucket;
         task.dueDate = self.selectedDate;
-        [[FatFreeCRMProxy sharedFatFreeCRMProxy] createTask:task];
+        [[SBNetworkManager sharedSBNetworkManager] createTask:task];
         [task release];
     }
     else

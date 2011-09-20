@@ -101,32 +101,32 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     [center addObserver:self.accountsController 
                selector:@selector(didReceiveData:) 
                    name:FatFreeCRMProxyDidRetrieveAccountsNotification
-                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+                 object:[SBNetworkManager sharedSBNetworkManager]];
     self.accountsController.listedClass = [SBCompanyAccount class];
     
     [center addObserver:self.opportunitiesController 
                selector:@selector(didReceiveData:) 
                    name:FatFreeCRMProxyDidRetrieveOpportunitiesNotification
-                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+                 object:[SBNetworkManager sharedSBNetworkManager]];
     self.opportunitiesController.listedClass = [SBOpportunity class];
     
     [center addObserver:self.contactsController 
                selector:@selector(didReceiveData:) 
                    name:FatFreeCRMProxyDidRetrieveContactsNotification
-                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+                 object:[SBNetworkManager sharedSBNetworkManager]];
     self.contactsController.listedClass = [SBContact class];
     self.contactsController.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
     [center addObserver:self.campaignsController
                selector:@selector(didReceiveData:)
                    name:FatFreeCRMProxyDidRetrieveCampaignsNotification
-                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+                 object:[SBNetworkManager sharedSBNetworkManager]];
     self.campaignsController.listedClass = [SBCampaign class];
     
     [center addObserver:self.leadsController
                selector:@selector(didReceiveData:)
                    name:FatFreeCRMProxyDidRetrieveLeadsNotification
-                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+                 object:[SBNetworkManager sharedSBNetworkManager]];
     self.leadsController.listedClass = [SBLead class];
     
     self.leadsController.tabBarItem.image = [UIImage imageNamed:@"leads.png"];

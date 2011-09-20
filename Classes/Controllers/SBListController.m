@@ -322,13 +322,13 @@
 	
     if (searchText != nil && [searchText length] > 0)
     {
-        [[FatFreeCRMProxy sharedFatFreeCRMProxy] searchList:self.listedClass query:searchText];
+        [[SBNetworkManager sharedSBNetworkManager] searchList:self.listedClass query:searchText];
     }
 }
 
 - (void)loadData
 {
-    [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadList:self.listedClass page:self.pageCounter];
+    [[SBNetworkManager sharedSBNetworkManager] loadList:self.listedClass page:self.pageCounter];
 }
 
 @end

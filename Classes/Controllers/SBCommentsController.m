@@ -62,12 +62,12 @@
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(didReceiveComments:) 
                                                      name:FatFreeCRMProxyDidRetrieveCommentsNotification
-                                                   object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+                                                   object:[SBNetworkManager sharedSBNetworkManager]];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didPostComment:) 
                                                      name:FatFreeCRMProxyDidPostCommentNotification 
-                                                   object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+                                                   object:[SBNetworkManager sharedSBNetworkManager]];
         
         UIBarButtonItem *button = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
                                                                                  target:self 
@@ -101,7 +101,7 @@
     self.title = self.entity.name;
     [self.comments removeAllObjects];
     [self.tableView reloadData];
-    [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadCommentsForEntity:self.entity];
+    [[SBNetworkManager sharedSBNetworkManager] loadCommentsForEntity:self.entity];
 }
 
 - (void)didReceiveMemoryWarning 
@@ -142,7 +142,7 @@
 - (void)editorrific:(AKOEditorrific *)editorrific didEnterText:(NSString *)text
 {
     self.backgroundButton.hidden = YES;
-    [[FatFreeCRMProxy sharedFatFreeCRMProxy] sendComment:text forEntity:self.entity];
+    [[SBNetworkManager sharedSBNetworkManager] sendComment:text forEntity:self.entity];
 }
 
 - (void)editorrificDidCancel:(AKOEditorrific *)editorrific
@@ -171,7 +171,7 @@
     SBBaseEntity *entity = [dict objectForKey:@"entity"];
     if (entity == self.entity)
     {
-        [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadCommentsForEntity:self.entity];
+        [[SBNetworkManager sharedSBNetworkManager] loadCommentsForEntity:self.entity];
     }
 }
 

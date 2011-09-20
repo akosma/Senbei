@@ -1,5 +1,5 @@
 //
-//  FatFreeCRMProxy.m
+//  SBNetworkManager.m
 //  Senbei
 //
 //  Created by Adrian on 1/19/10.
@@ -32,7 +32,7 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "FatFreeCRMProxy.h"
+#import "SBNetworkManager.h"
 #import "SBAppDelegate.h"
 #import "SynthesizeSingleton.h"
 #import "NSDate+Senbei.h"
@@ -51,7 +51,7 @@
 #define TASK_DONE_REQUEST @"task_done"
 #define NEW_COMMENT_REQUEST @"new_comment"
 
-@interface FatFreeCRMProxy ()
+@interface SBNetworkManager ()
 
 @property (nonatomic, retain) ASINetworkQueue *networkQueue;
 @property (nonatomic, assign) NSNotificationCenter *notificationCenter;
@@ -75,9 +75,9 @@
 @end
 
 
-@implementation FatFreeCRMProxy
+@implementation SBNetworkManager
 
-SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
+SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
 
 @synthesize server = _server;
 @synthesize username = _username;

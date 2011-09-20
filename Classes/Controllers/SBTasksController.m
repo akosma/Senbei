@@ -92,7 +92,7 @@
 
 - (void)refresh
 {
-    [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadTasks];
+    [[SBNetworkManager sharedSBNetworkManager] loadTasks];
 }
 
 #pragma mark - UIViewController methods
@@ -127,17 +127,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(didReceiveTasks:) 
                                                  name:FatFreeCRMProxyDidRetrieveTasksNotification 
-                                               object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+                                               object:[SBNetworkManager sharedSBNetworkManager]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadTasks:) 
                                                  name:FatFreeCRMProxyDidMarkTaskAsDoneNotification 
-                                               object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+                                               object:[SBNetworkManager sharedSBNetworkManager]];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadTasks:) 
                                                  name:FatFreeCRMProxyDidCreateTaskNotification
-                                               object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+                                               object:[SBNetworkManager sharedSBNetworkManager]];
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TaskCategories" ofType:@"plist"];
     NSArray *categoriesArray = [NSArray arrayWithContentsOfFile:path];
@@ -304,7 +304,7 @@
         [array removeObjectAtIndex:self.indexPathToDelete.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:self.indexPathToDelete]
                               withRowAnimation:UITableViewRowAnimationFade];
-        [[FatFreeCRMProxy sharedFatFreeCRMProxy] markTaskAsDone:task];
+        [[SBNetworkManager sharedSBNetworkManager] markTaskAsDone:task];
         [task release];
     }
     self.indexPathToDelete = nil;

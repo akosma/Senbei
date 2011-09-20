@@ -91,17 +91,17 @@
     [center addObserver:self 
                selector:@selector(didLogin:) 
                    name:FatFreeCRMProxyDidLoginNotification
-                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+                 object:[SBNetworkManager sharedSBNetworkManager]];
     
     [center addObserver:self 
                selector:@selector(didFailWithError:) 
                    name:FatFreeCRMProxyDidFailWithErrorNotification 
-                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+                 object:[SBNetworkManager sharedSBNetworkManager]];
 
     [center addObserver:self 
                selector:@selector(didFailLogin:) 
                    name:FatFreeCRMProxyDidFailLoginNotification 
-                 object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
+                 object:[SBNetworkManager sharedSBNetworkManager]];
     
     SBSettingsManager *settings = [SBSettingsManager sharedSBSettingsManager];
     NSString *server = settings.server;
@@ -201,7 +201,7 @@
     NSString *logging = NSLocalizedString(@"LOGGING_IN", @"Text shown while the user logs in");
     self.statusLabel.text = [NSString stringWithFormat:logging, username, host];
     
-    FatFreeCRMProxy *proxy = [FatFreeCRMProxy sharedFatFreeCRMProxy];
+    SBNetworkManager *proxy = [SBNetworkManager sharedSBNetworkManager];
     proxy.username = username;
     proxy.password = password;
     proxy.server = server;
