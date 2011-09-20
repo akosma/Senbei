@@ -118,13 +118,12 @@
         NSString *ok = NSLocalizedString(@"OK", @"The 'OK' word");
         [self.spinningWheel stopAnimating];
         self.statusLabel.text = message;
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil 
-                                                        message:message
-                                                       delegate:nil 
-                                              cancelButtonTitle:ok
-                                              otherButtonTitles:nil];
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:nil 
+                                                         message:message
+                                                        delegate:nil 
+                                               cancelButtonTitle:ok
+                                               otherButtonTitles:nil] autorelease];
         [alert show];
-        [alert release];
     }
     else 
     {
@@ -217,15 +216,13 @@
 {
     if (self.settingsNavigation == nil)
     {
-        SettingsController *settings = [[SettingsController alloc] init];
+        SettingsController *settings = [[[SettingsController alloc] init] autorelease];
         self.settingsNavigation = [[[UINavigationController alloc] initWithRootViewController:settings] autorelease];
-        [settings release];
 
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                                                                    target:self 
-                                                                                    action:@selector(hideSettingsPanel:)];
+        UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
+                                                                                     target:self 
+                                                                                     action:@selector(hideSettingsPanel:)] autorelease];
         settings.navigationItem.rightBarButtonItem = doneButton;
-        [doneButton release];
 
         self.settingsNavigation.view.transform = CGAffineTransformMakeTranslation(0.0, 480.0);
         self.window.rootViewController = self.settingsNavigation;
