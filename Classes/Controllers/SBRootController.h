@@ -41,7 +41,7 @@
 @class SettingsController;
 @class SBTasksController;
 @class SBListController;
-@class CommentsController;
+@class SBCommentsController;
 
 typedef enum {
     SenbeiViewControllerTasks = 0,

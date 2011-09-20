@@ -1,5 +1,5 @@
 //
-//  CommentsController.m
+//  SBCommentsController.m
 //  Senbei
 //
 //  Created by Adrian on 1/20/10.
@@ -32,21 +32,33 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "CommentsController.h"
+#import "SBCommentsController.h"
 #import "FatFreeCRMProxy.h"
 #import "Comment.h"
 #import "NSDate+Senbei.h"
 #import "AKOEditorrific.h"
 
-@implementation CommentsController
+@interface SBCommentsController ()
+
+@property (nonatomic, retain) UIButton *backgroundButton;
+@property (nonatomic, retain) NSMutableArray *comments;
+@property (nonatomic, retain) AKOEditorrific *editor;
+
+@end
+
+
+@implementation SBCommentsController
 
 @synthesize entity = _entity;
+@synthesize backgroundButton = _backgroundButton;
+@synthesize comments = _comments;
+@synthesize editor = _editor;
 
 - (id)init
 {
     if (self = [super initWithStyle:UITableViewStylePlain]) 
     {
-        _comments = [[NSMutableArray alloc] initWithCapacity:10];
+        self.comments = [NSMutableArray arrayWithCapacity:10];
         
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(didReceiveComments:) 
@@ -58,11 +70,10 @@
                                                      name:FatFreeCRMProxyDidPostCommentNotification 
                                                    object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
         
-        UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
-                                                                                target:self 
-                                                                                action:@selector(addComment:)];
+        UIBarButtonItem *button = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
+                                                                                 target:self 
+                                                                                 action:@selector(addComment:)] autorelease];
         self.navigationItem.rightBarButtonItem = button;
-        [button release];
     }
     return self;
 }
@@ -89,10 +100,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.title = _entity.name;
-    [_comments removeAllObjects];
+    self.title = self.entity.name;
+    [self.comments removeAllObjects];
     [self.tableView reloadData];
-    [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadCommentsForEntity:_entity];
+    [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadCommentsForEntity:self.entity];
 }
 
 - (void)didReceiveMemoryWarning 
@@ -105,28 +116,28 @@
 
 - (void)addComment:(id)sender
 {
-    if (_editor == nil)
+    if (self.editor == nil)
     {
-        _backgroundButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _backgroundButton.frame = CGRectMake(0.0, 0.0, 320.0, 480.0);
-        [_backgroundButton addTarget:self 
+        self.backgroundButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.backgroundButton.frame = CGRectMake(0.0, 0.0, 320.0, 480.0);
+        [self.backgroundButton addTarget:self 
                               action:@selector(backgroundButtonTouched:)
                     forControlEvents:UIControlEventTouchUpInside];
-        _backgroundButton.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.200];
-        [self.tabBarController.view addSubview:_backgroundButton];
+        self.backgroundButton.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.200];
+        [self.tabBarController.view addSubview:self.backgroundButton];
 
-        _editor = [[AKOEditorrific alloc] init];
-        _editor.delegate = self;
-        [self.tabBarController.view addSubview:_editor];
+        self.editor = [[[AKOEditorrific alloc] init] autorelease];
+        self.editor.delegate = self;
+        [self.tabBarController.view addSubview:self.editor];
     }
-    _backgroundButton.hidden = NO;
-    [_editor show];
+    self.backgroundButton.hidden = NO;
+    [self.editor show];
 }
 
 - (void)backgroundButtonTouched:(id)sender
 {
-    _backgroundButton.hidden = YES;
-    [_editor dismissEditor];
+    self.backgroundButton.hidden = YES;
+    [self.editor dismissEditor];
 }
 
 #pragma mark -
@@ -134,13 +145,13 @@
 
 - (void)editorrific:(AKOEditorrific *)editorrific didEnterText:(NSString *)text
 {
-    _backgroundButton.hidden = YES;
-    [[FatFreeCRMProxy sharedFatFreeCRMProxy] sendComment:text forEntity:_entity];
+    self.backgroundButton.hidden = YES;
+    [[FatFreeCRMProxy sharedFatFreeCRMProxy] sendComment:text forEntity:self.entity];
 }
 
 - (void)editorrificDidCancel:(AKOEditorrific *)editorrific
 {
-    _backgroundButton.hidden = YES;
+    self.backgroundButton.hidden = YES;
 }
 
 #pragma mark -
@@ -150,11 +161,11 @@
 {
     NSDictionary *dict = [notification userInfo];
     BaseEntity *entity = [dict objectForKey:@"entity"];
-    if (entity == _entity)
+    if (entity == self.entity)
     {
         NSArray *newData = [dict objectForKey:@"data"];
-        [_comments removeAllObjects];
-        [_comments addObjectsFromArray:newData];
+        [self.comments removeAllObjects];
+        [self.comments addObjectsFromArray:newData];
         [self.tableView reloadData];
     }
 }
@@ -163,9 +174,9 @@
 {
     NSDictionary *dict = [notification userInfo];
     BaseEntity *entity = [dict objectForKey:@"entity"];
-    if (entity == _entity)
+    if (entity == self.entity)
     {
-        [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadCommentsForEntity:_entity];
+        [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadCommentsForEntity:self.entity];
     }
 }
 
@@ -179,7 +190,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Comment *comment = [_comments objectAtIndex:indexPath.row];
+    Comment *comment = [self.comments objectAtIndex:indexPath.row];
     CGFloat height = [comment.comment sizeWithFont:[UIFont systemFontOfSize:17.0] 
                                  constrainedToSize:CGSizeMake(300.0, 4000.0)].height + 30.0;
     if (height < 44.0)
@@ -191,7 +202,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
-    return [_comments count];
+    return [self.comments count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
@@ -208,7 +219,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
 
-    Comment *comment = [_comments objectAtIndex:indexPath.row];
+    Comment *comment = [self.comments objectAtIndex:indexPath.row];
     cell.textLabel.text = comment.comment;
     cell.detailTextLabel.text = [comment.createdAt stringFormattedWithCurrentLocale];
     return cell;

@@ -44,7 +44,7 @@
 #import "Campaign.h"
 #import "Lead.h"
 #import "Definitions.h"
-#import "CommentsController.h"
+#import "SBCommentsController.h"
 #import "WebBrowserController.h"
 #import "SettingsManager.h"
 
@@ -58,7 +58,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 
 @interface SBRootController ()
 
-@property (nonatomic, retain) CommentsController *commentsController;
+@property (nonatomic, retain) SBCommentsController *commentsController;
 
 @end
 
@@ -341,7 +341,7 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
     {
         if (self.commentsController == nil)
         {
-            self.commentsController = [[[CommentsController alloc] init] autorelease];
+            self.commentsController = [[[SBCommentsController alloc] init] autorelease];
         }
         self.commentsController.entity = entity;
         [controller.navigationController pushViewController:self.commentsController
@@ -355,7 +355,7 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
     {
         if (self.commentsController == nil)
         {
-            self.commentsController = [[[CommentsController alloc] init] autorelease];
+            self.commentsController = [[[SBCommentsController alloc] init] autorelease];
         }
         self.commentsController.entity = entity;
         [controller.navigationController pushViewController:self.commentsController animated:YES];

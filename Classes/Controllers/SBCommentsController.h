@@ -1,5 +1,5 @@
 //
-//  CommentsController.h
+//  SBCommentsController.h
 //  Senbei
 //
 //  Created by Adrian on 1/20/10.
@@ -37,14 +37,7 @@
 
 @class BaseEntity;
 
-@interface CommentsController : UITableViewController <AKOEditorrificDelegate>
-{
-@private
-    UIButton *_backgroundButton;
-    BaseEntity *_entity;
-    NSMutableArray *_comments;
-    AKOEditorrific *_editor;
-}
+@interface SBCommentsController : UITableViewController <AKOEditorrificDelegate>
 
 @property (nonatomic, retain) BaseEntity *entity;
 

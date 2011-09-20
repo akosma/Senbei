@@ -32,7 +32,7 @@
 		3A0B525B11146D87005A26FD /* SBNewTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B525A11146D87005A26FD /* SBNewTaskController.m */; };
 		3A1104A3111DEF4500729EB6 /* DemoLogins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A1104A2111DEF4500729EB6 /* DemoLogins.plist */; };
 		3A1F518F1122029C0081580E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F518D1122029C0081580E /* Localizable.strings */; };
-		3A29C08A11075E2B00D887F1 /* CommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08911075E2B00D887F1 /* CommentsController.m */; };
+		3A29C08A11075E2B00D887F1 /* SBCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08911075E2B00D887F1 /* SBCommentsController.m */; };
 		3A29C08E11075E6100D887F1 /* CompanyAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08D11075E6100D887F1 /* CompanyAccount.m */; };
 		3A29C0931107600500D887F1 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C0921107600500D887F1 /* BaseEntity.m */; };
 		3A29C2BB11078D9500D887F1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A29C2BA11078D9500D887F1 /* Settings.bundle */; };
@@ -137,8 +137,8 @@
 		3A0B531D11147EEC005A26FD /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/TaskBuckets.plist; sourceTree = "<group>"; };
 		3A1104A2111DEF4500729EB6 /* DemoLogins.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DemoLogins.plist; sourceTree = "<group>"; };
 		3A1F518E1122029C0081580E /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3A29C08811075E2B00D887F1 /* CommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsController.h; sourceTree = "<group>"; };
-		3A29C08911075E2B00D887F1 /* CommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentsController.m; sourceTree = "<group>"; };
+		3A29C08811075E2B00D887F1 /* SBCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCommentsController.h; sourceTree = "<group>"; };
+		3A29C08911075E2B00D887F1 /* SBCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCommentsController.m; sourceTree = "<group>"; };
 		3A29C08C11075E6100D887F1 /* CompanyAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyAccount.h; sourceTree = "<group>"; };
 		3A29C08D11075E6100D887F1 /* CompanyAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyAccount.m; sourceTree = "<group>"; };
 		3A29C0911107600500D887F1 /* BaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEntity.h; sourceTree = "<group>"; };
@@ -479,8 +479,8 @@
 				3A29C3FD1107A34E00D887F1 /* SBTasksController.m */,
 				3A0B525911146D87005A26FD /* SBNewTaskController.h */,
 				3A0B525A11146D87005A26FD /* SBNewTaskController.m */,
-				3A29C08811075E2B00D887F1 /* CommentsController.h */,
-				3A29C08911075E2B00D887F1 /* CommentsController.m */,
+				3A29C08811075E2B00D887F1 /* SBCommentsController.h */,
+				3A29C08911075E2B00D887F1 /* SBCommentsController.m */,
 				3A29C3361107922300D887F1 /* SettingsController.h */,
 				3A29C3371107922300D887F1 /* SettingsController.m */,
 				3A6C62771119EA07000DD23B /* WebBrowserController.h */,
@@ -771,7 +771,7 @@
 				3A6D8D1E11064CD80089F21D /* NSURL+AKOCacheKey.m in Sources */,
 				3A6D8D3A11064DF20089F21D /* SBListController.m in Sources */,
 				3A6D8D61110654DB0089F21D /* FatFreeCRMProxy.m in Sources */,
-				3A29C08A11075E2B00D887F1 /* CommentsController.m in Sources */,
+				3A29C08A11075E2B00D887F1 /* SBCommentsController.m in Sources */,
 				3A29C08E11075E6100D887F1 /* CompanyAccount.m in Sources */,
 				3A29C0931107600500D887F1 /* BaseEntity.m in Sources */,
 				3A29C3381107922300D887F1 /* SettingsController.m in Sources */,
