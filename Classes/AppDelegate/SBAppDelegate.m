@@ -32,7 +32,7 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SenbeiAppDelegate.h"
+#import "SBAppDelegate.h"
 #import "FatFreeCRMProxy.h"
 #import "Definitions.h"
 #import "AKOImageCache.h"
@@ -41,7 +41,7 @@
 #import "SettingsController.h"
 #import "SettingsManager.h"
 
-@interface SenbeiAppDelegate ()
+@interface SBAppDelegate ()
 @property (nonatomic, readonly) UILabel *statusLabel;
 @property (nonatomic, readonly) UIActivityIndicatorView *spinningWheel;
 @property (nonatomic, readonly) UIView *applicationCredits;
@@ -54,7 +54,7 @@
 @end
 
 
-@implementation SenbeiAppDelegate
+@implementation SBAppDelegate
 
 @synthesize currentUser = _currentUser;
 @synthesize statusLabel = _statusLabel;
@@ -74,9 +74,9 @@
 #pragma mark -
 #pragma mark Static methods
 
-+ (SenbeiAppDelegate *)sharedAppDelegate
++ (SBAppDelegate *)sharedAppDelegate
 {
-    return (SenbeiAppDelegate *)[UIApplication sharedApplication].delegate;
+    return (SBAppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
 #pragma mark -

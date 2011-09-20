@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -44,7 +44,7 @@
 		3A2B966211088C26000373A5 /* Lead.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2B966111088C26000373A5 /* Lead.m */; };
 		3A2B966711088C3D000373A5 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2B966611088C3D000373A5 /* Task.m */; };
 		3A3E6A2B1121C6F700F3D322 /* NSDate+Senbei.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E6A2A1121C6F700F3D322 /* NSDate+Senbei.m */; };
-		3A3E6A2E1121C73300F3D322 /* SenbeiAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E6A2D1121C73300F3D322 /* SenbeiAppDelegate.m */; };
+		3A3E6A2E1121C73300F3D322 /* SBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E6A2D1121C73300F3D322 /* SBAppDelegate.m */; };
 		3A564E851147E1FE009A7435 /* TaskBuckets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A564E841147E1FE009A7435 /* TaskBuckets.plist */; };
 		3A564E871147E208009A7435 /* TaskCategories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A564E861147E208009A7435 /* TaskCategories.plist */; };
 		3A5C5402115781D500620375 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C53FF115781D500620375 /* NSDataAdditions.m */; };
@@ -161,8 +161,8 @@
 		3A2B966611088C3D000373A5 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
 		3A3E6A291121C6F700F3D322 /* NSDate+Senbei.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Senbei.h"; sourceTree = "<group>"; };
 		3A3E6A2A1121C6F700F3D322 /* NSDate+Senbei.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Senbei.m"; sourceTree = "<group>"; };
-		3A3E6A2C1121C73300F3D322 /* SenbeiAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SenbeiAppDelegate.h; sourceTree = "<group>"; };
-		3A3E6A2D1121C73300F3D322 /* SenbeiAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SenbeiAppDelegate.m; sourceTree = "<group>"; };
+		3A3E6A2C1121C73300F3D322 /* SBAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SBAppDelegate.h; sourceTree = "<group>"; };
+		3A3E6A2D1121C73300F3D322 /* SBAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAppDelegate.m; sourceTree = "<group>"; };
 		3A45743011625D3D00EFFEA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A45743111625D8D00EFFEA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/TaskBuckets.plist; sourceTree = "<group>"; };
 		3A45743211625DA100EFFEA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/TaskCategories.plist; sourceTree = "<group>"; };
@@ -459,8 +459,8 @@
 		3A6D8CD111064A4B0089F21D /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
-				3A3E6A2C1121C73300F3D322 /* SenbeiAppDelegate.h */,
-				3A3E6A2D1121C73300F3D322 /* SenbeiAppDelegate.m */,
+				3A3E6A2C1121C73300F3D322 /* SBAppDelegate.h */,
+				3A3E6A2D1121C73300F3D322 /* SBAppDelegate.m */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -690,10 +690,12 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0410;
 				ORGANIZATIONNAME = "akosma software";
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Senbei" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				English,
@@ -781,7 +783,7 @@
 				3A0B525B11146D87005A26FD /* NewTaskController.m in Sources */,
 				3A6C627A1119EA07000DD23B /* WebBrowserController.m in Sources */,
 				3A3E6A2B1121C6F700F3D322 /* NSDate+Senbei.m in Sources */,
-				3A3E6A2E1121C73300F3D322 /* SenbeiAppDelegate.m in Sources */,
+				3A3E6A2E1121C73300F3D322 /* SBAppDelegate.m in Sources */,
 				3AE1CC3A112941C500F50018 /* ListTableViewCell.m in Sources */,
 				3AE1CCF011294F5500F50018 /* NSString+Senbei.m in Sources */,
 				3A92BDDC112FDB6F001B43FE /* RootController.m in Sources */,
@@ -873,9 +875,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Senbei_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "Senbei-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = Senbei;
 			};
 			name = Debug;
@@ -889,9 +892,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Senbei_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "Senbei-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = Senbei;
 			};
 			name = Release;
@@ -904,8 +908,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				PREBINDING = NO;
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos;
 			};
 			name = DistributionAppStore;
 		};
@@ -919,9 +922,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Senbei_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "Senbei-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = Senbei;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F0C5B9DC-5402-4075-B4B4-090CE017F3E0";
 			};
@@ -935,8 +939,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				PREBINDING = NO;
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos;
 			};
 			name = DistributionAdHoc;
 		};
@@ -950,9 +953,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Senbei_Prefix.pch;
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "Senbei-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = Senbei;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
@@ -966,8 +970,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				PREBINDING = NO;
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -979,8 +982,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				PREBINDING = NO;
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};

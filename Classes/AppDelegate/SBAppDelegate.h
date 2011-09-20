@@ -37,7 +37,7 @@
 @class RootController;
 @class User;
 
-@interface SenbeiAppDelegate : NSObject <UIApplicationDelegate>
+@interface SBAppDelegate : NSObject <UIApplicationDelegate>
 {
 @private
     IBOutlet UIWindow *_window;
@@ -51,6 +51,6 @@
 
 @property (nonatomic, retain) User *currentUser;
 
-+ (SenbeiAppDelegate *)sharedAppDelegate;
++ (SBAppDelegate *)sharedAppDelegate;
 
 @end

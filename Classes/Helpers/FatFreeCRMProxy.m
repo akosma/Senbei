@@ -33,7 +33,7 @@
 //
 
 #import "FatFreeCRMProxy.h"
-#import "SenbeiAppDelegate.h"
+#import "SBAppDelegate.h"
 #import "SynthesizeSingleton.h"
 #import "NSDate+Senbei.h"
 #import "ASINetworkQueue.h"
@@ -179,7 +179,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments", self.server, path, entity.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
     
-    NSInteger idValue = [SenbeiAppDelegate sharedAppDelegate].currentUser.objectId;
+    NSInteger idValue = [SBAppDelegate sharedAppDelegate].currentUser.objectId;
     NSNumber *currentUserID = [NSNumber numberWithInt:idValue];
     
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
@@ -229,7 +229,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSString *urlString = [NSString stringWithFormat:@"%@/tasks", self.server, task.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
     
-    NSInteger idValue = [SenbeiAppDelegate sharedAppDelegate].currentUser.objectId;
+    NSInteger idValue = [SBAppDelegate sharedAppDelegate].currentUser.objectId;
     NSNumber *currentUserID = [NSNumber numberWithInt:idValue];
 
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
