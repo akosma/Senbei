@@ -33,7 +33,6 @@
 //
 
 #import "SBSettingsController.h"
-#import "Definitions.h"
 #import "SBHelpers.h"
 
 @implementation SBSettingsController

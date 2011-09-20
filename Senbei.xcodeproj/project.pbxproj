@@ -254,7 +254,6 @@
 		3A6D8D2511064D060089F21D /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		3A6D8D3811064DF20089F21D /* SBListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBListController.h; sourceTree = "<group>"; };
 		3A6D8D3911064DF20089F21D /* SBListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBListController.m; sourceTree = "<group>"; };
-		3A6D8D691106573B0089F21D /* Definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
 		3A708B411108427500CB2D83 /* SBComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBComment.h; sourceTree = "<group>"; };
 		3A708B421108427500CB2D83 /* SBComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBComment.m; sourceTree = "<group>"; };
 		3A7700E1115960E000BCF25B /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/MainWindow.xib; sourceTree = "<group>"; };
@@ -341,7 +340,6 @@
 			children = (
 				3A82A8821121C694009FF035 /* Senbei_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
-				3A6D8D691106573B0089F21D /* Definitions.h */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";

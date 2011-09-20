@@ -35,7 +35,6 @@
 #import "SBAppDelegate.h"
 #import "SBHelpers.h"
 #import "SBExternals.h"
-#import "Definitions.h"
 #import "SBRootController.h"
 #import "SBSettingsController.h"
 #import "SBNotifications.h"

@@ -35,7 +35,6 @@
 #import "SBContact.h"
 #import "SBHelpers.h"
 #import "SBExternals.h"
-#import "Definitions.h"
 
 void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringRef label, NSString *value)
 {

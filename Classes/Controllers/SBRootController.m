@@ -33,7 +33,6 @@
 //
 
 #import "SBRootController.h"
-#import "Definitions.h"
 #import "SBHelpers.h"
 #import "SBModels.h"
 #import "SBListController.h"
