@@ -37,7 +37,6 @@
 @class ASINetworkQueue;
 @class SBBaseEntity;
 @class SBTask;
-@class SBSettingsManager;
 
 @interface SBNetworkManager : NSObject
 
