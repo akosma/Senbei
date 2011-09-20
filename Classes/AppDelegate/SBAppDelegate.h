@@ -44,7 +44,10 @@
 @property (nonatomic, retain) IBOutlet UIView *applicationCredits;
 @property (nonatomic, retain) IBOutlet SBRootController *tabBarController;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet UINavigationController *settingsController;
 @property (nonatomic, retain) SBUser *currentUser;
+
+- (IBAction)login:(id)sender;
 
 + (SBAppDelegate *)sharedAppDelegate;
 

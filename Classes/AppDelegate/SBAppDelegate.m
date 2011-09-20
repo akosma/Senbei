@@ -42,9 +42,6 @@
 
 @interface SBAppDelegate ()
 
-@property (nonatomic, retain) UINavigationController *settingsNavigation;
-
-- (void)login;
 - (void)showSettingsPanel;
 
 @end
@@ -58,7 +55,7 @@
 @synthesize applicationCredits = _applicationCredits;
 @synthesize tabBarController = _tabBarController;
 @synthesize window = _window;
-@synthesize settingsNavigation = _settingsNavigation;
+@synthesize settingsController = _settingsController;
 
 - (void)dealloc 
 {
@@ -68,7 +65,7 @@
     [_applicationCredits release];
     [_tabBarController release];
     [_window release];
-    [_settingsNavigation release];
+    [_settingsController release];
     [super dealloc];
 }
 
@@ -125,21 +122,17 @@
     }
     else 
     {
-        [self login];
+        [self login:nil];
     }
 
-    self.applicationCredits.alpha = 0.0;
     [self.window makeKeyAndVisible];
-    
-    [UIView beginAnimations:nil context:NULL];
-    self.applicationCredits.alpha = 1.0;
-    [UIView commitAnimations];
 }
 
 #pragma mark - NSNotification handler methods
 
 - (void)didFailLogin:(NSNotification *)notification
 {
+    [[SBNetworkManager sharedSBNetworkManager] cancelConnections];
     [self.spinningWheel stopAnimating];
     self.statusLabel.text = @"Failed login";
     [self showSettingsPanel];
@@ -180,18 +173,18 @@
     self.currentUser = [[notification userInfo] objectForKey:@"user"];
     self.statusLabel.text = NSLocalizedString(@"LOADING_CONTROLLERS", @"Message shown when the controllers are loading");
 
-    self.tabBarController.view.alpha = 0.0;
-    self.window.rootViewController = self.tabBarController;
-    
-    [UIView animateWithDuration:0.4 
-                     animations:^{
-                         self.tabBarController.view.alpha = 1.0;
-                     }];
+    [UIView transitionFromView:self.settingsController.view 
+                        toView:self.tabBarController.view 
+                      duration:0.4
+                       options:UIViewAnimationOptionTransitionFlipFromLeft 
+                    completion:^(BOOL finished) {
+                        self.window.rootViewController = self.tabBarController;
+                    }];
 }
 
 #pragma mark - Private methods
 
-- (void)login
+- (IBAction)login:(id)sender
 {
     NSString *server = [SBSettingsManager sharedSBSettingsManager].server;
     NSURL *url = [NSURL URLWithString:server];
@@ -206,36 +199,13 @@
 
 - (void)showSettingsPanel
 {
-    if (self.settingsNavigation == nil)
-    {
-        SBSettingsController *settings = [[[SBSettingsController alloc] init] autorelease];
-        self.settingsNavigation = [[[UINavigationController alloc] initWithRootViewController:settings] autorelease];
-
-        UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
-                                                                                     target:self 
-                                                                                     action:@selector(hideSettingsPanel:)] autorelease];
-        settings.navigationItem.rightBarButtonItem = doneButton;
-
-        self.settingsNavigation.view.transform = CGAffineTransformMakeTranslation(0.0, 480.0);
-        self.window.rootViewController = self.settingsNavigation;
-    }
-    
-    [UIView animateWithDuration:0.4 
-                     animations:^{
-                         self.settingsNavigation.view.transform = CGAffineTransformIdentity;
-                     }];
-}
-
-- (void)hideSettingsPanel:(id)sender
-{
-    SBSettingsController *settings = [[self.settingsNavigation viewControllers] objectAtIndex:0];
-    [settings dismiss:self];
-    [self login];
-
-    [UIView animateWithDuration:0.4 
-                     animations:^{
-                         self.settingsNavigation.view.transform = CGAffineTransformMakeTranslation(0.0, 480.0);
-                     }];
+    [UIView transitionFromView:self.tabBarController.view 
+                        toView:self.settingsController.view
+                      duration:0.4
+                       options:UIViewAnimationOptionTransitionFlipFromRight 
+                    completion:^(BOOL finished) {
+                        self.window.rootViewController = self.settingsController;
+                    }];
 }
 
 @end

@@ -61,10 +61,7 @@
         {
             // In the case of FFCRM, bad login API requests receive a 302,
             // with a redirection body taking to the login form
-            NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidFailLoginNotification 
-                                                                  object:self 
-                                                                userInfo:nil];
-            [[NSNotificationCenter defaultCenter] postNotification:notif];            
+            errorMessage = @"Unauthorized";
             break;
         }
             

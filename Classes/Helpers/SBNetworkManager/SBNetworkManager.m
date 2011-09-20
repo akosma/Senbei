@@ -148,6 +148,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
     {
         [request processResponse];
     }
+    else if (request.responseStatusCode == 302)
+    {
+        NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidFailLoginNotification 
+                                                              object:self 
+                                                            userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notif];
+    }
     else
     {
         NSError *error = [self createErrorWithMessage:errorMessage code:request.responseStatusCode];

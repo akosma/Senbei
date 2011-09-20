@@ -49,6 +49,7 @@
     NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments.xml", server, path, entity.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
     id request = [self requestWithURL:url];
+    [request setEntity:entity];
     return request;
 }
 

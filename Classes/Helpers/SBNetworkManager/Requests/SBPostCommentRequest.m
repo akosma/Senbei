@@ -62,6 +62,7 @@
     NSNumber *currentUserID = [NSNumber numberWithInt:idValue];
     
     id request = [self requestWithURL:url];
+    [request setEntity:entity];
     [request setRequestMethod:@"POST"];
     [request setShouldRedirect:NO];
     [request setDefaultResponseEncoding:NSUTF8StringEncoding];
