@@ -36,6 +36,7 @@
 #import "SBModels.h"
 #import "SBHelpers.h"
 #import "SBExternals.h"
+#import "SBNotifications.h"
 
 @interface SBCommentsController ()
 
@@ -62,12 +63,12 @@
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(didReceiveComments:) 
                                                      name:SBNetworkManagerDidRetrieveCommentsNotification
-                                                   object:[SBNetworkManager sharedSBNetworkManager]];
+                                                   object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didPostComment:) 
                                                      name:SBNetworkManagerDidPostCommentNotification 
-                                                   object:[SBNetworkManager sharedSBNetworkManager]];
+                                                   object:nil];
         
         UIBarButtonItem *button = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
                                                                                  target:self 

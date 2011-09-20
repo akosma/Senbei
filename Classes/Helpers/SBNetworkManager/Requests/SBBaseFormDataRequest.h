@@ -1,8 +1,8 @@
 //
-//  SBHelpers.h
+//  SBBaseFormDataRequest.h
 //  Senbei
 //
-//  Created by Adrian on 9/20/11.
+//  Created by Adrian on 9/20/2011.
 //  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,8 +32,8 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SBNetworkManager.h"
-#import "NSDate+Senbei.h"
-#import "NSString+Senbei.h"
-#import "SBSettingsManager.h"
-#import "ASIHTTPRequest+Senbei.h"
+#import "ASIFormDataRequest.h"
+
+@interface SBBaseFormDataRequest : ASIFormDataRequest
+
+@end

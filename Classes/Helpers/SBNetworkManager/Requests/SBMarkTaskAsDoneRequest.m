@@ -1,8 +1,8 @@
 //
-//  SBHelpers.h
+//  SBMarkTaskAsDoneRequest.m
 //  Senbei
 //
-//  Created by Adrian on 9/20/11.
+//  Created by Adrian on 9/20/2011.
 //  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,8 +32,28 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SBNetworkManager.h"
-#import "NSDate+Senbei.h"
-#import "NSString+Senbei.h"
+#import "SBMarkTaskAsDoneRequest.h"
 #import "SBSettingsManager.h"
-#import "ASIHTTPRequest+Senbei.h"
+#import "SBModels.h"
+#import "SBNotifications.h"
+
+@implementation SBMarkTaskAsDoneRequest
+
++ (id)requestWithTask:(SBTask *)task
+{
+    NSString *server = [SBSettingsManager sharedSBSettingsManager].server;
+    NSString *urlString = [NSString stringWithFormat:@"%@/tasks/%d/complete", server, task.objectId];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    id request = [self requestWithURL:url];
+    [request setRequestMethod:@"PUT"];
+    return request;
+}
+
+- (void)processResponse
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:SBNetworkManagerDidMarkTaskAsDoneNotification
+                                                        object:self];
+}
+
+@end

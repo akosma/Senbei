@@ -2,8 +2,8 @@
 //  SBBaseRequest.h
 //  Senbei
 //
-//  Created by Adrian on 1/19/10.
-//  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
+//  Created by Adrian on 9/20/2011.
+//  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without
@@ -33,6 +33,8 @@
 //
 
 #import "ASIHTTPRequest.h"
+#import "ASIHTTPRequest+Senbei.h"
+#import "SBExternals.h"
 
 @interface SBBaseRequest : ASIHTTPRequest
 

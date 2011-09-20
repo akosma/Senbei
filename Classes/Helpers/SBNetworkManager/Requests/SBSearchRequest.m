@@ -1,8 +1,8 @@
 //
-//  SBHelpers.h
+//  SBSearchRequest.m
 //  Senbei
 //
-//  Created by Adrian on 9/20/11.
+//  Created by Adrian on 9/20/2011.
 //  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,8 +32,21 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SBNetworkManager.h"
-#import "NSDate+Senbei.h"
-#import "NSString+Senbei.h"
+#import "SBSearchRequest.h"
+#import "SBModels.h"
 #import "SBSettingsManager.h"
-#import "ASIHTTPRequest+Senbei.h"
+
+@implementation SBSearchRequest
+
++ (id)requestWithClass:(Class)klass query:(NSString *)query
+{
+    NSString *server = [SBSettingsManager sharedSBSettingsManager].server;
+    NSString *path = [klass serverPath];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@?page=1&query=%@", server, path, query];
+    NSURL *url = [NSURL URLWithString:urlString];
+    id request = [self requestWithURL:url];
+    [request setKlass:klass];
+    return request;
+}
+
+@end

@@ -1,8 +1,8 @@
 //
-//  SBHelpers.h
+//  SBNotifications.h
 //  Senbei
 //
-//  Created by Adrian on 9/20/11.
+//  Created by Adrian on 9/20/2011.
 //  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,8 +32,25 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SBNetworkManager.h"
-#import "NSDate+Senbei.h"
-#import "NSString+Senbei.h"
-#import "SBSettingsManager.h"
-#import "ASIHTTPRequest+Senbei.h"
+extern NSString * const SBNetworkManagerDidFailWithErrorNotification;
+extern NSString * const SBNetworkManagerDidRetrieveTasksNotification;
+extern NSString * const SBNetworkManagerDidMarkTaskAsDoneNotification;
+extern NSString * const SBNetworkManagerDidCreateTaskNotification;
+extern NSString * const SBNetworkManagerDidRetrieveAccountsNotification;
+extern NSString * const SBNetworkManagerDidRetrieveOpportunitiesNotification;
+extern NSString * const SBNetworkManagerDidRetrieveCampaignsNotification;
+extern NSString * const SBNetworkManagerDidRetrieveLeadsNotification;
+extern NSString * const SBNetworkManagerDidRetrieveContactsNotification;
+extern NSString * const SBNetworkManagerDidRetrieveCommentsNotification;
+extern NSString * const SBNetworkManagerDidPostCommentNotification;
+extern NSString * const SBNetworkManagerDidLoginNotification;
+extern NSString * const SBNetworkManagerDidFailLoginNotification;
+
+extern NSString * const SBNetworkManagerErrorKey;
+extern NSString * const TASKS_OVERDUE_KEY;
+extern NSString * const TASKS_DUE_ASAP_KEY;
+extern NSString * const TASKS_DUE_TODAY_KEY;
+extern NSString * const TASKS_DUE_TOMORROW_KEY;
+extern NSString * const TASKS_DUE_THIS_WEEK_KEY;
+extern NSString * const TASKS_DUE_NEXT_WEEK_KEY;
+extern NSString * const TASKS_DUE_LATER_KEY;

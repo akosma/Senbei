@@ -41,6 +41,7 @@
 #import "SBTasksController.h"
 #import "SBCommentsController.h"
 #import "SBWebBrowserController.h"
+#import "SBNotifications.h"
 
 typedef enum {
     SBViewControllerTasks = 0,
@@ -126,32 +127,32 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     [center addObserver:self.accountsController 
                selector:@selector(didReceiveData:) 
                    name:SBNetworkManagerDidRetrieveAccountsNotification
-                 object:[SBNetworkManager sharedSBNetworkManager]];
+                 object:nil];
     self.accountsController.listedClass = [SBCompanyAccount class];
     
     [center addObserver:self.opportunitiesController 
                selector:@selector(didReceiveData:) 
                    name:SBNetworkManagerDidRetrieveOpportunitiesNotification
-                 object:[SBNetworkManager sharedSBNetworkManager]];
+                 object:nil];
     self.opportunitiesController.listedClass = [SBOpportunity class];
     
     [center addObserver:self.contactsController 
                selector:@selector(didReceiveData:) 
                    name:SBNetworkManagerDidRetrieveContactsNotification
-                 object:[SBNetworkManager sharedSBNetworkManager]];
+                 object:nil];
     self.contactsController.listedClass = [SBContact class];
     self.contactsController.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
     [center addObserver:self.campaignsController
                selector:@selector(didReceiveData:)
                    name:SBNetworkManagerDidRetrieveCampaignsNotification
-                 object:[SBNetworkManager sharedSBNetworkManager]];
+                 object:nil];
     self.campaignsController.listedClass = [SBCampaign class];
     
     [center addObserver:self.leadsController
                selector:@selector(didReceiveData:)
                    name:SBNetworkManagerDidRetrieveLeadsNotification
-                 object:[SBNetworkManager sharedSBNetworkManager]];
+                 object:nil];
     self.leadsController.listedClass = [SBLead class];
     
     self.leadsController.tabBarItem.image = [UIImage imageNamed:@"leads.png"];

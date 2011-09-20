@@ -1,8 +1,8 @@
 //
-//  SBHelpers.h
+//  SBRequests.h
 //  Senbei
 //
-//  Created by Adrian on 9/20/11.
+//  Created by Adrian on 9/20/2011.
 //  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,8 +32,13 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SBNetworkManager.h"
-#import "NSDate+Senbei.h"
-#import "NSString+Senbei.h"
-#import "SBSettingsManager.h"
-#import "ASIHTTPRequest+Senbei.h"
+#import "SBBaseRequest.h"
+#import "SBBaseFormDataRequest.h"
+#import "SBLoginRequest.h"
+#import "SBListRequest.h"
+#import "SBSearchRequest.h"
+#import "SBCommentsRequest.h"
+#import "SBTasksRequest.h"
+#import "SBPostCommentRequest.h"
+#import "SBMarkTaskAsDoneRequest.h"
+#import "SBCreateTaskRequest.h"

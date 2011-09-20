@@ -1,8 +1,8 @@
 //
-//  SBHelpers.h
+//  SBBaseFormDataRequest.m
 //  Senbei
 //
-//  Created by Adrian on 9/20/11.
+//  Created by Adrian on 9/20/2011.
 //  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,8 +32,29 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SBNetworkManager.h"
-#import "NSDate+Senbei.h"
-#import "NSString+Senbei.h"
+#import "SBBaseFormDataRequest.h"
 #import "SBSettingsManager.h"
-#import "ASIHTTPRequest+Senbei.h"
+
+static NSTimeInterval REQUEST_TIMEOUT = 60;
+
+
+@implementation SBBaseFormDataRequest
+
+- (id)initWithURL:(NSURL *)newURL
+{
+    self = [super initWithURL:newURL];
+    if (self)
+    {
+        BOOL validateCertificate = ![SBSettingsManager sharedSBSettingsManager].useSelfSignedSSLCertificates;
+        [self setUsername:[SBSettingsManager sharedSBSettingsManager].username];
+        [self setPassword:[SBSettingsManager sharedSBSettingsManager].password];
+        [self setValidatesSecureCertificate:validateCertificate];
+        [self setShouldRedirect:NO];
+        [self setDefaultResponseEncoding:NSUTF8StringEncoding];
+        [self setTimeOutSeconds:REQUEST_TIMEOUT];
+        [self addRequestHeader:@"Accept" value:@"text/xml"];
+    }
+    return self;
+}
+
+@end

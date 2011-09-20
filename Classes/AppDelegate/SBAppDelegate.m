@@ -38,6 +38,7 @@
 #import "Definitions.h"
 #import "SBRootController.h"
 #import "SBSettingsController.h"
+#import "SBNotifications.h"
 
 @interface SBAppDelegate ()
 
@@ -90,17 +91,17 @@
     [center addObserver:self 
                selector:@selector(didLogin:) 
                    name:SBNetworkManagerDidLoginNotification
-                 object:[SBNetworkManager sharedSBNetworkManager]];
-    
+                 object:nil];
+   
     [center addObserver:self 
                selector:@selector(didFailWithError:) 
                    name:SBNetworkManagerDidFailWithErrorNotification 
-                 object:[SBNetworkManager sharedSBNetworkManager]];
+                 object:nil];
 
     [center addObserver:self 
                selector:@selector(didFailLogin:) 
                    name:SBNetworkManagerDidFailLoginNotification 
-                 object:[SBNetworkManager sharedSBNetworkManager]];
+                 object:nil];
     
     SBSettingsManager *settings = [SBSettingsManager sharedSBSettingsManager];
     NSString *server = settings.server;
@@ -196,14 +197,10 @@
     NSURL *url = [NSURL URLWithString:server];
     NSString *host = [url host];
     NSString *username = [SBSettingsManager sharedSBSettingsManager].username;
-    NSString *password = [SBSettingsManager sharedSBSettingsManager].password;
     NSString *logging = NSLocalizedString(@"LOGGING_IN", @"Text shown while the user logs in");
     self.statusLabel.text = [NSString stringWithFormat:logging, username, host];
     
     SBNetworkManager *proxy = [SBNetworkManager sharedSBNetworkManager];
-    proxy.username = username;
-    proxy.password = password;
-    proxy.server = server;
     [proxy login];
 }
 

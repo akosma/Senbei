@@ -1,8 +1,8 @@
 //
-//  SBHelpers.h
+//  SBCommentsRequest.m
 //  Senbei
 //
-//  Created by Adrian on 9/20/11.
+//  Created by Adrian on 9/20/2011.
 //  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,8 +32,44 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SBNetworkManager.h"
-#import "NSDate+Senbei.h"
-#import "NSString+Senbei.h"
+#import "SBCommentsRequest.h"
+#import "SBModels.h"
 #import "SBSettingsManager.h"
-#import "ASIHTTPRequest+Senbei.h"
+#import "SBNotifications.h"
+
+@implementation SBCommentsRequest
+
+@synthesize entity = _entity;
+
++ (id)requestWithEntity:(SBBaseEntity *)entity
+{
+    NSString *server = [SBSettingsManager sharedSBSettingsManager].server;
+    Class klass = [entity class];
+    NSString *path = [klass serverPath];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments.xml", server, path, entity.objectId];
+    NSURL *url = [NSURL URLWithString:urlString];
+    id request = [self requestWithURL:url];
+    return request;
+}
+
+- (void)dealloc
+{
+    [_entity release];
+    [super dealloc];
+}
+
+- (void)processResponse
+{
+    NSData *response = [self responseData];
+    NSArray *comments = [self deserializeXML:response 
+                                    forXPath:@"comment" 
+                                    andClass:NSClassFromString(@"SBComment")];
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:comments, @"data", self.entity, @"entity", nil];
+    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveCommentsNotification
+                                                          object:self 
+                                                        userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotification:notif];    
+}
+
+@end

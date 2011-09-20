@@ -35,6 +35,7 @@
 #import "SBNewTaskController.h"
 #import "SBModels.h"
 #import "SBHelpers.h"
+#import "SBNotifications.h"
 
 @interface SBNewTaskController ()
 
@@ -84,7 +85,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(close:) 
                                                      name:SBNetworkManagerDidCreateTaskNotification
-                                                   object:[SBNetworkManager sharedSBNetworkManager]];
+                                                   object:nil];
         
         self.nameField = [[[UITextField alloc] initWithFrame:CGRectMake(90.0, 12.0, 200.0, 20.0)] autorelease];
         self.nameField.delegate = self;

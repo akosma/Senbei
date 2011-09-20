@@ -1,8 +1,8 @@
 //
-//  SBHelpers.h
+//  SBLoginRequest.m
 //  Senbei
 //
-//  Created by Adrian on 9/20/11.
+//  Created by Adrian on 9/20/2011.
 //  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,8 +32,37 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SBNetworkManager.h"
-#import "NSDate+Senbei.h"
-#import "NSString+Senbei.h"
+#import "SBLoginRequest.h"
+#import "SBExternals.h"
+#import "SBModels.h"
+#import "SBNotifications.h"
 #import "SBSettingsManager.h"
-#import "ASIHTTPRequest+Senbei.h"
+
+static NSString *PROFILE_REQUEST = @"profile";
+
+@implementation SBLoginRequest
+
++ (id)request
+{
+    NSString *server = [SBSettingsManager sharedSBSettingsManager].server;
+    NSString *path = PROFILE_REQUEST;
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", server, path];
+    NSURL *url = [NSURL URLWithString:urlString];
+    id request = [self requestWithURL:url];
+    return request;
+}
+
+- (void)processResponse
+{
+    NSData *response = [self responseData];
+    TBXML *tbxml = [TBXML tbxmlWithXMLData:response];
+    TBXMLElement *root = tbxml.rootXMLElement;
+    SBUser *user = [[[SBUser alloc] initWithTBXMLElement:root] autorelease];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:user, @"user", nil];
+    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidLoginNotification
+                                                          object:self 
+                                                        userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotification:notif];    
+}
+
+@end

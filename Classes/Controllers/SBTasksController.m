@@ -36,6 +36,7 @@
 #import "SBModels.h"
 #import "SBHelpers.h"
 #import "SBNewTaskController.h"
+#import "SBNotifications.h"
 
 @interface SBTasksController ()
 
@@ -124,17 +125,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(didReceiveTasks:) 
                                                  name:SBNetworkManagerDidRetrieveTasksNotification 
-                                               object:[SBNetworkManager sharedSBNetworkManager]];
+                                               object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadTasks:) 
                                                  name:SBNetworkManagerDidMarkTaskAsDoneNotification 
-                                               object:[SBNetworkManager sharedSBNetworkManager]];
+                                               object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadTasks:) 
                                                  name:SBNetworkManagerDidCreateTaskNotification
-                                               object:[SBNetworkManager sharedSBNetworkManager]];
+                                               object:nil];
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TaskCategories" ofType:@"plist"];
     NSArray *categoriesArray = [NSArray arrayWithContentsOfFile:path];

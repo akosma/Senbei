@@ -33,64 +33,18 @@
 //
 
 #import "SBNetworkManager.h"
-#import "SBAppDelegate.h"
-#import "NSDate+Senbei.h"
-#import "Definitions.h"
-#import "SBExternals.h"
 #import "SBModels.h"
-#import "SBSettingsManager.h"
+#import "SBRequests.h"
+#import "SBNotifications.h"
+#import "ASIHTTPRequest+Senbei.h"
 
-NSString * const SBNetworkManagerDidFailWithErrorNotification         = @"SBNetworkManagerDidFailWithErrorNotification";
-NSString * const SBNetworkManagerDidRetrieveTasksNotification         = @"SBNetworkManagerDidRetrieveTasksNotification";
-NSString * const SBNetworkManagerDidMarkTaskAsDoneNotification        = @"SBNetworkManagerDidMarkTaskAsDoneNotification";
-NSString * const SBNetworkManagerDidCreateTaskNotification            = @"SBNetworkManagerDidCreateTaskNotification";
-NSString * const SBNetworkManagerDidRetrieveAccountsNotification      = @"SBNetworkManagerDidRetrieveAccountsNotification";
-NSString * const SBNetworkManagerDidRetrieveOpportunitiesNotification = @"SBNetworkManagerDidRetrieveOpportunitiesNotification";
-NSString * const SBNetworkManagerDidRetrieveCampaignsNotification     = @"SBNetworkManagerDidRetrieveCampaignsNotification";
-NSString * const SBNetworkManagerDidRetrieveLeadsNotification         = @"SBNetworkManagerDidRetrieveLeadsNotification";
-NSString * const SBNetworkManagerDidRetrieveContactsNotification      = @"SBNetworkManagerDidRetrieveContactsNotification";
-NSString * const SBNetworkManagerDidRetrieveCommentsNotification      = @"SBNetworkManagerDidRetrieveCommentsNotification";
-NSString * const SBNetworkManagerDidPostCommentNotification           = @"SBNetworkManagerDidPostCommentNotification";
-NSString * const SBNetworkManagerDidLoginNotification                 = @"SBNetworkManagerDidLoginNotification";
-NSString * const SBNetworkManagerDidFailLoginNotification             = @"SBNetworkManagerDidFailLoginNotification";
-
-NSString * const SBNetworkManagerErrorKey = @"SBNetworkManagerErrorKey";
-NSString * const TASKS_OVERDUE_KEY       = @"tasksOverdue";
-NSString * const TASKS_DUE_ASAP_KEY      = @"tasksDueASAP";
-NSString * const TASKS_DUE_TODAY_KEY     = @"tasksDueToday";
-NSString * const TASKS_DUE_TOMORROW_KEY  = @"tasksDueTomorrow";
-NSString * const TASKS_DUE_THIS_WEEK_KEY = @"tasksDueThisWeek";
-NSString * const TASKS_DUE_NEXT_WEEK_KEY = @"tasksDueNextWeek";
-NSString * const TASKS_DUE_LATER_KEY     = @"tasksDueLater";
-
-
-static NSString *PROFILE_REQUEST = @"profile";
-static NSString *COMMENTS_REQUEST = @"comments";
-static NSString *TASKS_REQUEST = @"tasks";
-static NSString *NEW_TASK_REQUEST = @"task_new";
-static NSString *TASK_DONE_REQUEST = @"task_done";
-static NSString *NEW_COMMENT_REQUEST = @"new_comment";
 
 @interface SBNetworkManager ()
 
 @property (nonatomic, retain) ASINetworkQueue *networkQueue;
-@property (nonatomic, assign) NSNotificationCenter *notificationCenter;
-@property (nonatomic, assign) SBSettingsManager *settingsManager;
 
-- (void)sendGETRequestToURL:(NSURL *)url path:(NSString *)path;
-- (BOOL)requestOK:(ASIHTTPRequest *)request;
 - (NSError *)createErrorWithMessage:(NSString *)string code:(NSInteger)code;
 - (void)notifyError:(NSError *)error;
-- (void)processGetAccountsRequest:(ASIHTTPRequest *)request;
-- (void)processGetOpportunitiesRequest:(ASIHTTPRequest *)request;
-- (void)processGetCampaignsRequest:(ASIHTTPRequest *)request;
-- (void)processGetLeadsRequest:(ASIHTTPRequest *)request;
-- (void)processGetContactsRequest:(ASIHTTPRequest *)request;
-- (void)processGetCommentsRequest:(ASIHTTPRequest *)request;
-- (void)processLoginRequest:(ASIHTTPRequest *)request;
-- (void)processGetTasksRequest:(ASIHTTPRequest *)request;
-- (NSArray *)deserializeXML:(NSData *)xmlData forXPath:(NSString *)xpath andClass:(Class)klass;
-- (NSArray *)deserializeXMLElement:(TBXMLElement *)element forXPath:(NSString *)xpath andClass:(Class)klass;
 
 @end
 
@@ -99,12 +53,7 @@ static NSString *NEW_COMMENT_REQUEST = @"new_comment";
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
 
-@synthesize server = _server;
-@synthesize username = _username;
-@synthesize password = _password;
 @synthesize networkQueue = _networkQueue;
-@synthesize notificationCenter = _notificationCenter;
-@synthesize settingsManager = _settingsManager;
 
 #pragma mark -
 #pragma mark Init and dealloc
@@ -113,9 +62,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
 {
     if (self = [super init])
     {
-        self.notificationCenter = [NSNotificationCenter defaultCenter];
-        self.settingsManager = [SBSettingsManager sharedSBSettingsManager];
-
         self.networkQueue = [[[ASINetworkQueue alloc] init] autorelease];
         self.networkQueue.shouldCancelAllRequestsOnFailure = NO;
         self.networkQueue.delegate = self;
@@ -129,11 +75,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
 
 - (void)dealloc
 {
-    [_server release];
-    [_username release];
-    [_password release];
-    [_notificationCenter release];
-    [_settingsManager release];
     [_networkQueue release];
     [super dealloc];
 }
@@ -143,121 +84,52 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
 
 - (void)login
 {
-    NSString *path = PROFILE_REQUEST;
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@", self.server, path];
-    NSURL *url = [NSURL URLWithString:urlString];
-    [self sendGETRequestToURL:url path:path];
+    SBLoginRequest *request = [SBLoginRequest request];
+    [self.networkQueue addOperation:request];    
 }
 
 - (void)loadList:(Class)klass page:(NSInteger)page
 {
-    NSString *path = [klass serverPath];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@?page=%d", self.server, path, page];
-    NSURL *url = [NSURL URLWithString:urlString];
-    [self sendGETRequestToURL:url path:path];
+    SBListRequest *request = [SBListRequest requestWithClass:klass 
+                                                        page:page];
+    [self.networkQueue addOperation:request];
 }
 
 - (void)searchList:(Class)klass query:(NSString *)query
 {
-    NSString *path = [klass serverPath];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@?page=1&query=%@", self.server, path, query];
-    NSURL *url = [NSURL URLWithString:urlString];
-    [self sendGETRequestToURL:url path:path];
+    SBSearchRequest *request = [SBSearchRequest requestWithClass:klass
+                                                           query:query];
+    [self.networkQueue addOperation:request];
 }
 
 - (void)loadCommentsForEntity:(SBBaseEntity *)entity
 {
-    Class klass = [entity class];
-    NSString *path = [klass serverPath];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments.xml", self.server, path, entity.objectId];
-    NSURL *url = [NSURL URLWithString:urlString];
-    
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    request.validatesSecureCertificate = !self.settingsManager.useSelfSignedSSLCertificates;
-    request.username = self.username;
-    request.password = self.password;
-    request.shouldRedirect = NO;
-    request.defaultResponseEncoding = NSUTF8StringEncoding;
-    request.timeOutSeconds = REQUEST_TIMEOUT;
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:COMMENTS_REQUEST, SELECTED_API_PATH, 
-                              entity, SELECTED_API_ENTITY, nil];
-    request.userInfo = userInfo;
-    [self.networkQueue addOperation:request];    
+    SBCommentsRequest *request = [SBCommentsRequest requestWithEntity:entity];
+    [self.networkQueue addOperation:request];
 }
 
 - (void)sendComment:(NSString *)comment forEntity:(SBBaseEntity *)entity
 {
-    Class klass = [entity class];
-    NSString *path = [klass serverPath];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments", self.server, path, entity.objectId];
-    NSURL *url = [NSURL URLWithString:urlString];
-    
-    NSInteger idValue = [SBAppDelegate sharedAppDelegate].currentUser.objectId;
-    NSNumber *currentUserID = [NSNumber numberWithInt:idValue];
-    
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    request.username = self.username;
-    request.password = self.password;
-    request.requestMethod = @"POST";
-    request.shouldRedirect = NO;
-    request.defaultResponseEncoding = NSUTF8StringEncoding;
-    request.timeOutSeconds = REQUEST_TIMEOUT;
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:NEW_COMMENT_REQUEST, SELECTED_API_PATH, 
-                              entity, SELECTED_API_ENTITY, nil];
-    request.userInfo = userInfo;
-    [request setPostValue:entity.commentableTypeName                forKey:@"comment[commentable_type]"];
-    [request setPostValue:[NSNumber numberWithInt:entity.objectId]  forKey:@"comment[commentable_id]"];
-    [request setPostValue:currentUserID                             forKey:@"comment[user_id]"];
-    [request setPostValue:comment                                   forKey:@"comment[comment]"];
+    SBPostCommentRequest *request = [SBPostCommentRequest requestWithEntity:entity 
+                                                                    comment:comment];
     [self.networkQueue addOperation:request];
 }
 
 - (void)loadTasks
 {
-    NSString *path = TASKS_REQUEST;
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@", self.server, path];
-    NSURL *url = [NSURL URLWithString:urlString];
-    [self sendGETRequestToURL:url path:path];
+    SBTasksRequest *request = [SBTasksRequest request];
+    [self.networkQueue addOperation:request];
 }
 
 - (void)markTaskAsDone:(SBTask *)task
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/tasks/%d/complete", self.server, task.objectId];
-    NSURL *url = [NSURL URLWithString:urlString];
-
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    request.validatesSecureCertificate = !self.settingsManager.useSelfSignedSSLCertificates;
-    request.requestMethod = @"PUT";
-    request.username = self.username;
-    request.password = self.password;
-    request.shouldRedirect = NO;
-    request.defaultResponseEncoding = NSUTF8StringEncoding;
-    request.timeOutSeconds = REQUEST_TIMEOUT;
-    request.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:TASK_DONE_REQUEST, SELECTED_API_PATH, nil];
+    SBMarkTaskAsDoneRequest *request = [SBMarkTaskAsDoneRequest requestWithTask:task];
     [self.networkQueue addOperation:request];    
 }
 
 - (void)createTask:(SBTask *)task
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/tasks", self.server, task.objectId];
-    NSURL *url = [NSURL URLWithString:urlString];
-    
-    NSInteger idValue = [SBAppDelegate sharedAppDelegate].currentUser.objectId;
-    NSNumber *currentUserID = [NSNumber numberWithInt:idValue];
-
-    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
-    request.requestMethod = @"POST";
-    request.username = self.username;
-    request.password = self.password;
-    request.shouldRedirect = NO;
-    request.defaultResponseEncoding = NSUTF8StringEncoding;
-    request.timeOutSeconds = REQUEST_TIMEOUT;
-    request.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:NEW_TASK_REQUEST, SELECTED_API_PATH, nil];
-    [request setPostValue:task.name                               forKey:@"task[name]"];
-    [request setPostValue:task.category                           forKey:@"task[category]"];
-    [request setPostValue:[task.dueDate stringForNewTaskCreation] forKey:@"task[calendar]"];
-    [request setPostValue:task.bucket                             forKey:@"task[bucket]"];
-    [request setPostValue:currentUserID                           forKey:@"task[user_id]"];
+    SBCreateTaskRequest *request = [SBCreateTaskRequest requestWithTask:task];
     [self.networkQueue addOperation:request];    
 }
 
@@ -269,64 +141,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
 #pragma mark -
 #pragma mark ASINetworkQueue delegate methods
 
-- (void)requestDone:(ASIHTTPRequest *)request
+- (void)requestDone:(SBBaseRequest *)request
 {
-    NSDictionary *userInfo = request.userInfo;
-    NSString *selectedAPIPath = [userInfo objectForKey:SELECTED_API_PATH];
-    if ([self requestOK:request])
+    NSString *errorMessage = [request validateResponse];
+    if (errorMessage == nil)
     {
-        if ([selectedAPIPath isEqualToString:[SBCompanyAccount serverPath]])
-        {
-            [self processGetAccountsRequest:request];
-        }
-        else if ([selectedAPIPath isEqualToString:[SBOpportunity serverPath]])
-        {
-            [self processGetOpportunitiesRequest:request];
-        }
-        else if ([selectedAPIPath isEqualToString:[SBContact serverPath]])
-        {
-            [self processGetContactsRequest:request];
-        }
-        else if ([selectedAPIPath isEqualToString:[SBCampaign serverPath]])
-        {
-            [self processGetCampaignsRequest:request];
-        }
-        else if ([selectedAPIPath isEqualToString:[SBLead serverPath]])
-        {
-            [self processGetLeadsRequest:request];
-        }
-        else if ([selectedAPIPath isEqualToString:COMMENTS_REQUEST])
-        {
-            [self processGetCommentsRequest:request];
-        }
-        else if ([selectedAPIPath isEqualToString:NEW_COMMENT_REQUEST])
-        {
-            NSDictionary *userInfo = request.userInfo;
-            SBBaseEntity *entity = [userInfo objectForKey:SELECTED_API_ENTITY];
-            NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:entity, @"entity", nil];
-            NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidPostCommentNotification
-                                                                  object:self 
-                                                                userInfo:dict];
-            [self.notificationCenter postNotification:notif];    
-        }
-        else if ([selectedAPIPath isEqualToString:PROFILE_REQUEST])
-        {
-            [self processLoginRequest:request];
-        }
-        else if ([selectedAPIPath isEqualToString:TASKS_REQUEST])
-        {
-            [self processGetTasksRequest:request];
-        }
-        else if ([selectedAPIPath isEqualToString:TASK_DONE_REQUEST])
-        {
-            [self.notificationCenter postNotificationName:SBNetworkManagerDidMarkTaskAsDoneNotification
-                                               object:self];
-        }
-        else if ([selectedAPIPath isEqualToString:NEW_TASK_REQUEST])
-        {
-            [self.notificationCenter postNotificationName:SBNetworkManagerDidCreateTaskNotification
-                                               object:self];
-        }
+        [request processResponse];
+    }
+    else
+    {
+        NSError *error = [self createErrorWithMessage:errorMessage code:request.responseStatusCode];
+        [self notifyError:error];
     }
 }
 
@@ -343,64 +168,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
 #pragma mark -
 #pragma mark Error management
 
-- (BOOL)requestOK:(ASIHTTPRequest *)request
-{
-    NSInteger statusCode = request.responseStatusCode;
-    BOOL ok = NO;
-    NSString *text = @"";
-    NSError *error = nil;
-
-    switch (statusCode) 
-    {
-        case 200:
-        case 201:
-        {
-            ok = YES;
-            break;
-        }
-            
-        case 302:
-        case 401:
-        {
-            // In the case of FFCRM, bad login API requests receive a 302,
-            // with a redirection body taking to the login form
-            NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidFailLoginNotification 
-                                                                  object:self 
-                                                                userInfo:nil];
-            [self.notificationCenter postNotification:notif];            
-            break;
-        }
-
-        case 404:
-        {
-            text = @"The specified path cannot be found (404)";
-            error = [self createErrorWithMessage:text code:statusCode];
-            break;
-        }
-
-        case 500:
-        {
-            text = @"The server experienced an error (500)";
-            error = [self createErrorWithMessage:text code:statusCode];
-            break;
-        }
-
-        default:
-        {
-            text = [NSString stringWithFormat:@"The communication with the server failed with error %d", statusCode];
-            error = [self createErrorWithMessage:text code:statusCode];
-            break;
-        }
-    }
-    
-    if (error != nil)
-    {
-        [self notifyError:error];
-    }
-    
-    return ok;
-}
-
 - (NSError *)createErrorWithMessage:(NSString *)text code:(NSInteger)code
 {
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:text, NSLocalizedDescriptionKey, nil];
@@ -416,190 +183,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
     NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidFailWithErrorNotification 
                                                           object:self 
                                                         userInfo:userInfo];
-    [self.notificationCenter postNotification:notif];    
-}
-
-#pragma mark -
-#pragma mark Request processing methods
-
-- (NSArray *)deserializeXMLElement:(TBXMLElement *)element forXPath:(NSString *)xpath andClass:(Class)klass
-{
-    NSMutableArray *objects = [NSMutableArray array];
-    if (element)
-    {
-        TBXMLElement *child = [TBXML childElementNamed:xpath parentElement:element];
-        
-        while (child != nil)
-        {
-            id item = [[klass alloc] initWithTBXMLElement:child];
-            [objects addObject:item];
-            [item release];
-            
-            child = [TBXML nextSiblingNamed:xpath searchFromElement:child];
-        }
-    }
-    return objects;
-}
-
-- (NSArray *)deserializeXML:(NSData *)xmlData forXPath:(NSString *)xpath andClass:(Class)klass
-{
-    TBXML *tbxml = [TBXML tbxmlWithXMLData:xmlData];
-    TBXMLElement *root = tbxml.rootXMLElement;
-    return [self deserializeXMLElement:root forXPath:xpath andClass:klass];
-}
-
-- (void)processGetAccountsRequest:(ASIHTTPRequest *)request
-{
-    NSData *response = [request responseData];
-    NSArray *accounts = [self deserializeXML:response 
-                                    forXPath:@"account" 
-                                    andClass:NSClassFromString(@"SBCompanyAccount")];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:accounts, @"data", nil];
-    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveAccountsNotification
-                                                          object:self 
-                                                        userInfo:dict];
-    [self.notificationCenter postNotification:notif];
-}
-
-- (void)processGetCampaignsRequest:(ASIHTTPRequest *)request
-{
-    NSData *response = [request responseData];
-    NSArray *campaigns = [self deserializeXML:response 
-                                     forXPath:@"campaign" 
-                                     andClass:NSClassFromString(@"SBCampaign")];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:campaigns, @"data", nil];
-    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveCampaignsNotification
-                                                          object:self 
-                                                        userInfo:dict];
-    [self.notificationCenter postNotification:notif];
-}
-
-- (void)processGetLeadsRequest:(ASIHTTPRequest *)request
-{
-    NSData *response = [request responseData];
-    NSArray *leads = [self deserializeXML:response 
-                                 forXPath:@"lead" 
-                                 andClass:NSClassFromString(@"SBLead")];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:leads, @"data", nil];
-    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveLeadsNotification
-                                                          object:self 
-                                                        userInfo:dict];
-    [self.notificationCenter postNotification:notif];
-}
-
-- (void)processGetOpportunitiesRequest:(ASIHTTPRequest *)request
-{
-    NSData *response = [request responseData];
-    NSArray *opportunities = [self deserializeXML:response 
-                                         forXPath:@"opportunity" 
-                                         andClass:NSClassFromString(@"SBOpportunity")];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:opportunities, @"data", nil];
-    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveOpportunitiesNotification
-                                                          object:self 
-                                                        userInfo:dict];
-    [self.notificationCenter postNotification:notif];
-}
-
-- (void)processGetContactsRequest:(ASIHTTPRequest *)request
-{
-    NSData *response = [request responseData];
-    NSArray *contacts = [self deserializeXML:response 
-                                    forXPath:@"contact" 
-                                    andClass:NSClassFromString(@"SBContact")];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:contacts, @"data", nil];
-    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveContactsNotification
-                                                          object:self 
-                                                        userInfo:dict];
-    [self.notificationCenter postNotification:notif];    
-}
-
-- (void)processGetCommentsRequest:(ASIHTTPRequest *)request
-{
-    NSData *response = [request responseData];
-    NSArray *comments = [self deserializeXML:response 
-                                    forXPath:@"comment" 
-                                    andClass:NSClassFromString(@"SBComment")];
-
-    SBBaseEntity *entity = [request.userInfo objectForKey:SELECTED_API_ENTITY];
-
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:comments, @"data", entity, @"entity", nil];
-    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveCommentsNotification
-                                                          object:self 
-                                                        userInfo:dict];
-    [self.notificationCenter postNotification:notif];    
-}
-
-- (void)processLoginRequest:(ASIHTTPRequest *)request
-{
-    NSData *response = [request responseData];
-    TBXML *tbxml = [TBXML tbxmlWithXMLData:response];
-    TBXMLElement *root = tbxml.rootXMLElement;
-    SBUser *user = [[[SBUser alloc] initWithTBXMLElement:root] autorelease];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:user, @"user", nil];
-    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidLoginNotification
-                                                          object:self 
-                                                        userInfo:dict];
-    [self.notificationCenter postNotification:notif];    
-}
-
-- (void)processGetTasksRequest:(ASIHTTPRequest *)request
-{
-    NSData *response = [request responseData];
-    TBXML *tbxml = [TBXML tbxmlWithXMLData:response];
-    TBXMLElement *hash = tbxml.rootXMLElement;
-    Class klass = NSClassFromString(@"SBTask");
-
-    NSArray *tasksOverdue = [self deserializeXMLElement:[TBXML childElementNamed:@"overdue" parentElement:hash] 
-                                               forXPath:@"overdue" 
-                                               andClass:klass];
-    NSArray *tasksDueASAP = [self deserializeXMLElement:[TBXML childElementNamed:@"due-asap" parentElement:hash] 
-                                               forXPath:@"due-asap" 
-                                               andClass:klass];
-    NSArray *tasksDueToday = [self deserializeXMLElement:[TBXML childElementNamed:@"due-today" parentElement:hash] 
-                                                forXPath:@"due-today" 
-                                                andClass:klass];
-    NSArray *tasksDueTomorrow = [self deserializeXMLElement:[TBXML childElementNamed:@"due-tomorrow" parentElement:hash] 
-                                                   forXPath:@"due-tomorrow" 
-                                                   andClass:klass];
-    NSArray *tasksDueThisWeek = [self deserializeXMLElement:[TBXML childElementNamed:@"due-this-week" parentElement:hash] 
-                                                   forXPath:@"due-this-week" 
-                                                   andClass:klass];
-    NSArray *tasksDueNextWeek = [self deserializeXMLElement:[TBXML childElementNamed:@"due-next-week" parentElement:hash] 
-                                                   forXPath:@"due-next-week" 
-                                                   andClass:klass];
-    NSArray *tasksDueLater = [self deserializeXMLElement:[TBXML childElementNamed:@"due-later" parentElement:hash] 
-                                                forXPath:@"due-later" 
-                                                andClass:klass];
-
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:tasksOverdue, TASKS_OVERDUE_KEY,
-                          tasksDueASAP, TASKS_DUE_ASAP_KEY, 
-                          tasksDueToday, TASKS_DUE_TODAY_KEY,
-                          tasksDueTomorrow, TASKS_DUE_TOMORROW_KEY,
-                          tasksDueThisWeek, TASKS_DUE_THIS_WEEK_KEY,
-                          tasksDueNextWeek, TASKS_DUE_NEXT_WEEK_KEY,
-                          tasksDueLater, TASKS_DUE_LATER_KEY,
-                          nil];
-    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveTasksNotification
-                                                          object:self 
-                                                        userInfo:dict];
-    [self.notificationCenter postNotification:notif];    
-}
-
-#pragma mark -
-#pragma mark Private methods
-
-- (void)sendGETRequestToURL:(NSURL *)url path:(NSString *)path
-{
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    request.validatesSecureCertificate = !self.settingsManager.useSelfSignedSSLCertificates;
-    request.username = self.username;
-    request.password = self.password;
-    request.shouldRedirect = NO;
-    request.defaultResponseEncoding = NSUTF8StringEncoding;
-    request.timeOutSeconds = REQUEST_TIMEOUT;
-    request.userInfo = [NSDictionary dictionaryWithObjectsAndKeys:path, SELECTED_API_PATH, nil];
-    [request addRequestHeader:@"Accept" value:@"text/xml"];
-    [self.networkQueue addOperation:request];    
+    [[NSNotificationCenter defaultCenter] postNotification:notif];    
 }
 
 @end

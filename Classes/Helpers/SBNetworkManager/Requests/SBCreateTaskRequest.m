@@ -1,8 +1,8 @@
 //
-//  SBHelpers.h
+//  SBCreateTaskRequest.m
 //  Senbei
 //
-//  Created by Adrian on 9/20/11.
+//  Created by Adrian on 9/20/2011.
 //  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,8 +32,38 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SBNetworkManager.h"
-#import "NSDate+Senbei.h"
-#import "NSString+Senbei.h"
+#import "SBCreateTaskRequest.h"
+#import "SBModels.h"
+#import "SBNotifications.h"
 #import "SBSettingsManager.h"
-#import "ASIHTTPRequest+Senbei.h"
+#import "SBAppDelegate.h"
+#import "NSDate+Senbei.h"
+
+@implementation SBCreateTaskRequest
+
++ (id)requestWithTask:(SBTask *)task
+{
+    NSString *server = [SBSettingsManager sharedSBSettingsManager].server;
+    NSString *urlString = [NSString stringWithFormat:@"%@/tasks", server, task.objectId];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSInteger idValue = [SBAppDelegate sharedAppDelegate].currentUser.objectId;
+    NSNumber *currentUserID = [NSNumber numberWithInt:idValue];
+    
+    id request = [self requestWithURL:url];
+    [request setRequestMethod:@"POST"];
+    [request setPostValue:task.name                               forKey:@"task[name]"];
+    [request setPostValue:task.category                           forKey:@"task[category]"];
+    [request setPostValue:[task.dueDate stringForNewTaskCreation] forKey:@"task[calendar]"];
+    [request setPostValue:task.bucket                             forKey:@"task[bucket]"];
+    [request setPostValue:currentUserID                           forKey:@"task[user_id]"];
+    return request;
+}
+
+- (void)processResponse
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:SBNetworkManagerDidCreateTaskNotification
+                                                        object:self];
+}
+
+@end

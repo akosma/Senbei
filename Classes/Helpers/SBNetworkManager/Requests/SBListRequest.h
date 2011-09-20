@@ -1,8 +1,8 @@
 //
-//  SBHelpers.h
+//  SBListRequest.h
 //  Senbei
 //
-//  Created by Adrian on 9/20/11.
+//  Created by Adrian on 9/20/2011.
 //  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,8 +32,12 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SBNetworkManager.h"
-#import "NSDate+Senbei.h"
-#import "NSString+Senbei.h"
-#import "SBSettingsManager.h"
-#import "ASIHTTPRequest+Senbei.h"
+#import "SBBaseRequest.h"
+
+@interface SBListRequest : SBBaseRequest
+
+@property (nonatomic, retain) Class klass;
+
++ (id)requestWithClass:(Class)klass page:(NSInteger)page;
+
+@end

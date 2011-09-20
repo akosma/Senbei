@@ -1,5 +1,5 @@
 //
-//  SBBaseRequest.m
+//  SBPostCommentRequest.m
 //  Senbei
 //
 //  Created by Adrian on 9/20/2011.
@@ -32,31 +32,53 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SBBaseRequest.h"
-#import "SBSettingsManager.h"
+#import "SBPostCommentRequest.h"
 #import "SBModels.h"
+#import "SBSettingsManager.h"
+#import "SBAppDelegate.h"
 #import "SBNotifications.h"
 
-static NSTimeInterval REQUEST_TIMEOUT = 60;
+
+@interface SBPostCommentRequest ()
+
+@property (nonatomic, retain) SBBaseEntity *entity;
+
+@end
 
 
-@implementation SBBaseRequest
+@implementation SBPostCommentRequest
 
-- (id)initWithURL:(NSURL *)newURL
+@synthesize entity = _entity;
+
++ (id)requestWithEntity:(SBBaseEntity *)entity comment:(NSString *)comment
 {
-    self = [super initWithURL:newURL];
-    if (self)
-    {
-        BOOL validateCertificate = ![SBSettingsManager sharedSBSettingsManager].useSelfSignedSSLCertificates;
-        [self setUsername:[SBSettingsManager sharedSBSettingsManager].username];
-        [self setPassword:[SBSettingsManager sharedSBSettingsManager].password];
-        [self setValidatesSecureCertificate:validateCertificate];
-        [self setShouldRedirect:NO];
-        [self setDefaultResponseEncoding:NSUTF8StringEncoding];
-        [self setTimeOutSeconds:REQUEST_TIMEOUT];
-        [self addRequestHeader:@"Accept" value:@"text/xml"];
-    }
-    return self;
+    NSString *server = [SBSettingsManager sharedSBSettingsManager].server;
+    Class klass = [entity class];
+    NSString *path = [klass serverPath];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments", server, path, entity.objectId];
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSInteger idValue = [SBAppDelegate sharedAppDelegate].currentUser.objectId;
+    NSNumber *currentUserID = [NSNumber numberWithInt:idValue];
+    
+    id request = [self requestWithURL:url];
+    [request setRequestMethod:@"POST"];
+    [request setShouldRedirect:NO];
+    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+    [request setPostValue:entity.commentableTypeName                forKey:@"comment[commentable_type]"];
+    [request setPostValue:[NSNumber numberWithInt:entity.objectId]  forKey:@"comment[commentable_id]"];
+    [request setPostValue:currentUserID                             forKey:@"comment[user_id]"];
+    [request setPostValue:comment                                   forKey:@"comment[comment]"];
+    return request;
+}
+
+- (void)processResponse
+{
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.entity, @"entity", nil];
+    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidPostCommentNotification
+                                                          object:self 
+                                                        userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotification:notif];    
 }
 
 @end
