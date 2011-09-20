@@ -33,9 +33,8 @@
 //
 
 #import "SBCommentsController.h"
-#import "FatFreeCRMProxy.h"
-#import "Comment.h"
-#import "NSDate+Senbei.h"
+#import "SBModels.h"
+#import "SBHelpers.h"
 #import "AKOEditorrific.h"
 
 @interface SBCommentsController ()

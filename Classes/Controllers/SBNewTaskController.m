@@ -33,9 +33,8 @@
 //
 
 #import "SBNewTaskController.h"
-#import "FatFreeCRMProxy.h"
-#import "NSDate+Senbei.h"
-#import "Task.h"
+#import "SBModels.h"
+#import "SBHelpers.h"
 
 @interface SBNewTaskController ()
 

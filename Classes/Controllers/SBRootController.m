@@ -33,20 +33,14 @@
 //
 
 #import "SBRootController.h"
-#import "FatFreeCRMProxy.h"
+#import "Definitions.h"
+#import "SBHelpers.h"
+#import "SBModels.h"
 #import "SBListController.h"
 #import "SBSettingsController.h"
 #import "SBTasksController.h"
-#import "CompanyAccount.h"
-#import "Opportunity.h"
-#import "Contact.h"
-#import "User.h"
-#import "Campaign.h"
-#import "Lead.h"
-#import "Definitions.h"
 #import "SBCommentsController.h"
 #import "SBWebBrowserController.h"
-#import "SettingsManager.h"
 
 typedef enum {
     SBViewControllerTasks = 0,

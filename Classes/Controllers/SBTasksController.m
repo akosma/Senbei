@@ -33,9 +33,9 @@
 //
 
 #import "SBTasksController.h"
-#import "FatFreeCRMProxy.h"
+#import "SBModels.h"
+#import "SBHelpers.h"
 #import "SBNewTaskController.h"
-#import "Task.h"
 
 @interface SBTasksController ()
 

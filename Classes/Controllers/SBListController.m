@@ -33,9 +33,8 @@
 //
 
 #import "SBListController.h"
-#import "FatFreeCRMProxy.h"
-#import "CompanyAccount.h"
-#import "NSDate+Senbei.h"
+#import "SBModels.h"
+#import "SBHelpers.h"
 #import "SBListTableViewCell.h"
 #import "AKOImageView.h"
 

@@ -137,6 +137,7 @@
 		3A0B531D11147EEC005A26FD /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/TaskBuckets.plist; sourceTree = "<group>"; };
 		3A1104A2111DEF4500729EB6 /* DemoLogins.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DemoLogins.plist; sourceTree = "<group>"; };
 		3A1F518E1122029C0081580E /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3A23F54F1428813E00894EA2 /* SBModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBModels.h; sourceTree = "<group>"; };
 		3A29C08811075E2B00D887F1 /* SBCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCommentsController.h; sourceTree = "<group>"; };
 		3A29C08911075E2B00D887F1 /* SBCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCommentsController.m; sourceTree = "<group>"; };
 		3A29C08C11075E6100D887F1 /* CompanyAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyAccount.h; sourceTree = "<group>"; };
@@ -403,6 +404,7 @@
 		3A29C08B11075E5400D887F1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3A23F54F1428813E00894EA2 /* SBModels.h */,
 				3A29C0911107600500D887F1 /* BaseEntity.h */,
 				3A29C0921107600500D887F1 /* BaseEntity.m */,
 				3A29C08C11075E6100D887F1 /* CompanyAccount.h */,
