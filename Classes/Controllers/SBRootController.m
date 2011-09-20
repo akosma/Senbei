@@ -36,7 +36,7 @@
 #import "FatFreeCRMProxy.h"
 #import "SBListController.h"
 #import "SettingsController.h"
-#import "TasksController.h"
+#import "SBTasksController.h"
 #import "CompanyAccount.h"
 #import "Opportunity.h"
 #import "Contact.h"

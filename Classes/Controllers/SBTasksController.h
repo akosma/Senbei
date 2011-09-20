@@ -1,5 +1,5 @@
 //
-//  TasksController.h
+//  SBTasksController.h
 //  Senbei
 //
 //  Created by Adrian on 1/20/10.
@@ -36,29 +36,9 @@
 
 @class NewTaskController;
 
-@interface TasksController : UITableViewController <UIAlertViewDelegate>
-{
-@private
-    UINavigationController *_navigationController;
-    NSMutableArray *_tasksOverdue;
-    NSMutableArray *_tasksDueASAP;
-    NSMutableArray *_tasksDueToday;
-    NSMutableArray *_tasksDueTomorrow;
-    NSMutableArray *_tasksDueThisWeek;
-    NSMutableArray *_tasksDueNextWeek;
-    NSMutableArray *_tasksDueLater;
-    
-    NSMutableArray *_sections;
-    NSMutableDictionary *_categories;
-    
-    NSIndexPath *_indexPathToDelete;
-    
-    NewTaskController *_newTaskController;
-    
-    BOOL _firstLoad;
-}
+@interface SBTasksController : UITableViewController <UIAlertViewDelegate>
 
-@property (nonatomic, readonly) UINavigationController *navigationController;
+@property (nonatomic, retain) UINavigationController *navigationController;
 
 - (void)refresh;
 

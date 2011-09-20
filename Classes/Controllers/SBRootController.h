@@ -39,7 +39,7 @@
 #import "SBListControllerDelegate.h"
 
 @class SettingsController;
-@class TasksController;
+@class SBTasksController;
 @class SBListController;
 @class CommentsController;
 
@@ -65,6 +65,6 @@ typedef enum {
 @property (nonatomic, retain) IBOutlet SBListController *leadsController;
 @property (nonatomic, retain) IBOutlet SBListController *campaignsController;
 @property (nonatomic, retain) IBOutlet SettingsController *settingsController;
-@property (nonatomic, retain) IBOutlet TasksController *tasksController;
+@property (nonatomic, retain) IBOutlet SBTasksController *tasksController;
 
 @end

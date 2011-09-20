@@ -37,7 +37,7 @@
 		3A29C0931107600500D887F1 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C0921107600500D887F1 /* BaseEntity.m */; };
 		3A29C2BB11078D9500D887F1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A29C2BA11078D9500D887F1 /* Settings.bundle */; };
 		3A29C3381107922300D887F1 /* SettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C3371107922300D887F1 /* SettingsController.m */; };
-		3A29C3FE1107A34E00D887F1 /* TasksController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C3FD1107A34E00D887F1 /* TasksController.m */; };
+		3A29C3FE1107A34E00D887F1 /* SBTasksController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C3FD1107A34E00D887F1 /* SBTasksController.m */; };
 		3A29C4531107A8A300D887F1 /* Opportunity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C4521107A8A300D887F1 /* Opportunity.m */; };
 		3A29C4E91107B3BF00D887F1 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C4E81107B3BF00D887F1 /* Contact.m */; };
 		3A2B965E11088AC1000373A5 /* Campaign.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2B965D11088AC1000373A5 /* Campaign.m */; };
@@ -147,8 +147,8 @@
 		3A29C3361107922300D887F1 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		3A29C3371107922300D887F1 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
 		3A29C35C110794BA00D887F1 /* SBListControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBListControllerDelegate.h; sourceTree = "<group>"; };
-		3A29C3FC1107A34E00D887F1 /* TasksController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksController.h; sourceTree = "<group>"; };
-		3A29C3FD1107A34E00D887F1 /* TasksController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksController.m; sourceTree = "<group>"; };
+		3A29C3FC1107A34E00D887F1 /* SBTasksController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBTasksController.h; sourceTree = "<group>"; };
+		3A29C3FD1107A34E00D887F1 /* SBTasksController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTasksController.m; sourceTree = "<group>"; };
 		3A29C4511107A8A300D887F1 /* Opportunity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Opportunity.h; sourceTree = "<group>"; };
 		3A29C4521107A8A300D887F1 /* Opportunity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Opportunity.m; sourceTree = "<group>"; };
 		3A29C4E71107B3BF00D887F1 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
@@ -475,8 +475,8 @@
 				3A6D8D3811064DF20089F21D /* SBListController.h */,
 				3A6D8D3911064DF20089F21D /* SBListController.m */,
 				3A29C35C110794BA00D887F1 /* SBListControllerDelegate.h */,
-				3A29C3FC1107A34E00D887F1 /* TasksController.h */,
-				3A29C3FD1107A34E00D887F1 /* TasksController.m */,
+				3A29C3FC1107A34E00D887F1 /* SBTasksController.h */,
+				3A29C3FD1107A34E00D887F1 /* SBTasksController.m */,
 				3A0B525911146D87005A26FD /* NewTaskController.h */,
 				3A0B525A11146D87005A26FD /* NewTaskController.m */,
 				3A29C08811075E2B00D887F1 /* CommentsController.h */,
@@ -775,7 +775,7 @@
 				3A29C08E11075E6100D887F1 /* CompanyAccount.m in Sources */,
 				3A29C0931107600500D887F1 /* BaseEntity.m in Sources */,
 				3A29C3381107922300D887F1 /* SettingsController.m in Sources */,
-				3A29C3FE1107A34E00D887F1 /* TasksController.m in Sources */,
+				3A29C3FE1107A34E00D887F1 /* SBTasksController.m in Sources */,
 				3A29C4531107A8A300D887F1 /* Opportunity.m in Sources */,
 				3A29C4E91107B3BF00D887F1 /* Contact.m in Sources */,
 				3A708B431108427500CB2D83 /* Comment.m in Sources */,

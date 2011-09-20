@@ -1,5 +1,5 @@
 //
-//  TasksController.m
+//  SBTasksController.m
 //  Senbei
 //
 //  Created by Adrian on 1/20/10.
@@ -32,14 +32,44 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "TasksController.h"
+#import "SBTasksController.h"
 #import "FatFreeCRMProxy.h"
 #import "NewTaskController.h"
 #import "Task.h"
 
-@implementation TasksController
+@interface SBTasksController ()
+
+@property (nonatomic, retain) NSMutableArray *tasksOverdue;
+@property (nonatomic, retain) NSMutableArray *tasksDueASAP;
+@property (nonatomic, retain) NSMutableArray *tasksDueToday;
+@property (nonatomic, retain) NSMutableArray *tasksDueTomorrow;
+@property (nonatomic, retain) NSMutableArray *tasksDueThisWeek;
+@property (nonatomic, retain) NSMutableArray *tasksDueNextWeek;
+@property (nonatomic, retain) NSMutableArray *tasksDueLater;
+@property (nonatomic, retain) NSMutableArray *sections;
+@property (nonatomic, retain) NSMutableDictionary *categories;
+@property (nonatomic, retain) NSIndexPath *indexPathToDelete;
+@property (nonatomic, retain) NewTaskController *newTaskController;
+@property (nonatomic, getter = isFirstLoad) BOOL firstLoad;
+
+@end
+
+
+@implementation SBTasksController
 
 @synthesize navigationController = _navigationController;
+@synthesize tasksOverdue = _tasksOverdue;
+@synthesize tasksDueASAP = _tasksDueASAP;
+@synthesize tasksDueToday = _tasksDueToday;
+@synthesize tasksDueTomorrow = _tasksDueTomorrow;
+@synthesize tasksDueThisWeek = _tasksDueThisWeek;
+@synthesize tasksDueNextWeek = _tasksDueNextWeek;
+@synthesize tasksDueLater = _tasksDueLater;
+@synthesize sections = _sections;
+@synthesize categories = _categories;
+@synthesize indexPathToDelete = _indexPathToDelete;
+@synthesize newTaskController = _newTaskController;
+@synthesize firstLoad = _firstLoad;
 
 #pragma mark -
 #pragma mark Dealloc
@@ -75,31 +105,29 @@
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
-    _firstLoad = YES;
-    _navigationController = [[UINavigationController alloc] initWithRootViewController:self];
+    self.firstLoad = YES;
+    self.navigationController = [[[UINavigationController alloc] initWithRootViewController:self] autorelease];
     self.title = NSLocalizedString(@"TASKS_CONTROLLER_TITLE", @"Title of the Tasks controller");
     
-    UIBarButtonItem *reloadItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
-                                                                                target:self
-                                                                                action:@selector(refresh)];
-    self.navigationItem.leftBarButtonItem = reloadItem;
-    [reloadItem release];
-    
-    UIBarButtonItem *addTaskItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+    UIBarButtonItem *reloadItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
                                                                                  target:self
-                                                                                 action:@selector(addNewTask:)];
-    self.navigationItem.rightBarButtonItem = addTaskItem;
-    [addTaskItem release];
-
-    _tasksOverdue = [[NSMutableArray alloc] initWithCapacity:10];
-    _tasksDueASAP = [[NSMutableArray alloc] initWithCapacity:10];
-    _tasksDueToday = [[NSMutableArray alloc] initWithCapacity:10];
-    _tasksDueTomorrow = [[NSMutableArray alloc] initWithCapacity:10];
-    _tasksDueThisWeek = [[NSMutableArray alloc] initWithCapacity:10];
-    _tasksDueNextWeek = [[NSMutableArray alloc] initWithCapacity:10];
-    _tasksDueLater = [[NSMutableArray alloc] initWithCapacity:10];
+                                                                                 action:@selector(refresh)] autorelease];
+    self.navigationItem.leftBarButtonItem = reloadItem;
     
-    _sections = [[NSMutableArray alloc] initWithCapacity:10];
+    UIBarButtonItem *addTaskItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                  target:self
+                                                                                  action:@selector(addNewTask:)] autorelease];
+    self.navigationItem.rightBarButtonItem = addTaskItem;
+
+    self.tasksOverdue = [NSMutableArray arrayWithCapacity:10];
+    self.tasksDueASAP = [NSMutableArray arrayWithCapacity:10];
+    self.tasksDueToday = [NSMutableArray arrayWithCapacity:10];
+    self.tasksDueTomorrow = [NSMutableArray arrayWithCapacity:10];
+    self.tasksDueThisWeek = [NSMutableArray arrayWithCapacity:10];
+    self.tasksDueNextWeek = [NSMutableArray arrayWithCapacity:10];
+    self.tasksDueLater = [NSMutableArray arrayWithCapacity:10];
+    
+    self.sections = [NSMutableArray arrayWithCapacity:10];
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(didReceiveTasks:) 
@@ -117,21 +145,20 @@
                                                object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TaskCategories" ofType:@"plist"];
-    NSArray *categoriesArray = [[NSArray alloc] initWithContentsOfFile:path];
-    _categories = [[NSMutableDictionary alloc] initWithCapacity:[categoriesArray count]];
+    NSArray *categoriesArray = [NSArray arrayWithContentsOfFile:path];
+    self.categories = [NSMutableDictionary dictionaryWithCapacity:[categoriesArray count]];
     for (NSDictionary *dict in categoriesArray)
     {
         [_categories setObject:[dict objectForKey:@"text"] 
                         forKey:[dict objectForKey:@"key"]];
     }
-    [categoriesArray release];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    if (_firstLoad)
+    if (self.isFirstLoad)
     {
-        _firstLoad = NO;
+        self.firstLoad = NO;
         [self refresh];
     }
 }
@@ -146,11 +173,11 @@
 
 - (void)addNewTask:(id)sender
 {
-    if (_newTaskController == nil)
+    if (self.newTaskController == nil)
     {
-        _newTaskController = [[NewTaskController alloc] init];
+        self.newTaskController = [[[NewTaskController alloc] init] autorelease];
     }
-    [self.navigationController presentModalViewController:_newTaskController.navigationController
+    [self.navigationController presentModalViewController:self.newTaskController.navigationController
                                                  animated:YES];
 }
 
@@ -159,32 +186,32 @@
 
 - (void)didReceiveTasks:(NSNotification *)notification
 {
-    [_sections removeAllObjects];
+    [self.sections removeAllObjects];
     
-    [_tasksOverdue removeAllObjects];
-    [_tasksDueASAP removeAllObjects];
-    [_tasksDueToday removeAllObjects];
-    [_tasksDueTomorrow removeAllObjects];
-    [_tasksDueThisWeek removeAllObjects];
-    [_tasksDueNextWeek removeAllObjects];
-    [_tasksDueLater removeAllObjects];
+    [self.tasksOverdue removeAllObjects];
+    [self.tasksDueASAP removeAllObjects];
+    [self.tasksDueToday removeAllObjects];
+    [self.tasksDueTomorrow removeAllObjects];
+    [self.tasksDueThisWeek removeAllObjects];
+    [self.tasksDueNextWeek removeAllObjects];
+    [self.tasksDueLater removeAllObjects];
     
     NSDictionary *userInfo = [notification userInfo];
-    [_tasksOverdue addObjectsFromArray:[userInfo objectForKey:TASKS_OVERDUE_KEY]];
-    [_tasksDueASAP addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_ASAP_KEY]];
-    [_tasksDueToday addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_TODAY_KEY]];
-    [_tasksDueTomorrow addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_TOMORROW_KEY]];
-    [_tasksDueThisWeek addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_THIS_WEEK_KEY]];
-    [_tasksDueNextWeek addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_NEXT_WEEK_KEY]];
-    [_tasksDueLater addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_LATER_KEY]];
+    [self.tasksOverdue addObjectsFromArray:[userInfo objectForKey:TASKS_OVERDUE_KEY]];
+    [self.tasksDueASAP addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_ASAP_KEY]];
+    [self.tasksDueToday addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_TODAY_KEY]];
+    [self.tasksDueTomorrow addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_TOMORROW_KEY]];
+    [self.tasksDueThisWeek addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_THIS_WEEK_KEY]];
+    [self.tasksDueNextWeek addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_NEXT_WEEK_KEY]];
+    [self.tasksDueLater addObjectsFromArray:[userInfo objectForKey:TASKS_DUE_LATER_KEY]];
     
-    if ([_tasksOverdue count] > 0) [_sections addObject:_tasksOverdue];
-    if ([_tasksDueASAP count] > 0) [_sections addObject:_tasksDueASAP];
-    if ([_tasksDueToday count] > 0) [_sections addObject:_tasksDueToday];
-    if ([_tasksDueTomorrow count] > 0) [_sections addObject:_tasksDueTomorrow];
-    if ([_tasksDueThisWeek count] > 0) [_sections addObject:_tasksDueThisWeek];
-    if ([_tasksDueNextWeek count] > 0) [_sections addObject:_tasksDueNextWeek];
-    if ([_tasksDueLater count] > 0) [_sections addObject:_tasksDueLater];
+    if ([self.tasksOverdue count] > 0) [self.sections addObject:self.tasksOverdue];
+    if ([self.tasksDueASAP count] > 0) [self.sections addObject:self.tasksDueASAP];
+    if ([self.tasksDueToday count] > 0) [self.sections addObject:self.tasksDueToday];
+    if ([self.tasksDueTomorrow count] > 0) [self.sections addObject:self.tasksDueTomorrow];
+    if ([self.tasksDueThisWeek count] > 0) [self.sections addObject:self.tasksDueThisWeek];
+    if ([self.tasksDueNextWeek count] > 0) [self.sections addObject:self.tasksDueNextWeek];
+    if ([self.tasksDueLater count] > 0) [self.sections addObject:self.tasksDueLater];
     
     [self.tableView reloadData];
 }
@@ -199,24 +226,24 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
-    return [_sections count];
+    return [self.sections count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
-    return [[_sections objectAtIndex:section] count];
+    return [[self.sections objectAtIndex:section] count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Task *task = [[_sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    Task *task = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     return [task.name sizeWithFont:[UIFont boldSystemFontOfSize:14.0] 
                        constrainedToSize:CGSizeMake(170.0, 4000.0)].height + 20.0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    NSMutableArray *array = [_sections objectAtIndex:section];
+    NSMutableArray *array = [self.sections objectAtIndex:section];
     NSString *text = nil;
     NSString *tasksOverdueTitle = NSLocalizedString(@"TASKS_OVERDUE_TITLE", @"Title of the overdue tasks section");
     NSString *tasksDueASAPTitle = NSLocalizedString(@"TASKS_DUE_ASAP_TITLE", @"Title of the due asap tasks section");
@@ -225,13 +252,13 @@
     NSString *tasksDueThisWeekTitle = NSLocalizedString(@"TASKS_DUE_THIS_WEEK_TITLE", @"Title of the due this week tasks section");
     NSString *tasksDueNextWeekTitle = NSLocalizedString(@"TASKS_DUE_NEXT_WEEK_TITLE", @"Title of the due next week tasks section");
     NSString *tasksDueLaterTitle = NSLocalizedString(@"TASKS_DUE_LATER_TITLE", @"Title of the due later tasks section");
-    if (array == _tasksOverdue) text = tasksOverdueTitle;
-    if (array == _tasksDueASAP) text = tasksDueASAPTitle;
-    if (array == _tasksDueToday) text = tasksDueTodayTitle;
-    if (array == _tasksDueTomorrow) text = tasksDueTomorrowTitle;
-    if (array == _tasksDueThisWeek) text = tasksDueThisWeekTitle;
-    if (array == _tasksDueNextWeek) text = tasksDueNextWeekTitle;
-    if (array == _tasksDueLater) text = tasksDueLaterTitle;
+    if (array == self.tasksOverdue) text = tasksOverdueTitle;
+    if (array == self.tasksDueASAP) text = tasksDueASAPTitle;
+    if (array == self.tasksDueToday) text = tasksDueTodayTitle;
+    if (array == self.tasksDueTomorrow) text = tasksDueTomorrowTitle;
+    if (array == self.tasksDueThisWeek) text = tasksDueThisWeekTitle;
+    if (array == self.tasksDueNextWeek) text = tasksDueNextWeekTitle;
+    if (array == self.tasksDueLater) text = tasksDueLaterTitle;
     return text;    
 }
 
@@ -249,8 +276,8 @@
         cell.detailTextLabel.numberOfLines = 0;
     }
     
-    Task *task = [[_sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    cell.textLabel.text = [_categories objectForKey:task.category];
+    Task *task = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    cell.textLabel.text = [self.categories objectForKey:task.category];
     cell.detailTextLabel.text = task.name;
     return cell;
 }
@@ -261,7 +288,7 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    _indexPathToDelete = [indexPath retain];
+    self.indexPathToDelete = [indexPath retain];
     NSString *message = NSLocalizedString(@"MARK_TASKS_DONE", @"Confirmation text shown before setting a task as done");
     NSString *ok = NSLocalizedString(@"OK", @"The 'OK' word");
     NSString *cancel = NSLocalizedString(@"CANCEL", @"The 'Cancel' word");
@@ -281,15 +308,15 @@
 {
     if (buttonIndex == 1)
     {
-        NSMutableArray *array = [_sections objectAtIndex:_indexPathToDelete.section];
-        Task *task = [[array objectAtIndex:_indexPathToDelete.row] retain];
-        [array removeObjectAtIndex:_indexPathToDelete.row];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:_indexPathToDelete]
+        NSMutableArray *array = [self.sections objectAtIndex:self.indexPathToDelete.section];
+        Task *task = [[array objectAtIndex:self.indexPathToDelete.row] retain];
+        [array removeObjectAtIndex:self.indexPathToDelete.row];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:self.indexPathToDelete]
                               withRowAnimation:UITableViewRowAnimationFade];
         [[FatFreeCRMProxy sharedFatFreeCRMProxy] markTaskAsDone:task];
         [task release];
     }
-    [_indexPathToDelete release];
+    [self.indexPathToDelete release];
 }
 
 @end
