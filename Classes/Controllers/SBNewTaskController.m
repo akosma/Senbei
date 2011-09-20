@@ -56,7 +56,6 @@
 
 @implementation SBNewTaskController
 
-@synthesize navigationController = _navigationController;
 @synthesize nameField = _nameField;
 @synthesize bucketField = _bucketField;
 @synthesize categoryField = _categoryField;
@@ -75,20 +74,13 @@
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) 
     {
-        self.navigationController = [[[UINavigationController alloc] initWithRootViewController:self] autorelease];
         NSString *controllerTitle = NSLocalizedString(@"NEW_TASK_TITLE", @"Title of the new task screen");
         self.title = controllerTitle;
 
         self.doneButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                              target:self
                                                                              action:@selector(done:)] autorelease];
-        self.navigationItem.rightBarButtonItem = self.doneButtonItem;
 
-        UIBarButtonItem *cancelItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-                                                                                     target:self
-                                                                                     action:@selector(close:)] autorelease];
-        self.navigationItem.leftBarButtonItem = cancelItem;
-        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(close:) 
                                                      name:FatFreeCRMProxyDidCreateTaskNotification
@@ -117,7 +109,6 @@
 - (void)dealloc 
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [_navigationController release];
     [_doneButtonItem release];
     [_nameField release];
     [_bucketField release];
@@ -180,6 +171,12 @@
 {
     [super viewDidLoad];
     self.tableView.scrollEnabled = NO;
+    self.navigationItem.rightBarButtonItem = self.doneButtonItem;
+
+    UIBarButtonItem *cancelItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                 target:self
+                                                                                 action:@selector(close:)] autorelease];
+    self.navigationItem.leftBarButtonItem = cancelItem;
 }
 
 - (void)viewWillAppear:(BOOL)animated 

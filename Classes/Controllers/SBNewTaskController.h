@@ -38,6 +38,4 @@
                                                         UIPickerViewDataSource,
                                                         UIPickerViewDelegate>
 
-@property (nonatomic, retain) UINavigationController *navigationController;
-
 @end

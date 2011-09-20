@@ -164,11 +164,12 @@
 
 - (void)addNewTask:(id)sender
 {
-    if (self.newTaskController == nil)
+    if (_newTaskController == nil)
     {
-        self.newTaskController = [[[SBNewTaskController alloc] init] autorelease];
+        _newTaskController = [[SBNewTaskController alloc] init];
     }
-    [self.navigationController presentModalViewController:self.newTaskController.navigationController
+    UINavigationController *controller = [[[UINavigationController alloc] initWithRootViewController:_newTaskController] autorelease];
+    [self.navigationController presentModalViewController:controller
                                                  animated:YES];
 }
 
