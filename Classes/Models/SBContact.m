@@ -251,4 +251,9 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
     return _person;
 }
 
+- (NSString *)commentableTypeName
+{
+    return @"Contact";
+}
+
 @end

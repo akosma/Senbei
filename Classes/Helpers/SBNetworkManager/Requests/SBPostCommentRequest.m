@@ -66,10 +66,10 @@
     [request setRequestMethod:@"POST"];
     [request setShouldRedirect:NO];
     [request setDefaultResponseEncoding:NSUTF8StringEncoding];
-    [request setPostValue:entity.commentableTypeName                forKey:@"comment[commentable_type]"];
-    [request setPostValue:[NSNumber numberWithInt:entity.objectId]  forKey:@"comment[commentable_id]"];
-    [request setPostValue:currentUserID                             forKey:@"comment[user_id]"];
-    [request setPostValue:comment                                   forKey:@"comment[comment]"];
+    [request setPostValue:entity.commentableTypeName                          forKey:@"comment[commentable_type]"];
+    [request setPostValue:[NSString stringWithFormat:@"%d", entity.objectId]  forKey:@"comment[commentable_id]"];
+    [request setPostValue:[currentUserID stringValue]                         forKey:@"comment[user_id]"];
+    [request setPostValue:comment                                             forKey:@"comment[comment]"];
     return request;
 }
 

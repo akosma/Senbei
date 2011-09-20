@@ -78,8 +78,7 @@
     return self.website;
 }
 
-#pragma mark -
-#pragma mark Overridable properties
+#pragma mark - Overridable properties
 
 - (NSString *)commentableTypeName
 {

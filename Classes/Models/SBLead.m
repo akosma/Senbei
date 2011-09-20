@@ -66,4 +66,9 @@
     return self.status;
 }
 
+- (NSString *)commentableTypeName
+{
+    return @"Lead";
+}
+
 @end

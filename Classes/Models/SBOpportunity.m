@@ -76,4 +76,9 @@
     return self.stage;
 }
 
+- (NSString *)commentableTypeName
+{
+    return @"Opportunity";
+}
+
 @end

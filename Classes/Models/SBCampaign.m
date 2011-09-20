@@ -91,4 +91,9 @@
     return self.status;
 }
 
+- (NSString *)commentableTypeName
+{
+    return @"Campaign";
+}
+
 @end

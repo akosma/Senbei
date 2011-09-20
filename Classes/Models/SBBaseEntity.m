@@ -46,9 +46,6 @@
 
 @dynamic commentableTypeName;
 
-#pragma mark -
-#pragma mark Class methods
-
 + (NSString *)stringValueForElement:(NSString *)elementName 
                       parentElement:(TBXMLElement *)element
 {
@@ -60,9 +57,6 @@
     }
     return value;
 }
-
-#pragma mark -
-#pragma mark Init and dealloc
 
 - (id)initWithTBXMLElement:(TBXMLElement *)element
 {
@@ -95,8 +89,7 @@
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Overridable properties
+#pragma mark - Overridable properties
 
 - (NSString *)commentableTypeName
 {
