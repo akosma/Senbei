@@ -40,7 +40,6 @@
 
 @interface SBListController ()
 
-@property (nonatomic, retain) UINavigationController *navigationController;
 @property (nonatomic, retain) UISearchDisplayController *searchController;
 @property (nonatomic, retain) UISearchBar *searchBar;
 @property (nonatomic, retain) NSMutableArray *data;
@@ -61,8 +60,6 @@
 @synthesize listedClass = _listedClass;
 @synthesize delegate = _delegate;
 @synthesize accessoryType = _accessoryType;
-
-@synthesize navigationController = _navigationController;
 @synthesize searchController = _searchController;
 @synthesize searchBar = _searchBar;
 @synthesize data = _data;
@@ -76,13 +73,12 @@
 {
     if (self = [super initWithCoder:coder]) 
     {
-        self.navigationController = [[[UINavigationController alloc] initWithRootViewController:self] autorelease];
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
         UIBarButtonItem *reloadItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
                                                                                      target:self
                                                                                      action:@selector(refresh:)] autorelease];
-        self.navigationItem.leftBarButtonItem = reloadItem;
+        self.navigationItem.rightBarButtonItem = reloadItem;
         
         self.searchBar = [[[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 44.0)] autorelease];
         NSString *search = NSLocalizedString(@"SEARCH", @"Word used in the 'Search' controller");
@@ -106,7 +102,6 @@
 
 - (void)dealloc 
 {
-    [_navigationController release];
     [_searchBar release];
     [_searchController release];
     [_data release];

@@ -64,6 +64,14 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 @interface SBRootController ()
 
 @property (nonatomic, retain) SBCommentsController *commentsController;
+@property (nonatomic, retain) UINavigationController *accountsNavController;
+@property (nonatomic, retain) UINavigationController *contactsNavController;
+@property (nonatomic, retain) UINavigationController *opportunitiesNavController;
+@property (nonatomic, retain) UINavigationController *leadsNavController;
+@property (nonatomic, retain) UINavigationController *campaignsNavController;
+@property (nonatomic, retain) UINavigationController *settingsNavController;
+@property (nonatomic, retain) UINavigationController *tasksNavController;
+@property (nonatomic, retain) UINavigationController *commentsNavController;
 
 @end
 
@@ -79,6 +87,15 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 @synthesize tasksController = _tasksController;
 @synthesize commentsController = _commentsController;
 
+@synthesize accountsNavController = _accountsNavController;
+@synthesize contactsNavController = _contactsNavController;
+@synthesize opportunitiesNavController = _opportunitiesNavController;
+@synthesize leadsNavController = _leadsNavController;
+@synthesize campaignsNavController = _campaignsNavController;
+@synthesize settingsNavController = _settingsNavController;
+@synthesize tasksNavController = _tasksNavController;
+@synthesize commentsNavController = _commentsNavController;
+
 - (void)dealloc 
 {
     [_accountsController release];
@@ -89,6 +106,14 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     [_settingsController release];
     [_tasksController release];
     [_commentsController release];
+    [_accountsNavController release];
+    [_contactsNavController release];
+    [_opportunitiesNavController release];
+    [_leadsNavController release];
+    [_campaignsNavController release];
+    [_settingsNavController release];
+    [_tasksNavController release];
+    [_commentsNavController release];
     [super dealloc];
 }
 
@@ -135,6 +160,14 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     self.tasksController.tabBarItem.image = [UIImage imageNamed:@"tasks.png"];
     self.accountsController.tabBarItem.image = [UIImage imageNamed:@"accounts.png"];
     self.opportunitiesController.tabBarItem.image = [UIImage imageNamed:@"opportunities.png"];
+    
+    self.leadsNavController = [[[UINavigationController alloc] initWithRootViewController:self.leadsController] autorelease];
+    self.contactsNavController = [[[UINavigationController alloc] initWithRootViewController:self.contactsController] autorelease];
+    self.campaignsNavController = [[[UINavigationController alloc] initWithRootViewController:self.campaignsController] autorelease];
+    self.tasksNavController = [[[UINavigationController alloc] initWithRootViewController:self.tasksController] autorelease];
+    self.accountsNavController = [[[UINavigationController alloc] initWithRootViewController:self.accountsController] autorelease];
+    self.opportunitiesNavController = [[[UINavigationController alloc] initWithRootViewController:self.opportunitiesController] autorelease];
+    self.settingsNavController = [[[UINavigationController alloc] initWithRootViewController:self.settingsController] autorelease];
 
     // Restore the order of the tab bars following the preferences of the user
     NSArray *order = [SBSettingsManager sharedSBSettingsManager].tabOrder;

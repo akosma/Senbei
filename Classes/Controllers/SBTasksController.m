@@ -57,7 +57,6 @@
 
 @implementation SBTasksController
 
-@synthesize navigationController = _navigationController;
 @synthesize tasksOverdue = _tasksOverdue;
 @synthesize tasksDueASAP = _tasksDueASAP;
 @synthesize tasksDueToday = _tasksDueToday;
@@ -82,7 +81,6 @@
     [_tasksDueNextWeek release];
     [_tasksDueLater release];
     [_sections release];
-    [_navigationController release];
     [_newTaskController release];
     [_categories release];
     [super dealloc];
@@ -101,18 +99,17 @@
 {
     [super viewDidLoad];
     self.firstLoad = YES;
-    self.navigationController = [[[UINavigationController alloc] initWithRootViewController:self] autorelease];
     self.title = NSLocalizedString(@"TASKS_CONTROLLER_TITLE", @"Title of the Tasks controller");
     
     UIBarButtonItem *reloadItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
                                                                                  target:self
                                                                                  action:@selector(refresh)] autorelease];
-    self.navigationItem.leftBarButtonItem = reloadItem;
+    self.navigationItem.rightBarButtonItem = reloadItem;
     
     UIBarButtonItem *addTaskItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                   target:self
                                                                                   action:@selector(addNewTask:)] autorelease];
-    self.navigationItem.rightBarButtonItem = addTaskItem;
+    self.navigationItem.leftBarButtonItem = addTaskItem;
 
     self.tasksOverdue = [NSMutableArray arrayWithCapacity:10];
     self.tasksDueASAP = [NSMutableArray arrayWithCapacity:10];

@@ -37,8 +37,6 @@
 
 @interface SBTasksController : UITableViewController <UIAlertViewDelegate>
 
-@property (nonatomic, retain) UINavigationController *navigationController;
-
 - (void)refresh;
 
 @end
