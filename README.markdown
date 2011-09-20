@@ -35,7 +35,7 @@ Functionality
 - View contacts as "address book" entries, with integrated e-mail and
   web browsing;
 - Configurable to use any FFCRM instance (URL, username, password,
-  done). Off the box it uses the http://demo.fatfreecrm.com/ site as a
+  done). Off the box it uses the <http://demo.fatfreecrm.com/> site as a
   default entry, with a random entry ("aaron", "ben", "elizabeth") as
   username and password;
 - Lists are sorted and displayed in the same order as the underlying
@@ -75,6 +75,6 @@ for details.
 [1]:http://www.fatfreecrm.com/
 [2]:http://en.wikipedia.org/wiki/Senbei
 [3]:http://zerofee.org/
-[4]:mike@fatfreecrm.com
+[4]:mailto:mike@fatfreecrm.com
 [5]:http://vemedio.com/
 
