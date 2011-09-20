@@ -38,7 +38,7 @@
 #import "NSURL+AKOCacheKey.h"
 #import "Definitions.h"
 #import "AKOImageCache.h"
-#import "SettingsManager.h"
+#import "SBSettingsManager.h"
 
 void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringRef label, NSString *value)
 {
@@ -126,7 +126,7 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
         self.title = [SBBaseEntity stringValueForElement:@"title" parentElement:element];
         self.twitter = [SBBaseEntity stringValueForElement:@"twitter" parentElement:element];
         
-        NSString *serverURL = [SettingsManager sharedSettingsManager].server;
+        NSString *serverURL = [SBSettingsManager sharedSBSettingsManager].server;
         NSString *defaultImage = [NSString stringWithFormat:@"%@/images/avatar.jpg", serverURL];
         self.photoURL = [[[NSURL alloc] initWithString:defaultImage] autorelease];
         

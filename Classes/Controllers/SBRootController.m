@@ -137,7 +137,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     self.opportunitiesController.tabBarItem.image = [UIImage imageNamed:@"opportunities.png"];
 
     // Restore the order of the tab bars following the preferences of the user
-    NSArray *order = [SettingsManager sharedSettingsManager].tabOrder;
+    NSArray *order = [SBSettingsManager sharedSBSettingsManager].tabOrder;
     NSMutableArray *controllers = [[NSMutableArray alloc] initWithCapacity:7];
     if (order == nil)
     {
@@ -194,7 +194,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     [controllers release];
     
     // Jump to the last selected view controller in the tab bar
-    SBViewController controllerNumber = [SettingsManager sharedSettingsManager].currentTab;
+    SBViewController controllerNumber = [SBSettingsManager sharedSBSettingsManager].currentTab;
     switch (controllerNumber) 
     {
         case SBViewControllerAccounts:
@@ -248,7 +248,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 - (void)tabBarController:(UITabBarController *)tabBarController 
  didSelectViewController:(UIViewController *)viewController
 {
-    SettingsManager *settings = [SettingsManager sharedSettingsManager];
+    SBSettingsManager *settings = [SBSettingsManager sharedSBSettingsManager];
     if (viewController == self.accountsController.navigationController)
     {
         settings.currentTab = SBViewControllerAccounts;
@@ -321,7 +321,7 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
                 [order addObject:[NSNumber numberWithInt:SBViewControllerSettings]];
             }
         }
-        [SettingsManager sharedSettingsManager].tabOrder = order;
+        [SBSettingsManager sharedSBSettingsManager].tabOrder = order;
     }
 }
 

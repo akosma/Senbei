@@ -35,4 +35,4 @@
 #import "FatFreeCRMProxy.h"
 #import "NSDate+Senbei.h"
 #import "NSString+Senbei.h"
-#import "SettingsManager.h"
+#import "SBSettingsManager.h"

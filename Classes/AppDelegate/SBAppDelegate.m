@@ -103,7 +103,7 @@
                    name:FatFreeCRMProxyDidFailLoginNotification 
                  object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
     
-    SettingsManager *settings = [SettingsManager sharedSettingsManager];
+    SBSettingsManager *settings = [SBSettingsManager sharedSBSettingsManager];
     NSString *server = settings.server;
     NSURL *url = [NSURL URLWithString:server];
     NSString *host = [url host];
@@ -193,11 +193,11 @@
 
 - (void)login
 {
-    NSString *server = [SettingsManager sharedSettingsManager].server;
+    NSString *server = [SBSettingsManager sharedSBSettingsManager].server;
     NSURL *url = [NSURL URLWithString:server];
     NSString *host = [url host];
-    NSString *username = [SettingsManager sharedSettingsManager].username;
-    NSString *password = [SettingsManager sharedSettingsManager].password;
+    NSString *username = [SBSettingsManager sharedSBSettingsManager].username;
+    NSString *password = [SBSettingsManager sharedSBSettingsManager].password;
     NSString *logging = NSLocalizedString(@"LOGGING_IN", @"Text shown while the user logs in");
     self.statusLabel.text = [NSString stringWithFormat:logging, username, host];
     

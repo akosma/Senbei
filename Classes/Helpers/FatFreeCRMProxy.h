@@ -60,7 +60,7 @@
 @class ASINetworkQueue;
 @class SBBaseEntity;
 @class SBTask;
-@class SettingsManager;
+@class SBSettingsManager;
 
 @interface FatFreeCRMProxy : NSObject
 {

@@ -42,7 +42,7 @@
 #import "Definitions.h"
 #import "TBXML.h"
 #import "SBModels.h"
-#import "SettingsManager.h"
+#import "SBSettingsManager.h"
 
 #define PROFILE_REQUEST @"profile"
 #define COMMENTS_REQUEST @"comments"
@@ -55,7 +55,7 @@
 
 @property (nonatomic, retain) ASINetworkQueue *networkQueue;
 @property (nonatomic, assign) NSNotificationCenter *notificationCenter;
-@property (nonatomic, assign) SettingsManager *settingsManager;
+@property (nonatomic, assign) SBSettingsManager *settingsManager;
 
 - (void)sendGETRequestToURL:(NSURL *)url path:(NSString *)path;
 - (BOOL)requestOK:(ASIHTTPRequest *)request;
@@ -94,7 +94,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     if (self = [super init])
     {
         self.notificationCenter = [NSNotificationCenter defaultCenter];
-        self.settingsManager = [SettingsManager sharedSettingsManager];
+        self.settingsManager = [SBSettingsManager sharedSBSettingsManager];
 
         self.networkQueue = [[[ASINetworkQueue alloc] init] autorelease];
         self.networkQueue.shouldCancelAllRequestsOnFailure = NO;

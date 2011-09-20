@@ -1,5 +1,5 @@
 //
-//  SettingsManager.m
+//  SBSettingsManager.m
 //  Senbei
 //
 //  Created by Adrian on 7/23/10.
@@ -32,7 +32,7 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SettingsManager.h"
+#import "SBSettingsManager.h"
 #import "SynthesizeSingleton.h"
 
 #define SETTING_SERVER @"SETTING_SERVER"
@@ -48,15 +48,15 @@
 #define OLD_PREFERENCES_USERNAME @"username"
 #define OLD_PREFERENCES_PASSWORD @"password"
 
-@interface SettingsManager ()
+@interface SBSettingsManager ()
 
 @property (nonatomic, retain) NSUserDefaults *userDefaults;
 
 @end
 
-@implementation SettingsManager
+@implementation SBSettingsManager
 
-SYNTHESIZE_SINGLETON_FOR_CLASS(SettingsManager)
+SYNTHESIZE_SINGLETON_FOR_CLASS(SBSettingsManager)
 
 @dynamic server;
 @dynamic username;

@@ -1,5 +1,5 @@
 //
-//  SettingsManager.h
+//  SBSettingsManager.h
 //  Senbei
 //
 //  Created by Adrian on 7/23/10.
@@ -34,11 +34,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SettingsManager : NSObject 
-{
-@private
-    NSUserDefaults *_userDefaults;
-}
+
+@interface SBSettingsManager : NSObject 
 
 @property (nonatomic, copy) NSString *server;
 @property (nonatomic, copy) NSString *username;
@@ -48,6 +45,6 @@
 @property (nonatomic, retain) NSArray *tabOrder;
 @property (nonatomic) NSInteger currentTab;
 
-+ (SettingsManager *)sharedSettingsManager;
++ (SBSettingsManager *)sharedSBSettingsManager;
 
 @end

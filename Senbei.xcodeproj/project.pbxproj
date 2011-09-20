@@ -11,7 +11,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		3A006CE511F9880200534055 /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A006CE411F9880200534055 /* SettingsManager.m */; };
+		3A006CE511F9880200534055 /* SBSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A006CE411F9880200534055 /* SBSettingsManager.m */; };
 		3A006DB911F99A1000534055 /* IASKAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A006D9C11F99A1000534055 /* IASKAppSettingsViewController.m */; };
 		3A006DBA11F99A1000534055 /* IASKSpecifierValuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A006D9E11F99A1000534055 /* IASKSpecifierValuesViewController.m */; };
 		3A006DBB11F99A1000534055 /* IASKSettingsReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A006DA111F99A1000534055 /* IASKSettingsReader.m */; };
@@ -97,8 +97,8 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3A006CE311F9880200534055 /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsManager.h; sourceTree = "<group>"; };
-		3A006CE411F9880200534055 /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsManager.m; sourceTree = "<group>"; };
+		3A006CE311F9880200534055 /* SBSettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSettingsManager.h; sourceTree = "<group>"; };
+		3A006CE411F9880200534055 /* SBSettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSettingsManager.m; sourceTree = "<group>"; };
 		3A006D9B11F99A1000534055 /* IASKAppSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKAppSettingsViewController.h; sourceTree = "<group>"; };
 		3A006D9C11F99A1000534055 /* IASKAppSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASKAppSettingsViewController.m; sourceTree = "<group>"; };
 		3A006D9D11F99A1000534055 /* IASKSpecifierValuesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASKSpecifierValuesViewController.h; sourceTree = "<group>"; };
@@ -501,8 +501,8 @@
 				3A3E6A2A1121C6F700F3D322 /* NSDate+Senbei.m */,
 				3AE1CCEE11294F5500F50018 /* NSString+Senbei.h */,
 				3AE1CCEF11294F5500F50018 /* NSString+Senbei.m */,
-				3A006CE311F9880200534055 /* SettingsManager.h */,
-				3A006CE411F9880200534055 /* SettingsManager.m */,
+				3A006CE311F9880200534055 /* SBSettingsManager.h */,
+				3A006CE411F9880200534055 /* SBSettingsManager.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -796,7 +796,7 @@
 				3A5C5402115781D500620375 /* NSDataAdditions.m in Sources */,
 				3A5C5403115781D500620375 /* TBXML.m in Sources */,
 				3A5C54B51157A61500620375 /* GTMNSString+HTML.m in Sources */,
-				3A006CE511F9880200534055 /* SettingsManager.m in Sources */,
+				3A006CE511F9880200534055 /* SBSettingsManager.m in Sources */,
 				3A006DB911F99A1000534055 /* IASKAppSettingsViewController.m in Sources */,
 				3A006DBA11F99A1000534055 /* IASKSpecifierValuesViewController.m in Sources */,
 				3A006DBB11F99A1000534055 /* IASKSettingsReader.m in Sources */,
