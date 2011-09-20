@@ -61,12 +61,12 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(didReceiveComments:) 
-                                                     name:FatFreeCRMProxyDidRetrieveCommentsNotification
+                                                     name:SBNetworkManagerDidRetrieveCommentsNotification
                                                    object:[SBNetworkManager sharedSBNetworkManager]];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didPostComment:) 
-                                                     name:FatFreeCRMProxyDidPostCommentNotification 
+                                                     name:SBNetworkManagerDidPostCommentNotification 
                                                    object:[SBNetworkManager sharedSBNetworkManager]];
         
         UIBarButtonItem *button = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose

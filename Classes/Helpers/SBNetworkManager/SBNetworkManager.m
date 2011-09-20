@@ -40,21 +40,21 @@
 #import "SBModels.h"
 #import "SBSettingsManager.h"
 
-NSString * const FatFreeCRMProxyDidFailWithErrorNotification         = @"FatFreeCRMProxyDidFailWithErrorNotification";
-NSString * const FatFreeCRMProxyDidRetrieveTasksNotification         = @"FatFreeCRMProxyDidRetrieveTasksNotification";
-NSString * const FatFreeCRMProxyDidMarkTaskAsDoneNotification        = @"FatFreeCRMProxyDidMarkTaskAsDoneNotification";
-NSString * const FatFreeCRMProxyDidCreateTaskNotification            = @"FatFreeCRMProxyDidCreateTaskNotification";
-NSString * const FatFreeCRMProxyDidRetrieveAccountsNotification      = @"FatFreeCRMProxyDidRetrieveAccountsNotification";
-NSString * const FatFreeCRMProxyDidRetrieveOpportunitiesNotification = @"FatFreeCRMProxyDidRetrieveOpportunitiesNotification";
-NSString * const FatFreeCRMProxyDidRetrieveCampaignsNotification     = @"FatFreeCRMProxyDidRetrieveCampaignsNotification";
-NSString * const FatFreeCRMProxyDidRetrieveLeadsNotification         = @"FatFreeCRMProxyDidRetrieveLeadsNotification";
-NSString * const FatFreeCRMProxyDidRetrieveContactsNotification      = @"FatFreeCRMProxyDidRetrieveContactsNotification";
-NSString * const FatFreeCRMProxyDidRetrieveCommentsNotification      = @"FatFreeCRMProxyDidRetrieveCommentsNotification";
-NSString * const FatFreeCRMProxyDidPostCommentNotification           = @"FatFreeCRMProxyDidPostCommentNotification";
-NSString * const FatFreeCRMProxyDidLoginNotification                 = @"FatFreeCRMProxyDidLoginNotification";
-NSString * const FatFreeCRMProxyDidFailLoginNotification             = @"FatFreeCRMProxyDidFailLoginNotification";
+NSString * const SBNetworkManagerDidFailWithErrorNotification         = @"SBNetworkManagerDidFailWithErrorNotification";
+NSString * const SBNetworkManagerDidRetrieveTasksNotification         = @"SBNetworkManagerDidRetrieveTasksNotification";
+NSString * const SBNetworkManagerDidMarkTaskAsDoneNotification        = @"SBNetworkManagerDidMarkTaskAsDoneNotification";
+NSString * const SBNetworkManagerDidCreateTaskNotification            = @"SBNetworkManagerDidCreateTaskNotification";
+NSString * const SBNetworkManagerDidRetrieveAccountsNotification      = @"SBNetworkManagerDidRetrieveAccountsNotification";
+NSString * const SBNetworkManagerDidRetrieveOpportunitiesNotification = @"SBNetworkManagerDidRetrieveOpportunitiesNotification";
+NSString * const SBNetworkManagerDidRetrieveCampaignsNotification     = @"SBNetworkManagerDidRetrieveCampaignsNotification";
+NSString * const SBNetworkManagerDidRetrieveLeadsNotification         = @"SBNetworkManagerDidRetrieveLeadsNotification";
+NSString * const SBNetworkManagerDidRetrieveContactsNotification      = @"SBNetworkManagerDidRetrieveContactsNotification";
+NSString * const SBNetworkManagerDidRetrieveCommentsNotification      = @"SBNetworkManagerDidRetrieveCommentsNotification";
+NSString * const SBNetworkManagerDidPostCommentNotification           = @"SBNetworkManagerDidPostCommentNotification";
+NSString * const SBNetworkManagerDidLoginNotification                 = @"SBNetworkManagerDidLoginNotification";
+NSString * const SBNetworkManagerDidFailLoginNotification             = @"SBNetworkManagerDidFailLoginNotification";
 
-NSString * const FatFreeCRMProxyErrorKey = @"FatFreeCRMProxyErrorKey";
+NSString * const SBNetworkManagerErrorKey = @"SBNetworkManagerErrorKey";
 NSString * const TASKS_OVERDUE_KEY       = @"tasksOverdue";
 NSString * const TASKS_DUE_ASAP_KEY      = @"tasksDueASAP";
 NSString * const TASKS_DUE_TODAY_KEY     = @"tasksDueToday";
@@ -304,7 +304,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
             NSDictionary *userInfo = request.userInfo;
             SBBaseEntity *entity = [userInfo objectForKey:SELECTED_API_ENTITY];
             NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:entity, @"entity", nil];
-            NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidPostCommentNotification
+            NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidPostCommentNotification
                                                                   object:self 
                                                                 userInfo:dict];
             [self.notificationCenter postNotification:notif];    
@@ -319,12 +319,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
         }
         else if ([selectedAPIPath isEqualToString:TASK_DONE_REQUEST])
         {
-            [self.notificationCenter postNotificationName:FatFreeCRMProxyDidMarkTaskAsDoneNotification
+            [self.notificationCenter postNotificationName:SBNetworkManagerDidMarkTaskAsDoneNotification
                                                object:self];
         }
         else if ([selectedAPIPath isEqualToString:NEW_TASK_REQUEST])
         {
-            [self.notificationCenter postNotificationName:FatFreeCRMProxyDidCreateTaskNotification
+            [self.notificationCenter postNotificationName:SBNetworkManagerDidCreateTaskNotification
                                                object:self];
         }
     }
@@ -364,7 +364,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
         {
             // In the case of FFCRM, bad login API requests receive a 302,
             // with a redirection body taking to the login form
-            NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidFailLoginNotification 
+            NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidFailLoginNotification 
                                                                   object:self 
                                                                 userInfo:nil];
             [self.notificationCenter postNotification:notif];            
@@ -412,8 +412,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
 
 - (void)notifyError:(NSError *)error
 {
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:error, FatFreeCRMProxyErrorKey, nil];
-    NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidFailWithErrorNotification 
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:error, SBNetworkManagerErrorKey, nil];
+    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidFailWithErrorNotification 
                                                           object:self 
                                                         userInfo:userInfo];
     [self.notificationCenter postNotification:notif];    
@@ -455,7 +455,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
                                     forXPath:@"account" 
                                     andClass:NSClassFromString(@"SBCompanyAccount")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:accounts, @"data", nil];
-    NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveAccountsNotification
+    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveAccountsNotification
                                                           object:self 
                                                         userInfo:dict];
     [self.notificationCenter postNotification:notif];
@@ -468,7 +468,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
                                      forXPath:@"campaign" 
                                      andClass:NSClassFromString(@"SBCampaign")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:campaigns, @"data", nil];
-    NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveCampaignsNotification
+    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveCampaignsNotification
                                                           object:self 
                                                         userInfo:dict];
     [self.notificationCenter postNotification:notif];
@@ -481,7 +481,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
                                  forXPath:@"lead" 
                                  andClass:NSClassFromString(@"SBLead")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:leads, @"data", nil];
-    NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveLeadsNotification
+    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveLeadsNotification
                                                           object:self 
                                                         userInfo:dict];
     [self.notificationCenter postNotification:notif];
@@ -494,7 +494,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
                                          forXPath:@"opportunity" 
                                          andClass:NSClassFromString(@"SBOpportunity")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:opportunities, @"data", nil];
-    NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveOpportunitiesNotification
+    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveOpportunitiesNotification
                                                           object:self 
                                                         userInfo:dict];
     [self.notificationCenter postNotification:notif];
@@ -507,7 +507,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
                                     forXPath:@"contact" 
                                     andClass:NSClassFromString(@"SBContact")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:contacts, @"data", nil];
-    NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveContactsNotification
+    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveContactsNotification
                                                           object:self 
                                                         userInfo:dict];
     [self.notificationCenter postNotification:notif];    
@@ -523,7 +523,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
     SBBaseEntity *entity = [request.userInfo objectForKey:SELECTED_API_ENTITY];
 
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:comments, @"data", entity, @"entity", nil];
-    NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveCommentsNotification
+    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveCommentsNotification
                                                           object:self 
                                                         userInfo:dict];
     [self.notificationCenter postNotification:notif];    
@@ -536,7 +536,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
     TBXMLElement *root = tbxml.rootXMLElement;
     SBUser *user = [[[SBUser alloc] initWithTBXMLElement:root] autorelease];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:user, @"user", nil];
-    NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidLoginNotification
+    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidLoginNotification
                                                           object:self 
                                                         userInfo:dict];
     [self.notificationCenter postNotification:notif];    
@@ -579,7 +579,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
                           tasksDueNextWeek, TASKS_DUE_NEXT_WEEK_KEY,
                           tasksDueLater, TASKS_DUE_LATER_KEY,
                           nil];
-    NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveTasksNotification
+    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveTasksNotification
                                                           object:self 
                                                         userInfo:dict];
     [self.notificationCenter postNotification:notif];    

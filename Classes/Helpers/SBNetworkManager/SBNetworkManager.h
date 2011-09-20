@@ -34,21 +34,21 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const FatFreeCRMProxyDidFailWithErrorNotification;
-extern NSString * const FatFreeCRMProxyDidRetrieveTasksNotification;
-extern NSString * const FatFreeCRMProxyDidMarkTaskAsDoneNotification;
-extern NSString * const FatFreeCRMProxyDidCreateTaskNotification;
-extern NSString * const FatFreeCRMProxyDidRetrieveAccountsNotification;
-extern NSString * const FatFreeCRMProxyDidRetrieveOpportunitiesNotification;
-extern NSString * const FatFreeCRMProxyDidRetrieveCampaignsNotification;
-extern NSString * const FatFreeCRMProxyDidRetrieveLeadsNotification;
-extern NSString * const FatFreeCRMProxyDidRetrieveContactsNotification;
-extern NSString * const FatFreeCRMProxyDidRetrieveCommentsNotification;
-extern NSString * const FatFreeCRMProxyDidPostCommentNotification;
-extern NSString * const FatFreeCRMProxyDidLoginNotification;
-extern NSString * const FatFreeCRMProxyDidFailLoginNotification;
+extern NSString * const SBNetworkManagerDidFailWithErrorNotification;
+extern NSString * const SBNetworkManagerDidRetrieveTasksNotification;
+extern NSString * const SBNetworkManagerDidMarkTaskAsDoneNotification;
+extern NSString * const SBNetworkManagerDidCreateTaskNotification;
+extern NSString * const SBNetworkManagerDidRetrieveAccountsNotification;
+extern NSString * const SBNetworkManagerDidRetrieveOpportunitiesNotification;
+extern NSString * const SBNetworkManagerDidRetrieveCampaignsNotification;
+extern NSString * const SBNetworkManagerDidRetrieveLeadsNotification;
+extern NSString * const SBNetworkManagerDidRetrieveContactsNotification;
+extern NSString * const SBNetworkManagerDidRetrieveCommentsNotification;
+extern NSString * const SBNetworkManagerDidPostCommentNotification;
+extern NSString * const SBNetworkManagerDidLoginNotification;
+extern NSString * const SBNetworkManagerDidFailLoginNotification;
 
-extern NSString * const FatFreeCRMProxyErrorKey;
+extern NSString * const SBNetworkManagerErrorKey;
 extern NSString * const TASKS_OVERDUE_KEY;
 extern NSString * const TASKS_DUE_ASAP_KEY;
 extern NSString * const TASKS_DUE_TODAY_KEY;

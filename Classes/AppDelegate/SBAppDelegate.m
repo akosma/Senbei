@@ -89,17 +89,17 @@
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self 
                selector:@selector(didLogin:) 
-                   name:FatFreeCRMProxyDidLoginNotification
+                   name:SBNetworkManagerDidLoginNotification
                  object:[SBNetworkManager sharedSBNetworkManager]];
     
     [center addObserver:self 
                selector:@selector(didFailWithError:) 
-                   name:FatFreeCRMProxyDidFailWithErrorNotification 
+                   name:SBNetworkManagerDidFailWithErrorNotification 
                  object:[SBNetworkManager sharedSBNetworkManager]];
 
     [center addObserver:self 
                selector:@selector(didFailLogin:) 
-                   name:FatFreeCRMProxyDidFailLoginNotification 
+                   name:SBNetworkManagerDidFailLoginNotification 
                  object:[SBNetworkManager sharedSBNetworkManager]];
     
     SBSettingsManager *settings = [SBSettingsManager sharedSBSettingsManager];
@@ -156,7 +156,7 @@
 - (void)didFailWithError:(NSNotification *)notification
 {
     NSDictionary *userInfo = [notification userInfo];
-    NSError *error = [userInfo objectForKey:FatFreeCRMProxyErrorKey];
+    NSError *error = [userInfo objectForKey:SBNetworkManagerErrorKey];
     NSString *msg = [error localizedDescription];
 
     [self.spinningWheel stopAnimating];

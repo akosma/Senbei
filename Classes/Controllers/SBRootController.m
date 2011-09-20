@@ -125,32 +125,32 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self.accountsController 
                selector:@selector(didReceiveData:) 
-                   name:FatFreeCRMProxyDidRetrieveAccountsNotification
+                   name:SBNetworkManagerDidRetrieveAccountsNotification
                  object:[SBNetworkManager sharedSBNetworkManager]];
     self.accountsController.listedClass = [SBCompanyAccount class];
     
     [center addObserver:self.opportunitiesController 
                selector:@selector(didReceiveData:) 
-                   name:FatFreeCRMProxyDidRetrieveOpportunitiesNotification
+                   name:SBNetworkManagerDidRetrieveOpportunitiesNotification
                  object:[SBNetworkManager sharedSBNetworkManager]];
     self.opportunitiesController.listedClass = [SBOpportunity class];
     
     [center addObserver:self.contactsController 
                selector:@selector(didReceiveData:) 
-                   name:FatFreeCRMProxyDidRetrieveContactsNotification
+                   name:SBNetworkManagerDidRetrieveContactsNotification
                  object:[SBNetworkManager sharedSBNetworkManager]];
     self.contactsController.listedClass = [SBContact class];
     self.contactsController.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
     [center addObserver:self.campaignsController
                selector:@selector(didReceiveData:)
-                   name:FatFreeCRMProxyDidRetrieveCampaignsNotification
+                   name:SBNetworkManagerDidRetrieveCampaignsNotification
                  object:[SBNetworkManager sharedSBNetworkManager]];
     self.campaignsController.listedClass = [SBCampaign class];
     
     [center addObserver:self.leadsController
                selector:@selector(didReceiveData:)
-                   name:FatFreeCRMProxyDidRetrieveLeadsNotification
+                   name:SBNetworkManagerDidRetrieveLeadsNotification
                  object:[SBNetworkManager sharedSBNetworkManager]];
     self.leadsController.listedClass = [SBLead class];
     

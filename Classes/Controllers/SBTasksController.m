@@ -123,17 +123,17 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(didReceiveTasks:) 
-                                                 name:FatFreeCRMProxyDidRetrieveTasksNotification 
+                                                 name:SBNetworkManagerDidRetrieveTasksNotification 
                                                object:[SBNetworkManager sharedSBNetworkManager]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadTasks:) 
-                                                 name:FatFreeCRMProxyDidMarkTaskAsDoneNotification 
+                                                 name:SBNetworkManagerDidMarkTaskAsDoneNotification 
                                                object:[SBNetworkManager sharedSBNetworkManager]];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadTasks:) 
-                                                 name:FatFreeCRMProxyDidCreateTaskNotification
+                                                 name:SBNetworkManagerDidCreateTaskNotification
                                                object:[SBNetworkManager sharedSBNetworkManager]];
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"TaskCategories" ofType:@"plist"];
