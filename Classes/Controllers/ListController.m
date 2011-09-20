@@ -107,11 +107,11 @@
 
 - (void)dealloc 
 {
-    self.navigationController = nil;
-    self.searchBar = nil;
-    self.searchController = nil;
-    self.data = nil;
-    self.searchData = nil;
+    [_navigationController release];
+    [_searchBar release];
+    [_searchController release];
+    [_data release];
+    [_searchData release];
     [super dealloc];
 }
 
