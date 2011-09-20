@@ -1,5 +1,5 @@
 //
-//  AccountsController.h
+//  SBListController.h
 //  Senbei
 //
 //  Created by Adrian on 1/19/10.
@@ -35,7 +35,7 @@
 #import <UIKit/UIKit.h>
 #import "ListControllerDelegate.h"
 
-@interface ListController : UITableViewController <UISearchDisplayDelegate, 
+@interface SBListController : UITableViewController <UISearchDisplayDelegate, 
                                                        UISearchBarDelegate>
 
 @property (nonatomic) UITableViewCellAccessoryType accessoryType;

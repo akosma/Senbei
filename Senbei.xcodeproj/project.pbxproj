@@ -66,7 +66,7 @@
 		3A6D8D2211064D060089F21D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6D8D2111064D060089F21D /* CFNetwork.framework */; };
 		3A6D8D2411064D060089F21D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6D8D2311064D060089F21D /* SystemConfiguration.framework */; };
 		3A6D8D2611064D060089F21D /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6D8D2511064D060089F21D /* libz.1.2.3.dylib */; };
-		3A6D8D3A11064DF20089F21D /* ListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8D3911064DF20089F21D /* ListController.m */; };
+		3A6D8D3A11064DF20089F21D /* SBListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8D3911064DF20089F21D /* SBListController.m */; };
 		3A6D8D4411064E880089F21D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D8D4311064E880089F21D /* MainWindow.xib */; };
 		3A6D8D61110654DB0089F21D /* FatFreeCRMProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8D60110654DB0089F21D /* FatFreeCRMProxy.m */; };
 		3A708B431108427500CB2D83 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A708B421108427500CB2D83 /* Comment.m */; };
@@ -211,8 +211,8 @@
 		3A6D8D2111064D060089F21D /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3A6D8D2311064D060089F21D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3A6D8D2511064D060089F21D /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
-		3A6D8D3811064DF20089F21D /* ListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListController.h; sourceTree = "<group>"; };
-		3A6D8D3911064DF20089F21D /* ListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListController.m; sourceTree = "<group>"; };
+		3A6D8D3811064DF20089F21D /* SBListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBListController.h; sourceTree = "<group>"; };
+		3A6D8D3911064DF20089F21D /* SBListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBListController.m; sourceTree = "<group>"; };
 		3A6D8D5F110654DB0089F21D /* FatFreeCRMProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FatFreeCRMProxy.h; sourceTree = "<group>"; };
 		3A6D8D60110654DB0089F21D /* FatFreeCRMProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FatFreeCRMProxy.m; sourceTree = "<group>"; };
 		3A6D8D691106573B0089F21D /* Definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
@@ -472,8 +472,8 @@
 			children = (
 				3A92BDDA112FDB6F001B43FE /* SBRootController.h */,
 				3A92BDDB112FDB6F001B43FE /* SBRootController.m */,
-				3A6D8D3811064DF20089F21D /* ListController.h */,
-				3A6D8D3911064DF20089F21D /* ListController.m */,
+				3A6D8D3811064DF20089F21D /* SBListController.h */,
+				3A6D8D3911064DF20089F21D /* SBListController.m */,
 				3A29C35C110794BA00D887F1 /* ListControllerDelegate.h */,
 				3A29C3FC1107A34E00D887F1 /* TasksController.h */,
 				3A29C3FD1107A34E00D887F1 /* TasksController.m */,
@@ -769,7 +769,7 @@
 				3A6D8D1C11064CD80089F21D /* UIImage+AKOLoadingExtension.m in Sources */,
 				3A6D8D1D11064CD80089F21D /* AKOImageView.m in Sources */,
 				3A6D8D1E11064CD80089F21D /* NSURL+AKOCacheKey.m in Sources */,
-				3A6D8D3A11064DF20089F21D /* ListController.m in Sources */,
+				3A6D8D3A11064DF20089F21D /* SBListController.m in Sources */,
 				3A6D8D61110654DB0089F21D /* FatFreeCRMProxy.m in Sources */,
 				3A29C08A11075E2B00D887F1 /* CommentsController.m in Sources */,
 				3A29C08E11075E6100D887F1 /* CompanyAccount.m in Sources */,

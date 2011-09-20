@@ -1,5 +1,5 @@
 //
-//  AccountsController.m
+//  SBListController.m
 //  Senbei
 //
 //  Created by Adrian on 1/19/10.
@@ -32,14 +32,14 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "ListController.h"
+#import "SBListController.h"
 #import "FatFreeCRMProxy.h"
 #import "CompanyAccount.h"
 #import "NSDate+Senbei.h"
 #import "ListTableViewCell.h"
 #import "AKOImageView.h"
 
-@interface ListController ()
+@interface SBListController ()
 
 @property (nonatomic, retain) UINavigationController *navigationController;
 @property (nonatomic, retain) UISearchDisplayController *searchController;
@@ -57,7 +57,7 @@
 @end
 
 
-@implementation ListController
+@implementation SBListController
 
 @synthesize listedClass = _listedClass;
 @synthesize delegate = _delegate;

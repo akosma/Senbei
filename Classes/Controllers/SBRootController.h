@@ -40,7 +40,7 @@
 
 @class SettingsController;
 @class TasksController;
-@class ListController;
+@class SBListController;
 @class CommentsController;
 
 typedef enum {
@@ -59,11 +59,11 @@ typedef enum {
                                                 ABPersonViewControllerDelegate,
                                                 MFMailComposeViewControllerDelegate> 
 
-@property (nonatomic, retain) IBOutlet ListController *accountsController;
-@property (nonatomic, retain) IBOutlet ListController *contactsController;
-@property (nonatomic, retain) IBOutlet ListController *opportunitiesController;
-@property (nonatomic, retain) IBOutlet ListController *leadsController;
-@property (nonatomic, retain) IBOutlet ListController *campaignsController;
+@property (nonatomic, retain) IBOutlet SBListController *accountsController;
+@property (nonatomic, retain) IBOutlet SBListController *contactsController;
+@property (nonatomic, retain) IBOutlet SBListController *opportunitiesController;
+@property (nonatomic, retain) IBOutlet SBListController *leadsController;
+@property (nonatomic, retain) IBOutlet SBListController *campaignsController;
 @property (nonatomic, retain) IBOutlet SettingsController *settingsController;
 @property (nonatomic, retain) IBOutlet TasksController *tasksController;
 

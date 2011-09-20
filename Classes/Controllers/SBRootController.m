@@ -34,7 +34,7 @@
 
 #import "SBRootController.h"
 #import "FatFreeCRMProxy.h"
-#import "ListController.h"
+#import "SBListController.h"
 #import "SettingsController.h"
 #import "TasksController.h"
 #import "CompanyAccount.h"
@@ -324,7 +324,7 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
 #pragma mark -
 #pragma mark BaseListControllerDelegate methods
 
-- (void)listController:(ListController *)controller didSelectEntity:(BaseEntity *)entity
+- (void)listController:(SBListController *)controller didSelectEntity:(BaseEntity *)entity
 {
     if (controller == self.contactsController)
     {
@@ -349,7 +349,7 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
     }
 }
 
-- (void)listController:(ListController *)controller didTapAccessoryForEntity:(BaseEntity *)entity
+- (void)listController:(SBListController *)controller didTapAccessoryForEntity:(BaseEntity *)entity
 {
     if (controller == self.contactsController)
     {
