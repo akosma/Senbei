@@ -32,6 +32,7 @@
 		3A0B525B11146D87005A26FD /* SBNewTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B525A11146D87005A26FD /* SBNewTaskController.m */; };
 		3A1104A3111DEF4500729EB6 /* DemoLogins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A1104A2111DEF4500729EB6 /* DemoLogins.plist */; };
 		3A1F518F1122029C0081580E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F518D1122029C0081580E /* Localizable.strings */; };
+		3A23F554142892F900894EA2 /* SBNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23F553142892F900894EA2 /* SBNetworkManager.m */; };
 		3A29C08A11075E2B00D887F1 /* SBCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08911075E2B00D887F1 /* SBCommentsController.m */; };
 		3A29C08E11075E6100D887F1 /* SBCompanyAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08D11075E6100D887F1 /* SBCompanyAccount.m */; };
 		3A29C0931107600500D887F1 /* SBBaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C0921107600500D887F1 /* SBBaseEntity.m */; };
@@ -68,7 +69,6 @@
 		3A6D8D2611064D060089F21D /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A6D8D2511064D060089F21D /* libz.1.2.3.dylib */; };
 		3A6D8D3A11064DF20089F21D /* SBListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8D3911064DF20089F21D /* SBListController.m */; };
 		3A6D8D4411064E880089F21D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D8D4311064E880089F21D /* MainWindow.xib */; };
-		3A6D8D61110654DB0089F21D /* SBNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8D60110654DB0089F21D /* SBNetworkManager.m */; };
 		3A708B431108427500CB2D83 /* SBComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A708B421108427500CB2D83 /* SBComment.m */; };
 		3A8C38811119D8E1006669BE /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8C38801119D8E1006669BE /* AddressBook.framework */; };
 		3A8C38831119D8E1006669BE /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8C38821119D8E1006669BE /* AddressBookUI.framework */; };
@@ -139,6 +139,8 @@
 		3A1F518E1122029C0081580E /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A23F54F1428813E00894EA2 /* SBModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBModels.h; sourceTree = "<group>"; };
 		3A23F5501428896800894EA2 /* SBExternals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBExternals.h; sourceTree = "<group>"; };
+		3A23F552142892F900894EA2 /* SBNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBNetworkManager.h; sourceTree = "<group>"; };
+		3A23F553142892F900894EA2 /* SBNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBNetworkManager.m; sourceTree = "<group>"; };
 		3A29C08811075E2B00D887F1 /* SBCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCommentsController.h; sourceTree = "<group>"; };
 		3A29C08911075E2B00D887F1 /* SBCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCommentsController.m; sourceTree = "<group>"; };
 		3A29C08C11075E6100D887F1 /* SBCompanyAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCompanyAccount.h; sourceTree = "<group>"; };
@@ -215,8 +217,6 @@
 		3A6D8D2511064D060089F21D /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		3A6D8D3811064DF20089F21D /* SBListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBListController.h; sourceTree = "<group>"; };
 		3A6D8D3911064DF20089F21D /* SBListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBListController.m; sourceTree = "<group>"; };
-		3A6D8D5F110654DB0089F21D /* SBNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBNetworkManager.h; sourceTree = "<group>"; };
-		3A6D8D60110654DB0089F21D /* SBNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBNetworkManager.m; sourceTree = "<group>"; };
 		3A6D8D691106573B0089F21D /* Definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
 		3A708B411108427500CB2D83 /* SBComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBComment.h; sourceTree = "<group>"; };
 		3A708B421108427500CB2D83 /* SBComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBComment.m; sourceTree = "<group>"; };
@@ -402,6 +402,15 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		3A23F551142892F900894EA2 /* SBNetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				3A23F552142892F900894EA2 /* SBNetworkManager.h */,
+				3A23F553142892F900894EA2 /* SBNetworkManager.m */,
+			);
+			path = SBNetworkManager;
+			sourceTree = "<group>";
+		};
 		3A29C08B11075E5400D887F1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -496,8 +505,7 @@
 			isa = PBXGroup;
 			children = (
 				3ACED40B142871FE003C65B1 /* SBHelpers.h */,
-				3A6D8D5F110654DB0089F21D /* SBNetworkManager.h */,
-				3A6D8D60110654DB0089F21D /* SBNetworkManager.m */,
+				3A23F551142892F900894EA2 /* SBNetworkManager */,
 				3A3E6A291121C6F700F3D322 /* NSDate+Senbei.h */,
 				3A3E6A2A1121C6F700F3D322 /* NSDate+Senbei.m */,
 				3AE1CCEE11294F5500F50018 /* NSString+Senbei.h */,
@@ -774,7 +782,6 @@
 				3A6D8D1D11064CD80089F21D /* AKOImageView.m in Sources */,
 				3A6D8D1E11064CD80089F21D /* NSURL+AKOCacheKey.m in Sources */,
 				3A6D8D3A11064DF20089F21D /* SBListController.m in Sources */,
-				3A6D8D61110654DB0089F21D /* SBNetworkManager.m in Sources */,
 				3A29C08A11075E2B00D887F1 /* SBCommentsController.m in Sources */,
 				3A29C08E11075E6100D887F1 /* SBCompanyAccount.m in Sources */,
 				3A29C0931107600500D887F1 /* SBBaseEntity.m in Sources */,
@@ -810,6 +817,7 @@
 				3A006DC111F99A1000534055 /* IASKSlider.m in Sources */,
 				3A006DC211F99A1000534055 /* IASKSwitch.m in Sources */,
 				3A006DC311F99A1000534055 /* IASKTextField.m in Sources */,
+				3A23F554142892F900894EA2 /* SBNetworkManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
