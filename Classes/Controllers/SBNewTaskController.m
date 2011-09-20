@@ -1,5 +1,5 @@
 //
-//  NewTaskController.m
+//  SBNewTaskController.m
 //  Senbei
 //
 //  Created by Adrian on 1/30/10.
@@ -32,14 +32,44 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "NewTaskController.h"
+#import "SBNewTaskController.h"
 #import "FatFreeCRMProxy.h"
 #import "NSDate+Senbei.h"
 #import "Task.h"
 
-@implementation NewTaskController
+@interface SBNewTaskController ()
+
+@property (nonatomic, retain) UITextField *nameField;
+@property (nonatomic, retain) UITextField *bucketField;
+@property (nonatomic, retain) UITextField *categoryField;
+@property (nonatomic, retain) UIBarButtonItem *doneButtonItem;
+@property (nonatomic, copy) NSString *selectedBucket;
+@property (nonatomic, retain) UIPickerView *bucketPicker;
+@property (nonatomic, retain) NSArray *buckets;
+@property (nonatomic, copy) NSString *selectedCategory;
+@property (nonatomic, retain) UIPickerView *categoryPicker;
+@property (nonatomic, retain) NSArray *categories;
+@property (nonatomic, retain) NSDate *selectedDate;
+@property (nonatomic, retain) UIDatePicker *datePicker;
+
+@end
+
+
+@implementation SBNewTaskController
 
 @synthesize navigationController = _navigationController;
+@synthesize nameField = _nameField;
+@synthesize bucketField = _bucketField;
+@synthesize categoryField = _categoryField;
+@synthesize doneButtonItem = _doneButtonItem;
+@synthesize selectedBucket = _selectedBucket;
+@synthesize bucketPicker = _bucketPicker;
+@synthesize buckets = _buckets;
+@synthesize selectedCategory = _selectedCategory;
+@synthesize categoryPicker = _categoryPicker;
+@synthesize categories = _categories;
+@synthesize selectedDate = _selectedDate;
+@synthesize datePicker = _datePicker;
 
 #pragma mark -
 #pragma mark Init and dealloc
@@ -48,14 +78,14 @@
 {
     if (self = [super initWithStyle:UITableViewStyleGrouped]) 
     {
-        _navigationController = [[UINavigationController alloc] initWithRootViewController:self];
+        self.navigationController = [[[UINavigationController alloc] initWithRootViewController:self] autorelease];
         NSString *controllerTitle = NSLocalizedString(@"NEW_TASK_TITLE", @"Title of the new task screen");
         self.title = controllerTitle;
 
-        _doneButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                     target:self
-                                                                                     action:@selector(done:)];
-        self.navigationItem.rightBarButtonItem = _doneButtonItem;
+        self.doneButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                        target:self
+                                                                                        action:@selector(done:)] autorelease];
+        self.navigationItem.rightBarButtonItem = self.doneButtonItem;
 
         UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                      target:self
@@ -68,22 +98,22 @@
                                                      name:FatFreeCRMProxyDidCreateTaskNotification
                                                    object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
         
-        _nameField = [[UITextField alloc] initWithFrame:CGRectMake(90.0, 12.0, 200.0, 20.0)];
-        _nameField.delegate = self;
+        self.nameField = [[[UITextField alloc] initWithFrame:CGRectMake(90.0, 12.0, 200.0, 20.0)] autorelease];
+        self.nameField.delegate = self;
         
-        _bucketField = [[UITextField alloc] initWithFrame:CGRectMake(90.0, 12.0, 200.0, 20.0)];
-        _bucketField.delegate = self;
+        self.bucketField = [[[UITextField alloc] initWithFrame:CGRectMake(90.0, 12.0, 200.0, 20.0)] autorelease];
+        self.bucketField.delegate = self;
         
-        _categoryField = [[UITextField alloc] initWithFrame:CGRectMake(90.0, 12.0, 200.0, 20.0)];
-        _categoryField.delegate = self;
+        self.categoryField = [[[UITextField alloc] initWithFrame:CGRectMake(90.0, 12.0, 200.0, 20.0)] autorelease];
+        self.categoryField.delegate = self;
         
         NSString *path = [[NSBundle mainBundle] pathForResource:@"TaskCategories" ofType:@"plist"];
-        _categories = [[NSArray alloc] initWithContentsOfFile:path];
-        _selectedCategory = [[[_categories objectAtIndex:0] objectForKey:@"key"] copy];
+        self.categories = [NSArray arrayWithContentsOfFile:path];
+        self.selectedCategory = [[self.categories objectAtIndex:0] objectForKey:@"key"];
         
         path = [[NSBundle mainBundle] pathForResource:@"TaskBuckets" ofType:@"plist"];
-        _buckets = [[NSArray alloc] initWithContentsOfFile:path];
-        _selectedBucket = [[[_buckets objectAtIndex:0] objectForKey:@"key"] copy];
+        self.buckets = [NSArray arrayWithContentsOfFile:path];
+        self.selectedBucket = [[self.buckets objectAtIndex:0] objectForKey:@"key"];
     }
     return self;
 }
@@ -112,14 +142,14 @@
 
 - (void)done:(id)sender
 {
-    if ([_nameField.text length] > 0)
+    if ([self.nameField.text length] > 0)
     {
-        _doneButtonItem.enabled = NO;
+        self.doneButtonItem.enabled = NO;
         Task *task = [[Task alloc] init];
-        task.name = _nameField.text;
-        task.category = _selectedCategory;
-        task.bucket = _selectedBucket;
-        task.dueDate = _selectedDate;
+        task.name = self.nameField.text;
+        task.category = self.selectedCategory;
+        task.bucket = self.selectedBucket;
+        task.dueDate = self.selectedDate;
         [[FatFreeCRMProxy sharedFatFreeCRMProxy] createTask:task];
         [task release];
     }
@@ -127,28 +157,26 @@
     {
         NSString *message = NSLocalizedString(@"NEW_TASK_SPECIFY_NAME", @"Text shown when trying to create a task without name");
         NSString *ok = NSLocalizedString(@"OK", @"The 'OK' word");
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:message
-                                                       delegate:nil
-                                              cancelButtonTitle:ok
-                                              otherButtonTitles:nil];
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:nil
+                                                         message:message
+                                                        delegate:nil
+                                               cancelButtonTitle:ok
+                                               otherButtonTitles:nil] autorelease];
         [alert show];
-        [alert release];
-        [_nameField becomeFirstResponder];
+        [self.nameField becomeFirstResponder];
     }
 }
 
 - (void)close:(id)sender
 {
-    _doneButtonItem.enabled = NO;
+    self.doneButtonItem.enabled = NO;
     [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)dateSelected:(id)sender
 {
-    [_selectedDate release];
-    _selectedDate = [[_datePicker date] retain];
-    _bucketField.text = [_selectedDate stringWithDateFormattedWithCurrentLocale];
+    self.selectedDate = [self.datePicker date];
+    self.bucketField.text = [self.selectedDate stringWithDateFormattedWithCurrentLocale];
 }
 
 #pragma mark -
@@ -163,14 +191,14 @@
 - (void)viewWillAppear:(BOOL)animated 
 {
     [super viewWillAppear:animated];
-    _nameField.text = @"";
-    _doneButtonItem.enabled = YES;
+    self.nameField.text = @"";
+    self.doneButtonItem.enabled = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [_nameField becomeFirstResponder];
+    [self.nameField becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning 
@@ -211,20 +239,20 @@
     {
         case 0:
             cell.textLabel.text = name;
-            _nameField.text = @"";
-            [cell.contentView addSubview:_nameField];
+            self.nameField.text = @"";
+            [cell.contentView addSubview:self.nameField];
             break;
 
         case 1:
             cell.textLabel.text = due;
-            _bucketField.text = [[_buckets objectAtIndex:0] objectForKey:@"text"];
-            [cell.contentView addSubview:_bucketField];
+            self.bucketField.text = [[self.buckets objectAtIndex:0] objectForKey:@"text"];
+            [cell.contentView addSubview:self.bucketField];
             break;
             
         case 2:
             cell.textLabel.text = category;
-            _categoryField.text = [[_categories objectAtIndex:0] objectForKey:@"text"];
-            [cell.contentView addSubview:_categoryField];
+            self.categoryField.text = [[self.categories objectAtIndex:0] objectForKey:@"text"];
+            [cell.contentView addSubview:self.categoryField];
 
         default:
             break;
@@ -238,15 +266,15 @@
     switch (indexPath.row) 
     {
         case 0:
-            [_nameField becomeFirstResponder];
+            [self.nameField becomeFirstResponder];
             break;
             
         case 1:
-            [_bucketField becomeFirstResponder];
+            [self.bucketField becomeFirstResponder];
             break;
             
         case 2:
-            [_categoryField becomeFirstResponder];
+            [self.categoryField becomeFirstResponder];
             break;
 
         default:
@@ -259,36 +287,36 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    if (textField == _nameField)
+    if (textField == self.nameField)
     {
         return YES;
     }
 
-    [_nameField resignFirstResponder];
+    [self.nameField resignFirstResponder];
 
-    if (textField == _categoryField)
+    if (textField == self.categoryField)
     {
-        if (_categoryPicker == nil)
+        if (self.categoryPicker == nil)
         {
-            _categoryPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, 264.0, 320.0, 216.0)];
-            _categoryPicker.delegate = self;
-            _categoryPicker.showsSelectionIndicator = YES;
-            [_categoryPicker selectRow:0 inComponent:0 animated:NO];
-            [self.navigationController.view addSubview:_categoryPicker];
+            self.categoryPicker = [[[UIPickerView alloc] initWithFrame:CGRectMake(0.0, 264.0, 320.0, 216.0)] autorelease];
+            self.categoryPicker.delegate = self;
+            self.categoryPicker.showsSelectionIndicator = YES;
+            [self.categoryPicker selectRow:0 inComponent:0 animated:NO];
+            [self.navigationController.view addSubview:self.categoryPicker];
         }
-        [self.navigationController.view bringSubviewToFront:_categoryPicker];
+        [self.navigationController.view bringSubviewToFront:self.categoryPicker];
     }
-    else if (textField == _bucketField)
+    else if (textField == self.bucketField)
     {
-        if (_bucketPicker == nil)
+        if (self.bucketPicker == nil)
         {
-            _bucketPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0.0, 264.0, 320.0, 216.0)];
-            _bucketPicker.delegate = self;
-            _bucketPicker.showsSelectionIndicator = YES;
-            [_bucketPicker selectRow:0 inComponent:0 animated:NO];
-            [self.navigationController.view addSubview:_bucketPicker];
+            self.bucketPicker = [[[UIPickerView alloc] initWithFrame:CGRectMake(0.0, 264.0, 320.0, 216.0)] autorelease];
+            self.bucketPicker.delegate = self;
+            self.bucketPicker.showsSelectionIndicator = YES;
+            [self.bucketPicker selectRow:0 inComponent:0 animated:NO];
+            [self.navigationController.view addSubview:self.bucketPicker];
         }
-        [self.navigationController.view bringSubviewToFront:_bucketPicker];
+        [self.navigationController.view bringSubviewToFront:self.bucketPicker];
     }
     
     return NO;
@@ -306,11 +334,11 @@
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    if (pickerView == _categoryPicker)
+    if (pickerView == self.categoryPicker)
     {
         return 1;
     }
-    if (pickerView == _bucketPicker)
+    if (pickerView == self.bucketPicker)
     {
         return 1;
     }
@@ -319,13 +347,13 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    if (pickerView == _categoryPicker)
+    if (pickerView == self.categoryPicker)
     {
-        return [_categories count];
+        return [self.categories count];
     }
-    if (pickerView == _bucketPicker)
+    if (pickerView == self.bucketPicker)
     {
-        return [_buckets count];
+        return [self.buckets count];
     }
     return 0;
 }
@@ -335,46 +363,43 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    if (pickerView == _categoryPicker)
+    if (pickerView == self.categoryPicker)
     {
-        return [[_categories objectAtIndex:row] objectForKey:@"text"];
+        return [[self.categories objectAtIndex:row] objectForKey:@"text"];
     }
-    if (pickerView == _bucketPicker)
+    if (pickerView == self.bucketPicker)
     {
-        return [[_buckets objectAtIndex:row] objectForKey:@"text"];
+        return [[self.buckets objectAtIndex:row] objectForKey:@"text"];
     }
     return 0;    
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    if (pickerView == _categoryPicker)
+    if (pickerView == self.categoryPicker)
     {
-        [_selectedCategory release];
-        _selectedCategory = [[[_categories objectAtIndex:row] objectForKey:@"key"] copy];
-        _categoryField.text = [[_categories objectAtIndex:row] objectForKey:@"text"];
+        self.selectedCategory = [[self.categories objectAtIndex:row] objectForKey:@"key"];
+        self.categoryField.text = [[self.categories objectAtIndex:row] objectForKey:@"text"];
     }
-    else if (pickerView == _bucketPicker)
+    else if (pickerView == self.bucketPicker)
     {
-        [_selectedBucket release];
-        _selectedBucket = [[[_buckets objectAtIndex:row] objectForKey:@"key"] copy];
-        _bucketField.text = [[_buckets objectAtIndex:row] objectForKey:@"text"];
+        self.selectedBucket = [[self.buckets objectAtIndex:row] objectForKey:@"key"];
+        self.bucketField.text = [[self.buckets objectAtIndex:row] objectForKey:@"text"];
         
-        if ([_selectedBucket isEqualToString:@"specific_time"])
+        if ([self.selectedBucket isEqualToString:@"specific_time"])
         {
-            if (_datePicker == nil)
+            if (self.datePicker == nil)
             {
-                _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0.0, 264.0, 320.0, 216.0)];
-                _datePicker.datePickerMode = UIDatePickerModeDate;
-                [_datePicker addTarget:self 
+                self.datePicker = [[[UIDatePicker alloc] initWithFrame:CGRectMake(0.0, 264.0, 320.0, 216.0)] autorelease];
+                self.datePicker.datePickerMode = UIDatePickerModeDate;
+                [self.datePicker addTarget:self 
                                 action:@selector(dateSelected:) 
                       forControlEvents:UIControlEventValueChanged];
-                [self.navigationController.view addSubview:_datePicker];
+                [self.navigationController.view addSubview:self.datePicker];
             }
-            [_selectedDate release];
-            _selectedDate = [[_datePicker date] retain];
-            _bucketField.text = [_selectedDate stringWithDateFormattedWithCurrentLocale];
-            [self.navigationController.view bringSubviewToFront:_datePicker];
+            self.selectedDate = [self.datePicker date];
+            self.bucketField.text = [self.selectedDate stringWithDateFormattedWithCurrentLocale];
+            [self.navigationController.view bringSubviewToFront:self.datePicker];
         }
     }
 }

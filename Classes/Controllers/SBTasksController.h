@@ -34,7 +34,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class NewTaskController;
+@class SBNewTaskController;
 
 @interface SBTasksController : UITableViewController <UIAlertViewDelegate>
 

@@ -29,7 +29,7 @@
 		3A006DC711F99A1000534055 /* IASKPSToggleSwitchSpecifierViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A006DB711F99A1000534055 /* IASKPSToggleSwitchSpecifierViewCell.xib */; };
 		3A006DC811F99A1000534055 /* IASKSpecifierValuesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A006DB811F99A1000534055 /* IASKSpecifierValuesView.xib */; };
 		3A006DE411F99DC000534055 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A006DE311F99DC000534055 /* MobileCoreServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		3A0B525B11146D87005A26FD /* NewTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B525A11146D87005A26FD /* NewTaskController.m */; };
+		3A0B525B11146D87005A26FD /* SBNewTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B525A11146D87005A26FD /* SBNewTaskController.m */; };
 		3A1104A3111DEF4500729EB6 /* DemoLogins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A1104A2111DEF4500729EB6 /* DemoLogins.plist */; };
 		3A1F518F1122029C0081580E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F518D1122029C0081580E /* Localizable.strings */; };
 		3A29C08A11075E2B00D887F1 /* CommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08911075E2B00D887F1 /* CommentsController.m */; };
@@ -131,8 +131,8 @@
 		3A006DD511F99D5100534055 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
 		3A006DD811F99D5D00534055 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
 		3A006DE311F99DC000534055 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		3A0B525911146D87005A26FD /* NewTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTaskController.h; sourceTree = "<group>"; };
-		3A0B525A11146D87005A26FD /* NewTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTaskController.m; sourceTree = "<group>"; };
+		3A0B525911146D87005A26FD /* SBNewTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBNewTaskController.h; sourceTree = "<group>"; };
+		3A0B525A11146D87005A26FD /* SBNewTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBNewTaskController.m; sourceTree = "<group>"; };
 		3A0B52FC11147B99005A26FD /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/TaskCategories.plist; sourceTree = "<group>"; };
 		3A0B531D11147EEC005A26FD /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/TaskBuckets.plist; sourceTree = "<group>"; };
 		3A1104A2111DEF4500729EB6 /* DemoLogins.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DemoLogins.plist; sourceTree = "<group>"; };
@@ -477,8 +477,8 @@
 				3A29C35C110794BA00D887F1 /* SBListControllerDelegate.h */,
 				3A29C3FC1107A34E00D887F1 /* SBTasksController.h */,
 				3A29C3FD1107A34E00D887F1 /* SBTasksController.m */,
-				3A0B525911146D87005A26FD /* NewTaskController.h */,
-				3A0B525A11146D87005A26FD /* NewTaskController.m */,
+				3A0B525911146D87005A26FD /* SBNewTaskController.h */,
+				3A0B525A11146D87005A26FD /* SBNewTaskController.m */,
 				3A29C08811075E2B00D887F1 /* CommentsController.h */,
 				3A29C08911075E2B00D887F1 /* CommentsController.m */,
 				3A29C3361107922300D887F1 /* SettingsController.h */,
@@ -784,7 +784,7 @@
 				3A2B965E11088AC1000373A5 /* Campaign.m in Sources */,
 				3A2B966211088C26000373A5 /* Lead.m in Sources */,
 				3A2B966711088C3D000373A5 /* Task.m in Sources */,
-				3A0B525B11146D87005A26FD /* NewTaskController.m in Sources */,
+				3A0B525B11146D87005A26FD /* SBNewTaskController.m in Sources */,
 				3A6C627A1119EA07000DD23B /* WebBrowserController.m in Sources */,
 				3A3E6A2B1121C6F700F3D322 /* NSDate+Senbei.m in Sources */,
 				3A3E6A2E1121C73300F3D322 /* SBAppDelegate.m in Sources */,
@@ -884,6 +884,7 @@
 				INFOPLIST_FILE = "Senbei-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = Senbei;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 			};
 			name = Debug;
 		};
@@ -901,6 +902,7 @@
 				INFOPLIST_FILE = "Senbei-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = Senbei;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 			};
 			name = Release;
 		};
@@ -932,6 +934,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = Senbei;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F0C5B9DC-5402-4075-B4B4-090CE017F3E0";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 			};
 			name = DistributionAppStore;
 		};
@@ -963,6 +966,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = Senbei;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 			};
 			name = DistributionAdHoc;
 		};

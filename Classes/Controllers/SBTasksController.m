@@ -34,7 +34,7 @@
 
 #import "SBTasksController.h"
 #import "FatFreeCRMProxy.h"
-#import "NewTaskController.h"
+#import "SBNewTaskController.h"
 #import "Task.h"
 
 @interface SBTasksController ()
@@ -49,7 +49,7 @@
 @property (nonatomic, retain) NSMutableArray *sections;
 @property (nonatomic, retain) NSMutableDictionary *categories;
 @property (nonatomic, retain) NSIndexPath *indexPathToDelete;
-@property (nonatomic, retain) NewTaskController *newTaskController;
+@property (nonatomic, retain) SBNewTaskController *newTaskController;
 @property (nonatomic, getter = isFirstLoad) BOOL firstLoad;
 
 @end
@@ -149,8 +149,8 @@
     self.categories = [NSMutableDictionary dictionaryWithCapacity:[categoriesArray count]];
     for (NSDictionary *dict in categoriesArray)
     {
-        [_categories setObject:[dict objectForKey:@"text"] 
-                        forKey:[dict objectForKey:@"key"]];
+        [self.categories setObject:[dict objectForKey:@"text"] 
+                            forKey:[dict objectForKey:@"key"]];
     }
 }
 
@@ -175,7 +175,7 @@
 {
     if (self.newTaskController == nil)
     {
-        self.newTaskController = [[[NewTaskController alloc] init] autorelease];
+        self.newTaskController = [[[SBNewTaskController alloc] init] autorelease];
     }
     [self.navigationController presentModalViewController:self.newTaskController.navigationController
                                                  animated:YES];
@@ -316,7 +316,7 @@
         [[FatFreeCRMProxy sharedFatFreeCRMProxy] markTaskAsDone:task];
         [task release];
     }
-    [self.indexPathToDelete release];
+    self.indexPathToDelete = nil;
 }
 
 @end

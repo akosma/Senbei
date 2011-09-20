@@ -103,7 +103,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
         self.notificationCenter = [NSNotificationCenter defaultCenter];
         self.settingsManager = [SettingsManager sharedSettingsManager];
 
-        self.networkQueue = [[ASINetworkQueue alloc] init];
+        self.networkQueue = [[[ASINetworkQueue alloc] init] autorelease];
         self.networkQueue.shouldCancelAllRequestsOnFailure = NO;
         self.networkQueue.delegate = self;
         self.networkQueue.requestDidFinishSelector = @selector(requestDone:);

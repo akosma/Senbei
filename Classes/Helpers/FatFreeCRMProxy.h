@@ -70,7 +70,6 @@
     NSString *_server;
     NSString *_username;
     NSString *_password;
-    SettingsManager *_settings;
 }
 
 @property (nonatomic, copy) NSString *server;

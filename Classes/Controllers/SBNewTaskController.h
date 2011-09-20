@@ -1,5 +1,5 @@
 //
-//  NewTaskController.h
+//  SBNewTaskController.h
 //  Senbei
 //
 //  Created by Adrian on 1/30/10.
@@ -34,29 +34,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewTaskController : UITableViewController <UITextFieldDelegate,
+@interface SBNewTaskController : UITableViewController <UITextFieldDelegate,
                                                       UIPickerViewDataSource,
                                                       UIPickerViewDelegate>
-{
-@private
-    UINavigationController *_navigationController;
-    UITextField *_nameField;
-    UITextField *_bucketField;
-    UITextField *_categoryField;
-    UIBarButtonItem *_doneButtonItem;
-    
-    NSString *_selectedBucket;
-    UIPickerView *_bucketPicker;
-    NSArray *_buckets;
 
-    NSString *_selectedCategory;
-    UIPickerView *_categoryPicker;
-    NSArray *_categories;
-    
-    NSDate *_selectedDate;
-    UIDatePicker *_datePicker;
-}
-
-@property (nonatomic, readonly) UINavigationController *navigationController;
+@property (nonatomic, retain) UINavigationController *navigationController;
 
 @end
