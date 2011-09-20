@@ -1,5 +1,5 @@
 //
-//  BaseListControllerDelegate.h
+//  SBListControllerDelegate.h
 //  Senbei
 //
 //  Created by Adrian on 1/20/10.
@@ -37,7 +37,7 @@
 @class SBListController;
 @class BaseEntity;
 
-@protocol ListControllerDelegate <NSObject>
+@protocol SBListControllerDelegate <NSObject>
 
 @optional
 - (void)listController:(SBListController *)controller didSelectEntity:(BaseEntity *)entity;

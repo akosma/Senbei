@@ -36,7 +36,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <AddressBook/AddressBook.h>
 #import <MessageUI/MFMailComposeViewController.h>
-#import "ListControllerDelegate.h"
+#import "SBListControllerDelegate.h"
 
 @class SettingsController;
 @class TasksController;
@@ -55,7 +55,7 @@ typedef enum {
 } SenbeiViewController;
 
 @interface SBRootController : UITabBarController <UITabBarControllerDelegate,
-                                                ListControllerDelegate,
+                                                SBListControllerDelegate,
                                                 ABPersonViewControllerDelegate,
                                                 MFMailComposeViewControllerDelegate> 
 

@@ -146,7 +146,7 @@
 		3A29C2BA11078D9500D887F1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		3A29C3361107922300D887F1 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsController.h; sourceTree = "<group>"; };
 		3A29C3371107922300D887F1 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsController.m; sourceTree = "<group>"; };
-		3A29C35C110794BA00D887F1 /* ListControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListControllerDelegate.h; sourceTree = "<group>"; };
+		3A29C35C110794BA00D887F1 /* SBListControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBListControllerDelegate.h; sourceTree = "<group>"; };
 		3A29C3FC1107A34E00D887F1 /* TasksController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksController.h; sourceTree = "<group>"; };
 		3A29C3FD1107A34E00D887F1 /* TasksController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksController.m; sourceTree = "<group>"; };
 		3A29C4511107A8A300D887F1 /* Opportunity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Opportunity.h; sourceTree = "<group>"; };
@@ -474,7 +474,7 @@
 				3A92BDDB112FDB6F001B43FE /* SBRootController.m */,
 				3A6D8D3811064DF20089F21D /* SBListController.h */,
 				3A6D8D3911064DF20089F21D /* SBListController.m */,
-				3A29C35C110794BA00D887F1 /* ListControllerDelegate.h */,
+				3A29C35C110794BA00D887F1 /* SBListControllerDelegate.h */,
 				3A29C3FC1107A34E00D887F1 /* TasksController.h */,
 				3A29C3FD1107A34E00D887F1 /* TasksController.m */,
 				3A0B525911146D87005A26FD /* NewTaskController.h */,

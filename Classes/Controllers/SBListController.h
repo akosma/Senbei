@@ -33,13 +33,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ListControllerDelegate.h"
+#import "SBListControllerDelegate.h"
 
 @interface SBListController : UITableViewController <UISearchDisplayDelegate, 
                                                        UISearchBarDelegate>
 
 @property (nonatomic) UITableViewCellAccessoryType accessoryType;
 @property (nonatomic, retain) Class listedClass;
-@property (nonatomic, assign) id<ListControllerDelegate> delegate;
+@property (nonatomic, assign) id<SBListControllerDelegate> delegate;
 
 @end
