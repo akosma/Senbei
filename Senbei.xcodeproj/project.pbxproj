@@ -161,7 +161,7 @@
 		3A2B966611088C3D000373A5 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
 		3A3E6A291121C6F700F3D322 /* NSDate+Senbei.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Senbei.h"; sourceTree = "<group>"; };
 		3A3E6A2A1121C6F700F3D322 /* NSDate+Senbei.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Senbei.m"; sourceTree = "<group>"; };
-		3A3E6A2C1121C73300F3D322 /* SBAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SBAppDelegate.h; sourceTree = "<group>"; };
+		3A3E6A2C1121C73300F3D322 /* SBAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAppDelegate.h; sourceTree = "<group>"; };
 		3A3E6A2D1121C73300F3D322 /* SBAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAppDelegate.m; sourceTree = "<group>"; };
 		3A45743011625D3D00EFFEA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A45743111625D8D00EFFEA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/TaskBuckets.plist; sourceTree = "<group>"; };
@@ -246,6 +246,7 @@
 		3AB723D311087A80001F861D /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		3AB723D411087A80001F861D /* tasks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tasks.png; sourceTree = "<group>"; };
 		3ACED3FC1428700C003C65B1 /* Entitlements.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Entitlements.entitlements; sourceTree = "<group>"; };
+		3ACED40B142871FE003C65B1 /* SBHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBHelpers.h; sourceTree = "<group>"; };
 		3AE1CC38112941C500F50018 /* ListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewCell.h; sourceTree = "<group>"; };
 		3AE1CC39112941C500F50018 /* ListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewCell.m; sourceTree = "<group>"; };
 		3AE1CCEE11294F5500F50018 /* NSString+Senbei.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Senbei.h"; sourceTree = "<group>"; };
@@ -491,6 +492,7 @@
 		3A6D8CD511064A4B0089F21D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				3ACED40B142871FE003C65B1 /* SBHelpers.h */,
 				3A6D8D5F110654DB0089F21D /* FatFreeCRMProxy.h */,
 				3A6D8D60110654DB0089F21D /* FatFreeCRMProxy.m */,
 				3A3E6A291121C6F700F3D322 /* NSDate+Senbei.h */,

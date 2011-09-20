@@ -1,5 +1,5 @@
 //
-//  SenbeiAppDelegate.m
+//  SBAppDelegate.m
 //  Senbei
 //
 //  Created by Adrian on 1/19/10.
@@ -33,24 +33,20 @@
 //
 
 #import "SBAppDelegate.h"
-#import "FatFreeCRMProxy.h"
+#import "SBHelpers.h"
 #import "Definitions.h"
 #import "AKOImageCache.h"
 #import "Reachability.h"
 #import "RootController.h"
 #import "SettingsController.h"
-#import "SettingsManager.h"
 
 @interface SBAppDelegate ()
-@property (nonatomic, readonly) UILabel *statusLabel;
-@property (nonatomic, readonly) UIActivityIndicatorView *spinningWheel;
-@property (nonatomic, readonly) UIView *applicationCredits;
-@property (nonatomic, readonly) RootController *tabBarController;
-@property (nonatomic, readonly) UIWindow *window;
+
 @property (nonatomic, retain) UINavigationController *settingsNavigation;
 
 - (void)login;
 - (void)showSettingsPanel;
+
 @end
 
 
@@ -66,8 +62,13 @@
 
 - (void)dealloc 
 {
-    self.currentUser = nil;
-    self.settingsNavigation = nil;
+    _currentUser = nil;
+    _statusLabel = nil;
+    _spinningWheel = nil;
+    _applicationCredits = nil;
+    _tabBarController = nil;
+    _window = nil;
+    _settingsNavigation = nil;
     [super dealloc];
 }
 
@@ -149,13 +150,12 @@
 
     NSString *message = NSLocalizedString(@"CREDENTIALS_REJECTED", @"Message shown when the login credentials are rejected");
     NSString *ok = NSLocalizedString(@"OK", @"The 'OK' word");
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil 
-                                                    message:message
-                                                   delegate:nil 
-                                          cancelButtonTitle:ok
-                                          otherButtonTitles:nil];
+    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:nil 
+                                                     message:message
+                                                    delegate:nil 
+                                           cancelButtonTitle:ok
+                                           otherButtonTitles:nil] autorelease];
     [alert show];
-    [alert release];
 }
 
 - (void)didFailWithError:(NSNotification *)notification
@@ -171,13 +171,12 @@
 
     [self showSettingsPanel];
 
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil 
-                                                    message:msg 
-                                                   delegate:nil 
-                                          cancelButtonTitle:ok 
-                                          otherButtonTitles:nil];
+    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:nil 
+                                                     message:msg 
+                                                    delegate:nil 
+                                           cancelButtonTitle:ok 
+                                           otherButtonTitles:nil] autorelease];
     [alert show];
-    [alert release];
 }
 
 - (void)didLogin:(NSNotification *)notification
@@ -186,11 +185,12 @@
     self.statusLabel.text = NSLocalizedString(@"LOADING_CONTROLLERS", @"Message shown when the controllers are loading");
 
     self.tabBarController.view.alpha = 0.0;
-    [self.window addSubview:self.tabBarController.view];
+    self.window.rootViewController = self.tabBarController;
     
-    [UIView beginAnimations:nil context:NULL];
-    self.tabBarController.view.alpha = 1.0;
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.4 
+                     animations:^{
+                         self.tabBarController.view.alpha = 1.0;
+                     }];
 }
 
 #pragma mark -
@@ -228,13 +228,13 @@
         [doneButton release];
 
         self.settingsNavigation.view.transform = CGAffineTransformMakeTranslation(0.0, 480.0);
-        [self.window addSubview:self.settingsNavigation.view];
+        self.window.rootViewController = self.settingsNavigation;
     }
-
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.4];
-    self.settingsNavigation.view.transform = CGAffineTransformIdentity;
-    [UIView commitAnimations];
+    
+    [UIView animateWithDuration:0.4 
+                     animations:^{
+                         self.settingsNavigation.view.transform = CGAffineTransformIdentity;
+                     }];
 }
 
 - (void)hideSettingsPanel:(id)sender
@@ -242,11 +242,11 @@
     SettingsController *settings = [[self.settingsNavigation viewControllers] objectAtIndex:0];
     [settings dismiss:self];
     [self login];
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.4];
-    self.settingsNavigation.view.transform = CGAffineTransformMakeTranslation(0.0, 480.0);
-    [UIView commitAnimations];
+
+    [UIView animateWithDuration:0.4 
+                     animations:^{
+                         self.settingsNavigation.view.transform = CGAffineTransformMakeTranslation(0.0, 480.0);
+                     }];
 }
 
 @end

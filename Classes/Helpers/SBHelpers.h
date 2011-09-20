@@ -1,9 +1,9 @@
 //
-//  SBAppDelegate.h
+//  SBHelpers.h
 //  Senbei
 //
-//  Created by Adrian on 1/19/10.
-//  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
+//  Created by Adrian on 9/20/11.
+//  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without
@@ -32,20 +32,7 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <UIKit/UIKit.h>
-
-@class RootController;
-@class User;
-
-@interface SBAppDelegate : NSObject <UIApplicationDelegate>
-
-@property (nonatomic, readonly) IBOutlet UILabel *statusLabel;
-@property (nonatomic, readonly) IBOutlet UIActivityIndicatorView *spinningWheel;
-@property (nonatomic, readonly) IBOutlet UIView *applicationCredits;
-@property (nonatomic, readonly) IBOutlet RootController *tabBarController;
-@property (nonatomic, readonly) IBOutlet UIWindow *window;
-@property (nonatomic, retain) User *currentUser;
-
-+ (SBAppDelegate *)sharedAppDelegate;
-
-@end
+#import "FatFreeCRMProxy.h"
+#import "NSDate+Senbei.h"
+#import "NSString+Senbei.h"
+#import "SettingsManager.h"
