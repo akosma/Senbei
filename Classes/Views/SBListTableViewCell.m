@@ -1,5 +1,5 @@
 //
-//  ListTableViewCell.m
+//  SBListTableViewCell.m
 //  Senbei
 //
 //  Created by Adrian on 2/15/10.
@@ -32,24 +32,18 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "ListTableViewCell.h"
+#import "SBListTableViewCell.h"
 #import "AKOImageView.h"
 
-@implementation ListTableViewCell
+@implementation SBListTableViewCell
 
-@dynamic photoView;
+@synthesize photoView = _photoView;
 
-#pragma mark -
-#pragma mark Static methods
-
-+ (ListTableViewCell *)cellWithReuseIdentifier:(NSString *)reuseIdentifier
++ (SBListTableViewCell *)cellWithReuseIdentifier:(NSString *)reuseIdentifier
 {
-    ListTableViewCell *cell = [[ListTableViewCell alloc] initWithReuseIdentifier:reuseIdentifier];
+    SBListTableViewCell *cell = [[SBListTableViewCell alloc] initWithReuseIdentifier:reuseIdentifier];
     return [cell autorelease];
 }
-
-#pragma mark -
-#pragma mark Init and dealloc
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -62,12 +56,11 @@
 
 - (void)dealloc 
 {
-    self.photoView = nil;
+    [_photoView release];
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Overridden methods
+#pragma mark - Overridden methods
 
 - (void)layoutSubviews 
 {
@@ -89,8 +82,7 @@
     }
 }
 
-#pragma mark -
-#pragma mark Overridden properties
+#pragma mark - Overridden properties
 
 - (AKOImageView *)photoView
 {

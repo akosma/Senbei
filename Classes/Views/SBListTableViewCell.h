@@ -1,5 +1,5 @@
 //
-//  ListTableViewCell.h
+//  SBListTableViewCell.h
 //  Senbei
 //
 //  Created by Adrian on 2/15/10.
@@ -36,15 +36,11 @@
 
 @class AKOImageView;
 
-@interface ListTableViewCell : UITableViewCell 
-{
-@private
-    AKOImageView *_photoView;
-}
+@interface SBListTableViewCell : UITableViewCell 
 
 @property (nonatomic, retain) AKOImageView *photoView;
 
-+ (ListTableViewCell *)cellWithReuseIdentifier:(NSString *)reuseIdentifier;
++ (SBListTableViewCell *)cellWithReuseIdentifier:(NSString *)reuseIdentifier;
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 
 @end

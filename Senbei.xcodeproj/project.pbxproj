@@ -87,7 +87,7 @@
 		3AB723DA11087A80001F861D /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723D311087A80001F861D /* settings.png */; };
 		3AB723DB11087A80001F861D /* tasks.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723D411087A80001F861D /* tasks.png */; };
 		3ACED3FD1428700C003C65B1 /* Entitlements.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 3ACED3FC1428700C003C65B1 /* Entitlements.entitlements */; };
-		3AE1CC3A112941C500F50018 /* ListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1CC39112941C500F50018 /* ListTableViewCell.m */; };
+		3AE1CC3A112941C500F50018 /* SBListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1CC39112941C500F50018 /* SBListTableViewCell.m */; };
 		3AE1CCF011294F5500F50018 /* NSString+Senbei.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1CCEF11294F5500F50018 /* NSString+Senbei.m */; };
 /* End PBXBuildFile section */
 
@@ -247,8 +247,8 @@
 		3AB723D411087A80001F861D /* tasks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tasks.png; sourceTree = "<group>"; };
 		3ACED3FC1428700C003C65B1 /* Entitlements.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Entitlements.entitlements; sourceTree = "<group>"; };
 		3ACED40B142871FE003C65B1 /* SBHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBHelpers.h; sourceTree = "<group>"; };
-		3AE1CC38112941C500F50018 /* ListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListTableViewCell.h; sourceTree = "<group>"; };
-		3AE1CC39112941C500F50018 /* ListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListTableViewCell.m; sourceTree = "<group>"; };
+		3AE1CC38112941C500F50018 /* SBListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBListTableViewCell.h; sourceTree = "<group>"; };
+		3AE1CC39112941C500F50018 /* SBListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBListTableViewCell.m; sourceTree = "<group>"; };
 		3AE1CCEE11294F5500F50018 /* NSString+Senbei.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Senbei.h"; sourceTree = "<group>"; };
 		3AE1CCEF11294F5500F50018 /* NSString+Senbei.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Senbei.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -661,8 +661,8 @@
 		3AE1CC371129419E00F50018 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				3AE1CC38112941C500F50018 /* ListTableViewCell.h */,
-				3AE1CC39112941C500F50018 /* ListTableViewCell.m */,
+				3AE1CC38112941C500F50018 /* SBListTableViewCell.h */,
+				3AE1CC39112941C500F50018 /* SBListTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -788,7 +788,7 @@
 				3A6C627A1119EA07000DD23B /* SBWebBrowserController.m in Sources */,
 				3A3E6A2B1121C6F700F3D322 /* NSDate+Senbei.m in Sources */,
 				3A3E6A2E1121C73300F3D322 /* SBAppDelegate.m in Sources */,
-				3AE1CC3A112941C500F50018 /* ListTableViewCell.m in Sources */,
+				3AE1CC3A112941C500F50018 /* SBListTableViewCell.m in Sources */,
 				3AE1CCF011294F5500F50018 /* NSString+Senbei.m in Sources */,
 				3A92BDDC112FDB6F001B43FE /* SBRootController.m in Sources */,
 				3A5C5402115781D500620375 /* NSDataAdditions.m in Sources */,

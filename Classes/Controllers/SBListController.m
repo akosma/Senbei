@@ -36,7 +36,7 @@
 #import "FatFreeCRMProxy.h"
 #import "CompanyAccount.h"
 #import "NSDate+Senbei.h"
-#import "ListTableViewCell.h"
+#import "SBListTableViewCell.h"
 #import "AKOImageView.h"
 
 @interface SBListController ()
@@ -232,10 +232,10 @@
 {
     static NSString *cellIdentifier = @"ListControllerCell";
     
-    ListTableViewCell *cell = (ListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    SBListTableViewCell *cell = (SBListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) 
     {
-        cell = [ListTableViewCell cellWithReuseIdentifier:cellIdentifier];
+        cell = [SBListTableViewCell cellWithReuseIdentifier:cellIdentifier];
     }
 
     NSArray *array = (self.searchDisplayController.active) ? self.searchData : self.data;
