@@ -34,7 +34,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class RootController;
+@class SBRootController;
 @class User;
 
 @interface SBAppDelegate : NSObject <UIApplicationDelegate>
@@ -42,7 +42,7 @@
 @property (nonatomic, readonly) IBOutlet UILabel *statusLabel;
 @property (nonatomic, readonly) IBOutlet UIActivityIndicatorView *spinningWheel;
 @property (nonatomic, readonly) IBOutlet UIView *applicationCredits;
-@property (nonatomic, readonly) IBOutlet RootController *tabBarController;
+@property (nonatomic, readonly) IBOutlet SBRootController *tabBarController;
 @property (nonatomic, readonly) IBOutlet UIWindow *window;
 @property (nonatomic, retain) User *currentUser;
 

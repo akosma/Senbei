@@ -1,5 +1,5 @@
 //
-//  RootController.m
+//  SBRootController.m
 //  Senbei
 //
 //  Created by Adrian on 2/20/10.
@@ -32,7 +32,7 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "RootController.h"
+#import "SBRootController.h"
 #import "FatFreeCRMProxy.h"
 #import "ListController.h"
 #import "SettingsController.h"
@@ -56,19 +56,14 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     return [value autorelease];
 }
 
-@interface RootController ()
-@property (nonatomic, readonly) ListController *accountsController;
-@property (nonatomic, readonly) ListController *contactsController;
-@property (nonatomic, readonly) ListController *opportunitiesController;
-@property (nonatomic, readonly) ListController *leadsController;
-@property (nonatomic, readonly) ListController *campaignsController;
-@property (nonatomic, readonly) SettingsController *settingsController;
-@property (nonatomic, readonly) TasksController *tasksController;
+@interface SBRootController ()
+
 @property (nonatomic, retain) CommentsController *commentsController;
+
 @end
 
 
-@implementation RootController
+@implementation SBRootController
 
 @synthesize accountsController = _accountsController;
 @synthesize contactsController = _contactsController;
@@ -81,7 +76,14 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 
 - (void)dealloc 
 {
-    self.commentsController = nil;
+    [_accountsController release];
+    [_contactsController release];
+    [_opportunitiesController release];
+    [_leadsController release];
+    [_campaignsController release];
+    [_settingsController release];
+    [_tasksController release];
+    [_commentsController release];
     [super dealloc];
 }
 

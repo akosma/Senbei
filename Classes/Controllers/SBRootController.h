@@ -1,5 +1,5 @@
 //
-//  RootController.h
+//  SBRootController.h
 //  Senbei
 //
 //  Created by Adrian on 2/20/10.
@@ -54,20 +54,17 @@ typedef enum {
     SenbeiViewControllerMore = 7
 } SenbeiViewController;
 
-@interface RootController : UITabBarController <UITabBarControllerDelegate,
+@interface SBRootController : UITabBarController <UITabBarControllerDelegate,
                                                 ListControllerDelegate,
                                                 ABPersonViewControllerDelegate,
                                                 MFMailComposeViewControllerDelegate> 
-{
-@private
-    IBOutlet ListController *_accountsController;
-    IBOutlet ListController *_contactsController;
-    IBOutlet ListController *_opportunitiesController;
-    IBOutlet ListController *_leadsController;
-    IBOutlet ListController *_campaignsController;
-    IBOutlet SettingsController *_settingsController;
-    IBOutlet TasksController *_tasksController;
-    CommentsController *_commentsController;
-}
+
+@property (nonatomic, readonly) IBOutlet ListController *accountsController;
+@property (nonatomic, readonly) IBOutlet ListController *contactsController;
+@property (nonatomic, readonly) IBOutlet ListController *opportunitiesController;
+@property (nonatomic, readonly) IBOutlet ListController *leadsController;
+@property (nonatomic, readonly) IBOutlet ListController *campaignsController;
+@property (nonatomic, readonly) IBOutlet SettingsController *settingsController;
+@property (nonatomic, readonly) IBOutlet TasksController *tasksController;
 
 @end

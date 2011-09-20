@@ -37,7 +37,7 @@
 #import "Definitions.h"
 #import "AKOImageCache.h"
 #import "Reachability.h"
-#import "RootController.h"
+#import "SBRootController.h"
 #import "SettingsController.h"
 
 @interface SBAppDelegate ()
