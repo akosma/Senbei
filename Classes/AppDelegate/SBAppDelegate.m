@@ -62,13 +62,13 @@
 
 - (void)dealloc 
 {
-    _currentUser = nil;
-    _statusLabel = nil;
-    _spinningWheel = nil;
-    _applicationCredits = nil;
-    _tabBarController = nil;
-    _window = nil;
-    _settingsNavigation = nil;
+    [_currentUser release];
+    [_statusLabel release];
+    [_spinningWheel release];
+    [_applicationCredits release];
+    [_tabBarController release];
+    [_window release];
+    [_settingsNavigation release];
     [super dealloc];
 }
 

@@ -39,11 +39,11 @@
 
 @interface SBAppDelegate : NSObject <UIApplicationDelegate>
 
-@property (nonatomic, readonly) IBOutlet UILabel *statusLabel;
-@property (nonatomic, readonly) IBOutlet UIActivityIndicatorView *spinningWheel;
-@property (nonatomic, readonly) IBOutlet UIView *applicationCredits;
-@property (nonatomic, readonly) IBOutlet SBRootController *tabBarController;
-@property (nonatomic, readonly) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet UILabel *statusLabel;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *spinningWheel;
+@property (nonatomic, retain) IBOutlet UIView *applicationCredits;
+@property (nonatomic, retain) IBOutlet SBRootController *tabBarController;
+@property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) User *currentUser;
 
 + (SBAppDelegate *)sharedAppDelegate;
