@@ -1,8 +1,8 @@
 //
-//  BaseEntity.h
+//  SBTask.h
 //  Senbei
 //
-//  Created by Adrian on 1/20/10.
+//  Created by Adrian on 1/21/10.
 //  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -33,29 +33,20 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TBXML.h"
+#import "SBBaseEntity.h"
 
-@interface BaseEntity : NSObject 
+@interface SBTask : SBBaseEntity
 {
 @private
-    NSInteger _objectId;
-    NSDate *_createdAt;
-    NSDate *_updatedAt;
-    NSString *_name;
-    NSURL *_photoURL;
-    NSDateFormatter *_formatter;
+    NSDate *_dueDate;
+    NSString *_category;
+    NSString *_bucket;
 }
 
-@property (nonatomic) NSInteger objectId;
-@property (nonatomic, retain) NSDate *createdAt;
-@property (nonatomic, retain) NSDate *updatedAt;
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, retain) NSURL *photoURL;
-@property (nonatomic, readonly) NSString *commentableTypeName;
-@property (nonatomic, retain) NSDateFormatter *formatter;
+@property (nonatomic, retain) NSDate *dueDate;
+@property (nonatomic, copy) NSString *category;
+@property (nonatomic, copy) NSString *bucket;
 
-+ (NSString *)stringValueForElement:(NSString *)elementName 
-                      parentElement:(TBXMLElement *)element;
 - (id)initWithTBXMLElement:(TBXMLElement *)element;
 
 @end

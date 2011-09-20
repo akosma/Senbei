@@ -35,7 +35,7 @@
 #import <UIKit/UIKit.h>
 
 @class SBRootController;
-@class User;
+@class SBUser;
 
 @interface SBAppDelegate : NSObject <UIApplicationDelegate>
 
@@ -44,7 +44,7 @@
 @property (nonatomic, retain) IBOutlet UIView *applicationCredits;
 @property (nonatomic, retain) IBOutlet SBRootController *tabBarController;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) User *currentUser;
+@property (nonatomic, retain) SBUser *currentUser;
 
 + (SBAppDelegate *)sharedAppDelegate;
 

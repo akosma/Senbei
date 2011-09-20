@@ -35,10 +35,10 @@
 #import <UIKit/UIKit.h>
 #import "AKOEditorrificDelegate.h"
 
-@class BaseEntity;
+@class SBBaseEntity;
 
 @interface SBCommentsController : UITableViewController <AKOEditorrificDelegate>
 
-@property (nonatomic, retain) BaseEntity *entity;
+@property (nonatomic, retain) SBBaseEntity *entity;
 
 @end

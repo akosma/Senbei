@@ -35,12 +35,12 @@
 #import <UIKit/UIKit.h>
 
 @class SBListController;
-@class BaseEntity;
+@class SBBaseEntity;
 
 @protocol SBListControllerDelegate <NSObject>
 
 @optional
-- (void)listController:(SBListController *)controller didSelectEntity:(BaseEntity *)entity;
-- (void)listController:(SBListController *)controller didTapAccessoryForEntity:(BaseEntity *)entity;
+- (void)listController:(SBListController *)controller didSelectEntity:(SBBaseEntity *)entity;
+- (void)listController:(SBListController *)controller didTapAccessoryForEntity:(SBBaseEntity *)entity;
 
 @end

@@ -1,8 +1,8 @@
 //
-//  Campaign.h
+//  SBBaseEntity.h
 //  Senbei
 //
-//  Created by Adrian on 1/21/10.
+//  Created by Adrian on 1/20/10.
 //  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -33,37 +33,20 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BaseEntity.h"
+#import "TBXML.h"
 
-@interface Campaign : BaseEntity 
-{
-@private
-    double _budget;
-    NSDate *_endsOn;
-    NSInteger _leadsCount;
-    NSString *_objectives;
-    NSInteger _opportunitiesCount;
-    double _revenue;
-    NSDate *_startsOn;
-    NSString *_status;
-    float _conversionTarget;
-    NSInteger _leadsTarget;
-    double _revenueTarget;
-}
+@interface SBBaseEntity : NSObject 
 
-@property (nonatomic) double budget;
-@property (nonatomic, retain) NSDate *endsOn;
-@property (nonatomic) NSInteger leadsCount;
-@property (nonatomic, copy) NSString *objectives;
-@property (nonatomic) NSInteger opportunitiesCount;
-@property (nonatomic) double revenue;
-@property (nonatomic, retain) NSDate *startsOn;
-@property (nonatomic, copy) NSString *status;
-@property (nonatomic) float conversionTarget;
-@property (nonatomic) NSInteger leadsTarget;
-@property (nonatomic) double revenueTarget;
+@property (nonatomic) NSInteger objectId;
+@property (nonatomic, retain) NSDate *createdAt;
+@property (nonatomic, retain) NSDate *updatedAt;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, retain) NSURL *photoURL;
+@property (nonatomic, readonly) NSString *commentableTypeName;
+@property (nonatomic, retain) NSDateFormatter *formatter;
 
-+ (NSString *)serverPath;
++ (NSString *)stringValueForElement:(NSString *)elementName 
+                      parentElement:(TBXMLElement *)element;
 - (id)initWithTBXMLElement:(TBXMLElement *)element;
 
 @end

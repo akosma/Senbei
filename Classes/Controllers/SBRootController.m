@@ -102,32 +102,32 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
                selector:@selector(didReceiveData:) 
                    name:FatFreeCRMProxyDidRetrieveAccountsNotification
                  object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
-    self.accountsController.listedClass = [CompanyAccount class];
+    self.accountsController.listedClass = [SBCompanyAccount class];
     
     [center addObserver:self.opportunitiesController 
                selector:@selector(didReceiveData:) 
                    name:FatFreeCRMProxyDidRetrieveOpportunitiesNotification
                  object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
-    self.opportunitiesController.listedClass = [Opportunity class];
+    self.opportunitiesController.listedClass = [SBOpportunity class];
     
     [center addObserver:self.contactsController 
                selector:@selector(didReceiveData:) 
                    name:FatFreeCRMProxyDidRetrieveContactsNotification
                  object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
-    self.contactsController.listedClass = [Contact class];
+    self.contactsController.listedClass = [SBContact class];
     self.contactsController.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
     [center addObserver:self.campaignsController
                selector:@selector(didReceiveData:)
                    name:FatFreeCRMProxyDidRetrieveCampaignsNotification
                  object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
-    self.campaignsController.listedClass = [Campaign class];
+    self.campaignsController.listedClass = [SBCampaign class];
     
     [center addObserver:self.leadsController
                selector:@selector(didReceiveData:)
                    name:FatFreeCRMProxyDidRetrieveLeadsNotification
                  object:[FatFreeCRMProxy sharedFatFreeCRMProxy]];
-    self.leadsController.listedClass = [Lead class];
+    self.leadsController.listedClass = [SBLead class];
     
     self.leadsController.tabBarItem.image = [UIImage imageNamed:@"leads.png"];
     self.contactsController.tabBarItem.image = [UIImage imageNamed:@"contacts.png"];
@@ -327,15 +327,15 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
 
 #pragma mark - BaseListControllerDelegate methods
 
-- (void)listController:(SBListController *)controller didSelectEntity:(BaseEntity *)entity
+- (void)listController:(SBListController *)controller didSelectEntity:(SBBaseEntity *)entity
 {
     if (controller == self.contactsController)
     {
         ABPersonViewController *personController = [[ABPersonViewController alloc] init];
-        Contact *contact = (Contact *)entity;
+        SBContact *contact = (SBContact *)entity;
         ABRecordRef person = [contact getPerson];
         personController.displayedPerson = person;
-        personController.displayedProperties = [Contact displayedProperties];
+        personController.displayedProperties = [SBContact displayedProperties];
         personController.personViewDelegate = self;
         [controller.navigationController pushViewController:personController animated:YES];
         [personController release];
@@ -352,7 +352,7 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
     }
 }
 
-- (void)listController:(SBListController *)controller didTapAccessoryForEntity:(BaseEntity *)entity
+- (void)listController:(SBListController *)controller didTapAccessoryForEntity:(SBBaseEntity *)entity
 {
     if (controller == self.contactsController)
     {

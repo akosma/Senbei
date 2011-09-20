@@ -41,14 +41,7 @@
 #import "ASIFormDataRequest.h"
 #import "Definitions.h"
 #import "TBXML.h"
-#import "CompanyAccount.h"
-#import "Opportunity.h"
-#import "Contact.h"
-#import "Comment.h"
-#import "User.h"
-#import "Task.h"
-#import "Campaign.h"
-#import "Lead.h"
+#import "SBModels.h"
 #import "SettingsManager.h"
 
 #define PROFILE_REQUEST @"profile"
@@ -152,7 +145,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     [self sendGETRequestToURL:url path:path];
 }
 
-- (void)loadCommentsForEntity:(BaseEntity *)entity
+- (void)loadCommentsForEntity:(SBBaseEntity *)entity
 {
     Class klass = [entity class];
     NSString *path = [klass serverPath];
@@ -172,7 +165,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     [self.networkQueue addOperation:request];    
 }
 
-- (void)sendComment:(NSString *)comment forEntity:(BaseEntity *)entity
+- (void)sendComment:(NSString *)comment forEntity:(SBBaseEntity *)entity
 {
     Class klass = [entity class];
     NSString *path = [klass serverPath];
@@ -207,7 +200,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     [self sendGETRequestToURL:url path:path];
 }
 
-- (void)markTaskAsDone:(Task *)task
+- (void)markTaskAsDone:(SBTask *)task
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/tasks/%d/complete", self.server, task.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
@@ -224,7 +217,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     [self.networkQueue addOperation:request];    
 }
 
-- (void)createTask:(Task *)task
+- (void)createTask:(SBTask *)task
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/tasks", self.server, task.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
@@ -262,23 +255,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSString *selectedAPIPath = [userInfo objectForKey:SELECTED_API_PATH];
     if ([self requestOK:request])
     {
-        if ([selectedAPIPath isEqualToString:[CompanyAccount serverPath]])
+        if ([selectedAPIPath isEqualToString:[SBCompanyAccount serverPath]])
         {
             [self processGetAccountsRequest:request];
         }
-        else if ([selectedAPIPath isEqualToString:[Opportunity serverPath]])
+        else if ([selectedAPIPath isEqualToString:[SBOpportunity serverPath]])
         {
             [self processGetOpportunitiesRequest:request];
         }
-        else if ([selectedAPIPath isEqualToString:[Contact serverPath]])
+        else if ([selectedAPIPath isEqualToString:[SBContact serverPath]])
         {
             [self processGetContactsRequest:request];
         }
-        else if ([selectedAPIPath isEqualToString:[Campaign serverPath]])
+        else if ([selectedAPIPath isEqualToString:[SBCampaign serverPath]])
         {
             [self processGetCampaignsRequest:request];
         }
-        else if ([selectedAPIPath isEqualToString:[Lead serverPath]])
+        else if ([selectedAPIPath isEqualToString:[SBLead serverPath]])
         {
             [self processGetLeadsRequest:request];
         }
@@ -289,7 +282,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
         else if ([selectedAPIPath isEqualToString:NEW_COMMENT_REQUEST])
         {
             NSDictionary *userInfo = request.userInfo;
-            BaseEntity *entity = [userInfo objectForKey:SELECTED_API_ENTITY];
+            SBBaseEntity *entity = [userInfo objectForKey:SELECTED_API_ENTITY];
             NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:entity, @"entity", nil];
             NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidPostCommentNotification
                                                                   object:self 
@@ -440,7 +433,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSData *response = [request responseData];
     NSArray *accounts = [self deserializeXML:response 
                                     forXPath:@"account" 
-                                    andClass:NSClassFromString(@"CompanyAccount")];
+                                    andClass:NSClassFromString(@"SBCompanyAccount")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:accounts, @"data", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveAccountsNotification
                                                           object:self 
@@ -453,7 +446,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSData *response = [request responseData];
     NSArray *campaigns = [self deserializeXML:response 
                                      forXPath:@"campaign" 
-                                     andClass:NSClassFromString(@"Campaign")];
+                                     andClass:NSClassFromString(@"SBCampaign")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:campaigns, @"data", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveCampaignsNotification
                                                           object:self 
@@ -466,7 +459,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSData *response = [request responseData];
     NSArray *leads = [self deserializeXML:response 
                                  forXPath:@"lead" 
-                                 andClass:NSClassFromString(@"Lead")];
+                                 andClass:NSClassFromString(@"SBLead")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:leads, @"data", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveLeadsNotification
                                                           object:self 
@@ -479,7 +472,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSData *response = [request responseData];
     NSArray *opportunities = [self deserializeXML:response 
                                          forXPath:@"opportunity" 
-                                         andClass:NSClassFromString(@"Opportunity")];
+                                         andClass:NSClassFromString(@"SBOpportunity")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:opportunities, @"data", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveOpportunitiesNotification
                                                           object:self 
@@ -492,7 +485,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSData *response = [request responseData];
     NSArray *contacts = [self deserializeXML:response 
                                     forXPath:@"contact" 
-                                    andClass:NSClassFromString(@"Contact")];
+                                    andClass:NSClassFromString(@"SBContact")];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:contacts, @"data", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveContactsNotification
                                                           object:self 
@@ -505,9 +498,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSData *response = [request responseData];
     NSArray *comments = [self deserializeXML:response 
                                     forXPath:@"comment" 
-                                    andClass:NSClassFromString(@"Comment")];
+                                    andClass:NSClassFromString(@"SBComment")];
 
-    BaseEntity *entity = [request.userInfo objectForKey:SELECTED_API_ENTITY];
+    SBBaseEntity *entity = [request.userInfo objectForKey:SELECTED_API_ENTITY];
 
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:comments, @"data", entity, @"entity", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidRetrieveCommentsNotification
@@ -521,7 +514,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSData *response = [request responseData];
     TBXML *tbxml = [TBXML tbxmlWithXMLData:response];
     TBXMLElement *root = tbxml.rootXMLElement;
-    User *user = [[[User alloc] initWithTBXMLElement:root] autorelease];
+    SBUser *user = [[[SBUser alloc] initWithTBXMLElement:root] autorelease];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:user, @"user", nil];
     NSNotification *notif = [NSNotification notificationWithName:FatFreeCRMProxyDidLoginNotification
                                                           object:self 
@@ -534,7 +527,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(FatFreeCRMProxy)
     NSData *response = [request responseData];
     TBXML *tbxml = [TBXML tbxmlWithXMLData:response];
     TBXMLElement *hash = tbxml.rootXMLElement;
-    Class klass = NSClassFromString(@"Task");
+    Class klass = NSClassFromString(@"SBTask");
 
     NSArray *tasksOverdue = [self deserializeXMLElement:[TBXML childElementNamed:@"overdue" parentElement:hash] 
                                                forXPath:@"overdue" 

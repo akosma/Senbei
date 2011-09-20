@@ -155,7 +155,7 @@
 - (void)didReceiveComments:(NSNotification *)notification
 {
     NSDictionary *dict = [notification userInfo];
-    BaseEntity *entity = [dict objectForKey:@"entity"];
+    SBBaseEntity *entity = [dict objectForKey:@"entity"];
     if (entity == self.entity)
     {
         NSArray *newData = [dict objectForKey:@"data"];
@@ -168,7 +168,7 @@
 - (void)didPostComment:(NSNotification *)notification
 {
     NSDictionary *dict = [notification userInfo];
-    BaseEntity *entity = [dict objectForKey:@"entity"];
+    SBBaseEntity *entity = [dict objectForKey:@"entity"];
     if (entity == self.entity)
     {
         [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadCommentsForEntity:self.entity];
@@ -184,7 +184,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Comment *comment = [self.comments objectAtIndex:indexPath.row];
+    SBComment *comment = [self.comments objectAtIndex:indexPath.row];
     CGFloat height = [comment.comment sizeWithFont:[UIFont systemFontOfSize:17.0] 
                                  constrainedToSize:CGSizeMake(300.0, 4000.0)].height + 30.0;
     if (height < 44.0)
@@ -213,7 +213,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
 
-    Comment *comment = [self.comments objectAtIndex:indexPath.row];
+    SBComment *comment = [self.comments objectAtIndex:indexPath.row];
     cell.textLabel.text = comment.comment;
     cell.detailTextLabel.text = [comment.createdAt stringFormattedWithCurrentLocale];
     return cell;

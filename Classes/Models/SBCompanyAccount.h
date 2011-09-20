@@ -1,8 +1,8 @@
 //
-//  Comment.m
+//  SBCompanyAccount.h
 //  Senbei
 //
-//  Created by Adrian on 1/21/10.
+//  Created by Adrian on 1/20/10.
 //  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,25 +32,28 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "Comment.h"
+#import <Foundation/Foundation.h>
+#import "SBBaseEntity.h"
 
-@implementation Comment
-
-@synthesize comment = _comment;
-
-- (id)initWithTBXMLElement:(TBXMLElement *)element
+@interface SBCompanyAccount : SBBaseEntity 
 {
-    if (self = [super initWithTBXMLElement:element])
-    {
-        self.comment = [BaseEntity stringValueForElement:@"comment" parentElement:element];
-    }
-    return self;
+@private
+    NSString *_billingAddress;
+    NSString *_fax;
+    NSString *_phone;
+    NSString *_shippingAddress;
+    NSString *_tollFreePhone;
+    NSString *_website;
 }
 
-- (void)dealloc
-{
-    self.comment = nil;
-    [super dealloc];
-}
+@property (nonatomic, copy) NSString *billingAddress;
+@property (nonatomic, copy) NSString *fax;
+@property (nonatomic, copy) NSString *phone;
+@property (nonatomic, copy) NSString *shippingAddress;
+@property (nonatomic, copy) NSString *tollFreePhone;
+@property (nonatomic, copy) NSString *website;
+
++ (NSString *)serverPath;
+- (id)initWithTBXMLElement:(TBXMLElement *)element;
 
 @end

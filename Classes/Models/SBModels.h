@@ -32,12 +32,12 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "BaseEntity.h"
-#import "CompanyAccount.h"
-#import "Opportunity.h"
-#import "Contact.h"
-#import "Comment.h"
-#import "User.h"
-#import "Campaign.h"
-#import "Lead.h"
-#import "Task.h"
+#import "SBBaseEntity.h"
+#import "SBCompanyAccount.h"
+#import "SBOpportunity.h"
+#import "SBContact.h"
+#import "SBComment.h"
+#import "SBUser.h"
+#import "SBCampaign.h"
+#import "SBLead.h"
+#import "SBTask.h"

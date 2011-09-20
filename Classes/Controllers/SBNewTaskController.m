@@ -140,7 +140,7 @@
     if ([self.nameField.text length] > 0)
     {
         self.doneButtonItem.enabled = NO;
-        Task *task = [[Task alloc] init];
+        SBTask *task = [[SBTask alloc] init];
         task.name = self.nameField.text;
         task.category = self.selectedCategory;
         task.bucket = self.selectedBucket;

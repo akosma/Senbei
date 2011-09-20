@@ -1,5 +1,5 @@
 //
-//  Task.h
+//  SBLead.m
 //  Senbei
 //
 //  Created by Adrian on 1/21/10.
@@ -32,21 +32,38 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Foundation/Foundation.h>
-#import "BaseEntity.h"
+#import "SBLead.h"
 
-@interface Task : BaseEntity
+@implementation SBLead
+
+@synthesize status = _status;
+@synthesize referredBy = _referredBy;
+
++ (NSString *)serverPath
 {
-@private
-    NSDate *_dueDate;
-    NSString *_category;
-    NSString *_bucket;
+    return @"leads";
 }
 
-@property (nonatomic, retain) NSDate *dueDate;
-@property (nonatomic, copy) NSString *category;
-@property (nonatomic, copy) NSString *bucket;
+- (id)initWithTBXMLElement:(TBXMLElement *)element
+{
+    if (self = [super initWithTBXMLElement:element])
+    {
+        self.status = [SBBaseEntity stringValueForElement:@"status" parentElement:element];
+        self.referredBy = [SBBaseEntity stringValueForElement:@"referred-by" parentElement:element];
+    }
+    return self;
+}
 
-- (id)initWithTBXMLElement:(TBXMLElement *)element;
+- (void)dealloc
+{
+    [_status release];
+    [_referredBy release];
+    [super dealloc];
+}
+
+- (NSString *)description
+{
+    return self.status;
+}
 
 @end

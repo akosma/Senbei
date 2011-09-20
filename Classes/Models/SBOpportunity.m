@@ -1,5 +1,5 @@
 //
-//  Contact.h
+//  SBOpportunity.m
 //  Senbei
 //
 //  Created by Adrian on 1/20/10.
@@ -32,55 +32,48 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Foundation/Foundation.h>
-#import <AddressBook/AddressBook.h>
-#import "BaseEntity.h"
+#import "SBOpportunity.h"
 
-@interface Contact : BaseEntity 
+@implementation SBOpportunity
+
+@synthesize amount = _amount;
+@synthesize discount = _discount;
+@synthesize probability = _probability;
+@synthesize closingDate = _closingDate;
+@synthesize source = _source;
+@synthesize stage = _stage;
+
++ (NSString *)serverPath
 {
-@private
-    NSString *_address;
-    NSString *_altEmail;
-    NSString *_blog;
-    NSString *_department;
-    NSString *_email;
-    NSString *_facebook;
-    NSString *_fax;
-    NSString *_firstName;
-    NSString *_lastName;
-    NSString *_linkedIn;
-    NSString *_mobile;
-    NSString *_phone;
-    NSString *_source;
-    NSString *_title;
-    NSString *_twitter;
-    NSDate *_birthDate;
-    BOOL _doNotCall;
-    ABRecordRef _person;
+    return @"opportunities";
 }
 
-@property (nonatomic, copy) NSString *address;
-@property (nonatomic, copy) NSString *altEmail;
-@property (nonatomic, copy) NSString *blog;
-@property (nonatomic, copy) NSString *department;
-@property (nonatomic, copy) NSString *email;
-@property (nonatomic, copy) NSString *facebook;
-@property (nonatomic, copy) NSString *fax;
-@property (nonatomic, copy) NSString *firstName;
-@property (nonatomic, copy) NSString *lastName;
-@property (nonatomic, copy) NSString *linkedIn;
-@property (nonatomic, copy) NSString *mobile;
-@property (nonatomic, copy) NSString *phone;
-@property (nonatomic, copy) NSString *source;
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *twitter;
-@property (nonatomic, retain) NSDate *birthDate;
-@property (nonatomic) BOOL doNotCall;
+- (id)initWithTBXMLElement:(TBXMLElement *)element
+{
+    if (self = [super initWithTBXMLElement:element])
+    {
+        self.amount = [[SBBaseEntity stringValueForElement:@"amount" parentElement:element] doubleValue];
+        self.discount = [[SBBaseEntity stringValueForElement:@"discount" parentElement:element] doubleValue];
+        self.probability = [[SBBaseEntity stringValueForElement:@"probability" parentElement:element] intValue];
+        self.source = [SBBaseEntity stringValueForElement:@"source" parentElement:element];
+        self.stage = [SBBaseEntity stringValueForElement:@"stage" parentElement:element];
+        self.closingDate = [self.formatter dateFromString:[SBBaseEntity stringValueForElement:@"closes-on" 
+                                                                              parentElement:element]];
+    }
+    return self;
+}
 
-+ (NSString *)serverPath;
-+ (NSArray *)displayedProperties;
+- (void)dealloc
+{
+    [_closingDate release];
+    [_source release];
+    [_stage release];
+    [super dealloc];
+}
 
-- (id)initWithTBXMLElement:(TBXMLElement *)element;
-- (ABRecordRef)getPerson;
+- (NSString *)description
+{
+    return self.stage;
+}
 
 @end

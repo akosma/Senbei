@@ -33,16 +33,16 @@
 		3A1104A3111DEF4500729EB6 /* DemoLogins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A1104A2111DEF4500729EB6 /* DemoLogins.plist */; };
 		3A1F518F1122029C0081580E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F518D1122029C0081580E /* Localizable.strings */; };
 		3A29C08A11075E2B00D887F1 /* SBCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08911075E2B00D887F1 /* SBCommentsController.m */; };
-		3A29C08E11075E6100D887F1 /* CompanyAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08D11075E6100D887F1 /* CompanyAccount.m */; };
-		3A29C0931107600500D887F1 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C0921107600500D887F1 /* BaseEntity.m */; };
+		3A29C08E11075E6100D887F1 /* SBCompanyAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C08D11075E6100D887F1 /* SBCompanyAccount.m */; };
+		3A29C0931107600500D887F1 /* SBBaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C0921107600500D887F1 /* SBBaseEntity.m */; };
 		3A29C2BB11078D9500D887F1 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A29C2BA11078D9500D887F1 /* Settings.bundle */; };
 		3A29C3381107922300D887F1 /* SBSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C3371107922300D887F1 /* SBSettingsController.m */; };
 		3A29C3FE1107A34E00D887F1 /* SBTasksController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C3FD1107A34E00D887F1 /* SBTasksController.m */; };
-		3A29C4531107A8A300D887F1 /* Opportunity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C4521107A8A300D887F1 /* Opportunity.m */; };
-		3A29C4E91107B3BF00D887F1 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C4E81107B3BF00D887F1 /* Contact.m */; };
-		3A2B965E11088AC1000373A5 /* Campaign.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2B965D11088AC1000373A5 /* Campaign.m */; };
-		3A2B966211088C26000373A5 /* Lead.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2B966111088C26000373A5 /* Lead.m */; };
-		3A2B966711088C3D000373A5 /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2B966611088C3D000373A5 /* Task.m */; };
+		3A29C4531107A8A300D887F1 /* SBOpportunity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C4521107A8A300D887F1 /* SBOpportunity.m */; };
+		3A29C4E91107B3BF00D887F1 /* SBContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A29C4E81107B3BF00D887F1 /* SBContact.m */; };
+		3A2B965E11088AC1000373A5 /* SBCampaign.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2B965D11088AC1000373A5 /* SBCampaign.m */; };
+		3A2B966211088C26000373A5 /* SBLead.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2B966111088C26000373A5 /* SBLead.m */; };
+		3A2B966711088C3D000373A5 /* SBTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2B966611088C3D000373A5 /* SBTask.m */; };
 		3A3E6A2B1121C6F700F3D322 /* NSDate+Senbei.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E6A2A1121C6F700F3D322 /* NSDate+Senbei.m */; };
 		3A3E6A2E1121C73300F3D322 /* SBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3E6A2D1121C73300F3D322 /* SBAppDelegate.m */; };
 		3A564E851147E1FE009A7435 /* TaskBuckets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A564E841147E1FE009A7435 /* TaskBuckets.plist */; };
@@ -69,14 +69,14 @@
 		3A6D8D3A11064DF20089F21D /* SBListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8D3911064DF20089F21D /* SBListController.m */; };
 		3A6D8D4411064E880089F21D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D8D4311064E880089F21D /* MainWindow.xib */; };
 		3A6D8D61110654DB0089F21D /* FatFreeCRMProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8D60110654DB0089F21D /* FatFreeCRMProxy.m */; };
-		3A708B431108427500CB2D83 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A708B421108427500CB2D83 /* Comment.m */; };
+		3A708B431108427500CB2D83 /* SBComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A708B421108427500CB2D83 /* SBComment.m */; };
 		3A8C38811119D8E1006669BE /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8C38801119D8E1006669BE /* AddressBook.framework */; };
 		3A8C38831119D8E1006669BE /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8C38821119D8E1006669BE /* AddressBookUI.framework */; };
 		3A92BDDC112FDB6F001B43FE /* SBRootController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A92BDDB112FDB6F001B43FE /* SBRootController.m */; };
 		3A9565BF1119E439003BF4D6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9565BE1119E439003BF4D6 /* MessageUI.framework */; };
 		3AB721FB11085642001F861D /* AKOEditorrific.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB721F911085642001F861D /* AKOEditorrific.m */; };
 		3AB7220111085699001F861D /* ako-editorrific-bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB7220011085699001F861D /* ako-editorrific-bar.png */; };
-		3AB7231A110868BB001F861D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB72319110868BB001F861D /* User.m */; };
+		3AB7231A110868BB001F861D /* SBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB72319110868BB001F861D /* SBUser.m */; };
 		3AB7231F1108695A001F861D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB7231E1108695A001F861D /* Icon.png */; };
 		3AB723A511087569001F861D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723A411087569001F861D /* Default.png */; };
 		3AB723D511087A80001F861D /* accounts.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AB723CE11087A80001F861D /* accounts.png */; };
@@ -140,26 +140,26 @@
 		3A23F54F1428813E00894EA2 /* SBModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBModels.h; sourceTree = "<group>"; };
 		3A29C08811075E2B00D887F1 /* SBCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCommentsController.h; sourceTree = "<group>"; };
 		3A29C08911075E2B00D887F1 /* SBCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCommentsController.m; sourceTree = "<group>"; };
-		3A29C08C11075E6100D887F1 /* CompanyAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyAccount.h; sourceTree = "<group>"; };
-		3A29C08D11075E6100D887F1 /* CompanyAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyAccount.m; sourceTree = "<group>"; };
-		3A29C0911107600500D887F1 /* BaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEntity.h; sourceTree = "<group>"; };
-		3A29C0921107600500D887F1 /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
+		3A29C08C11075E6100D887F1 /* SBCompanyAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCompanyAccount.h; sourceTree = "<group>"; };
+		3A29C08D11075E6100D887F1 /* SBCompanyAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCompanyAccount.m; sourceTree = "<group>"; };
+		3A29C0911107600500D887F1 /* SBBaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBBaseEntity.h; sourceTree = "<group>"; };
+		3A29C0921107600500D887F1 /* SBBaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBBaseEntity.m; sourceTree = "<group>"; };
 		3A29C2BA11078D9500D887F1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		3A29C3361107922300D887F1 /* SBSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSettingsController.h; sourceTree = "<group>"; };
 		3A29C3371107922300D887F1 /* SBSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSettingsController.m; sourceTree = "<group>"; };
 		3A29C35C110794BA00D887F1 /* SBListControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBListControllerDelegate.h; sourceTree = "<group>"; };
 		3A29C3FC1107A34E00D887F1 /* SBTasksController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBTasksController.h; sourceTree = "<group>"; };
 		3A29C3FD1107A34E00D887F1 /* SBTasksController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTasksController.m; sourceTree = "<group>"; };
-		3A29C4511107A8A300D887F1 /* Opportunity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Opportunity.h; sourceTree = "<group>"; };
-		3A29C4521107A8A300D887F1 /* Opportunity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Opportunity.m; sourceTree = "<group>"; };
-		3A29C4E71107B3BF00D887F1 /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
-		3A29C4E81107B3BF00D887F1 /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
-		3A2B965C11088AC1000373A5 /* Campaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Campaign.h; sourceTree = "<group>"; };
-		3A2B965D11088AC1000373A5 /* Campaign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Campaign.m; sourceTree = "<group>"; };
-		3A2B966011088C26000373A5 /* Lead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lead.h; sourceTree = "<group>"; };
-		3A2B966111088C26000373A5 /* Lead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lead.m; sourceTree = "<group>"; };
-		3A2B966511088C3D000373A5 /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
-		3A2B966611088C3D000373A5 /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		3A29C4511107A8A300D887F1 /* SBOpportunity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBOpportunity.h; sourceTree = "<group>"; };
+		3A29C4521107A8A300D887F1 /* SBOpportunity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBOpportunity.m; sourceTree = "<group>"; };
+		3A29C4E71107B3BF00D887F1 /* SBContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBContact.h; sourceTree = "<group>"; };
+		3A29C4E81107B3BF00D887F1 /* SBContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBContact.m; sourceTree = "<group>"; };
+		3A2B965C11088AC1000373A5 /* SBCampaign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCampaign.h; sourceTree = "<group>"; };
+		3A2B965D11088AC1000373A5 /* SBCampaign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCampaign.m; sourceTree = "<group>"; };
+		3A2B966011088C26000373A5 /* SBLead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBLead.h; sourceTree = "<group>"; };
+		3A2B966111088C26000373A5 /* SBLead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBLead.m; sourceTree = "<group>"; };
+		3A2B966511088C3D000373A5 /* SBTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBTask.h; sourceTree = "<group>"; };
+		3A2B966611088C3D000373A5 /* SBTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTask.m; sourceTree = "<group>"; };
 		3A3E6A291121C6F700F3D322 /* NSDate+Senbei.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Senbei.h"; sourceTree = "<group>"; };
 		3A3E6A2A1121C6F700F3D322 /* NSDate+Senbei.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Senbei.m"; sourceTree = "<group>"; };
 		3A3E6A2C1121C73300F3D322 /* SBAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAppDelegate.h; sourceTree = "<group>"; };
@@ -217,8 +217,8 @@
 		3A6D8D5F110654DB0089F21D /* FatFreeCRMProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FatFreeCRMProxy.h; sourceTree = "<group>"; };
 		3A6D8D60110654DB0089F21D /* FatFreeCRMProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FatFreeCRMProxy.m; sourceTree = "<group>"; };
 		3A6D8D691106573B0089F21D /* Definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
-		3A708B411108427500CB2D83 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
-		3A708B421108427500CB2D83 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
+		3A708B411108427500CB2D83 /* SBComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBComment.h; sourceTree = "<group>"; };
+		3A708B421108427500CB2D83 /* SBComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBComment.m; sourceTree = "<group>"; };
 		3A7700E1115960E000BCF25B /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		3A7700E4115961C800BCF25B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/TaskBuckets.plist; sourceTree = "<group>"; };
 		3A7700E51159620400BCF25B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/TaskCategories.plist; sourceTree = "<group>"; };
@@ -235,8 +235,8 @@
 		3AB721F911085642001F861D /* AKOEditorrific.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKOEditorrific.m; sourceTree = "<group>"; };
 		3AB721FA11085642001F861D /* AKOEditorrificDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKOEditorrificDelegate.h; sourceTree = "<group>"; };
 		3AB7220011085699001F861D /* ako-editorrific-bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ako-editorrific-bar.png"; sourceTree = "<group>"; };
-		3AB72318110868BB001F861D /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		3AB72319110868BB001F861D /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		3AB72318110868BB001F861D /* SBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUser.h; sourceTree = "<group>"; };
+		3AB72319110868BB001F861D /* SBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUser.m; sourceTree = "<group>"; };
 		3AB7231E1108695A001F861D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		3AB723A411087569001F861D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3AB723CE11087A80001F861D /* accounts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = accounts.png; sourceTree = "<group>"; };
@@ -405,24 +405,24 @@
 			isa = PBXGroup;
 			children = (
 				3A23F54F1428813E00894EA2 /* SBModels.h */,
-				3A29C0911107600500D887F1 /* BaseEntity.h */,
-				3A29C0921107600500D887F1 /* BaseEntity.m */,
-				3A29C08C11075E6100D887F1 /* CompanyAccount.h */,
-				3A29C08D11075E6100D887F1 /* CompanyAccount.m */,
-				3A29C4511107A8A300D887F1 /* Opportunity.h */,
-				3A29C4521107A8A300D887F1 /* Opportunity.m */,
-				3A29C4E71107B3BF00D887F1 /* Contact.h */,
-				3A29C4E81107B3BF00D887F1 /* Contact.m */,
-				3A708B411108427500CB2D83 /* Comment.h */,
-				3A708B421108427500CB2D83 /* Comment.m */,
-				3AB72318110868BB001F861D /* User.h */,
-				3AB72319110868BB001F861D /* User.m */,
-				3A2B965C11088AC1000373A5 /* Campaign.h */,
-				3A2B965D11088AC1000373A5 /* Campaign.m */,
-				3A2B966011088C26000373A5 /* Lead.h */,
-				3A2B966111088C26000373A5 /* Lead.m */,
-				3A2B966511088C3D000373A5 /* Task.h */,
-				3A2B966611088C3D000373A5 /* Task.m */,
+				3A29C0911107600500D887F1 /* SBBaseEntity.h */,
+				3A29C0921107600500D887F1 /* SBBaseEntity.m */,
+				3A29C08C11075E6100D887F1 /* SBCompanyAccount.h */,
+				3A29C08D11075E6100D887F1 /* SBCompanyAccount.m */,
+				3A29C4511107A8A300D887F1 /* SBOpportunity.h */,
+				3A29C4521107A8A300D887F1 /* SBOpportunity.m */,
+				3A29C4E71107B3BF00D887F1 /* SBContact.h */,
+				3A29C4E81107B3BF00D887F1 /* SBContact.m */,
+				3A708B411108427500CB2D83 /* SBComment.h */,
+				3A708B421108427500CB2D83 /* SBComment.m */,
+				3AB72318110868BB001F861D /* SBUser.h */,
+				3AB72319110868BB001F861D /* SBUser.m */,
+				3A2B965C11088AC1000373A5 /* SBCampaign.h */,
+				3A2B965D11088AC1000373A5 /* SBCampaign.m */,
+				3A2B966011088C26000373A5 /* SBLead.h */,
+				3A2B966111088C26000373A5 /* SBLead.m */,
+				3A2B966511088C3D000373A5 /* SBTask.h */,
+				3A2B966611088C3D000373A5 /* SBTask.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -774,18 +774,18 @@
 				3A6D8D3A11064DF20089F21D /* SBListController.m in Sources */,
 				3A6D8D61110654DB0089F21D /* FatFreeCRMProxy.m in Sources */,
 				3A29C08A11075E2B00D887F1 /* SBCommentsController.m in Sources */,
-				3A29C08E11075E6100D887F1 /* CompanyAccount.m in Sources */,
-				3A29C0931107600500D887F1 /* BaseEntity.m in Sources */,
+				3A29C08E11075E6100D887F1 /* SBCompanyAccount.m in Sources */,
+				3A29C0931107600500D887F1 /* SBBaseEntity.m in Sources */,
 				3A29C3381107922300D887F1 /* SBSettingsController.m in Sources */,
 				3A29C3FE1107A34E00D887F1 /* SBTasksController.m in Sources */,
-				3A29C4531107A8A300D887F1 /* Opportunity.m in Sources */,
-				3A29C4E91107B3BF00D887F1 /* Contact.m in Sources */,
-				3A708B431108427500CB2D83 /* Comment.m in Sources */,
+				3A29C4531107A8A300D887F1 /* SBOpportunity.m in Sources */,
+				3A29C4E91107B3BF00D887F1 /* SBContact.m in Sources */,
+				3A708B431108427500CB2D83 /* SBComment.m in Sources */,
 				3AB721FB11085642001F861D /* AKOEditorrific.m in Sources */,
-				3AB7231A110868BB001F861D /* User.m in Sources */,
-				3A2B965E11088AC1000373A5 /* Campaign.m in Sources */,
-				3A2B966211088C26000373A5 /* Lead.m in Sources */,
-				3A2B966711088C3D000373A5 /* Task.m in Sources */,
+				3AB7231A110868BB001F861D /* SBUser.m in Sources */,
+				3A2B965E11088AC1000373A5 /* SBCampaign.m in Sources */,
+				3A2B966211088C26000373A5 /* SBLead.m in Sources */,
+				3A2B966711088C3D000373A5 /* SBTask.m in Sources */,
 				3A0B525B11146D87005A26FD /* SBNewTaskController.m in Sources */,
 				3A6C627A1119EA07000DD23B /* SBWebBrowserController.m in Sources */,
 				3A3E6A2B1121C6F700F3D322 /* NSDate+Senbei.m in Sources */,

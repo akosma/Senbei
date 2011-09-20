@@ -1,8 +1,8 @@
 //
-//  Task.m
+//  SBOpportunity.h
 //  Senbei
 //
-//  Created by Adrian on 1/21/10.
+//  Created by Adrian on 1/20/10.
 //  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,32 +32,19 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "Task.h"
+#import <Foundation/Foundation.h>
+#import "SBBaseEntity.h"
 
-@implementation Task
+@interface SBOpportunity : SBBaseEntity 
 
-@synthesize dueDate = _dueDate;
-@synthesize category = _category;
-@synthesize bucket = _bucket;
+@property (nonatomic) double amount;
+@property (nonatomic) double discount;
+@property (nonatomic) NSInteger probability;
+@property (nonatomic, retain) NSDate *closingDate;
+@property (nonatomic, copy) NSString *source;
+@property (nonatomic, copy) NSString *stage;
 
-- (id)initWithTBXMLElement:(TBXMLElement *)element
-{
-    if (self = [super initWithTBXMLElement:element])
-    {
-        self.category = [BaseEntity stringValueForElement:@"category" parentElement:element];
-        self.bucket = [BaseEntity stringValueForElement:@"bucket" parentElement:element];
-        self.dueDate = [self.formatter dateFromString:[BaseEntity stringValueForElement:@"due-at" 
-                                                                          parentElement:element]];
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-    self.bucket = nil;
-    self.dueDate = nil;
-    self.category = nil;
-    [super dealloc];
-}
++ (NSString *)serverPath;
+- (id)initWithTBXMLElement:(TBXMLElement *)element;
 
 @end

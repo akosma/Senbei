@@ -1,8 +1,8 @@
 //
-//  Lead.m
+//  SBCompanyAccount.m
 //  Senbei
 //
-//  Created by Adrian on 1/21/10.
+//  Created by Adrian on 1/20/10.
 //  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,38 +32,58 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "Lead.h"
+#import "SBCompanyAccount.h"
 
-@implementation Lead
+@implementation SBCompanyAccount
 
-@synthesize status = _status;
-@synthesize referredBy = _referredBy;
+@synthesize billingAddress = _billingAddress;
+@synthesize fax = _fax;
+@synthesize phone = _phone;
+@synthesize shippingAddress = _shippingAddress;
+@synthesize tollFreePhone = _tollFreePhone;
+@synthesize website = _website;
 
 + (NSString *)serverPath
 {
-    return @"leads";
+    return @"accounts";
 }
 
 - (id)initWithTBXMLElement:(TBXMLElement *)element
 {
     if (self = [super initWithTBXMLElement:element])
     {
-        self.status = [BaseEntity stringValueForElement:@"status" parentElement:element];
-        self.referredBy = [BaseEntity stringValueForElement:@"referred-by" parentElement:element];
+        self.billingAddress = [SBBaseEntity stringValueForElement:@"billing-address" parentElement:element];
+        self.fax = [SBBaseEntity stringValueForElement:@"fax" parentElement:element];
+        self.phone = [SBBaseEntity stringValueForElement:@"phone" parentElement:element];
+        self.shippingAddress = [SBBaseEntity stringValueForElement:@"shipping-address" parentElement:element];
+        self.tollFreePhone = [SBBaseEntity stringValueForElement:@"toll-free-phone" parentElement:element];
+        self.website = [SBBaseEntity stringValueForElement:@"website" parentElement:element];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    self.status = nil;
-    self.referredBy = nil;
+    self.billingAddress = nil;
+    self.fax = nil;
+    self.phone = nil;
+    self.shippingAddress = nil;
+    self.tollFreePhone = nil;
+    self.website = nil;
     [super dealloc];
 }
 
 - (NSString *)description
 {
-    return self.status;
+    return self.website;
+}
+
+#pragma mark -
+#pragma mark Overridable properties
+
+- (NSString *)commentableTypeName
+{
+    return @"Account";
 }
 
 @end

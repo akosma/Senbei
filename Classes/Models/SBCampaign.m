@@ -1,5 +1,5 @@
 //
-//  Campaign.m
+//  SBCampaign.m
 //  Senbei
 //
 //  Created by Adrian on 1/21/10.
@@ -32,9 +32,9 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "Campaign.h"
+#import "SBCampaign.h"
 
-@implementation Campaign
+@implementation SBCampaign
 
 @synthesize budget = _budget;
 @synthesize endsOn = _endsOn;
@@ -57,32 +57,32 @@
 {
     if (self = [super initWithTBXMLElement:element])
     {
-        self.budget = [[BaseEntity stringValueForElement:@"budget" parentElement:element] doubleValue];
-        self.endsOn = [self.formatter dateFromString:[BaseEntity stringValueForElement:@"ends-on" 
+        self.budget = [[SBBaseEntity stringValueForElement:@"budget" parentElement:element] doubleValue];
+        self.endsOn = [self.formatter dateFromString:[SBBaseEntity stringValueForElement:@"ends-on" 
                                                                          parentElement:element]];
-        self.leadsCount = [[BaseEntity stringValueForElement:@"leads-count" 
+        self.leadsCount = [[SBBaseEntity stringValueForElement:@"leads-count" 
                                                parentElement:element] intValue];
-        self.objectives = [BaseEntity stringValueForElement:@"objectives" parentElement:element];
-        self.opportunitiesCount = [[BaseEntity stringValueForElement:@"opportunities-count" 
+        self.objectives = [SBBaseEntity stringValueForElement:@"objectives" parentElement:element];
+        self.opportunitiesCount = [[SBBaseEntity stringValueForElement:@"opportunities-count" 
                                                        parentElement:element] intValue];
-        self.revenue = [[BaseEntity stringValueForElement:@"revenue" 
+        self.revenue = [[SBBaseEntity stringValueForElement:@"revenue" 
                                             parentElement:element] doubleValue];
-        self.startsOn = [self.formatter dateFromString:[BaseEntity stringValueForElement:@"starts-on" 
+        self.startsOn = [self.formatter dateFromString:[SBBaseEntity stringValueForElement:@"starts-on" 
                                                                            parentElement:element]];
-        self.status = [BaseEntity stringValueForElement:@"status" parentElement:element];
-        self.conversionTarget = [[BaseEntity stringValueForElement:@"target-conversion" parentElement:element] floatValue];
-        self.leadsTarget = [[BaseEntity stringValueForElement:@"target-leads" parentElement:element] intValue];
-        self.revenueTarget = [[BaseEntity stringValueForElement:@"target-revenue" parentElement:element] doubleValue];
+        self.status = [SBBaseEntity stringValueForElement:@"status" parentElement:element];
+        self.conversionTarget = [[SBBaseEntity stringValueForElement:@"target-conversion" parentElement:element] floatValue];
+        self.leadsTarget = [[SBBaseEntity stringValueForElement:@"target-leads" parentElement:element] intValue];
+        self.revenueTarget = [[SBBaseEntity stringValueForElement:@"target-revenue" parentElement:element] doubleValue];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    self.endsOn = nil;
-    self.objectives = nil;
-    self.startsOn = nil;
-    self.status = nil;
+    [_endsOn release];
+    [_objectives release];
+    [_startsOn release];
+    [_status release];
     [super dealloc];
 }
 

@@ -1,8 +1,8 @@
 //
-//  Account.h
+//  SBLead.h
 //  Senbei
 //
-//  Created by Adrian on 1/20/10.
+//  Created by Adrian on 1/21/10.
 //  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -33,25 +33,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BaseEntity.h"
+#import "SBContact.h"
 
-@interface CompanyAccount : BaseEntity 
+@interface SBLead : SBContact 
 {
 @private
-    NSString *_billingAddress;
-    NSString *_fax;
-    NSString *_phone;
-    NSString *_shippingAddress;
-    NSString *_tollFreePhone;
-    NSString *_website;
+    NSString *_status;
+    NSString *_referredBy;
 }
 
-@property (nonatomic, copy) NSString *billingAddress;
-@property (nonatomic, copy) NSString *fax;
-@property (nonatomic, copy) NSString *phone;
-@property (nonatomic, copy) NSString *shippingAddress;
-@property (nonatomic, copy) NSString *tollFreePhone;
-@property (nonatomic, copy) NSString *website;
+@property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSString *referredBy;
 
 + (NSString *)serverPath;
 - (id)initWithTBXMLElement:(TBXMLElement *)element;

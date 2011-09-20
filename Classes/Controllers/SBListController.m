@@ -241,7 +241,7 @@
     
     if (indexPath.row < [array count])
     {
-        BaseEntity *item = [array objectAtIndex:indexPath.row];
+        SBBaseEntity *item = [array objectAtIndex:indexPath.row];
         cell.accessoryType = self.accessoryType;
         cell.textLabel.text = item.name;
         cell.textLabel.textColor = [UIColor blackColor];
@@ -273,7 +273,7 @@
         NSArray *array = (self.searchDisplayController.active) ? self.searchData : self.data;
         if (indexPath.row < [array count])
         {
-            BaseEntity *entity = [array objectAtIndex:indexPath.row];
+            SBBaseEntity *entity = [array objectAtIndex:indexPath.row];
             [self.delegate listController:self didTapAccessoryForEntity:entity];
         }
     }
@@ -286,7 +286,7 @@
         NSArray *array = (self.searchDisplayController.active) ? self.searchData : self.data;
         if (indexPath.row < [array count])
         {
-            BaseEntity *entity = [array objectAtIndex:indexPath.row];
+            SBBaseEntity *entity = [array objectAtIndex:indexPath.row];
             [self.delegate listController:self didSelectEntity:entity];
         }
     }

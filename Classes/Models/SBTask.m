@@ -1,8 +1,8 @@
 //
-//  BaseEntity.m
+//  SBTask.m
 //  Senbei
 //
-//  Created by Adrian on 1/20/10.
+//  Created by Adrian on 1/21/10.
 //  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,75 +32,32 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "BaseEntity.h"
-#import "GTMNSString+HTML.h"
+#import "SBTask.h"
 
-@implementation BaseEntity
+@implementation SBTask
 
-@synthesize name = _name;
-@synthesize objectId = _objectId;
-@synthesize createdAt = _createdAt;
-@synthesize updatedAt = _updatedAt;
-@synthesize formatter = _formatter;
-@synthesize photoURL = _photoURL;
-
-@dynamic commentableTypeName;
-
-#pragma mark -
-#pragma mark Class methods
-
-+ (NSString *)stringValueForElement:(NSString *)elementName 
-                      parentElement:(TBXMLElement *)element
-{
-    TBXMLElement *attribute = [TBXML childElementNamed:elementName parentElement:element];
-    NSString *value = @"";
-    if (attribute != nil)
-    {
-        value = [[TBXML textForElement:attribute] gtm_stringByUnescapingFromHTML];
-    }
-    return value;
-}
-
-#pragma mark -
-#pragma mark Init and dealloc
+@synthesize dueDate = _dueDate;
+@synthesize category = _category;
+@synthesize bucket = _bucket;
 
 - (id)initWithTBXMLElement:(TBXMLElement *)element
 {
-    if (self = [super init])
+    if (self = [super initWithTBXMLElement:element])
     {
-        self.formatter = [[[NSDateFormatter alloc] init] autorelease];
-        [self.formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
-
-        NSString *value = [BaseEntity stringValueForElement:@"id" parentElement:element];
-        self.objectId = [value intValue];
-
-        value = [BaseEntity stringValueForElement:@"created-at" parentElement:element];
-        self.createdAt = [self.formatter dateFromString:value];
-
-        value = [BaseEntity stringValueForElement:@"updated-at" parentElement:element];
-        self.updatedAt = [self.formatter dateFromString:value];
-
-        self.name = [BaseEntity stringValueForElement:@"name" parentElement:element];
+        self.category = [SBBaseEntity stringValueForElement:@"category" parentElement:element];
+        self.bucket = [SBBaseEntity stringValueForElement:@"bucket" parentElement:element];
+        self.dueDate = [self.formatter dateFromString:[SBBaseEntity stringValueForElement:@"due-at" 
+                                                                          parentElement:element]];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    self.formatter = nil;
-    self.createdAt = nil;
-    self.updatedAt = nil;
-    self.name = nil;
-    self.photoURL = nil;
+    [_bucket release];
+    [_dueDate release];
+    [_category release];
     [super dealloc];
-}
-
-#pragma mark -
-#pragma mark Overridable properties
-
-- (NSString *)commentableTypeName
-{
-    return NSStringFromClass([self class]);
 }
 
 @end

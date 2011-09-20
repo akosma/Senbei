@@ -58,8 +58,8 @@
 #define TASKS_DUE_LATER_KEY     @"tasksDueLater"
 
 @class ASINetworkQueue;
-@class BaseEntity;
-@class Task;
+@class SBBaseEntity;
+@class SBTask;
 @class SettingsManager;
 
 @interface FatFreeCRMProxy : NSObject
@@ -81,10 +81,10 @@
 - (void)login;
 - (void)loadList:(Class)klass page:(NSInteger)page;
 - (void)searchList:(Class)klass query:(NSString *)search;
-- (void)loadCommentsForEntity:(BaseEntity *)entity;
-- (void)sendComment:(NSString *)comment forEntity:(BaseEntity *)entity;
-- (void)markTaskAsDone:(Task *)task;
-- (void)createTask:(Task *)task;
+- (void)loadCommentsForEntity:(SBBaseEntity *)entity;
+- (void)sendComment:(NSString *)comment forEntity:(SBBaseEntity *)entity;
+- (void)markTaskAsDone:(SBTask *)task;
+- (void)createTask:(SBTask *)task;
 - (void)loadTasks;
 - (void)cancelConnections;
 

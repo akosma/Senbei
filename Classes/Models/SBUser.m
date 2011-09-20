@@ -1,5 +1,5 @@
 //
-//  User.m
+//  SBUser.m
 //  Senbei
 //
 //  Created by Adrian on 1/21/10.
@@ -32,9 +32,9 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "User.h"
+#import "SBUser.h"
 
-@implementation User
+@implementation SBUser
 
 @synthesize admin = _admin;
 @synthesize aim = _aim;
@@ -55,38 +55,38 @@
 {
     if (self = [super initWithTBXMLElement:element])
     {
-        self.admin = [[BaseEntity stringValueForElement:@"admin" parentElement:element] isEqualToString:@"true"];
-        self.altEmail = [BaseEntity stringValueForElement:@"alt-email" parentElement:element];
-        self.company = [BaseEntity stringValueForElement:@"company" parentElement:element];
-        self.email = [BaseEntity stringValueForElement:@"email" parentElement:element];
-        self.firstName = [BaseEntity stringValueForElement:@"first-name" parentElement:element];
-        self.google = [BaseEntity stringValueForElement:@"google" parentElement:element];
-        self.lastName = [BaseEntity stringValueForElement:@"last-name" parentElement:element];
-        self.mobile = [BaseEntity stringValueForElement:@"mobile" parentElement:element];
-        self.phone = [BaseEntity stringValueForElement:@"phone" parentElement:element];
-        self.skype = [BaseEntity stringValueForElement:@"skype" parentElement:element];
-        self.title = [BaseEntity stringValueForElement:@"title" parentElement:element];
-        self.username = [BaseEntity stringValueForElement:@"username" parentElement:element];
-        self.yahoo = [BaseEntity stringValueForElement:@"yahoo" parentElement:element];
+        self.admin = [[SBBaseEntity stringValueForElement:@"admin" parentElement:element] isEqualToString:@"true"];
+        self.altEmail = [SBBaseEntity stringValueForElement:@"alt-email" parentElement:element];
+        self.company = [SBBaseEntity stringValueForElement:@"company" parentElement:element];
+        self.email = [SBBaseEntity stringValueForElement:@"email" parentElement:element];
+        self.firstName = [SBBaseEntity stringValueForElement:@"first-name" parentElement:element];
+        self.google = [SBBaseEntity stringValueForElement:@"google" parentElement:element];
+        self.lastName = [SBBaseEntity stringValueForElement:@"last-name" parentElement:element];
+        self.mobile = [SBBaseEntity stringValueForElement:@"mobile" parentElement:element];
+        self.phone = [SBBaseEntity stringValueForElement:@"phone" parentElement:element];
+        self.skype = [SBBaseEntity stringValueForElement:@"skype" parentElement:element];
+        self.title = [SBBaseEntity stringValueForElement:@"title" parentElement:element];
+        self.username = [SBBaseEntity stringValueForElement:@"username" parentElement:element];
+        self.yahoo = [SBBaseEntity stringValueForElement:@"yahoo" parentElement:element];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    self.aim = nil;
-    self.altEmail = nil;
-    self.company = nil;
-    self.email = nil;
-    self.firstName = nil;
-    self.google = nil;
-    self.lastName = nil;
-    self.mobile = nil;
-    self.phone = nil;
-    self.skype = nil;
-    self.title = nil;
-    self.username = nil;
-    self.yahoo = nil;
+    [_aim release];
+    [_altEmail release];
+    [_company release];
+    [_email release];
+    [_firstName release];
+    [_google release];
+    [_lastName release];
+    [_mobile release];
+    [_phone release];
+    [_skype release];
+    [_title release];
+    [_username release];
+    [_yahoo release];
     [super dealloc];
 }
 

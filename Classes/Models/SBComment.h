@@ -1,8 +1,8 @@
 //
-//  Opportunity.m
+//  SBComment.h
 //  Senbei
 //
-//  Created by Adrian on 1/20/10.
+//  Created by Adrian on 1/21/10.
 //  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,48 +32,13 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "Opportunity.h"
+#import <Foundation/Foundation.h>
+#import "SBBaseEntity.h"
 
-@implementation Opportunity
+@interface SBComment : SBBaseEntity
 
-@synthesize amount = _amount;
-@synthesize discount = _discount;
-@synthesize probability = _probability;
-@synthesize closingDate = _closingDate;
-@synthesize source = _source;
-@synthesize stage = _stage;
+@property (nonatomic, copy) NSString *comment;
 
-+ (NSString *)serverPath
-{
-    return @"opportunities";
-}
-
-- (id)initWithTBXMLElement:(TBXMLElement *)element
-{
-    if (self = [super initWithTBXMLElement:element])
-    {
-        self.amount = [[BaseEntity stringValueForElement:@"amount" parentElement:element] doubleValue];
-        self.discount = [[BaseEntity stringValueForElement:@"discount" parentElement:element] doubleValue];
-        self.probability = [[BaseEntity stringValueForElement:@"probability" parentElement:element] intValue];
-        self.source = [BaseEntity stringValueForElement:@"source" parentElement:element];
-        self.stage = [BaseEntity stringValueForElement:@"stage" parentElement:element];
-        self.closingDate = [self.formatter dateFromString:[BaseEntity stringValueForElement:@"closes-on" 
-                                                                              parentElement:element]];
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-    self.closingDate = nil;
-    self.source = nil;
-    self.stage = nil;
-    [super dealloc];
-}
-
-- (NSString *)description
-{
-    return self.stage;
-}
+- (id)initWithTBXMLElement:(TBXMLElement *)element;
 
 @end

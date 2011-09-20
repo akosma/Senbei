@@ -1,8 +1,8 @@
 //
-//  Opportunity.h
+//  SBComment.m
 //  Senbei
 //
-//  Created by Adrian on 1/20/10.
+//  Created by Adrian on 1/21/10.
 //  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,28 +32,25 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Foundation/Foundation.h>
-#import "BaseEntity.h"
+#import "SBComment.h"
 
-@interface Opportunity : BaseEntity 
+@implementation SBComment
+
+@synthesize comment = _comment;
+
+- (id)initWithTBXMLElement:(TBXMLElement *)element
 {
-@private
-    double _amount;
-    double _discount;
-    NSInteger _probability;
-    NSDate *_closingDate;
-    NSString *_source;
-    NSString *_stage;
+    if (self = [super initWithTBXMLElement:element])
+    {
+        self.comment = [SBBaseEntity stringValueForElement:@"comment" parentElement:element];
+    }
+    return self;
 }
 
-@property (nonatomic) double amount;
-@property (nonatomic) double discount;
-@property (nonatomic) NSInteger probability;
-@property (nonatomic, retain) NSDate *closingDate;
-@property (nonatomic, copy) NSString *source;
-@property (nonatomic, copy) NSString *stage;
-
-+ (NSString *)serverPath;
-- (id)initWithTBXMLElement:(TBXMLElement *)element;
+- (void)dealloc
+{
+    [_comment release];
+    [super dealloc];
+}
 
 @end

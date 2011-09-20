@@ -228,7 +228,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Task *task = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    SBTask *task = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     return [task.name sizeWithFont:[UIFont boldSystemFontOfSize:14.0] 
                        constrainedToSize:CGSizeMake(170.0, 4000.0)].height + 20.0;
 }
@@ -268,7 +268,7 @@
         cell.detailTextLabel.numberOfLines = 0;
     }
     
-    Task *task = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    SBTask *task = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     cell.textLabel.text = [self.categories objectForKey:task.category];
     cell.detailTextLabel.text = task.name;
     return cell;
@@ -300,7 +300,7 @@
     if (buttonIndex == 1)
     {
         NSMutableArray *array = [self.sections objectAtIndex:self.indexPathToDelete.section];
-        Task *task = [[array objectAtIndex:self.indexPathToDelete.row] retain];
+        SBTask *task = [[array objectAtIndex:self.indexPathToDelete.row] retain];
         [array removeObjectAtIndex:self.indexPathToDelete.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:self.indexPathToDelete]
                               withRowAnimation:UITableViewRowAnimationFade];

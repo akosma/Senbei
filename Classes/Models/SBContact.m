@@ -1,5 +1,5 @@
 //
-//  Contact.m
+//  SBContact.m
 //  Senbei
 //
 //  Created by Adrian on 1/20/10.
@@ -32,7 +32,7 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "Contact.h"
+#import "SBContact.h"
 #import "NSDate+Senbei.h"
 #import "NSString+Senbei.h"
 #import "NSURL+AKOCacheKey.h"
@@ -52,7 +52,8 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
     }
 }
 
-@implementation Contact
+
+@implementation SBContact
 
 @synthesize address = _address;
 @synthesize altEmail = _altEmail;
@@ -106,24 +107,24 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
     if (self = [super initWithTBXMLElement:element])
     {
         self.photoURL = nil;
-        self.address = [BaseEntity stringValueForElement:@"address" parentElement:element];
-        self.altEmail = [BaseEntity stringValueForElement:@"alt-email" parentElement:element];
-        self.blog = [BaseEntity stringValueForElement:@"blog" parentElement:element];
-        self.birthDate = [self.formatter dateFromString:[BaseEntity stringValueForElement:@"born-on" 
+        self.address = [SBBaseEntity stringValueForElement:@"address" parentElement:element];
+        self.altEmail = [SBBaseEntity stringValueForElement:@"alt-email" parentElement:element];
+        self.blog = [SBBaseEntity stringValueForElement:@"blog" parentElement:element];
+        self.birthDate = [self.formatter dateFromString:[SBBaseEntity stringValueForElement:@"born-on" 
                                                                             parentElement:element]];
-        self.department = [BaseEntity stringValueForElement:@"department" parentElement:element];
-        self.doNotCall = [[BaseEntity stringValueForElement:@"do-not-call" parentElement:element] isEqualToString:@"true"];
-        self.email = [BaseEntity stringValueForElement:@"email" parentElement:element];
-        self.facebook = [BaseEntity stringValueForElement:@"facebook" parentElement:element];
-        self.fax = [BaseEntity stringValueForElement:@"fax" parentElement:element];
-        self.firstName = [BaseEntity stringValueForElement:@"first-name" parentElement:element];
-        self.lastName = [BaseEntity stringValueForElement:@"last-name" parentElement:element];
-        self.linkedIn = [BaseEntity stringValueForElement:@"linkedin" parentElement:element];
-        self.mobile = [BaseEntity stringValueForElement:@"mobile" parentElement:element];
-        self.phone = [BaseEntity stringValueForElement:@"phone" parentElement:element];
-        self.source = [BaseEntity stringValueForElement:@"source" parentElement:element];
-        self.title = [BaseEntity stringValueForElement:@"title" parentElement:element];
-        self.twitter = [BaseEntity stringValueForElement:@"twitter" parentElement:element];
+        self.department = [SBBaseEntity stringValueForElement:@"department" parentElement:element];
+        self.doNotCall = [[SBBaseEntity stringValueForElement:@"do-not-call" parentElement:element] isEqualToString:@"true"];
+        self.email = [SBBaseEntity stringValueForElement:@"email" parentElement:element];
+        self.facebook = [SBBaseEntity stringValueForElement:@"facebook" parentElement:element];
+        self.fax = [SBBaseEntity stringValueForElement:@"fax" parentElement:element];
+        self.firstName = [SBBaseEntity stringValueForElement:@"first-name" parentElement:element];
+        self.lastName = [SBBaseEntity stringValueForElement:@"last-name" parentElement:element];
+        self.linkedIn = [SBBaseEntity stringValueForElement:@"linkedin" parentElement:element];
+        self.mobile = [SBBaseEntity stringValueForElement:@"mobile" parentElement:element];
+        self.phone = [SBBaseEntity stringValueForElement:@"phone" parentElement:element];
+        self.source = [SBBaseEntity stringValueForElement:@"source" parentElement:element];
+        self.title = [SBBaseEntity stringValueForElement:@"title" parentElement:element];
+        self.twitter = [SBBaseEntity stringValueForElement:@"twitter" parentElement:element];
         
         NSString *serverURL = [SettingsManager sharedSettingsManager].server;
         NSString *defaultImage = [NSString stringWithFormat:@"%@/images/avatar.jpg", serverURL];
@@ -143,23 +144,23 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
 
 - (void)dealloc
 {
-    self.photoURL = nil;
-    self.address = nil;
-    self.altEmail = nil;
-    self.blog = nil;
-    self.department = nil;
-    self.email = nil;
-    self.facebook = nil;
-    self.fax = nil;
-    self.firstName = nil;
-    self.lastName = nil;
-    self.linkedIn = nil;
-    self.mobile = nil;
-    self.phone = nil;
-    self.source = nil;
-    self.title = nil;
-    self.twitter = nil;
-    self.birthDate = nil;
+    [_address release];
+    [_altEmail release];
+    [_blog release];
+    [_department release];
+    [_email release];
+    [_facebook release];
+    [_fax release];
+    [_firstName release];
+    [_lastName release];
+    [_linkedIn release];
+    [_mobile release];
+    [_phone release];
+    [_source release];
+    [_title release];
+    [_twitter release];
+    [_birthDate release];
+    
     if (_person != NULL)
     {
         CFRelease(_person);

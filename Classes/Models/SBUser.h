@@ -1,8 +1,8 @@
 //
-//  Account.m
+//  SBUser.h
 //  Senbei
 //
-//  Created by Adrian on 1/20/10.
+//  Created by Adrian on 1/21/10.
 //  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,58 +32,26 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "CompanyAccount.h"
+#import <Foundation/Foundation.h>
+#import "SBBaseEntity.h"
 
-@implementation CompanyAccount
+@interface SBUser : SBBaseEntity 
 
-@synthesize billingAddress = _billingAddress;
-@synthesize fax = _fax;
-@synthesize phone = _phone;
-@synthesize shippingAddress = _shippingAddress;
-@synthesize tollFreePhone = _tollFreePhone;
-@synthesize website = _website;
+@property (nonatomic) BOOL admin;
+@property (nonatomic, copy) NSString *aim;
+@property (nonatomic, copy) NSString *altEmail;
+@property (nonatomic, copy) NSString *company;
+@property (nonatomic, copy) NSString *email;
+@property (nonatomic, copy) NSString *firstName;
+@property (nonatomic, copy) NSString *google;
+@property (nonatomic, copy) NSString *lastName;
+@property (nonatomic, copy) NSString *mobile;
+@property (nonatomic, copy) NSString *phone;
+@property (nonatomic, copy) NSString *skype;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *yahoo;
 
-+ (NSString *)serverPath
-{
-    return @"accounts";
-}
-
-- (id)initWithTBXMLElement:(TBXMLElement *)element
-{
-    if (self = [super initWithTBXMLElement:element])
-    {
-        self.billingAddress = [BaseEntity stringValueForElement:@"billing-address" parentElement:element];
-        self.fax = [BaseEntity stringValueForElement:@"fax" parentElement:element];
-        self.phone = [BaseEntity stringValueForElement:@"phone" parentElement:element];
-        self.shippingAddress = [BaseEntity stringValueForElement:@"shipping-address" parentElement:element];
-        self.tollFreePhone = [BaseEntity stringValueForElement:@"toll-free-phone" parentElement:element];
-        self.website = [BaseEntity stringValueForElement:@"website" parentElement:element];
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-    self.billingAddress = nil;
-    self.fax = nil;
-    self.phone = nil;
-    self.shippingAddress = nil;
-    self.tollFreePhone = nil;
-    self.website = nil;
-    [super dealloc];
-}
-
-- (NSString *)description
-{
-    return self.website;
-}
-
-#pragma mark -
-#pragma mark Overridable properties
-
-- (NSString *)commentableTypeName
-{
-    return @"Account";
-}
+- (id)initWithTBXMLElement:(TBXMLElement *)element;
 
 @end
