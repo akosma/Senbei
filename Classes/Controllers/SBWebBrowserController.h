@@ -1,5 +1,5 @@
 //
-//  WebBrowserController.h
+//  SBWebBrowserController.h
 //  Senbei
 //
 //  Created by Adrian on 2/3/10.
@@ -34,14 +34,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WebBrowserController : UIViewController <UIWebViewDelegate>
-{
-@private
-    IBOutlet UINavigationBar *_navigationBar;
-    IBOutlet UIWebView *_webView;
-    NSURL *_url;
-}
+@interface SBWebBrowserController : UIViewController <UIWebViewDelegate>
 
+@property (nonatomic, retain) IBOutlet UINavigationBar *navigationBar;
+@property (nonatomic, retain) IBOutlet UIWebView *webView;
 @property (nonatomic, retain) NSURL *url;
 
 - (IBAction)close:(id)sender;

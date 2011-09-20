@@ -50,8 +50,8 @@
 		3A5C5402115781D500620375 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C53FF115781D500620375 /* NSDataAdditions.m */; };
 		3A5C5403115781D500620375 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C5401115781D500620375 /* TBXML.m */; };
 		3A5C54B51157A61500620375 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C54B41157A61500620375 /* GTMNSString+HTML.m */; };
-		3A6C627A1119EA07000DD23B /* WebBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6C62781119EA07000DD23B /* WebBrowserController.m */; };
-		3A6C627E1119EA29000DD23B /* WebBrowserController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6C627C1119EA29000DD23B /* WebBrowserController.xib */; };
+		3A6C627A1119EA07000DD23B /* SBWebBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6C62781119EA07000DD23B /* SBWebBrowserController.m */; };
+		3A6C627E1119EA29000DD23B /* SBWebBrowserController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6C627C1119EA29000DD23B /* SBWebBrowserController.xib */; };
 		3A6D8D0611064C8F0089F21D /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8CF011064C8F0089F21D /* ASIAuthenticationDialog.m */; };
 		3A6D8D0711064C8F0089F21D /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8CF211064C8F0089F21D /* ASIFormDataRequest.m */; };
 		3A6D8D0811064C8F0089F21D /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D8CF411064C8F0089F21D /* ASIHTTPRequest.m */; };
@@ -178,9 +178,9 @@
 		3A5C54B21157A61500620375 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		3A5C54B31157A61500620375 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
 		3A5C54B41157A61500620375 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
-		3A6C62771119EA07000DD23B /* WebBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebBrowserController.h; sourceTree = "<group>"; };
-		3A6C62781119EA07000DD23B /* WebBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebBrowserController.m; sourceTree = "<group>"; };
-		3A6C627D1119EA29000DD23B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/WebBrowserController.xib; sourceTree = "<group>"; };
+		3A6C62771119EA07000DD23B /* SBWebBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBWebBrowserController.h; sourceTree = "<group>"; };
+		3A6C62781119EA07000DD23B /* SBWebBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBWebBrowserController.m; sourceTree = "<group>"; };
+		3A6C627D1119EA29000DD23B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SBWebBrowserController.xib; sourceTree = "<group>"; };
 		3A6D8CDB11064A900089F21D /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		3A6D8CE211064B420089F21D /* README.textile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.textile; sourceTree = "<group>"; };
 		3A6D8CE311064B4B0089F21D /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -483,8 +483,8 @@
 				3A29C08911075E2B00D887F1 /* SBCommentsController.m */,
 				3A29C3361107922300D887F1 /* SBSettingsController.h */,
 				3A29C3371107922300D887F1 /* SBSettingsController.m */,
-				3A6C62771119EA07000DD23B /* WebBrowserController.h */,
-				3A6C62781119EA07000DD23B /* WebBrowserController.m */,
+				3A6C62771119EA07000DD23B /* SBWebBrowserController.h */,
+				3A6C62781119EA07000DD23B /* SBWebBrowserController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -550,7 +550,7 @@
 			isa = PBXGroup;
 			children = (
 				3A6D8D4311064E880089F21D /* MainWindow.xib */,
-				3A6C627C1119EA29000DD23B /* WebBrowserController.xib */,
+				3A6C627C1119EA29000DD23B /* SBWebBrowserController.xib */,
 			);
 			path = NIBs;
 			sourceTree = "<group>";
@@ -738,7 +738,7 @@
 				3AB723DB11087A80001F861D /* tasks.png in Resources */,
 				3A564E871147E208009A7435 /* TaskCategories.plist in Resources */,
 				3A564E851147E1FE009A7435 /* TaskBuckets.plist in Resources */,
-				3A6C627E1119EA29000DD23B /* WebBrowserController.xib in Resources */,
+				3A6C627E1119EA29000DD23B /* SBWebBrowserController.xib in Resources */,
 				3A1104A3111DEF4500729EB6 /* DemoLogins.plist in Resources */,
 				3A1F518F1122029C0081580E /* Localizable.strings in Resources */,
 				3A006DC411F99A1000534055 /* IASKAppSettingsView.xib in Resources */,
@@ -785,7 +785,7 @@
 				3A2B966211088C26000373A5 /* Lead.m in Sources */,
 				3A2B966711088C3D000373A5 /* Task.m in Sources */,
 				3A0B525B11146D87005A26FD /* SBNewTaskController.m in Sources */,
-				3A6C627A1119EA07000DD23B /* WebBrowserController.m in Sources */,
+				3A6C627A1119EA07000DD23B /* SBWebBrowserController.m in Sources */,
 				3A3E6A2B1121C6F700F3D322 /* NSDate+Senbei.m in Sources */,
 				3A3E6A2E1121C73300F3D322 /* SBAppDelegate.m in Sources */,
 				3AE1CC3A112941C500F50018 /* ListTableViewCell.m in Sources */,
@@ -846,12 +846,12 @@
 			name = TaskCategories.plist;
 			sourceTree = "<group>";
 		};
-		3A6C627C1119EA29000DD23B /* WebBrowserController.xib */ = {
+		3A6C627C1119EA29000DD23B /* SBWebBrowserController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				3A6C627D1119EA29000DD23B /* English */,
 			);
-			name = WebBrowserController.xib;
+			name = SBWebBrowserController.xib;
 			sourceTree = "<group>";
 		};
 		3A6D8D4311064E880089F21D /* MainWindow.xib */ = {

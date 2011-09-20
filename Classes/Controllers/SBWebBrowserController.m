@@ -1,5 +1,5 @@
 //
-//  WebBrowserController.m
+//  SBWebBrowserController.m
 //  Senbei
 //
 //  Created by Adrian on 2/3/10.
@@ -32,14 +32,18 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "WebBrowserController.h"
+#import "SBWebBrowserController.h"
 
-@implementation WebBrowserController
+@implementation SBWebBrowserController
 
+@synthesize navigationBar = _navigationBar;
+@synthesize webView = _webView;
 @synthesize url = _url;
 
 - (void)dealloc 
 {
+    [_navigationBar release];
+    [_webView release];
     [_url release];
     [super dealloc];
 }
@@ -50,7 +54,7 @@
 {
     [super viewDidLoad];
     [self reload:nil];
-    _navigationBar.topItem.title = [_url absoluteString];
+    self.navigationBar.topItem.title = [self.url absoluteString];
 }
 
 - (void)didReceiveMemoryWarning 
@@ -67,13 +71,13 @@
 
 - (IBAction)openInSafari:(id)sender
 {
-    [[UIApplication sharedApplication] openURL:_url];
+    [[UIApplication sharedApplication] openURL:self.url];
 }
 
 - (IBAction)reload:(id)sender
 {
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:_url];
-    [_webView loadRequest:request];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:self.url];
+    [self.webView loadRequest:request];
     [request release];
 }
 

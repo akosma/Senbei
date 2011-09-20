@@ -45,7 +45,7 @@
 #import "Lead.h"
 #import "Definitions.h"
 #import "SBCommentsController.h"
-#import "WebBrowserController.h"
+#import "SBWebBrowserController.h"
 #import "SettingsManager.h"
 
 typedef enum {
@@ -397,7 +397,7 @@ shouldPerformDefaultActionForPerson:(ABRecordRef)person
     {
         NSString* urlString = getValueForPropertyFromPerson(person, property, identifierForValue);
         NSURL *url = [[NSURL alloc] initWithString:urlString];
-        WebBrowserController *webController = [[WebBrowserController alloc] init];
+        SBWebBrowserController *webController = [[SBWebBrowserController alloc] init];
         webController.url = url;
         webController.title = urlString;
         webController.hidesBottomBarWhenPushed = YES;
