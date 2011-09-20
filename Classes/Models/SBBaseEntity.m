@@ -33,7 +33,7 @@
 //
 
 #import "SBBaseEntity.h"
-#import "GTMNSString+HTML.h"
+#import "SBExternals.h"
 
 @implementation SBBaseEntity
 

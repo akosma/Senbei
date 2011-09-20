@@ -33,12 +33,9 @@
 //
 
 #import "SBContact.h"
-#import "NSDate+Senbei.h"
-#import "NSString+Senbei.h"
-#import "NSURL+AKOCacheKey.h"
+#import "SBHelpers.h"
+#import "SBExternals.h"
 #import "Definitions.h"
-#import "AKOImageCache.h"
-#import "SBSettingsManager.h"
 
 void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringRef label, NSString *value)
 {

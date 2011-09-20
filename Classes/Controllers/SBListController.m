@@ -35,8 +35,8 @@
 #import "SBListController.h"
 #import "SBModels.h"
 #import "SBHelpers.h"
+#import "SBExternals.h"
 #import "SBListTableViewCell.h"
-#import "AKOImageView.h"
 
 @interface SBListController ()
 

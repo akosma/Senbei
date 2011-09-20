@@ -35,7 +35,7 @@
 #import "SBCommentsController.h"
 #import "SBModels.h"
 #import "SBHelpers.h"
-#import "AKOEditorrific.h"
+#import "SBExternals.h"
 
 @interface SBCommentsController ()
 

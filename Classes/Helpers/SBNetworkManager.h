@@ -34,28 +34,28 @@
 
 #import <Foundation/Foundation.h>
 
-#define FatFreeCRMProxyDidFailWithErrorNotification         @"FatFreeCRMProxyDidFailWithErrorNotification"
-#define FatFreeCRMProxyDidRetrieveTasksNotification         @"FatFreeCRMProxyDidRetrieveTasksNotification"
-#define FatFreeCRMProxyDidMarkTaskAsDoneNotification        @"FatFreeCRMProxyDidMarkTaskAsDoneNotification"
-#define FatFreeCRMProxyDidCreateTaskNotification            @"FatFreeCRMProxyDidCreateTaskNotification"
-#define FatFreeCRMProxyDidRetrieveAccountsNotification      @"FatFreeCRMProxyDidRetrieveAccountsNotification"
-#define FatFreeCRMProxyDidRetrieveOpportunitiesNotification @"FatFreeCRMProxyDidRetrieveOpportunitiesNotification"
-#define FatFreeCRMProxyDidRetrieveCampaignsNotification     @"FatFreeCRMProxyDidRetrieveCampaignsNotification"
-#define FatFreeCRMProxyDidRetrieveLeadsNotification         @"FatFreeCRMProxyDidRetrieveLeadsNotification"
-#define FatFreeCRMProxyDidRetrieveContactsNotification      @"FatFreeCRMProxyDidRetrieveContactsNotification"
-#define FatFreeCRMProxyDidRetrieveCommentsNotification      @"FatFreeCRMProxyDidRetrieveCommentsNotification"
-#define FatFreeCRMProxyDidPostCommentNotification           @"FatFreeCRMProxyDidPostCommentNotification"
-#define FatFreeCRMProxyDidLoginNotification                 @"FatFreeCRMProxyDidLoginNotification"
-#define FatFreeCRMProxyDidFailLoginNotification             @"FatFreeCRMProxyDidFailLoginNotification"
+extern NSString * const FatFreeCRMProxyDidFailWithErrorNotification;
+extern NSString * const FatFreeCRMProxyDidRetrieveTasksNotification;
+extern NSString * const FatFreeCRMProxyDidMarkTaskAsDoneNotification;
+extern NSString * const FatFreeCRMProxyDidCreateTaskNotification;
+extern NSString * const FatFreeCRMProxyDidRetrieveAccountsNotification;
+extern NSString * const FatFreeCRMProxyDidRetrieveOpportunitiesNotification;
+extern NSString * const FatFreeCRMProxyDidRetrieveCampaignsNotification;
+extern NSString * const FatFreeCRMProxyDidRetrieveLeadsNotification;
+extern NSString * const FatFreeCRMProxyDidRetrieveContactsNotification;
+extern NSString * const FatFreeCRMProxyDidRetrieveCommentsNotification;
+extern NSString * const FatFreeCRMProxyDidPostCommentNotification;
+extern NSString * const FatFreeCRMProxyDidLoginNotification;
+extern NSString * const FatFreeCRMProxyDidFailLoginNotification;
 
-#define FatFreeCRMProxyErrorKey @"FatFreeCRMProxyErrorKey"
-#define TASKS_OVERDUE_KEY       @"tasksOverdue"
-#define TASKS_DUE_ASAP_KEY      @"tasksDueASAP"
-#define TASKS_DUE_TODAY_KEY     @"tasksDueToday"
-#define TASKS_DUE_TOMORROW_KEY  @"tasksDueTomorrow"
-#define TASKS_DUE_THIS_WEEK_KEY @"tasksDueThisWeek"
-#define TASKS_DUE_NEXT_WEEK_KEY @"tasksDueNextWeek"
-#define TASKS_DUE_LATER_KEY     @"tasksDueLater"
+extern NSString * const FatFreeCRMProxyErrorKey;
+extern NSString * const TASKS_OVERDUE_KEY;
+extern NSString * const TASKS_DUE_ASAP_KEY;
+extern NSString * const TASKS_DUE_TODAY_KEY;
+extern NSString * const TASKS_DUE_TOMORROW_KEY;
+extern NSString * const TASKS_DUE_THIS_WEEK_KEY;
+extern NSString * const TASKS_DUE_NEXT_WEEK_KEY;
+extern NSString * const TASKS_DUE_LATER_KEY;
 
 @class ASINetworkQueue;
 @class SBBaseEntity;
@@ -63,14 +63,6 @@
 @class SBSettingsManager;
 
 @interface SBNetworkManager : NSObject
-{
-@private
-    ASINetworkQueue *_networkQueue;
-    NSNotificationCenter *_notificationCenter;
-    NSString *_server;
-    NSString *_username;
-    NSString *_password;
-}
 
 @property (nonatomic, copy) NSString *server;
 @property (nonatomic, copy) NSString *username;

@@ -34,22 +34,42 @@
 
 #import "SBNetworkManager.h"
 #import "SBAppDelegate.h"
-#import "SynthesizeSingleton.h"
 #import "NSDate+Senbei.h"
-#import "ASINetworkQueue.h"
-#import "ASIHTTPRequest.h"
-#import "ASIFormDataRequest.h"
 #import "Definitions.h"
-#import "TBXML.h"
+#import "SBExternals.h"
 #import "SBModels.h"
 #import "SBSettingsManager.h"
 
-#define PROFILE_REQUEST @"profile"
-#define COMMENTS_REQUEST @"comments"
-#define TASKS_REQUEST @"tasks"
-#define NEW_TASK_REQUEST @"task_new"
-#define TASK_DONE_REQUEST @"task_done"
-#define NEW_COMMENT_REQUEST @"new_comment"
+NSString * const FatFreeCRMProxyDidFailWithErrorNotification         = @"FatFreeCRMProxyDidFailWithErrorNotification";
+NSString * const FatFreeCRMProxyDidRetrieveTasksNotification         = @"FatFreeCRMProxyDidRetrieveTasksNotification";
+NSString * const FatFreeCRMProxyDidMarkTaskAsDoneNotification        = @"FatFreeCRMProxyDidMarkTaskAsDoneNotification";
+NSString * const FatFreeCRMProxyDidCreateTaskNotification            = @"FatFreeCRMProxyDidCreateTaskNotification";
+NSString * const FatFreeCRMProxyDidRetrieveAccountsNotification      = @"FatFreeCRMProxyDidRetrieveAccountsNotification";
+NSString * const FatFreeCRMProxyDidRetrieveOpportunitiesNotification = @"FatFreeCRMProxyDidRetrieveOpportunitiesNotification";
+NSString * const FatFreeCRMProxyDidRetrieveCampaignsNotification     = @"FatFreeCRMProxyDidRetrieveCampaignsNotification";
+NSString * const FatFreeCRMProxyDidRetrieveLeadsNotification         = @"FatFreeCRMProxyDidRetrieveLeadsNotification";
+NSString * const FatFreeCRMProxyDidRetrieveContactsNotification      = @"FatFreeCRMProxyDidRetrieveContactsNotification";
+NSString * const FatFreeCRMProxyDidRetrieveCommentsNotification      = @"FatFreeCRMProxyDidRetrieveCommentsNotification";
+NSString * const FatFreeCRMProxyDidPostCommentNotification           = @"FatFreeCRMProxyDidPostCommentNotification";
+NSString * const FatFreeCRMProxyDidLoginNotification                 = @"FatFreeCRMProxyDidLoginNotification";
+NSString * const FatFreeCRMProxyDidFailLoginNotification             = @"FatFreeCRMProxyDidFailLoginNotification";
+
+NSString * const FatFreeCRMProxyErrorKey = @"FatFreeCRMProxyErrorKey";
+NSString * const TASKS_OVERDUE_KEY       = @"tasksOverdue";
+NSString * const TASKS_DUE_ASAP_KEY      = @"tasksDueASAP";
+NSString * const TASKS_DUE_TODAY_KEY     = @"tasksDueToday";
+NSString * const TASKS_DUE_TOMORROW_KEY  = @"tasksDueTomorrow";
+NSString * const TASKS_DUE_THIS_WEEK_KEY = @"tasksDueThisWeek";
+NSString * const TASKS_DUE_NEXT_WEEK_KEY = @"tasksDueNextWeek";
+NSString * const TASKS_DUE_LATER_KEY     = @"tasksDueLater";
+
+
+static NSString *PROFILE_REQUEST = @"profile";
+static NSString *COMMENTS_REQUEST = @"comments";
+static NSString *TASKS_REQUEST = @"tasks";
+static NSString *NEW_TASK_REQUEST = @"task_new";
+static NSString *TASK_DONE_REQUEST = @"task_done";
+static NSString *NEW_COMMENT_REQUEST = @"new_comment";
 
 @interface SBNetworkManager ()
 
@@ -109,12 +129,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
 
 - (void)dealloc
 {
-    self.server = nil;
-    self.username = nil;
-    self.password = nil;
-    self.notificationCenter = nil;
-    self.settingsManager = nil;
-    self.networkQueue = nil;
+    [_server release];
+    [_username release];
+    [_password release];
+    [_notificationCenter release];
+    [_settingsManager release];
+    [_networkQueue release];
     [super dealloc];
 }
 

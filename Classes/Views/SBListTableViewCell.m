@@ -33,7 +33,7 @@
 //
 
 #import "SBListTableViewCell.h"
-#import "AKOImageView.h"
+#import "SBExternals.h"
 
 @implementation SBListTableViewCell
 
