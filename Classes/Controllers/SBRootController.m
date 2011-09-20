@@ -35,7 +35,7 @@
 #import "SBRootController.h"
 #import "FatFreeCRMProxy.h"
 #import "SBListController.h"
-#import "SettingsController.h"
+#import "SBSettingsController.h"
 #import "SBTasksController.h"
 #import "CompanyAccount.h"
 #import "Opportunity.h"
@@ -47,6 +47,17 @@
 #import "SBCommentsController.h"
 #import "WebBrowserController.h"
 #import "SettingsManager.h"
+
+typedef enum {
+    SBViewControllerTasks = 0,
+    SBViewControllerAccounts = 1,
+    SBViewControllerContacts = 2,
+    SBViewControllerSettings = 3,
+    SBViewControllerOpportunities = 4,
+    SBViewControllerLeads = 5,
+    SBViewControllerCampaigns = 6,
+    SBViewControllerMore = 7
+} SBViewController;
 
 NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID property, ABMultiValueIdentifier identifierForValue)
 {
@@ -151,31 +162,31 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
         {
             switch ([number intValue]) 
             {
-                case SenbeiViewControllerAccounts:
+                case SBViewControllerAccounts:
                     [controllers addObject:self.accountsController.navigationController];
                     break;
                     
-                case SenbeiViewControllerCampaigns:
+                case SBViewControllerCampaigns:
                     [controllers addObject:self.campaignsController.navigationController];
                     break;
                     
-                case SenbeiViewControllerContacts:
+                case SBViewControllerContacts:
                     [controllers addObject:self.contactsController.navigationController];
                     break;
                     
-                case SenbeiViewControllerLeads:
+                case SBViewControllerLeads:
                     [controllers addObject:self.leadsController.navigationController];
                     break;
                     
-                case SenbeiViewControllerOpportunities:
+                case SBViewControllerOpportunities:
                     [controllers addObject:self.opportunitiesController.navigationController];
                     break;
                     
-                case SenbeiViewControllerSettings:
+                case SBViewControllerSettings:
                     [controllers addObject:self.settingsController.navigationController];
                     break;
                     
-                case SenbeiViewControllerTasks:
+                case SBViewControllerTasks:
                     [controllers addObject:self.tasksController.navigationController];
                     break;
 
@@ -189,38 +200,38 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     [controllers release];
     
     // Jump to the last selected view controller in the tab bar
-    SenbeiViewController controllerNumber = [SettingsManager sharedSettingsManager].currentTab;
+    SBViewController controllerNumber = [SettingsManager sharedSettingsManager].currentTab;
     switch (controllerNumber) 
     {
-        case SenbeiViewControllerAccounts:
+        case SBViewControllerAccounts:
             self.selectedViewController = self.accountsController.navigationController;
             break;
             
-        case SenbeiViewControllerCampaigns:
+        case SBViewControllerCampaigns:
             self.selectedViewController = self.campaignsController.navigationController;
             break;
             
-        case SenbeiViewControllerContacts:
+        case SBViewControllerContacts:
             self.selectedViewController = self.contactsController.navigationController;
             break;
             
-        case SenbeiViewControllerLeads:
+        case SBViewControllerLeads:
             self.selectedViewController = self.leadsController.navigationController;
             break;
             
-        case SenbeiViewControllerOpportunities:
+        case SBViewControllerOpportunities:
             self.selectedViewController = self.opportunitiesController.navigationController;
             break;
             
-        case SenbeiViewControllerSettings:
+        case SBViewControllerSettings:
             self.selectedViewController = self.settingsController.navigationController;
             break;
             
-        case SenbeiViewControllerTasks:
+        case SBViewControllerTasks:
             self.selectedViewController = self.tasksController.navigationController;
             break;
             
-        case SenbeiViewControllerMore:
+        case SBViewControllerMore:
             self.selectedViewController = self.moreNavigationController;
         default:
             break;
@@ -238,8 +249,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark -
-#pragma mark UITabBarControllerDelegate methods
+#pragma mark - UITabBarControllerDelegate methods
 
 - (void)tabBarController:(UITabBarController *)tabBarController 
  didSelectViewController:(UIViewController *)viewController
@@ -247,35 +257,35 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     SettingsManager *settings = [SettingsManager sharedSettingsManager];
     if (viewController == self.accountsController.navigationController)
     {
-        settings.currentTab = SenbeiViewControllerAccounts;
+        settings.currentTab = SBViewControllerAccounts;
     }
     else if (viewController == self.contactsController.navigationController)
     {
-        settings.currentTab = SenbeiViewControllerContacts;
+        settings.currentTab = SBViewControllerContacts;
     }
     else if (viewController == self.opportunitiesController.navigationController)
     {
-        settings.currentTab = SenbeiViewControllerOpportunities;
+        settings.currentTab = SBViewControllerOpportunities;
     }
     else if (viewController == self.tasksController.navigationController)
     {
-        settings.currentTab = SenbeiViewControllerTasks;
+        settings.currentTab = SBViewControllerTasks;
     }
     else if (viewController == self.leadsController.navigationController)
     {
-        settings.currentTab = SenbeiViewControllerLeads;
+        settings.currentTab = SBViewControllerLeads;
     }
     else if (viewController == self.campaignsController.navigationController)
     {
-        settings.currentTab = SenbeiViewControllerCampaigns;
+        settings.currentTab = SBViewControllerCampaigns;
     }
     else if (viewController == self.settingsController.navigationController)
     {
-        settings.currentTab = SenbeiViewControllerSettings;
+        settings.currentTab = SBViewControllerSettings;
     }
     else if (viewController == self.moreNavigationController)
     {
-        settings.currentTab = SenbeiViewControllerMore;
+        settings.currentTab = SBViewControllerMore;
     }
 }
 
@@ -290,39 +300,38 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
         {
             if (controller == self.accountsController.navigationController)
             {
-                [order addObject:[NSNumber numberWithInt:SenbeiViewControllerAccounts]];
+                [order addObject:[NSNumber numberWithInt:SBViewControllerAccounts]];
             }
             else if (controller == self.contactsController.navigationController)
             {
-                [order addObject:[NSNumber numberWithInt:SenbeiViewControllerContacts]];
+                [order addObject:[NSNumber numberWithInt:SBViewControllerContacts]];
             }
             else if (controller == self.opportunitiesController.navigationController)
             {
-                [order addObject:[NSNumber numberWithInt:SenbeiViewControllerOpportunities]];
+                [order addObject:[NSNumber numberWithInt:SBViewControllerOpportunities]];
             }
             else if (controller == self.tasksController.navigationController)
             {
-                [order addObject:[NSNumber numberWithInt:SenbeiViewControllerTasks]];
+                [order addObject:[NSNumber numberWithInt:SBViewControllerTasks]];
             }
             else if (controller == self.leadsController.navigationController)
             {
-                [order addObject:[NSNumber numberWithInt:SenbeiViewControllerLeads]];
+                [order addObject:[NSNumber numberWithInt:SBViewControllerLeads]];
             }
             else if (controller == self.campaignsController.navigationController)
             {
-                [order addObject:[NSNumber numberWithInt:SenbeiViewControllerCampaigns]];
+                [order addObject:[NSNumber numberWithInt:SBViewControllerCampaigns]];
             }
             else if (controller == self.settingsController.navigationController)
             {
-                [order addObject:[NSNumber numberWithInt:SenbeiViewControllerSettings]];
+                [order addObject:[NSNumber numberWithInt:SBViewControllerSettings]];
             }
         }
         [SettingsManager sharedSettingsManager].tabOrder = order;
     }
 }
 
-#pragma mark -
-#pragma mark BaseListControllerDelegate methods
+#pragma mark - BaseListControllerDelegate methods
 
 - (void)listController:(SBListController *)controller didSelectEntity:(BaseEntity *)entity
 {
@@ -362,8 +371,7 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
     }
 }
 
-#pragma mark -
-#pragma mark ABPersonViewControllerDelegate methods
+#pragma mark - ABPersonViewControllerDelegate methods
 
 -        (BOOL)personViewController:(ABPersonViewController *)personViewController 
 shouldPerformDefaultActionForPerson:(ABRecordRef)person 
@@ -402,8 +410,7 @@ shouldPerformDefaultActionForPerson:(ABRecordRef)person
     return YES;
 }
 
-#pragma mark -
-#pragma mark MFMailComposeViewControllerDelegate methods
+#pragma mark - MFMailComposeViewControllerDelegate methods
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller 
           didFinishWithResult:(MFMailComposeResult)result 

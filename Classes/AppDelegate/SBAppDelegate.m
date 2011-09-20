@@ -38,7 +38,7 @@
 #import "AKOImageCache.h"
 #import "Reachability.h"
 #import "SBRootController.h"
-#import "SettingsController.h"
+#import "SBSettingsController.h"
 
 @interface SBAppDelegate ()
 
@@ -72,16 +72,14 @@
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Static methods
+#pragma mark - Static methods
 
 + (SBAppDelegate *)sharedAppDelegate
 {
     return (SBAppDelegate *)[UIApplication sharedApplication].delegate;
 }
 
-#pragma mark -
-#pragma mark UIApplicationDelegate methods
+#pragma mark - UIApplicationDelegate methods
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {
@@ -138,8 +136,7 @@
     [UIView commitAnimations];
 }
 
-#pragma mark -
-#pragma mark NSNotification handler methods
+#pragma mark - NSNotification handler methods
 
 - (void)didFailLogin:(NSNotification *)notification
 {
@@ -192,8 +189,7 @@
                      }];
 }
 
-#pragma mark -
-#pragma mark Private methods
+#pragma mark - Private methods
 
 - (void)login
 {
@@ -216,7 +212,7 @@
 {
     if (self.settingsNavigation == nil)
     {
-        SettingsController *settings = [[[SettingsController alloc] init] autorelease];
+        SBSettingsController *settings = [[[SBSettingsController alloc] init] autorelease];
         self.settingsNavigation = [[[UINavigationController alloc] initWithRootViewController:settings] autorelease];
 
         UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
@@ -236,7 +232,7 @@
 
 - (void)hideSettingsPanel:(id)sender
 {
-    SettingsController *settings = [[self.settingsNavigation viewControllers] objectAtIndex:0];
+    SBSettingsController *settings = [[self.settingsNavigation viewControllers] objectAtIndex:0];
     [settings dismiss:self];
     [self login];
 

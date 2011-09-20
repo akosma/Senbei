@@ -878,7 +878,7 @@
 					<string>{{0, 654}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>SettingsController</string>
+					<string>SBSettingsController</string>
 					<string>{{21, 631}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1067,7 +1067,7 @@
 							<string>SBListController</string>
 							<string>SBListController</string>
 							<string>SBListController</string>
-							<string>SettingsController</string>
+							<string>SBSettingsController</string>
 							<string>SBTasksController</string>
 						</object>
 					</object>
@@ -1107,7 +1107,7 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">_settingsController</string>
-								<string key="candidateClassName">SettingsController</string>
+								<string key="candidateClassName">SBSettingsController</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">_tasksController</string>
@@ -1121,19 +1121,19 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">SBTasksController</string>
-					<string key="superclassName">UITableViewController</string>
+					<string key="className">SBSettingsController</string>
+					<string key="superclassName">IASKAppSettingsViewController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBUserSource</string>
 						<string key="minorKey"/>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">SettingsController</string>
-					<string key="superclassName">IASKAppSettingsViewController</string>
+					<string key="className">SBTasksController</string>
+					<string key="superclassName">UITableViewController</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Controllers/SettingsController.h</string>
+						<string key="majorKey">IBUserSource</string>
+						<string key="minorKey"/>
 					</object>
 				</object>
 			</object>

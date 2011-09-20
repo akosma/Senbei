@@ -38,21 +38,9 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "SBListControllerDelegate.h"
 
-@class SettingsController;
+@class SBSettingsController;
 @class SBTasksController;
 @class SBListController;
-@class SBCommentsController;
-
-typedef enum {
-    SenbeiViewControllerTasks = 0,
-    SenbeiViewControllerAccounts = 1,
-    SenbeiViewControllerContacts = 2,
-    SenbeiViewControllerSettings = 3,
-    SenbeiViewControllerOpportunities = 4,
-    SenbeiViewControllerLeads = 5,
-    SenbeiViewControllerCampaigns = 6,
-    SenbeiViewControllerMore = 7
-} SenbeiViewController;
 
 @interface SBRootController : UITabBarController <UITabBarControllerDelegate,
                                                 SBListControllerDelegate,
@@ -64,7 +52,7 @@ typedef enum {
 @property (nonatomic, retain) IBOutlet SBListController *opportunitiesController;
 @property (nonatomic, retain) IBOutlet SBListController *leadsController;
 @property (nonatomic, retain) IBOutlet SBListController *campaignsController;
-@property (nonatomic, retain) IBOutlet SettingsController *settingsController;
+@property (nonatomic, retain) IBOutlet SBSettingsController *settingsController;
 @property (nonatomic, retain) IBOutlet SBTasksController *tasksController;
 
 @end

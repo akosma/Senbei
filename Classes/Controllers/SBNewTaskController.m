@@ -71,27 +71,24 @@
 @synthesize selectedDate = _selectedDate;
 @synthesize datePicker = _datePicker;
 
-#pragma mark -
-#pragma mark Init and dealloc
-
 - (id)init
 {
-    if (self = [super initWithStyle:UITableViewStyleGrouped]) 
+    self = [super initWithStyle:UITableViewStyleGrouped];
+    if (self) 
     {
         self.navigationController = [[[UINavigationController alloc] initWithRootViewController:self] autorelease];
         NSString *controllerTitle = NSLocalizedString(@"NEW_TASK_TITLE", @"Title of the new task screen");
         self.title = controllerTitle;
 
         self.doneButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                                        target:self
-                                                                                        action:@selector(done:)] autorelease];
+                                                                             target:self
+                                                                             action:@selector(done:)] autorelease];
         self.navigationItem.rightBarButtonItem = self.doneButtonItem;
 
-        UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+        UIBarButtonItem *cancelItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                      target:self
-                                                                                     action:@selector(close:)];
+                                                                                     action:@selector(close:)] autorelease];
         self.navigationItem.leftBarButtonItem = cancelItem;
-        [cancelItem release];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(close:) 
@@ -137,8 +134,7 @@
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Event handlers
+#pragma mark - Event handlers
 
 - (void)done:(id)sender
 {
@@ -179,8 +175,7 @@
     self.bucketField.text = [self.selectedDate stringWithDateFormattedWithCurrentLocale];
 }
 
-#pragma mark -
-#pragma mark UIViewController methods
+#pragma mark - UIViewController methods
 
 - (void)viewDidLoad 
 {
@@ -206,8 +201,7 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark -
-#pragma mark Table view methods
+#pragma mark - Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
@@ -282,8 +276,7 @@
     }
 }
 
-#pragma mark -
-#pragma mark UITextFieldDelegate methods
+#pragma mark - UITextFieldDelegate methods
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
@@ -329,8 +322,7 @@
 }
 
 
-#pragma mark -
-#pragma mark UIPickerViewDataSource methods
+#pragma mark - UIPickerViewDataSource methods
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -358,8 +350,7 @@
     return 0;
 }
 
-#pragma mark -
-#pragma mark UIPickerViewDelegate methods
+#pragma mark - UIPickerViewDelegate methods
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {

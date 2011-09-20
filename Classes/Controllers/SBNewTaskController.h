@@ -35,8 +35,8 @@
 #import <UIKit/UIKit.h>
 
 @interface SBNewTaskController : UITableViewController <UITextFieldDelegate,
-                                                      UIPickerViewDataSource,
-                                                      UIPickerViewDelegate>
+                                                        UIPickerViewDataSource,
+                                                        UIPickerViewDelegate>
 
 @property (nonatomic, retain) UINavigationController *navigationController;
 

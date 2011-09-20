@@ -38,17 +38,13 @@
 
 @synthesize url = _url;
 
-#pragma mark -
-#pragma mark Init and dealloc
-
 - (void)dealloc 
 {
     [_url release];
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark UIViewController methods
+#pragma mark - UIViewController methods
 
 - (void)viewDidLoad 
 {
@@ -62,8 +58,7 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark -
-#pragma mark IBAction methods
+#pragma mark - IBAction methods
 
 - (IBAction)close:(id)sender
 {
@@ -82,8 +77,7 @@
     [request release];
 }
 
-#pragma mark -
-#pragma mark UIWebViewDelegate methods
+#pragma mark - UIWebViewDelegate methods
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {

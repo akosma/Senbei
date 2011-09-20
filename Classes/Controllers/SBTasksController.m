@@ -71,9 +71,6 @@
 @synthesize newTaskController = _newTaskController;
 @synthesize firstLoad = _firstLoad;
 
-#pragma mark -
-#pragma mark Dealloc
-
 - (void)dealloc 
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -91,16 +88,14 @@
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Public methods
+#pragma mark - Public methods
 
 - (void)refresh
 {
     [[FatFreeCRMProxy sharedFatFreeCRMProxy] loadTasks];
 }
 
-#pragma mark -
-#pragma mark UIViewController methods
+#pragma mark - UIViewController methods
 
 - (void)viewDidLoad 
 {
@@ -168,8 +163,7 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark -
-#pragma mark Button handlers
+#pragma mark - Button handlers
 
 - (void)addNewTask:(id)sender
 {
@@ -181,8 +175,7 @@
                                                  animated:YES];
 }
 
-#pragma mark -
-#pragma mark NSNotification handler methods
+#pragma mark - NSNotification handler methods
 
 - (void)didReceiveTasks:(NSNotification *)notification
 {
@@ -221,8 +214,7 @@
     [self refresh];
 }
 
-#pragma mark -
-#pragma mark Table view methods
+#pragma mark - Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
@@ -301,8 +293,7 @@
     [alert release];
 }
 
-#pragma mark -
-#pragma mark UIAlertViewDelegate methods
+#pragma mark - UIAlertViewDelegate methods
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {

@@ -115,8 +115,7 @@
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Button handler methods
+#pragma mark - Button handler methods
 
 - (void)refresh:(id)sender
 {
@@ -128,8 +127,7 @@
     [self loadData];
 }
 
-#pragma mark -
-#pragma mark UIViewController methods
+#pragma mark - UIViewController methods
 
 - (void)viewDidLoad 
 {
@@ -153,8 +151,7 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark -
-#pragma mark NSNotification methods
+#pragma mark - NSNotification methods
 
 - (void)didReceiveData:(NSNotification *)notification
 {
@@ -198,8 +195,7 @@
     [self.tableView reloadData];
 }
 
-#pragma mark -
-#pragma mark UIScrollViewDelegate methods
+#pragma mark - UIScrollViewDelegate methods
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
@@ -212,8 +208,7 @@
     }
 }
 
-#pragma mark -
-#pragma mark Table view methods
+#pragma mark - Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -298,8 +293,7 @@
     }
 }
 
-#pragma mark -
-#pragma mark UISearchDisplayController Delegate Methods
+#pragma mark - UISearchDisplayController Delegate Methods
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString
 {
@@ -320,8 +314,7 @@
     return NO;
 }
 
-#pragma mark -
-#pragma mark Private methods
+#pragma mark - Private methods
 
 - (void)filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope
 {

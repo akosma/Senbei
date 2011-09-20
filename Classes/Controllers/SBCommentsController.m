@@ -89,8 +89,7 @@
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark UIViewController methods
+#pragma mark - UIViewController methods
 
 - (void)viewDidLoad 
 {
@@ -111,8 +110,7 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark -
-#pragma mark Button handler
+#pragma mark - Button handler
 
 - (void)addComment:(id)sender
 {
@@ -140,8 +138,7 @@
     [self.editor dismissEditor];
 }
 
-#pragma mark -
-#pragma mark AKOEditorrificDelegate methods
+#pragma mark - AKOEditorrificDelegate methods
 
 - (void)editorrific:(AKOEditorrific *)editorrific didEnterText:(NSString *)text
 {
@@ -154,8 +151,7 @@
     self.backgroundButton.hidden = YES;
 }
 
-#pragma mark -
-#pragma mark NSNotification handler methods
+#pragma mark - NSNotification handler methods
 
 - (void)didReceiveComments:(NSNotification *)notification
 {
@@ -180,8 +176,7 @@
     }
 }
 
-#pragma mark -
-#pragma mark Table view methods
+#pragma mark - Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {

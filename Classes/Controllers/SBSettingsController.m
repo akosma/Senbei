@@ -1,5 +1,5 @@
 //
-//  SettingsController.h
+//  SBSettingsController.m
 //  Senbei
 //
 //  Created by Adrian on 1/20/10.
@@ -32,15 +32,63 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <UIKit/UIKit.h>
-#import "IASKAppSettingsViewController.h"
+#import "SBSettingsController.h"
+#import "Definitions.h"
+#import "FatFreeCRMProxy.h"
 
-@interface SettingsController : IASKAppSettingsViewController
+@implementation SBSettingsController
+
+@synthesize navigationController = _navigationController;
+
+- (id)init
 {
-@private
-    UINavigationController *_navigationController;
+    if (self = [super initWithNibName:@"IASKAppSettingsView" bundle:nil]) 
+    {
+        self.showDoneButton = NO;
+        self.showCreditsFooter = NO;
+        self.navigationController = [[[UINavigationController alloc] initWithRootViewController:self] autorelease];
+        NSString *settings = NSLocalizedString(@"SETTINGS_TITLE", @"Title of the settings controller");
+        self.title = settings;
+        self.tabBarItem.image = [UIImage imageNamed:@"settings.png"];
+    }
+    return self;
 }
 
-@property (nonatomic, readonly) UINavigationController *navigationController;
+- (id)initWithCoder:(NSCoder *)coder
+{
+    if (self = [self init]) 
+    {
+    }
+    return self;
+}
+
+- (void)dealloc 
+{
+    [_navigationController release];
+    [super dealloc];
+}
+
+#pragma mark - UIViewController methods
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // In the superclass, this method sets the title to a "Settings" key.
+    // Here, we override that behaviour.
+    NSString *settings = NSLocalizedString(@"SETTINGS_TITLE", @"Title of the settings controller");
+    self.title = settings;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)didReceiveMemoryWarning 
+{
+    [super didReceiveMemoryWarning];
+}
 
 @end
