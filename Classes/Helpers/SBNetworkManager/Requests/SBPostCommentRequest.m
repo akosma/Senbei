@@ -53,9 +53,7 @@
 + (id)requestWithEntity:(SBBaseEntity *)entity comment:(NSString *)comment
 {
     NSString *server = [SBSettingsManager sharedSBSettingsManager].server;
-    Class klass = [entity class];
-    NSString *path = [klass serverPath];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments", server, path, entity.objectId];
+    NSString *urlString = [NSString stringWithFormat:@"%@/comments", server];
     NSURL *url = [NSURL URLWithString:urlString];
     
     NSInteger idValue = [SBAppDelegate sharedAppDelegate].currentUser.objectId;
