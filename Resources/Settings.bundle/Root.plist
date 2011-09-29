@@ -100,7 +100,7 @@
 			<key>Title</key>
 			<string>Copyright</string>
 			<key>DefaultValue</key>
-			<string>2010 akosma software</string>
+			<string>© 2011 akosma software</string>
 			<key>Key</key>
 			<string>copyright</string>
 		</dict>
