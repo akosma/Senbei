@@ -39,3 +39,6 @@ NEW_TASK_SPECIFY_NAME = "Please specify the name of the task"; /* Text shown whe
 
 /* SettingsController */
 SETTINGS_TITLE = "Settings"; /* Title of the settings controller */
+
+/* CommentsController */
+DELETE_COMMENT = "Are you sure?"; /* Confirmation text shown before deleting a comment */

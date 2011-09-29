@@ -43,6 +43,7 @@ NSString * const SBNetworkManagerDidRetrieveLeadsNotification         = @"SBNetw
 NSString * const SBNetworkManagerDidRetrieveContactsNotification      = @"SBNetworkManagerDidRetrieveContactsNotification";
 NSString * const SBNetworkManagerDidRetrieveCommentsNotification      = @"SBNetworkManagerDidRetrieveCommentsNotification";
 NSString * const SBNetworkManagerDidPostCommentNotification           = @"SBNetworkManagerDidPostCommentNotification";
+NSString * const SBNetworkManagerDidDeleteCommentNotification         = @"SBNetworkManagerDidDeleteCommentNotification";
 NSString * const SBNetworkManagerDidLoginNotification                 = @"SBNetworkManagerDidLoginNotification";
 NSString * const SBNetworkManagerDidFailLoginNotification             = @"SBNetworkManagerDidFailLoginNotification";
 

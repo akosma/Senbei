@@ -43,3 +43,6 @@ NEW_TASK_CATEGORY_FIELD = "categoría"; /* Title of the 'category' form field */
 
 /* SettingsController */
 SETTINGS_TITLE = "Ajustes"; /* Title of the settings controller */
+
+/* CommentsController */
+DELETE_COMMENT = "Está usted seguro?"; /* Confirmation text shown before deleting a comment */

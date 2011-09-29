@@ -1,8 +1,8 @@
 //
-//  SBRequests.h
+//  SBDeleteCommentRequest.m
 //  Senbei
 //
-//  Created by Adrian on 9/20/2011.
+//  Created by Adrian on 9/29/11.
 //  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,14 +32,50 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SBBaseRequest.h"
-#import "SBBaseFormDataRequest.h"
-#import "SBLoginRequest.h"
-#import "SBListRequest.h"
-#import "SBSearchRequest.h"
-#import "SBCommentsRequest.h"
-#import "SBTasksRequest.h"
-#import "SBPostCommentRequest.h"
 #import "SBDeleteCommentRequest.h"
-#import "SBMarkTaskAsDoneRequest.h"
-#import "SBCreateTaskRequest.h"
+#import "SBModels.h"
+#import "SBSettingsManager.h"
+#import "SBNotifications.h"
+
+@interface SBDeleteCommentRequest ()
+
+@property (nonatomic, retain) SBBaseEntity *entity;
+
+@end
+
+
+@implementation SBDeleteCommentRequest
+
+@synthesize entity = _entity;
+
++ (id)requestWithEntity:(SBBaseEntity *)entity commentID:(NSInteger)commentID
+{
+    NSString *server = [SBSettingsManager sharedSBSettingsManager].server;
+    NSString *urlString = [NSString stringWithFormat:@"%@/comments/%d", server, commentID];
+    NSURL *url = [NSURL URLWithString:urlString];
+        
+    id request = [self requestWithURL:url];
+    [request setEntity:entity];
+    [request setRequestMethod:@"POST"];
+    [request setShouldRedirect:NO];
+    [request setDefaultResponseEncoding:NSUTF8StringEncoding];
+    [request setPostValue:@"delete" forKey:@"_method"];
+    [request setPostValue:@"" forKey:@"_"];
+    
+    // This is important, otherwise this request might generate
+    // a 500 server error!
+    [[request requestHeaders] removeObjectForKey:@"Accept"];
+    [request addRequestHeader:@"Accept" value:@"text/javascript"];
+    return request;
+}
+
+- (void)processResponse
+{
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.entity, @"entity", nil];
+    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidDeleteCommentNotification
+                                                          object:self 
+                                                        userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotification:notif];    
+}
+
+@end

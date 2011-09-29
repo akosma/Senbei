@@ -43,6 +43,7 @@
 @property (nonatomic, retain) UIButton *backgroundButton;
 @property (nonatomic, retain) NSMutableArray *comments;
 @property (nonatomic, retain) AKOEditorrific *editor;
+@property (nonatomic, retain) SBComment *commentToDelete;
 
 @end
 
@@ -53,6 +54,7 @@
 @synthesize backgroundButton = _backgroundButton;
 @synthesize comments = _comments;
 @synthesize editor = _editor;
+@synthesize commentToDelete = _commentToDelete;
 
 - (id)init
 {
@@ -69,6 +71,10 @@
                                                  selector:@selector(didPostComment:) 
                                                      name:SBNetworkManagerDidPostCommentNotification 
                                                    object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didDeleteComment:) 
+                                                     name:SBNetworkManagerDidDeleteCommentNotification
+                                                   object:nil];
         
         UIBarButtonItem *button = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
                                                                                  target:self 
@@ -82,6 +88,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_comments release];
+    [_commentToDelete release];
     [_backgroundButton release];
     _editor.delegate = nil;
     [_editor release];
@@ -176,6 +183,17 @@
     }
 }
 
+- (void)didDeleteComment:(NSNotification *)notification
+{
+    NSDictionary *dict = [notification userInfo];
+    SBBaseEntity *entity = [dict objectForKey:@"entity"];
+    if (entity == self.entity)
+    {
+        self.commentToDelete = nil;
+        [[SBNetworkManager sharedSBNetworkManager] loadCommentsForEntity:self.entity];
+    }
+}
+
 #pragma mark - Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
@@ -183,7 +201,8 @@
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+-    (CGFloat)tableView:(UITableView *)tableView 
+heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SBComment *comment = [self.comments objectAtIndex:indexPath.row];
     CGFloat height = [comment.comment sizeWithFont:[UIFont systemFontOfSize:17.0] 
@@ -195,7 +214,8 @@
     return height;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
+- (NSInteger)tableView:(UITableView *)tableView 
+ numberOfRowsInSection:(NSInteger)section 
 {
     return [self.comments count];
 }
@@ -218,6 +238,37 @@
     cell.textLabel.text = comment.comment;
     cell.detailTextLabel.text = [comment.createdAt stringFormattedWithCurrentLocale];
     return cell;
+}
+
+-  (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+ forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) 
+    {
+        self.commentToDelete = [self.comments objectAtIndex:indexPath.row];
+        
+        NSString *message = NSLocalizedString(@"DELETE_COMMENT", @"Confirmation text shown before deleting a comment");
+        NSString *ok = NSLocalizedString(@"OK", @"The 'OK' word");
+        NSString *cancel = NSLocalizedString(@"CANCEL", @"The 'Cancel' word");
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:nil
+                                                         message:message
+                                                        delegate:self
+                                               cancelButtonTitle:cancel
+                                               otherButtonTitles:ok, nil] autorelease];
+        [alert show];
+    }
+}
+
+#pragma mark - UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        [[SBNetworkManager sharedSBNetworkManager] deleteCommentWithID:self.commentToDelete.objectId 
+                                                             forEntity:self.entity];
+    }
 }
 
 @end

@@ -115,6 +115,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
     [self.networkQueue addOperation:request];
 }
 
+- (void)deleteCommentWithID:(NSInteger)commentID forEntity:(SBBaseEntity *)entity
+{
+    SBDeleteCommentRequest *request = [SBDeleteCommentRequest requestWithEntity:entity 
+                                                                      commentID:commentID];
+    [self.networkQueue addOperation:request];
+}
+
 - (void)loadTasks
 {
     SBTasksRequest *request = [SBTasksRequest request];

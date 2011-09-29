@@ -43,6 +43,7 @@ extern NSString * const SBNetworkManagerDidRetrieveLeadsNotification;
 extern NSString * const SBNetworkManagerDidRetrieveContactsNotification;
 extern NSString * const SBNetworkManagerDidRetrieveCommentsNotification;
 extern NSString * const SBNetworkManagerDidPostCommentNotification;
+extern NSString * const SBNetworkManagerDidDeleteCommentNotification;
 extern NSString * const SBNetworkManagerDidLoginNotification;
 extern NSString * const SBNetworkManagerDidFailLoginNotification;
 

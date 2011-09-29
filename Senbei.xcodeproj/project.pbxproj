@@ -31,6 +31,7 @@
 		3A006DE411F99DC000534055 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A006DE311F99DC000534055 /* MobileCoreServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3A0B525B11146D87005A26FD /* SBNewTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0B525A11146D87005A26FD /* SBNewTaskController.m */; };
 		3A1104A3111DEF4500729EB6 /* DemoLogins.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A1104A2111DEF4500729EB6 /* DemoLogins.plist */; };
+		3A1F28CF14349F0400AA5FBC /* SBDeleteCommentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1F28CE14349F0400AA5FBC /* SBDeleteCommentRequest.m */; };
 		3A1F518F1122029C0081580E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A1F518D1122029C0081580E /* Localizable.strings */; };
 		3A23F554142892F900894EA2 /* SBNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23F553142892F900894EA2 /* SBNetworkManager.m */; };
 		3A23F5581428934200894EA2 /* SBBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23F5571428934200894EA2 /* SBBaseRequest.m */; };
@@ -162,6 +163,8 @@
 		3A0B52FC11147B99005A26FD /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/TaskCategories.plist; sourceTree = "<group>"; };
 		3A0B531D11147EEC005A26FD /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = English; path = English.lproj/TaskBuckets.plist; sourceTree = "<group>"; };
 		3A1104A2111DEF4500729EB6 /* DemoLogins.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DemoLogins.plist; sourceTree = "<group>"; };
+		3A1F28CD14349F0400AA5FBC /* SBDeleteCommentRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBDeleteCommentRequest.h; sourceTree = "<group>"; };
+		3A1F28CE14349F0400AA5FBC /* SBDeleteCommentRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBDeleteCommentRequest.m; sourceTree = "<group>"; };
 		3A1F518E1122029C0081580E /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A23F54F1428813E00894EA2 /* SBModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBModels.h; sourceTree = "<group>"; };
 		3A23F5501428896800894EA2 /* SBExternals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBExternals.h; sourceTree = "<group>"; };
@@ -495,6 +498,8 @@
 				3A23F56A1428A33600894EA2 /* SBTasksRequest.m */,
 				3A23F56C1428A69F00894EA2 /* SBPostCommentRequest.h */,
 				3A23F56D1428A6A000894EA2 /* SBPostCommentRequest.m */,
+				3A1F28CD14349F0400AA5FBC /* SBDeleteCommentRequest.h */,
+				3A1F28CE14349F0400AA5FBC /* SBDeleteCommentRequest.m */,
 				3A23F56F1428A8B700894EA2 /* SBMarkTaskAsDoneRequest.h */,
 				3A23F5701428A8B700894EA2 /* SBMarkTaskAsDoneRequest.m */,
 				3A23F5721428A9E300894EA2 /* SBCreateTaskRequest.h */,
@@ -954,6 +959,7 @@
 				3A23F5741428A9E700894EA2 /* SBCreateTaskRequest.m in Sources */,
 				3A23F57B1428AEEA00894EA2 /* SBBaseFormDataRequest.m in Sources */,
 				3A23F57E1428AF9600894EA2 /* ASIHTTPRequest+Senbei.m in Sources */,
+				3A1F28CF14349F0400AA5FBC /* SBDeleteCommentRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

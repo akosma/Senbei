@@ -1,8 +1,8 @@
 //
-//  SBRequests.h
+//  SBDeleteCommentRequest.h
 //  Senbei
 //
-//  Created by Adrian on 9/20/2011.
+//  Created by Adrian on 9/29/11.
 //  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
@@ -32,14 +32,13 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import "SBBaseRequest.h"
 #import "SBBaseFormDataRequest.h"
-#import "SBLoginRequest.h"
-#import "SBListRequest.h"
-#import "SBSearchRequest.h"
-#import "SBCommentsRequest.h"
-#import "SBTasksRequest.h"
-#import "SBPostCommentRequest.h"
-#import "SBDeleteCommentRequest.h"
-#import "SBMarkTaskAsDoneRequest.h"
-#import "SBCreateTaskRequest.h"
+
+
+@class SBBaseEntity;
+
+@interface SBDeleteCommentRequest : SBBaseFormDataRequest
+
++ (id)requestWithEntity:(SBBaseEntity *)entity commentID:(NSInteger)commentID;
+
+@end

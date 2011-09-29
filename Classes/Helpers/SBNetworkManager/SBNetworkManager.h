@@ -47,6 +47,7 @@
 - (void)searchList:(Class)klass query:(NSString *)search;
 - (void)loadCommentsForEntity:(SBBaseEntity *)entity;
 - (void)sendComment:(NSString *)comment forEntity:(SBBaseEntity *)entity;
+- (void)deleteCommentWithID:(NSInteger)commentID forEntity:(SBBaseEntity *)entity;
 - (void)markTaskAsDone:(SBTask *)task;
 - (void)createTask:(SBTask *)task;
 - (void)loadTasks;

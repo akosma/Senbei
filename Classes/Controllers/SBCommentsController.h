@@ -37,7 +37,8 @@
 
 @class SBBaseEntity;
 
-@interface SBCommentsController : UITableViewController <AKOEditorrificDelegate>
+@interface SBCommentsController : UITableViewController <AKOEditorrificDelegate,
+                                                         UIAlertViewDelegate>
 
 @property (nonatomic, retain) SBBaseEntity *entity;
 
