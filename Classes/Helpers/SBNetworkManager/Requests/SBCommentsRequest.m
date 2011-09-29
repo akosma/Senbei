@@ -44,9 +44,8 @@
 + (id)requestWithEntity:(SBBaseEntity *)entity
 {
     NSString *server = [SBSettingsManager sharedSBSettingsManager].server;
-    Class klass = [entity class];
-    NSString *path = [klass serverPath];
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@/%d/comments.xml", server, path, entity.objectId];
+    NSString *entityName = [entity.commentableTypeName lowercaseString];
+    NSString *urlString = [NSString stringWithFormat:@"%@/comments.xml?%@_id=%d", server, entityName, entity.objectId];
     NSURL *url = [NSURL URLWithString:urlString];
     id request = [self requestWithURL:url];
     [request setEntity:entity];
