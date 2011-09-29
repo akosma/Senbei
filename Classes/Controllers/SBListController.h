@@ -40,6 +40,6 @@
 
 @property (nonatomic) UITableViewCellAccessoryType accessoryType;
 @property (nonatomic, retain) Class listedClass;
-@property (nonatomic, assign) id<SBListControllerDelegate> delegate;
+@property (nonatomic, assign) IBOutlet id<SBListControllerDelegate> delegate;
 
 @end

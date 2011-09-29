@@ -36,12 +36,6 @@
 #import "SBBaseEntity.h"
 
 @interface SBTask : SBBaseEntity
-{
-@private
-    NSDate *_dueDate;
-    NSString *_category;
-    NSString *_bucket;
-}
 
 @property (nonatomic, retain) NSDate *dueDate;
 @property (nonatomic, copy) NSString *category;

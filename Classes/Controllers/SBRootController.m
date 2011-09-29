@@ -40,6 +40,7 @@
 #import "SBTasksController.h"
 #import "SBCommentsController.h"
 #import "SBWebBrowserController.h"
+#import "SBActivitiesController.h"
 #import "SBNotifications.h"
 
 typedef enum {
@@ -50,7 +51,8 @@ typedef enum {
     SBViewControllerOpportunities = 4,
     SBViewControllerLeads = 5,
     SBViewControllerCampaigns = 6,
-    SBViewControllerMore = 7
+    SBViewControllerMore = 7,
+    SBViewControllerActivities = 8
 } SBViewController;
 
 NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID property, ABMultiValueIdentifier identifierForValue)
@@ -72,6 +74,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 @property (nonatomic, retain) UINavigationController *settingsNavController;
 @property (nonatomic, retain) UINavigationController *tasksNavController;
 @property (nonatomic, retain) UINavigationController *commentsNavController;
+@property (nonatomic, retain) UINavigationController *activitiesNavController;
 
 @end
 
@@ -86,6 +89,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 @synthesize settingsController = _settingsController;
 @synthesize tasksController = _tasksController;
 @synthesize commentsController = _commentsController;
+@synthesize activitiesController = _activitiesController;
 
 @synthesize accountsNavController = _accountsNavController;
 @synthesize contactsNavController = _contactsNavController;
@@ -95,6 +99,7 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 @synthesize settingsNavController = _settingsNavController;
 @synthesize tasksNavController = _tasksNavController;
 @synthesize commentsNavController = _commentsNavController;
+@synthesize activitiesNavController = _activitiesNavController;
 
 - (void)dealloc 
 {
@@ -114,6 +119,8 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     [_settingsNavController release];
     [_tasksNavController release];
     [_commentsNavController release];
+    [_activitiesController release];
+    [_activitiesNavController release];
     [super dealloc];
 }
 
@@ -153,13 +160,14 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
                    name:SBNetworkManagerDidRetrieveLeadsNotification
                  object:nil];
     self.leadsController.listedClass = [SBLead class];
-    
-    self.leadsController.tabBarItem.image = [UIImage imageNamed:@"leads.png"];
-    self.contactsController.tabBarItem.image = [UIImage imageNamed:@"contacts.png"];
-    self.campaignsController.tabBarItem.image = [UIImage imageNamed:@"campaigns.png"];
-    self.tasksController.tabBarItem.image = [UIImage imageNamed:@"tasks.png"];
-    self.accountsController.tabBarItem.image = [UIImage imageNamed:@"accounts.png"];
-    self.opportunitiesController.tabBarItem.image = [UIImage imageNamed:@"opportunities.png"];
+
+    self.leadsController.tabBarItem.image = [UIImage imageNamed:@"leads"];
+    self.contactsController.tabBarItem.image = [UIImage imageNamed:@"contacts"];
+    self.campaignsController.tabBarItem.image = [UIImage imageNamed:@"campaigns"];
+    self.tasksController.tabBarItem.image = [UIImage imageNamed:@"tasks"];
+    self.accountsController.tabBarItem.image = [UIImage imageNamed:@"accounts"];
+    self.opportunitiesController.tabBarItem.image = [UIImage imageNamed:@"opportunities"];
+    self.activitiesController.tabBarItem.image = [UIImage imageNamed:@"activities"];
     
     self.leadsNavController = [[[UINavigationController alloc] initWithRootViewController:self.leadsController] autorelease];
     self.contactsNavController = [[[UINavigationController alloc] initWithRootViewController:self.contactsController] autorelease];
@@ -168,13 +176,15 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     self.accountsNavController = [[[UINavigationController alloc] initWithRootViewController:self.accountsController] autorelease];
     self.opportunitiesNavController = [[[UINavigationController alloc] initWithRootViewController:self.opportunitiesController] autorelease];
     self.settingsNavController = [[[UINavigationController alloc] initWithRootViewController:self.settingsController] autorelease];
+    self.activitiesNavController = [[[UINavigationController alloc] initWithRootViewController:self.activitiesController] autorelease];
 
     // Restore the order of the tab bars following the preferences of the user
     NSArray *order = [SBSettingsManager sharedSBSettingsManager].tabOrder;
-    NSMutableArray *controllers = [[NSMutableArray alloc] initWithCapacity:7];
+    NSMutableArray *controllers = [[NSMutableArray alloc] initWithCapacity:8];
     if (order == nil)
     {
         // Probably first run, or never reordered controllers
+        [controllers addObject:self.activitiesController.navigationController];
         [controllers addObject:self.tasksController.navigationController];
         [controllers addObject:self.accountsController.navigationController];
         [controllers addObject:self.contactsController.navigationController];
@@ -215,6 +225,10 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
                     
                 case SBViewControllerTasks:
                     [controllers addObject:self.tasksController.navigationController];
+                    break;
+                    
+                case SBViewControllerActivities:
+                    [controllers addObject:self.activitiesController.navigationController];
                     break;
 
                 default:
@@ -257,7 +271,11 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
         case SBViewControllerTasks:
             self.selectedViewController = self.tasksController.navigationController;
             break;
-            
+
+        case SBViewControllerActivities:
+            self.selectedViewController = self.activitiesController.navigationController;
+            break;
+
         case SBViewControllerMore:
             self.selectedViewController = self.moreNavigationController;
         default:
@@ -314,6 +332,10 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     {
         settings.currentTab = SBViewControllerMore;
     }
+    else if (viewController == self.activitiesController.navigationController)
+    {
+        settings.currentTab = SBViewControllerActivities;
+    }
 }
 
 -         (void)tabBarController:(UITabBarController *)tabBarController 
@@ -352,6 +374,10 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
             else if (controller == self.settingsController.navigationController)
             {
                 [order addObject:[NSNumber numberWithInt:SBViewControllerSettings]];
+            }
+            else if (controller == self.activitiesController.navigationController)
+            {
+                [order addObject:[NSNumber numberWithInt:SBViewControllerActivities]];
             }
         }
         [SBSettingsManager sharedSBSettingsManager].tabOrder = order;

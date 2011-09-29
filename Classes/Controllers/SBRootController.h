@@ -41,6 +41,7 @@
 @class SBSettingsController;
 @class SBTasksController;
 @class SBListController;
+@class SBActivitiesController;
 
 @interface SBRootController : UITabBarController <UITabBarControllerDelegate,
                                                 SBListControllerDelegate,
@@ -52,6 +53,7 @@
 @property (nonatomic, retain) IBOutlet SBListController *opportunitiesController;
 @property (nonatomic, retain) IBOutlet SBListController *leadsController;
 @property (nonatomic, retain) IBOutlet SBListController *campaignsController;
+@property (nonatomic, retain) IBOutlet SBActivitiesController *activitiesController;
 @property (nonatomic, retain) IBOutlet SBSettingsController *settingsController;
 @property (nonatomic, retain) IBOutlet SBTasksController *tasksController;
 

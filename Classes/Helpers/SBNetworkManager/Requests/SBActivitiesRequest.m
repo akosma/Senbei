@@ -1,9 +1,9 @@
 //
-//  SBNetworkManager.h
+//  SBActivitiesRequest.m
 //  Senbei
 //
-//  Created by Adrian on 1/19/10.
-//  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
+//  Created by Adrian on 9/29/11.
+//  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without
@@ -32,26 +32,34 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Foundation/Foundation.h>
+#import "SBActivitiesRequest.h"
+#import "SBModels.h"
+#import "SBSettingsManager.h"
+#import "SBNotifications.h"
 
-@class ASINetworkQueue;
-@class SBBaseEntity;
-@class SBTask;
+@implementation SBActivitiesRequest
 
-@interface SBNetworkManager : NSObject
++ (id)request
+{
+    NSString *server = [SBSettingsManager sharedSBSettingsManager].server;
+    NSString *urlString = [NSString stringWithFormat:@"%@/activities.xml", server];
+    NSURL *url = [NSURL URLWithString:urlString];
+    id request = [self requestWithURL:url];
+    return request;
+}
 
-+ (SBNetworkManager *)sharedSBNetworkManager;
-
-- (void)login;
-- (void)loadList:(Class)klass page:(NSInteger)page;
-- (void)searchList:(Class)klass query:(NSString *)search;
-- (void)loadCommentsForEntity:(SBBaseEntity *)entity;
-- (void)sendComment:(NSString *)comment forEntity:(SBBaseEntity *)entity;
-- (void)deleteCommentWithID:(NSInteger)commentID forEntity:(SBBaseEntity *)entity;
-- (void)markTaskAsDone:(SBTask *)task;
-- (void)createTask:(SBTask *)task;
-- (void)loadTasks;
-- (void)loadActivities;
-- (void)cancelConnections;
+- (void)processResponse
+{
+    NSData *response = [self responseData];
+    NSArray *activities = [self deserializeXML:response 
+                                      forXPath:@"activity" 
+                                      andClass:NSClassFromString(@"SBActivity")];
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:activities, @"data", nil];
+    NSNotification *notif = [NSNotification notificationWithName:SBNetworkManagerDidRetrieveActivitiesNotification
+                                                          object:self 
+                                                        userInfo:dict];
+    [[NSNotificationCenter defaultCenter] postNotification:notif];    
+}
 
 @end

@@ -128,6 +128,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
     [self.networkQueue addOperation:request];
 }
 
+- (void)loadActivities
+{
+    SBActivitiesRequest *request = [SBActivitiesRequest request];
+    [self.networkQueue addOperation:request];
+}
+
 - (void)markTaskAsDone:(SBTask *)task
 {
     SBMarkTaskAsDoneRequest *request = [SBMarkTaskAsDoneRequest requestWithTask:task];

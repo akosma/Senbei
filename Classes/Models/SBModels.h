@@ -41,3 +41,4 @@
 #import "SBCampaign.h"
 #import "SBLead.h"
 #import "SBTask.h"
+#import "SBActivity.h"

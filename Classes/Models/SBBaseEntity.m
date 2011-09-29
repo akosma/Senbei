@@ -58,6 +58,32 @@
     return value;
 }
 
++ (Class)classForSubjectType:(NSString *)subjectType
+{
+    Class klass = nil;
+    if ([subjectType isEqualToString:@"Account"])
+    {
+        klass = NSClassFromString(@"SBCompanyAccount");
+    }
+    else if ([subjectType isEqualToString:@"Opportunity"])
+    {
+        klass = NSClassFromString(@"SBOpportunity");
+    }
+    else if ([subjectType isEqualToString:@"Contact"])
+    {
+        klass = NSClassFromString(@"SBContact");
+    }
+    else if ([subjectType isEqualToString:@"Campaign"])
+    {
+        klass = NSClassFromString(@"SBCampaign");
+    }
+    else if ([subjectType isEqualToString:@"Lead"])
+    {
+        klass = NSClassFromString(@"SBLead");
+    }
+    return klass;
+}
+
 - (id)initWithTBXMLElement:(TBXMLElement *)element
 {
     if (self = [super init])

@@ -1,9 +1,9 @@
 //
-//  SBNetworkManager.h
+//  SBActivitiesController.h
 //  Senbei
 //
-//  Created by Adrian on 1/19/10.
-//  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
+//  Created by Adrian on 9/29/11.
+//  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without
@@ -32,26 +32,8 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@class ASINetworkQueue;
-@class SBBaseEntity;
-@class SBTask;
-
-@interface SBNetworkManager : NSObject
-
-+ (SBNetworkManager *)sharedSBNetworkManager;
-
-- (void)login;
-- (void)loadList:(Class)klass page:(NSInteger)page;
-- (void)searchList:(Class)klass query:(NSString *)search;
-- (void)loadCommentsForEntity:(SBBaseEntity *)entity;
-- (void)sendComment:(NSString *)comment forEntity:(SBBaseEntity *)entity;
-- (void)deleteCommentWithID:(NSInteger)commentID forEntity:(SBBaseEntity *)entity;
-- (void)markTaskAsDone:(SBTask *)task;
-- (void)createTask:(SBTask *)task;
-- (void)loadTasks;
-- (void)loadActivities;
-- (void)cancelConnections;
+@interface SBActivitiesController : UITableViewController
 
 @end

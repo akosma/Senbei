@@ -47,6 +47,7 @@
 
 + (NSString *)stringValueForElement:(NSString *)elementName 
                       parentElement:(TBXMLElement *)element;
++ (Class)classForSubjectType:(NSString *)subjectType;
 - (id)initWithTBXMLElement:(TBXMLElement *)element;
 
 @end

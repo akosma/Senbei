@@ -37,3 +37,4 @@
 #import "NSString+Senbei.h"
 #import "SBSettingsManager.h"
 #import "ASIHTTPRequest+Senbei.h"
+#import "SBNotifications.h"

@@ -46,3 +46,6 @@ SETTINGS_TITLE = "Settings"; /* Title of the settings controller */
 
 /* CommentsController */
 DELETE_COMMENT = "Are you sure?"; /* Confirmation text shown before deleting a comment */
+
+/* Activities Controller */
+ACTIVITIES_TITLE = "Activity"; /* Title of the activities controller */

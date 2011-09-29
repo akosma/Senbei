@@ -43,3 +43,4 @@
 #import "SBDeleteCommentRequest.h"
 #import "SBMarkTaskAsDoneRequest.h"
 #import "SBCreateTaskRequest.h"
+#import "SBActivitiesRequest.h"
