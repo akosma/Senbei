@@ -265,6 +265,7 @@
 		3A45743011625D3D00EFFEA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A45743111625D8D00EFFEA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/TaskBuckets.plist; sourceTree = "<group>"; };
 		3A45743211625DA100EFFEA5 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/TaskCategories.plist; sourceTree = "<group>"; };
+		3A45B0BC1435BBC90099028B /* CHANGELOG.markdown */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG.markdown; sourceTree = "<group>"; };
 		3A564E541147DDAA009A7435 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A564E551147DDAC009A7435 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3A564E561147DDB4009A7435 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -372,6 +373,7 @@
 			children = (
 				3A23F57F1428C07D00894EA2 /* README.markdown */,
 				3A6D8CE311064B4B0089F21D /* LICENSE */,
+				3A45B0BC1435BBC90099028B /* CHANGELOG.markdown */,
 				3A6D8CD011064A4B0089F21D /* Classes */,
 				3A6D8CD711064A820089F21D /* Externals */,
 				3A6D8CD811064A900089F21D /* Resources */,

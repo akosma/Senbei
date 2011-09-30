@@ -426,14 +426,14 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
 {
     if (controller == self.contactsController)
     {
-        ABPersonViewController *personController = [[ABPersonViewController alloc] init];
+        ABUnknownPersonViewController *personController = [[[ABUnknownPersonViewController alloc] init] autorelease];
         SBContact *contact = (SBContact *)entity;
         ABRecordRef person = [contact getPerson];
         personController.displayedPerson = person;
-        personController.displayedProperties = [SBContact displayedProperties];
-        personController.personViewDelegate = self;
+        personController.unknownPersonViewDelegate = self;
+        personController.allowsAddingToAddressBook = YES;
+        personController.allowsActions = YES;
         [controller.navigationController pushViewController:personController animated:YES];
-        [personController release];
     }
 }
 
@@ -463,9 +463,13 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
     return NO;
 }
 
-#pragma mark - ABPersonViewControllerDelegate methods
+#pragma mark - ABUnknownPersonViewControllerDelegate methods
 
--        (BOOL)personViewController:(ABPersonViewController *)personViewController 
+- (void)unknownPersonViewController:(ABUnknownPersonViewController *)unknownPersonView didResolveToPerson:(ABRecordRef)person
+{
+}
+
+- (BOOL)unknownPersonViewController:(ABUnknownPersonViewController *)personViewController 
 shouldPerformDefaultActionForPerson:(ABRecordRef)person 
                            property:(ABPropertyID)property 
                          identifier:(ABMultiValueIdentifier)identifierForValue

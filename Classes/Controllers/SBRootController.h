@@ -45,7 +45,7 @@
 
 @interface SBRootController : UITabBarController <UITabBarControllerDelegate,
                                                   SBListControllerDelegate,
-                                                  ABPersonViewControllerDelegate,
+                                                  ABUnknownPersonViewControllerDelegate,
                                                   ABPeoplePickerNavigationControllerDelegate,
                                                   MFMailComposeViewControllerDelegate> 
 

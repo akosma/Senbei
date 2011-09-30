@@ -10,6 +10,8 @@ Version 1.4 (Not yet sent to the App Store)
   latest versions of the FFCRM application.
 - New contacts can be created directly from the address book of the
   local device.
+- Contacts from the server can be added in the local address book of the
+  device.
 
 Version 1.3 (September 20th, 2011)
 ----------------------------------
