@@ -44,3 +44,4 @@
 #import "SBMarkTaskAsDoneRequest.h"
 #import "SBCreateTaskRequest.h"
 #import "SBActivitiesRequest.h"
+#import "SBCreateContactRequest.h"

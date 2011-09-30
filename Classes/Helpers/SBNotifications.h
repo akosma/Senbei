@@ -47,6 +47,7 @@ extern NSString * const SBNetworkManagerDidDeleteCommentNotification;
 extern NSString * const SBNetworkManagerDidLoginNotification;
 extern NSString * const SBNetworkManagerDidFailLoginNotification;
 extern NSString * const SBNetworkManagerDidRetrieveActivitiesNotification;
+extern NSString * const SBNetworkManagerDidCreateContactNotification;
 
 extern NSString * const SBNetworkManagerErrorKey;
 extern NSString * const TASKS_OVERDUE_KEY;

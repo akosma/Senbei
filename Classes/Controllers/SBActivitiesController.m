@@ -95,6 +95,10 @@
                                              selector:@selector(refresh) 
                                                  name:SBNetworkManagerDidMarkTaskAsDoneNotification 
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refresh) 
+                                                 name:SBNetworkManagerDidCreateContactNotification 
+                                               object:nil];
 
     [self refresh];
 }

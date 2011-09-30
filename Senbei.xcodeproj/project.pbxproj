@@ -121,6 +121,8 @@
 		3ACED3FD1428700C003C65B1 /* Entitlements.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 3ACED3FC1428700C003C65B1 /* Entitlements.entitlements */; };
 		3AE1CC3A112941C500F50018 /* SBListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1CC39112941C500F50018 /* SBListTableViewCell.m */; };
 		3AE1CCF011294F5500F50018 /* NSString+Senbei.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1CCEF11294F5500F50018 /* NSString+Senbei.m */; };
+		3AFDCB5B14359F2A008169B3 /* SBCreateContactRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDCB5A14359F2A008169B3 /* SBCreateContactRequest.m */; };
+		3AFDCB5F1435A444008169B3 /* ABHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDCB5E1435A444008169B3 /* ABHelpers.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -330,6 +332,10 @@
 		3AE1CC39112941C500F50018 /* SBListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBListTableViewCell.m; sourceTree = "<group>"; };
 		3AE1CCEE11294F5500F50018 /* NSString+Senbei.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Senbei.h"; sourceTree = "<group>"; };
 		3AE1CCEF11294F5500F50018 /* NSString+Senbei.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Senbei.m"; sourceTree = "<group>"; };
+		3AFDCB5914359F2A008169B3 /* SBCreateContactRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBCreateContactRequest.h; sourceTree = "<group>"; };
+		3AFDCB5A14359F2A008169B3 /* SBCreateContactRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBCreateContactRequest.m; sourceTree = "<group>"; };
+		3AFDCB5D1435A444008169B3 /* ABHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABHelpers.h; sourceTree = "<group>"; };
+		3AFDCB5E1435A444008169B3 /* ABHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABHelpers.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -525,6 +531,8 @@
 				3A23F5731428A9E500894EA2 /* SBCreateTaskRequest.m */,
 				3A1F28D01434ADAA00AA5FBC /* SBActivitiesRequest.h */,
 				3A1F28D11434ADAA00AA5FBC /* SBActivitiesRequest.m */,
+				3AFDCB5914359F2A008169B3 /* SBCreateContactRequest.h */,
+				3AFDCB5A14359F2A008169B3 /* SBCreateContactRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -669,6 +677,8 @@
 				3A23F56414289B4300894EA2 /* SBNotifications.m */,
 				3A23F57C1428AF9400894EA2 /* ASIHTTPRequest+Senbei.h */,
 				3A23F57D1428AF9500894EA2 /* ASIHTTPRequest+Senbei.m */,
+				3AFDCB5D1435A444008169B3 /* ABHelpers.h */,
+				3AFDCB5E1435A444008169B3 /* ABHelpers.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -983,6 +993,8 @@
 				3A1F28D21434ADAB00AA5FBC /* SBActivitiesRequest.m in Sources */,
 				3A1F28D51434AE0D00AA5FBC /* SBActivity.m in Sources */,
 				3A1F28D81434B74800AA5FBC /* SBActivitiesController.m in Sources */,
+				3AFDCB5B14359F2A008169B3 /* SBCreateContactRequest.m in Sources */,
+				3AFDCB5F1435A444008169B3 /* ABHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

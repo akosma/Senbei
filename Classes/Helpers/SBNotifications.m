@@ -47,6 +47,7 @@ NSString * const SBNetworkManagerDidDeleteCommentNotification         = @"SBNetw
 NSString * const SBNetworkManagerDidLoginNotification                 = @"SBNetworkManagerDidLoginNotification";
 NSString * const SBNetworkManagerDidFailLoginNotification             = @"SBNetworkManagerDidFailLoginNotification";
 NSString * const SBNetworkManagerDidRetrieveActivitiesNotification    = @"SBNetworkManagerDidRetrieveActivitiesNotification";
+NSString * const SBNetworkManagerDidCreateContactNotification         = @"SBNetworkManagerDidCreateContactNotification";
 
 NSString * const SBNetworkManagerErrorKey = @"SBNetworkManagerErrorKey";
 NSString * const TASKS_OVERDUE_KEY        = @"tasksOverdue";

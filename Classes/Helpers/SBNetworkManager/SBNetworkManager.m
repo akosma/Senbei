@@ -79,8 +79,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
     [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Public methods
+#pragma mark - Public methods
 
 - (void)login
 {
@@ -146,13 +145,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
     [self.networkQueue addOperation:request];    
 }
 
+- (void)createContact:(SBContact *)contact
+{
+    SBCreateContactRequest *request = [SBCreateContactRequest requestWithContact:contact];
+    [self.networkQueue addOperation:request];
+}
+
 - (void)cancelConnections
 {
     [self.networkQueue cancelAllOperations];
 }
 
-#pragma mark -
-#pragma mark ASINetworkQueue delegate methods
+#pragma mark - ASINetworkQueue delegate methods
 
 - (void)requestDone:(SBBaseRequest *)request
 {
@@ -185,8 +189,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SBNetworkManager)
 {
 }
 
-#pragma mark -
-#pragma mark Error management
+#pragma mark - Error management
 
 - (NSError *)createErrorWithMessage:(NSString *)text code:(NSInteger)code
 {

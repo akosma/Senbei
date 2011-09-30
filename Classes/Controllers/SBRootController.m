@@ -55,13 +55,6 @@ typedef enum {
     SBViewControllerActivities = 8
 } SBViewController;
 
-NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID property, ABMultiValueIdentifier identifierForValue)
-{
-    ABMultiValueRef items = ABRecordCopyValue(person, property);
-    NSString *value = (NSString *)ABMultiValueCopyValueAtIndex(items, identifierForValue);
-    CFRelease(items);
-    return [value autorelease];
-}
 
 @interface SBRootController ()
 
@@ -75,6 +68,8 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 @property (nonatomic, retain) UINavigationController *tasksNavController;
 @property (nonatomic, retain) UINavigationController *commentsNavController;
 @property (nonatomic, retain) UINavigationController *activitiesNavController;
+
+- (void)addContactFromAddressBook:(id)sender;
 
 @end
 
@@ -130,6 +125,12 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     self.delegate = self;
 
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    
+    [center addObserver:self
+               selector:@selector(contactCreated:)
+                   name:SBNetworkManagerDidCreateContactNotification 
+                 object:nil];    
+    
     [center addObserver:self.accountsController 
                selector:@selector(didReceiveData:) 
                    name:SBNetworkManagerDidRetrieveAccountsNotification
@@ -178,6 +179,13 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
     self.settingsNavController = [[[UINavigationController alloc] initWithRootViewController:self.settingsController] autorelease];
     self.activitiesNavController = [[[UINavigationController alloc] initWithRootViewController:self.activitiesController] autorelease];
 
+    // Add a button item to the contacts controller, 
+    // to create a new contact from the addresss book
+    UIBarButtonItem *addItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                              target:self
+                                                                              action:@selector(addContactFromAddressBook:)] autorelease];
+    self.contactsController.navigationItem.leftBarButtonItem = addItem;
+    
     // Restore the order of the tab bars following the preferences of the user
     NSArray *order = [SBSettingsManager sharedSBSettingsManager].tabOrder;
     NSMutableArray *controllers = [[NSMutableArray alloc] initWithCapacity:8];
@@ -292,6 +300,23 @@ NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID propert
 {
     [super viewDidUnload];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - IBAction methods
+
+- (void)addContactFromAddressBook:(id)sender
+{
+    ABPeoplePickerNavigationController *picker = [[[ABPeoplePickerNavigationController alloc] init] autorelease];
+    picker.peoplePickerDelegate = self;
+    [self.contactsNavController presentModalViewController:picker
+                                                  animated:YES];
+}
+
+#pragma mark - NSNotification handlers
+
+- (void)contactCreated:(NSNotification *)notification
+{
+    [self.contactsController refresh:nil];
 }
 
 #pragma mark - UITabBarControllerDelegate methods
@@ -412,6 +437,32 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
     }
 }
 
+#pragma mark - ABPeoplePickerNavigationControllerDelegate methods
+
+- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker 
+{
+    [peoplePicker dismissModalViewControllerAnimated:YES];
+}
+
+
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person 
+{
+    SBContact *contact = [[[SBContact alloc] initWithPerson:person] autorelease];
+    [[SBNetworkManager sharedSBNetworkManager] createContact:contact];
+    
+    [peoplePicker dismissModalViewControllerAnimated:YES];
+    return NO;
+}
+
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person
+                                property:(ABPropertyID)property
+                              identifier:(ABMultiValueIdentifier)identifier
+{
+    return NO;
+}
+
 #pragma mark - ABPersonViewControllerDelegate methods
 
 -        (BOOL)personViewController:(ABPersonViewController *)personViewController 
@@ -437,14 +488,12 @@ shouldPerformDefaultActionForPerson:(ABRecordRef)person
     else if (property == kABPersonURLProperty)
     {
         NSString* urlString = getValueForPropertyFromPerson(person, property, identifierForValue);
-        NSURL *url = [[NSURL alloc] initWithString:urlString];
-        SBWebBrowserController *webController = [[SBWebBrowserController alloc] init];
+        NSURL *url = [NSURL URLWithString:urlString];
+        SBWebBrowserController *webController = [[[SBWebBrowserController alloc] init] autorelease];
         webController.url = url;
         webController.title = urlString;
         webController.hidesBottomBarWhenPushed = YES;
         [personViewController presentModalViewController:webController animated:YES];
-        [webController release];
-        [url release];
         return NO;
     }
     

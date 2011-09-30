@@ -44,9 +44,10 @@
 @class SBActivitiesController;
 
 @interface SBRootController : UITabBarController <UITabBarControllerDelegate,
-                                                SBListControllerDelegate,
-                                                ABPersonViewControllerDelegate,
-                                                MFMailComposeViewControllerDelegate> 
+                                                  SBListControllerDelegate,
+                                                  ABPersonViewControllerDelegate,
+                                                  ABPeoplePickerNavigationControllerDelegate,
+                                                  MFMailComposeViewControllerDelegate> 
 
 @property (nonatomic, retain) IBOutlet SBListController *accountsController;
 @property (nonatomic, retain) IBOutlet SBListController *contactsController;

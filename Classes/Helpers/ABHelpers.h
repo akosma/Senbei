@@ -1,9 +1,9 @@
 //
-//  SBListController.h
+//  ABHelpers.h
 //  Senbei
 //
-//  Created by Adrian on 1/19/10.
-//  Copyright (c) 2010, akosma software / Adrian Kosmaczewski
+//  Created by Adrian on 9/30/11.
+//  Copyright (c) 2011, akosma software / Adrian Kosmaczewski
 //  All rights reserved.
 //
 //  Redistribution and use in source and binary forms, with or without
@@ -32,16 +32,9 @@
 //  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 
-#import <UIKit/UIKit.h>
-#import "SBListControllerDelegate.h"
+#import <Foundation/Foundation.h>
+#import <AddressBook/AddressBook.h>
 
-@interface SBListController : UITableViewController <UISearchDisplayDelegate, 
-                                                       UISearchBarDelegate>
-
-@property (nonatomic) UITableViewCellAccessoryType accessoryType;
-@property (nonatomic, retain) Class listedClass;
-@property (nonatomic, assign) IBOutlet id<SBListControllerDelegate> delegate;
-
-- (void)refresh:(id)sender;
-
-@end
+void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringRef label, NSString *value);
+NSString *getValueForPropertyFromPerson(ABRecordRef person, ABPropertyID property, ABMultiValueIdentifier identifierForValue);
+NSString *getPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringRef label);

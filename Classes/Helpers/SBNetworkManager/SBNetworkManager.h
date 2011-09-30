@@ -37,6 +37,7 @@
 @class ASINetworkQueue;
 @class SBBaseEntity;
 @class SBTask;
+@class SBContact;
 
 @interface SBNetworkManager : NSObject
 
@@ -52,6 +53,7 @@
 - (void)createTask:(SBTask *)task;
 - (void)loadTasks;
 - (void)loadActivities;
+- (void)createContact:(SBContact *)contact;
 - (void)cancelConnections;
 
 @end

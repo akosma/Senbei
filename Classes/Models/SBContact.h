@@ -64,6 +64,7 @@
 + (NSArray *)displayedProperties;
 
 - (id)initWithTBXMLElement:(TBXMLElement *)element;
+- (id)initWithPerson:(ABRecordRef)person;
 - (ABRecordRef)getPerson;
 
 @end

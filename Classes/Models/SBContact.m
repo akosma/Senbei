@@ -36,18 +36,6 @@
 #import "SBHelpers.h"
 #import "SBExternals.h"
 
-void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringRef label, NSString *value)
-{
-    if (value != nil && ![value isEqualToString:@""])
-    {
-        ABMutableMultiValueRef items = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-        CFIndex index = ABMultiValueGetCount(items);
-        ABMultiValueInsertValueAndLabelAtIndex(items, (CFStringRef)value, label, index, nil);
-        ABRecordSetValue(person, property, items, nil);
-        CFRelease(items);
-    }
-}
-
 
 @implementation SBContact
 
@@ -134,6 +122,32 @@ void setPersonPropertyValue(ABRecordRef person, ABPropertyID property, CFStringR
             NSString *stringURL = [NSString stringWithFormat:@"%@/%@.png?d=%@&s=50", base, emailHash, defaultImage];
             self.photoURL = [[[NSURL alloc] initWithString:stringURL] autorelease];
         }        
+    }
+    return self;
+}
+
+- (id)initWithPerson:(ABRecordRef)person
+{
+    self = [super init];
+    if (self)
+    {
+        _person = CFRetain(person);
+        
+        self.firstName = getPersonPropertyValue(person, kABPersonFirstNameProperty, NULL);
+        self.lastName = getPersonPropertyValue(person, kABPersonLastNameProperty, NULL);
+        self.title = getPersonPropertyValue(person, kABPersonJobTitleProperty, NULL);        
+        self.department = getPersonPropertyValue(person, kABPersonDepartmentProperty, NULL);
+        
+        CFDateRef birthday = ABRecordCopyValue(person, kABPersonBirthdayProperty);
+        self.birthDate = (NSDate *)birthday;
+        CFRelease(birthday);
+
+        self.mobile = getPersonPropertyValue(_person, kABPersonPhoneProperty, kABPersonPhoneMobileLabel);
+        self.phone = getPersonPropertyValue(_person, kABPersonPhoneProperty, kABPersonPhoneMainLabel);
+        self.fax = getPersonPropertyValue(_person, kABPersonPhoneProperty, kABPersonPhoneWorkFAXLabel);
+        self.blog = getPersonPropertyValue(_person, kABPersonURLProperty, kABPersonHomePageLabel);
+        self.email = getPersonPropertyValue(_person, kABPersonEmailProperty, kABWorkLabel);
+        self.altEmail = getPersonPropertyValue(_person, kABPersonEmailProperty, kABHomeLabel);
     }
     return self;
 }
