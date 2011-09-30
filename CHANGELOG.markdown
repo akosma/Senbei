@@ -6,6 +6,8 @@ Version 1.4 (Not yet sent to the App Store)
 - Touching an item in the activity list takes you to the comments screen
   for that object.
 - Comments can be deleted now, by swiping over the corresponding row.
+- Updated the URL endpoints of the application, to match those of the
+  latest versions of the FFCRM application.
 
 Version 1.3 (September 20th, 2011)
 ----------------------------------
