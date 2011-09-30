@@ -388,6 +388,17 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
 
 - (void)listController:(SBListController *)controller didSelectEntity:(SBBaseEntity *)entity
 {
+    if (self.commentsController == nil)
+    {
+        self.commentsController = [[[SBCommentsController alloc] init] autorelease];
+    }
+    self.commentsController.entity = entity;
+    [controller.navigationController pushViewController:self.commentsController 
+                                               animated:YES];
+}
+
+- (void)listController:(SBListController *)controller didTapAccessoryForEntity:(SBBaseEntity *)entity
+{
     if (controller == self.contactsController)
     {
         ABPersonViewController *personController = [[ABPersonViewController alloc] init];
@@ -398,29 +409,6 @@ didEndCustomizingViewControllers:(NSArray *)viewControllers
         personController.personViewDelegate = self;
         [controller.navigationController pushViewController:personController animated:YES];
         [personController release];
-    }
-    else
-    {
-        if (self.commentsController == nil)
-        {
-            self.commentsController = [[[SBCommentsController alloc] init] autorelease];
-        }
-        self.commentsController.entity = entity;
-        [controller.navigationController pushViewController:self.commentsController
-                                                   animated:YES];
-    }
-}
-
-- (void)listController:(SBListController *)controller didTapAccessoryForEntity:(SBBaseEntity *)entity
-{
-    if (controller == self.contactsController)
-    {
-        if (self.commentsController == nil)
-        {
-            self.commentsController = [[[SBCommentsController alloc] init] autorelease];
-        }
-        self.commentsController.entity = entity;
-        [controller.navigationController pushViewController:self.commentsController animated:YES];
     }
 }
 
