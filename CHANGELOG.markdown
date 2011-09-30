@@ -1,3 +1,12 @@
+Version 1.4 (Not yet sent to the App Store)
+-------------------------------------------
+
+- New screen, "Activity", which shows the list of the latest actions
+  done in the system. 
+- Touching an item in the activity list takes you to the comments screen
+  for that object.
+- Comments can be deleted now, by swiping over the corresponding row.
+
 Version 1.3 (September 20th, 2011)
 ----------------------------------
 
