@@ -21,7 +21,8 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    if ([super initWithFrame:frame])
+    self = [super initWithFrame:frame];
+    if (self)
     {
         _spinningWheel = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         _spinningWheel.center = self.center;

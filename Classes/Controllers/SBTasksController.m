@@ -50,7 +50,7 @@
 @property (nonatomic, retain) NSMutableArray *sections;
 @property (nonatomic, retain) NSMutableDictionary *categories;
 @property (nonatomic, retain) NSIndexPath *indexPathToDelete;
-@property (nonatomic, retain) SBNewTaskController *newTaskController;
+@property (nonatomic, retain) SBNewTaskController *formTaskController;
 @property (nonatomic, getter = isFirstLoad) BOOL firstLoad;
 
 @end
@@ -68,7 +68,7 @@
 @synthesize sections = _sections;
 @synthesize categories = _categories;
 @synthesize indexPathToDelete = _indexPathToDelete;
-@synthesize newTaskController = _newTaskController;
+@synthesize formTaskController = _formTaskController;
 @synthesize firstLoad = _firstLoad;
 
 - (void)dealloc 
@@ -82,7 +82,7 @@
     [_tasksDueNextWeek release];
     [_tasksDueLater release];
     [_sections release];
-    [_newTaskController release];
+    [_formTaskController release];
     [_categories release];
     [super dealloc];
 }
@@ -165,11 +165,11 @@
 
 - (void)addNewTask:(id)sender
 {
-    if (_newTaskController == nil)
+    if (_formTaskController == nil)
     {
-        _newTaskController = [[SBNewTaskController alloc] init];
+        _formTaskController = [[SBNewTaskController alloc] init];
     }
-    UINavigationController *controller = [[[UINavigationController alloc] initWithRootViewController:_newTaskController] autorelease];
+    UINavigationController *controller = [[[UINavigationController alloc] initWithRootViewController:_formTaskController] autorelease];
     [self.navigationController presentModalViewController:controller
                                                  animated:YES];
 }
