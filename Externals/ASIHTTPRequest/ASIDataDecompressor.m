@@ -77,9 +77,10 @@
 	zStream.next_in = bytes;
 	zStream.avail_in = (unsigned int)length;
 	zStream.avail_out = 0;
+	NSError *theError = nil;
 	
 	NSInteger bytesProcessedAlready = zStream.total_out;
-	while (zStream.avail_in != 0) {
+	while (zStream.avail_out == 0) {
 		
 		if (zStream.total_out-bytesProcessedAlready >= [outputData length]) {
 			[outputData increaseLengthBy:halfLength];
@@ -88,18 +89,29 @@
 		zStream.next_out = [outputData mutableBytes] + zStream.total_out-bytesProcessedAlready;
 		zStream.avail_out = (unsigned int)([outputData length] - (zStream.total_out-bytesProcessedAlready));
 		
-		status = inflate(&zStream, Z_NO_FLUSH);
+		status = inflate(&zStream, Z_SYNC_FLUSH);
 		
 		if (status == Z_STREAM_END) {
-			break;
+			theError = [self closeStream];
+			if (theError) {
+				break;
+			}
 		} else if (status != Z_OK) {
 			if (err) {
 				*err = [[self class] inflateErrorWithCode:status];
 			}
+			[self closeStream];
 			return nil;
 		}
 	}
 	
+	if (theError) {
+		if (err) {
+			*err = theError;
+		}
+		return nil;
+	}
+
 	// Set real length
 	[outputData setLength: zStream.total_out-bytesProcessedAlready];
 	return outputData;
@@ -121,10 +133,8 @@
 
 + (BOOL)uncompressDataFromFile:(NSString *)sourcePath toFile:(NSString *)destinationPath error:(NSError **)err
 {
-	NSFileManager *fileManager = [[[NSFileManager alloc] init] autorelease];
-
 	// Create an empty file at the destination path
-	if (![fileManager createFileAtPath:destinationPath contents:[NSData data] attributes:nil]) {
+	if (![[NSFileManager defaultManager] createFileAtPath:destinationPath contents:[NSData data] attributes:nil]) {
 		if (err) {
 			*err = [NSError errorWithDomain:NetworkRequestErrorDomain code:ASICompressionError userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Decompression of %@ failed because we were to create a file at %@",sourcePath,destinationPath],NSLocalizedDescriptionKey,nil]];
 		}
@@ -132,7 +142,7 @@
 	}
 	
 	// Ensure the source file exists
-	if (![fileManager fileExistsAtPath:sourcePath]) {
+	if (![[NSFileManager defaultManager] fileExistsAtPath:sourcePath]) {
 		if (err) {
 			*err = [NSError errorWithDomain:NetworkRequestErrorDomain code:ASICompressionError userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Decompression of %@ failed the file does not exist",sourcePath],NSLocalizedDescriptionKey,nil]];
 		}
@@ -159,15 +169,11 @@
 		
 		// Make sure nothing went wrong
 		if ([inputStream streamStatus] == NSStreamEventErrorOccurred) {
+            [decompressor closeStream];
 			if (err) {
 				*err = [NSError errorWithDomain:NetworkRequestErrorDomain code:ASICompressionError userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Decompression of %@ failed because we were unable to read from the source data file",sourcePath],NSLocalizedDescriptionKey,[inputStream streamError],NSUnderlyingErrorKey,nil]];
 			}
-            [decompressor closeStream];
 			return NO;
-		}
-		// Have we reached the end of the input data?
-		if (!readLength) {
-			break;
 		}
 
 		// Attempt to inflate the chunk of data
@@ -176,7 +182,6 @@
 			if (err) {
 				*err = theError;
 			}
-			[decompressor closeStream];
 			return NO;
 		}
 		
@@ -185,10 +190,10 @@
 		
 		// Make sure nothing went wrong
 		if ([inputStream streamStatus] == NSStreamEventErrorOccurred) {
+			[decompressor closeStream];
 			if (err) {
 				*err = [NSError errorWithDomain:NetworkRequestErrorDomain code:ASICompressionError userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Decompression of %@ failed because we were unable to write to the destination data file at &@",sourcePath,destinationPath],NSLocalizedDescriptionKey,[outputStream streamError],NSUnderlyingErrorKey,nil]];
             }
-			[decompressor closeStream];
 			return NO;
 		}
 		
@@ -196,15 +201,6 @@
 	
 	[inputStream close];
 	[outputStream close];
-
-	NSError *error = [decompressor closeStream];
-	if (error) {
-		if (err) {
-			*err = error;
-		}
-		return NO;
-	}
-
 	return YES;
 }
 
